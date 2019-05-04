@@ -1,0 +1,51 @@
+<app-page-header>
+  <h3><app-snippet snippet='artists-title'></app-snippet></h3>
+</app-page-header>
+
+<app-page-body>
+  <div class="flexbox">
+    <div class="list-container">
+      <app-scrollpane>
+        <app-scrollpane-section #residentSection snippet='artists-resident' active="true">
+          <ul class="artists-list">
+            <li class="artist-link" *ngFor="let artist of residentArtists"
+              [class.section-active]='residentSection.active'
+              (mouseenter)="artistMouseover(artist)"
+              (mouseleave)="artistMouseout(artist)"
+            >
+              <a href="/artist/{{artist.slug}}">
+                {{artist.name}}
+              </a>
+            </li>
+          </ul>
+        </app-scrollpane-section>
+        <app-scrollpane-section #guestSection snippet='artists-guest'>
+          <ul class="artists-list">
+            <li class="artist-link" *ngFor="let artist of guestArtists"
+              [class.section-active]='guestSection.active'
+              (mouseenter)="artistMouseover(artist)"
+              (mouseleave)="artistMouseout(artist)"
+            >
+              <a href="/artist/{{artist.slug}}">
+                {{artist.name}}
+              </a>
+            </li>
+          </ul>
+        </app-scrollpane-section>
+        <!-- <app-scrollpane-section #guestSection2 snippet='artists-guest'>
+            <ul class="artists-list">
+              <li class="artist-link" *ngFor="let artist of guestArtists2"
+                [class.section-active]='guestSection2.active'
+                (mouseenter)="artistMouseover(artist)"
+                (mouseleave)="artistMouseout(artist)"
+              >
+                <a href="/artist/{{artist.slug}}">
+                  {{artist.name}}
+                </a>
+              </li>
+            </ul>
+          </app-scrollpane-section> -->
+      </app-scrollpane>
+    </div>
+  </div>
+</app-page-body>

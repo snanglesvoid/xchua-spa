@@ -1,0 +1,29 @@
+@import '../../../../styles/variables.less';
+
+.language-select {
+    margin-top: 12px;
+    text-align: left;
+    padding-left: 64px;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    
+    a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 2rem;
+        color: @color-fg-dark;
+        display: block;
+        transition: all 0.3s ease;
+        padding-left: 64px;
+        font-size: 1.5rem;
+        display: inline;
+        padding-left: 0;
+        padding-right: 20px;
+    }
+
+    a.active {
+        text-decoration: underline;
+    }
+}

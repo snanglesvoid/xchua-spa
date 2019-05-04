@@ -1,0 +1,61 @@
+@import '../../../styles/variables.less';
+
+.spinner-container {
+    width: 100%;
+    text-align: center;
+}
+
+.spinner {
+    border-radius: 50%;
+    background: @color-logo-dot;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    animation: splash 2s infinite;
+}
+
+@keyframes splash {
+    0% { 
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+// @-webkit-keyframes splash {
+//     0% { 
+//         transform: scale(2);
+//     }
+//     50% {
+//         transform: scale(.1);
+//     }
+//     100% {
+//         transform: scale(1);
+//     }
+// }
+// @-moz-keyframes splash {
+//     0% { 
+//         transform: scale(2);
+//     }
+//     50% {
+//         transform: scale(.1);
+//     }
+//     100% {
+//         transform: scale(1);
+//     }
+// }
+// @-o-keyframes splash {
+//     0% { 
+//         transform: scale(2);
+//     }
+//     50% {
+//         transform: scale(.1);
+//     }
+//     100% {
+//         transform: scale(1);
+//     }
+// }

@@ -1,0 +1,55 @@
+<div class='limit-width'>
+
+<input type="hidden" name="action" value="contact">
+  <div class="form-group" [class.has-error]="validationErrors.name">
+    <label for="name.full">
+    <app-snippet snippet='contact-name'></app-snippet>
+  </label>
+  <input class="form-control" type="text" name='name.full' [(ngModel)]="data.name">
+</div>
+
+<div class="form-group" [class.has-error]="validationErrors.email">
+  <label for="email">
+    <app-snippet snippet='contact-email'></app-snippet>
+  </label>
+  <input class="form-control" type="email" name="email" [(ngModel)]="data.email">
+</div>
+
+<div class="form-group">
+  <label for="phone">
+    <app-snippet snippet='contact-phone'></app-snippet>
+  </label>
+  <input class="form-control" type="text" name='phone' [(ngModel)]="data.phone" placeholder="(optional)">
+</div>
+
+<div class="form-group" [class.has-error]="validationErrors.message">
+  <label for="message">
+    <app-snippet snippet="contact-message"></app-snippet>
+  </label>
+  <textarea class="form-control" name="message" placeholder="Leave us a message..." rows=4 [(ngModel)]="data.message"></textarea>
+</div>
+
+<div class="form-group check" [class.has-error]='validationErrors.agree'>
+  <span>
+    <app-snippet snippet='data-policy-agree'></app-snippet>&nbsp;
+    <a href="/texts/data-protection-agreement" target='_blank'>
+      <em><app-snippet snippet='data-policy-name'></app-snippet></em>.
+    </a>
+  </span>
+  <div class="checkmark-container">
+    <input type="checkbox" name='data-agree' [(ngModel)]="data.agree">
+    <span class="checkmark"></span>
+  </div>
+</div>
+
+<div class="form-group">
+  <hr>
+</div>
+
+<div class="form-actions">
+  <button class='btn btn-primary'>
+    <app-snippet snippet='contact-send'></app-snippet>
+  </button>
+</div>
+
+</div>

@@ -1,0 +1,81 @@
+@import '../../../../styles/variables.less';
+
+:host {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @header-height;
+    // border: 1px solid red;
+    box-sizing: border-box;
+    z-index: 900;
+    background: white;
+}
+
+.titlebar {
+    position: absolute;
+    
+    top: 0;
+    left: @mg-left;
+    right: 0;
+    height: 100%;
+
+    overflow: hidden;
+    box-sizing: border-box;
+    // border: 1px dotted grey;
+}
+
+:host /deep/ h3 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding-left: 0;
+    color: #333;
+}
+:host /deep/ h2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    // padding-left: @padding * 2;
+    padding-left: 0;
+    font-size: 3rem;
+    color: #333;
+    font-weight: 100;
+}
+
+@media screen and (max-width: @size-md) {
+    :host {
+        height: @header-height-md;
+    
+        .titlebar {
+            left: @mg-left-sm;
+            text-align: right;
+
+            :host /deep/ h2, h3 {
+                position: absolute;
+                top: 8px;
+                right: 0;
+                padding-right: @padding-sm * 2;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: @size-sm) {
+    :host {
+        height: @header-height-sm;
+    
+        .titlebar {
+            left: @mg-left-sm;
+            text-align: right;
+            :host /deep/ h2, h3 {
+                position: absolute;
+                top: 8px;
+                right: 0;
+                padding-right: @padding-sm * 2;
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

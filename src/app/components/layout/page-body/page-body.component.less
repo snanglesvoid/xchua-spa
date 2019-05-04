@@ -1,0 +1,60 @@
+@import '../../../../styles/variables.less';
+
+:host {
+    display: block;
+    position: absolute;
+    top: @header-height;
+    bottom: 0;
+    left: @mg-left;
+    right: 0;
+    box-sizing: border-box;
+    // border: 1px solid blue;
+    z-index: -1;
+}
+
+.page {
+    height: 100%;
+    max-height: 100%;
+
+    // max-width: 900px;
+
+    padding-top: 0;
+    padding-top: @padding * 2;
+    padding-right: 0;
+    padding-left: 0;
+    // padding-right: @padding * 6;
+    // padding-left: @padding * 2;
+
+    transition: all .5s ease;
+
+    font-size: 2rem;
+    line-height: 2.5rem;
+
+    a {
+		text-decoration: underline;
+	}
+}
+
+@media screen and (max-width: @size-md) {
+    .page {
+        padding-left: 8px;
+        padding-right: 8px;
+        padding-top: 8px;
+    }
+
+    :host {
+        top: @header-height-md;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: @size-sm) {
+    :host {
+        top: @header-height-sm;
+        left: 0;
+    }
+    .page {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

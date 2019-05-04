@@ -1,0 +1,48 @@
+@import '../../../styles/variables.less';
+
+.logo {
+    position: fixed;
+    z-index: 400;
+    text-decoration: none;
+    display: block;
+    bottom: 12px;
+    right: 18px;
+    cursor: pointer;
+    padding-bottom: 100px;
+    margin-bottom: -100px;
+    
+    svg {
+        width: 100px;
+        height: 32px;
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    z-index: 400;
+    text-decoration: none;
+    bottom: 12px;
+    right: 61px;
+    cursor: pointer;
+    width: 150px;
+
+    // transform: 'translate(-29%, 0)';
+
+    a {
+        display: block;
+        flex: 1;
+        text-decoration: none;
+        font-size: 1.7rem;
+        letter-spacing: 2.25px;
+        text-transform: uppercase;
+        font-weight: 300;
+        color: #888;
+    }
+
+    a:hover {
+        color: @color-logo-dot;
+        font-weight: 400;
+    }
+}

@@ -1,0 +1,32 @@
+.social-links {
+    position: fixed;
+    display: flex;
+    padding-left: 0;
+    list-style-type: none;
+    bottom: 20px;
+    left: 18px;
+    margin-bottom: 0;
+
+    li {
+        a {
+            text-decoration: none;
+            background: transparent;
+            color: #222;
+            margin-left: 6px;
+            width: 20px;
+            display: block;
+            height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            line-height: 20px;
+            font-size: 12px;
+            transition: all .5s ease;
+            cursor: pointer;
+        }
+    }
+    li:hover {
+        a {
+            transform: scale(1.5) rotate(360deg);
+        }
+    }
+}

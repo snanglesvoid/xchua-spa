@@ -1,0 +1,100 @@
+@import "../../../../styles/variables.less";
+
+:host {
+    position: fixed;
+    z-index: 3;
+    left:0;
+    top: @header-height;
+    bottom: 64px;
+    width: @mg-left;
+    overflow: hidden;
+    box-sizing: border-box;
+    // border: 1px dotted gray;
+    padding-top: 32px;
+}
+
+
+@media screen and (max-width: @size-md) {
+    :host {
+        position: fixed;
+        top: 0;
+        left: @mg-left-sm;
+        height: @header-height-sm;
+        width: auto;
+        padding-top: 6px;
+    }
+}
+
+@media screen and (max-width: @size-sm) {
+    :host {
+        position: fixed;
+        top: @header-height-sm;
+        left: unset;
+        height: auto;
+        width: auto;
+        bottom: unset;
+        margin-top: -36px;
+        right: 12px;
+        ul.tabs {
+            flex-direction: row;
+        }
+    }
+}
+
+:host /deep/ .tabs {
+    display: flex;
+    list-style-type: none;
+    margin-bottom: 0;
+    flex-direction: column;
+    padding-left: @padding;
+    li {
+        display: block;
+        text-transform: uppercase;
+        color: @color-fg-dark;
+        transition: all .5s;
+        font-size: 1.5rem;
+        line-height: 3.5rem;
+        position: relative;
+        padding-left: 32px;
+        cursor: pointer;
+        a {
+            text-decoration: none;
+            color: #bbb;
+            transition: all .4s ease;
+            display: block;
+            width: 100%;
+        }
+    }
+    li.active {
+        a {
+            color: black;
+        }
+    }
+    li:hover {
+        a {
+            color: black;
+        }
+    }
+}
+
+.tab {
+    display: none;
+    transition: all 1s ease;
+    height: 100%;
+}
+.tab.active {
+    display: block;
+}
+
+@media screen and (max-width: @size-md) {
+    .tabs {
+        padding-left: @padding-md;
+    }
+}
+
+
+@media screen and (max-width: @size-sm) {
+    .tabs {
+        padding-left: @padding-sm;
+    }
+}

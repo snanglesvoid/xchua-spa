@@ -1,0 +1,14 @@
+<app-page-header>
+  <h3><app-snippet snippet="contact-title"></app-snippet></h3>
+</app-page-header>
+
+<app-page-body>
+  <app-scrollpane>
+    <div *ngIf="enquirySubmitted">
+      <h3>
+        <app-snippet snippet='contact-thanks'></app-snippet>
+      </h3>
+    </div>
+    <app-contact-form *ngIf="!enquirySubmitted"></app-contact-form>
+  </app-scrollpane>  
+</app-page-body>
