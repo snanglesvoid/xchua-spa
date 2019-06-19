@@ -1,26 +1,18 @@
 <div class="scrollpane" #scrollpane
-  (ps-y-reach-start)="onReachTop($event)"
-  (ps-y-reach-end)="onReachBottom($event)"
-  (ps-scroll-up)="onScrollUp($event)"
-  (ps-scroll-down)="onScrollDown($event)"
 >
-  <div class="scrollpane-content">
+  <div class="scrollpane-content" [style.padding-top]="noPadding ? 0 : ''">
     <ng-content></ng-content>
   </div>
-</div>
-
-<div *ngIf="boxShadows">
-  <div class="scrollpane-box-shadow" *ngIf="showBoxShadowTop">
-  </div>
-  <div class="scrollpane-box-shadow-top" *ngIf="showBoxShadowsBottom">
-  </div>
+  
 </div>
 
 <app-tabbar *ngIf="sections && sections.length > 0">
-  <li *ngFor="let s of sections" [class.active]='s.active'>
-    <a (click)="scrollTo(s)">
-      <app-snippet [snippet]="s.snippet"></app-snippet>
-    </a>
-    <hr #hr *ngIf="s !== sections.last">
+  <li *ngFor="let s of sections" [class.active]='s.active' [class.subsection]="s.subsection">
+    <div *ngIf="!s.isEmpty">
+      <a (click)="scrollToSection(s)">
+        <app-snippet [snippet]="s.snippet"></app-snippet>
+      </a>
+      <hr #hr *ngIf="s !== sections.last">
+    </div>
   </li>
 </app-tabbar>

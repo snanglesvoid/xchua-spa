@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { SnippetService } from 'src/app/services/snippet.service';
 import { LanguageService } from 'src/app/services/language.service';
 
@@ -7,11 +7,13 @@ import { LanguageService } from 'src/app/services/language.service';
   templateUrl: './snippet.component.html',
   styleUrls: ['./snippet.component.less']
 })
-export class SnippetComponent implements OnInit {
+export class SnippetComponent implements OnInit, OnDestroy {
 
   @Input() snippet: string = ''
 
   text: string = '...'
+
+  @Output() finished = new EventEmitter<any>()
 
   constructor(
     private snippetService: SnippetService,
@@ -20,8 +22,20 @@ export class SnippetComponent implements OnInit {
 
   }
 
+  private subscription
   async ngOnInit() {
+    this.updateData()
+    this.subscription = this.languageService.languageChanged.subscribe(() => {
+      this.updateData()
+    })
+  }
+  
+  async updateData() {
     await this.snippetService.waitForLoad()
     this.text = await this.snippetService.snippetText(this.snippet, this.languageService.language)
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe()
   }
 }

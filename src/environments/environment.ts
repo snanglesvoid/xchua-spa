@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiPrefix: 'http://localhost:3000/api'
+  apiPrefix: 'https://galerie-xchua.com/api'
 };
 
 /*

@@ -1,7 +1,17 @@
 <app-page-header>
-  <h3>About</h3>
+  <h3><app-snippet snippet="about-title"></app-snippet></h3>
 </app-page-header>
   
 <app-page-body>
-  About Page Works
+ 
+  <app-scrollpane [showLines]="false" [boxShadows]="false">
+
+    <app-scrollpane-section 
+    *ngFor="let space of gallerySpaces"
+    [snippet]='space.location'
+    >
+      <app-gallery-space [gallery]="space"></app-gallery-space>
+    </app-scrollpane-section>
+    <app-spinner *ngIf="loading"></app-spinner>
+  </app-scrollpane>
 </app-page-body>

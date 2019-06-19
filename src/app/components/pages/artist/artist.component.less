@@ -1,0 +1,147 @@
+@import '../../../../styles/variables.less';
+
+@background-color: rgba(255, 255, 255, 0.95);
+
+app-page-header {
+  pointer-events: all;
+  h3 {
+    transition: all 0.5s ease;
+    cursor: pointer;
+    outline: none !important;
+  }
+  h3:hover {
+    color: @color-logo-dot;
+  }
+}
+:host /deep/ app-page-header .titlebar {
+  pointer-events: all;
+}
+
+.background {
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+@media screen and (min-width: @size-md) {
+  h1.title {
+    position: absolute;
+    top: 158px;
+    font-size: 4rem;
+    margin: 0;
+    transform: translateY(-100%);
+    margin-top: -26px;
+  }
+  .background {
+    left: 190px !important;
+  }
+}
+
+.text {
+  background: @background-color;
+  transition: opacity 0.6s ease;
+  margin-top: 80px;
+  opacity: 0;
+}
+
+.grid-item {
+  transform: translateY(100%);
+  transition: transform 1s ease, opacity 1s ease;
+  opacity: 0;
+}
+
+.grid-item.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.artist-name {
+  font-size: 6rem;
+  line-height: 7rem;
+  font-weight: 200;
+  letter-spacing: 10px;
+  margin-bottom: 120px;
+  text-align: center;
+}
+
+@keyframes arrow-blink {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.down-arrow {
+  position: fixed;
+  z-index: 10;
+  bottom: 64px;
+  left: 50%;
+  width: 32px;
+  transform: translateX(-50%);
+  background: transparent;
+  text-align: center;
+  transition: opacity 1s ease;
+  font-size: 1.5rem;
+  line-height: 0.5rem;
+  cursor: pointer;
+
+  .arrow {
+    width: 100%;
+    height: 10px;
+    color: @color-logo-dot;
+    animation-name: arrow-blink;
+    animation-duration: 1600ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+  }
+}
+
+@media screen and (min-width: @size-md) {
+  .artist-name {
+    margin-left: -190px;
+  }
+
+  .sidebar-background {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 190px;
+    background: @background-color;
+    transition: opacity 1s ease;
+  }
+}
+
+:host /deep/ .background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100% !important;
+  width: 100% !important;
+  max-height: unset !important;
+  max-width: unset !important;
+  object-fit: cover;
+}
+
+:host /deep/ app-tabbar {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+:host /deep/ .tabbar-hidden app-tabbar {
+  opacity: 0;
+}

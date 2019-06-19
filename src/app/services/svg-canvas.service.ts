@@ -9,11 +9,16 @@ export class SvgCanvasService {
   constructor() { 
     this.elements = []
     this.initCanvas()
-    ;(window as any).Bezier = Bezier
+    // let c = this.circle()
+    // c.fill = 'red'
+    // c.center = { x: 200, y: 200 }
+    // c.radius = 50;
+    // ;(window as any).Bezier = Bezier
   }
 
   private svgContainer: HTMLElement
   private svg: SVGSVGElement
+  private g: SVGGElement
 
   private elements: CanvasElement[]
 
@@ -30,18 +35,31 @@ export class SvgCanvasService {
     document.querySelector('body').appendChild(this.svgContainer)
 
     this.svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
+    // this.svg.style.marginTop = '100px'
     this.svgContainer.appendChild(this.svg)
+
+    this.g = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+    // this.g.setAttribute('transform', 'translate(0,-100)')
+    this.svg.appendChild(this.g)
     
     window.addEventListener('resize', event => this.resize())
     this.resize()
+
+    ;(window as any).canvas = this;
   }
   
   private resize() {
     let viewportRect = this.svgContainer.getBoundingClientRect()
-    let w = viewportRect.width.toString()
-    let h = viewportRect.height.toString()
-    this.svg.setAttribute('width', w)
-    this.svg.setAttribute('height', h)
+
+    let w = viewportRect.width
+    let h = viewportRect.height
+
+    if (w <= 768) {
+      this.svg.style.display = 'none'
+    }
+
+    this.svg.setAttribute('width', w.toString())
+    this.svg.setAttribute('height', h.toString())
     this.svg.setAttribute('viewbox', `0 0 ${w} ${h}`)
     this.render()
   }
@@ -52,7 +70,7 @@ export class SvgCanvasService {
 
   public clear() {
     this.elements.forEach(e => {
-      this.svg.removeChild(e.getElement())
+      this.g.removeChild(e.getElement())
     })
     this.elements = []
   }
@@ -60,29 +78,30 @@ export class SvgCanvasService {
   public circle() {
     let circle = new CanvasCircle()
     this.elements.push(circle)
-    this.svg.appendChild(circle.getElement())
+    this.g.appendChild(circle.getElement())
     return circle
   }
   public line() {
     let line = new CanvasLine()
     this.elements.push(line)
-    this.svg.appendChild(line.getElement())
+    this.g.appendChild(line.getElement())
     return line
   }
   public bezier() {
     let bezier = new CanvasBezier()
     this.elements.push(bezier)
-    this.svg.appendChild(bezier.getElement())
+    this.g.appendChild(bezier.getElement())
     return bezier
   }
-  public polyline() {
+  public polyline(animate: boolean = false) {
     let polyline = new CanvasPolyline()
+    if (animate) polyline.className = 'path-animate'
     this.elements.push(polyline)
-    this.svg.appendChild(polyline.getElement())
+    this.g.appendChild(polyline.getElement())
     return polyline
   }
   public deleteElement(e: CanvasElement) {
-    this.svg.removeChild(e.getElement())
+    this.g.removeChild(e.getElement())
     this.elements = this.elements.filter(x => x !== e)
   }
 }
@@ -91,7 +110,6 @@ export interface CanvasPoint {
   x: number;
   y: number;
 }
-
 abstract class CanvasElement {
   public abstract getElement() : SVGElement
 
@@ -101,9 +119,16 @@ abstract class CanvasElement {
   public set transform(t: string) {
     this.getElement().setAttribute('transform', t)
   }
+
+  public get className () {
+    return this.getElement().getAttribute('class')
+  }
+  public set className(value) {
+    this.getElement().setAttribute('class', value)
+  }
 }
 
-class CanvasCircle extends CanvasElement {
+export class CanvasCircle extends CanvasElement {
 
   private circle: SVGCircleElement
 
@@ -143,7 +168,7 @@ class CanvasCircle extends CanvasElement {
 }
 
 
-class CanvasRect extends CanvasElement {
+export class CanvasRect extends CanvasElement {
   private rect: SVGRectElement
 
   constructor() {
@@ -156,7 +181,7 @@ class CanvasRect extends CanvasElement {
   }
 }
 
-class CanvasLine extends CanvasElement {
+export class CanvasLine extends CanvasElement {
   private line: SVGLineElement
 
   private _stroke : string
@@ -219,7 +244,7 @@ class CanvasLine extends CanvasElement {
   }
 }
 
-class CanvasBezier extends CanvasElement {
+export class CanvasBezier extends CanvasElement {
   private path: SVGPathElement
   private bezier: any
   private _points: CanvasPoint[] = []
@@ -311,7 +336,7 @@ class CanvasBezier extends CanvasElement {
 
 }
 
-class CanvasPolyline extends CanvasElement {
+export class CanvasPolyline extends CanvasElement {
   private path: SVGPathElement
   private _points: CanvasPoint[] = []
   private _stroke: string = '#000'

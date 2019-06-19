@@ -30,6 +30,7 @@ export class GallerySpace extends Model {
     public get address() { return this._address }
     private _openingHours: string
     public get openingHours() { return this._openingHours }
+    public getModel() { return this.model }
 
     translate(language: Language) {
         this._location = this.model.location[language] || this.model.location.english

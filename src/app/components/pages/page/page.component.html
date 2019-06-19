@@ -1,7 +1,15 @@
 <app-page-header>
-  <h3>Page</h3>
+  <h3 *ngIf="data"><app-typewriter [text]="data.title" (finished)="writing=false"
+      interval="50"
+    >
+  </app-typewriter></h3>
 </app-page-header>
 
 <app-page-body>
-  Page page works
+  <app-scrollpane>
+    <div *ngIf="!writing && !loading && data"
+    [@fadeIn]="true"
+    [innerHtml]="data.content" class="narrow"></div>
+    <app-spinner *ngIf="loading"></app-spinner>
+  </app-scrollpane>
 </app-page-body>

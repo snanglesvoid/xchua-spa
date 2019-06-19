@@ -1,0 +1,14 @@
+<div #grid class="grid" (imagesLoaded)="imagesLoaded($event)">
+  <div
+    class="grid-item"
+    [style.width]="placeholderWidth + 'px'"
+    [style.height]="2 * rowItemHeight + 'px'"
+    [style.display]="row ? 'block' : 'none'"
+  ></div>
+  <ng-content></ng-content>
+  <div
+    class="grid-item"
+    [style.width]="placeholderWidth + 'px'"
+    [style.height]="2 * rowItemHeight + 'px'"
+  ></div>
+</div>

@@ -1,31 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  trigger, style, animate, keyframes
-} from '@angular/animations'
+import { Component, OnInit } from '@angular/core'
+import { trigger, style, animate, keyframes } from '@angular/animations'
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.less'],
-  animations: [
-    trigger('open-close', [
-
-    ]) 
-  ]
+  animations: [trigger('open-close', [])],
 })
 export class NavComponent implements OnInit {
+  isOpen: boolean = false
 
-  private isOpen: boolean = false;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   navToggled(event) {
-    console.log('nav toggled', event)
+    // console.log('nav toggled', event)
     this.isOpen = event
   }
-
 }

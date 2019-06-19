@@ -1,0 +1,28 @@
+<cl-image
+  *ngIf="imageExists"
+  [public-id]="publicId"
+  [class]="imageClass"
+  (imagesLoaded)="onImagesLoaded()"
+  (click)="click()"
+  [@fade]="loading ? 'out' : 'in'"
+>
+  <cl-transformation
+    [attr.height]="resolution.height"
+    [attr.width]="resolution.width"
+    crop="limit"
+  >
+
+  </cl-transformation>
+</cl-image>
+<!-- <app-spinner [@fade]="loading ? 'in' : 'out'" *ngIf="loading"> 
+
+</app-spinner> -->
+<div class="placeholder" *ngIf="!imageExists">
+  <h3>...</h3>
+</div>
+
+<!-- <div class="info">
+  <p *ngIf="resolution">reso: (w:{{resolution.width}}, h:{{resolution.height}})</p>
+  <p *ngIf="image">orig: (w:{{image.width}}, h:{{image.height}})</p>
+  <p *ngIf="clientRect">client: (w:{{clientRect.width}}, h:{{clientRect.height}})</p>
+</div> -->

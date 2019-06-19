@@ -1,8 +1,7 @@
 import { Model } from './Model'
 import { CloudinaryImageModel, CloudinaryImage } from './CloudinaryImage'
 import { GallerySpaceModel, GallerySpace } from './GallerySpace';
-import { ArtistModel, Artist } from './Artist';
-import { ArtworkModel, Artwork } from './Artwork';
+import { ArtistModel, Artist, ArtworkModel, Artwork  } from './Artist';
 import { ApiService } from '../services/api.service';
 import { Language } from '../services/language.service';
 
@@ -40,16 +39,18 @@ export class Exhibition extends Model {
             this._artworks = model.artworks as string[]
         }
         else {
+            // console.log(model.artworks)
             this._artworks = model.artworks.map(x => new Artwork(api, x as ArtworkModel))
         }
-
+        this._start = new Date(model.date.start)
+        this._end = new Date(model.date.end)
         this._coverPicture = new CloudinaryImage(api, model.coverPicture)
         this._pictures = model.pictures && model.pictures.length ? model.pictures.map(p => new CloudinaryImage(api, p)) : []
     }
 
     public get id () { return this.model._id }
     public get slug() { return this.model.slug }
-    private _title: string
+    private _title: string = ''
     public get title() { return this._title }
     private _start: Date
     private _end: Date
@@ -69,6 +70,7 @@ export class Exhibition extends Model {
     public get artworks() { return this._artworks }
 
     public translate(language: Language) {
+        // console.log('translate', this)
         this._title = this.model.title[language] || this.model.title.english
         this._text = this.model.text[language] || this.model.text.english || ''
 

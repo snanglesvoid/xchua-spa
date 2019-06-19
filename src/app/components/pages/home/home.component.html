@@ -1,7 +1,55 @@
-<app-page-header>
-  <h3>Home</h3>
-</app-page-header>
-
-<app-page-body>
-  Home page works
-</app-page-body>
+<div class="full-page">
+  <app-parallax
+    [invertX]="true"
+    [invertY]="true"
+    [style.opacity]="loading ? 0 : 1"
+  >
+    <div class="layer" data-depth="0.1">
+      <app-slideshow
+        slideDuration="8000"
+        [images]="images"
+        animation="fade"
+        transitionDuration="800ms"
+        (slideChanged)="slideChanged($event)"
+        (contentRendered)="slideshowContentRendered($event)"
+        (imageLoadProgress)="slideshowLoadingProgress($event)"
+        imageClass="slideshow-img"
+        imageSize="0"
+      >
+      </app-slideshow>
+    </div>
+    <div class="layer" data-depth="0.4" style="pointer-events: all;">
+      <div>
+        <div
+          *ngFor="let slide of slides"
+          class="slideshow-title"
+          [ngClass]="classesFor(slide)"
+          [@fade]="slide.animationState"
+        >
+          <h3
+            class="subtitle"
+            [style.color]="slide.customColor"
+            *ngIf="slide.animationState == 'in'"
+          >
+            {{ slide.subtitle }}
+          </h3>
+          <h2 class="title" *ngIf="slide.animationState == 'in'">
+            <a [routerLink]="slide.linkUrl" [style.color]="slide.customColor">
+              {{ slide.title }}
+            </a>
+          </h2>
+          <h3
+            class="caption"
+            [style.color]="slide.customColor"
+            *ngIf="slide.animationState == 'in'"
+          >
+            {{ slide.caption }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </app-parallax>
+  <app-spinner *ngIf="loading">
+    <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
+  </app-spinner>
+</div>

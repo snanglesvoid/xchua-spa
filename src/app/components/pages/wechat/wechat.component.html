@@ -1,0 +1,13 @@
+<app-page-header>
+  <h3>
+    <app-snippet snippet="wechat-title"></app-snippet>
+  </h3>
+</app-page-header>
+<app-scrollpane>
+  <img 
+  [@fadeIn]="fadeState()"
+  src="assets/images/wechatQR.webp" style="margin-left:50%; transform: translateX(-50%); margin-top: 64px; width: 240px; height: 240px;">
+  <p style="text-align: center">
+    <app-snippet snippet="wechat-qr-code" (finished)="loading = false"></app-snippet>
+  </p>
+</app-scrollpane>

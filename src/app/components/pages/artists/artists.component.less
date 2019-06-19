@@ -32,12 +32,6 @@
 }
 
 @media screen and (max-width: @size-md) {
-    .flexbox.responsive {
-        // flex-direction: column-reverse;
-    }
-
-    .flexbox {
-    }
 
     .golden-ratio-2 {
         width: 100%;
@@ -68,44 +62,34 @@
     }
 }
 
-.picture-container {
-    width: ~"calc(100% - @{list-width})";
+:host /deep/ .picture-container {
+    width: calc(62% - 130px);
+    padding-top: 158px;
+    padding-bottom: 10vh;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
 
-    position: relative;
-    
-    .preview {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: all .5s ease;
-
-        img {
-            height: 560px;
-            max-height: ~"calc(100% - 64px)";
-            max-width: 100%;
-            object-fit: cover;
-
-            margin-left: 50%;
-            transform: translateX(-50%);
-        }
-    }
 }
 
 .list-container {
-    width: @list-width;
+    min-width: @list-width;
+    width: 38%;
     max-height: 100%;
+    padding-bottom: 30px;
     .artists-list {
         
         font-size: 2rem;
         list-style-type: none;
         padding-left: 0;
+        margin: 0;
         
         li {
             text-transform: capitalize;
-            line-height: 4rem;
+            // line-height: 4rem;
+            font-size: 2vw;
+            line-height: 3.5vw;
             a {   
                 text-decoration: none;
                 color: #bbb;
@@ -116,7 +100,10 @@
         li.active a, li.section-active a {
             color: #000;
         }
-        li.active.section-active a {
+        li a:hover {
+            color: #000;
+        }
+        li.section-active a:hover {
             color: #bbb;
         }
         h4 {
@@ -135,9 +122,30 @@
 @media screen and (max-width: @size-md) {
     .picture-container {
         width: 0;
+        display: none;
     }
     .list-container {
         width: 100%;
-        padding-left: 32px;
+        padding-left: 22px;
+        
+        .artists-list {
+            margin-top: 0px;
+        }
     }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .list-container {
+        .artists-list {
+            li {
+                font-size: 2rem;
+                line-height: 3.5rem;
+            }
+        }
+    }
+}
+
+app-spinner, app-slideshow  {
+    transition: opacity 1s ease;
 }

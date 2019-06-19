@@ -1,7 +1,6 @@
-import { Model } from './model'
+import { Model } from './Model'
 import { Language } from '../services/language.service'
-import { ArtistModel, Artist } from './Artist';
-import { ArtworkModel, Artwork } from './Artwork'
+import { ArtistModel, Artist, ArtworkModel, Artwork } from './Artist';
 import { ApiService } from '../services/api.service';
 
 export interface ArtworkSeriesModel {
@@ -28,6 +27,10 @@ export class ArtworkSeries extends Model {
         else  { 
             this._selectedWork = new Artwork(api, model.selectedWork as ArtworkModel)
         }
+        this._artworks = model.artworks.map(x => {
+            return new Artwork(api, x as ArtworkModel)
+        })
+        this._title = this.model.title.english
     }
 
     public get id() { return this.model._id }
@@ -38,6 +41,8 @@ export class ArtworkSeries extends Model {
     public get artist() { return this._artist }
     private _selectedWork : Artwork | string
     public get selectedWork() { return this._selectedWork }
+    private _artworks : Artwork[]
+    public get artworks() { return this._artworks }
 
     translate(language: Language) {
         this._title = this.model.title[language] || this.model.title.english

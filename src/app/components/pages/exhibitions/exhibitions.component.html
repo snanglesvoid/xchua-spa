@@ -1,7 +1,30 @@
 <app-page-header>
-  <h3>Exhibitions</h3>
+  <h3><app-snippet snippet="exhibitions-title"></app-snippet></h3>
 </app-page-header>
 
 <app-page-body>
-  Exhibitions page works
+  <app-spinner *ngIf="loading"></app-spinner>
+  <app-scrollpane [showLines]="false" #scrollpane>
+    <app-scrollpane-section #upcomingSection
+      snippet="exhibitions-upcoming">
+      <app-exhibitions-list 
+      [exhibitions]="stream | async | exDateFilter: 'upcoming'"
+      (change)="scrollpane.updateLines()">
+      </app-exhibitions-list>
+    </app-scrollpane-section>
+    <app-scrollpane-section #currentSection
+      snippet="exhibitions-current">
+      <app-exhibitions-list
+      [exhibitions]="stream | async | exDateFilter: 'current'"
+      (change)="scrollpane.updateLines()">
+      </app-exhibitions-list>
+    </app-scrollpane-section>
+    <app-scrollpane-section #pastSection
+      snippet="exhibitions-past">
+      <app-exhibitions-list 
+      [exhibitions]="stream | async | exDateFilter: 'past'"
+      (change)="scrollpane.updateLines()">
+      </app-exhibitions-list>
+    </app-scrollpane-section>
+  </app-scrollpane>
 </app-page-body>

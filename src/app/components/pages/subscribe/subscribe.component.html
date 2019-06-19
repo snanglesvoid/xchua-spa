@@ -1,7 +1,14 @@
 <app-page-header>
-  <h3>Subscribe</h3>
+  <h3><app-snippet snippet="subscribe-title"></app-snippet></h3>
 </app-page-header>
 
 <app-page-body>
-  Subscribe page works
+  <app-scrollpane>
+    <div *ngIf="submitted">
+      <h3>
+        <app-snippet snippet='subscribe-thanks'></app-snippet>
+      </h3>
+    </div>
+    <app-subscribe-form *ngIf="!submitted"></app-subscribe-form>
+  </app-scrollpane>
 </app-page-body>

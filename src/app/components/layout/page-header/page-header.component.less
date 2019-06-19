@@ -2,24 +2,29 @@
 
 :host {
     display: block;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    // right: 0;
+    width: 240px;
     height: @header-height;
     // border: 1px solid red;
     box-sizing: border-box;
-    z-index: 900;
-    background: white;
+    z-index: 2;
+    background: transparent;
+    pointer-events: none;
 }
 
 .titlebar {
     position: absolute;
+    pointer-events: none;
     
     top: 0;
-    left: @mg-left;
-    right: 0;
-    height: 100%;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    padding-left: 46px;
+    padding-top: 32px;
 
     overflow: hidden;
     box-sizing: border-box;
@@ -27,11 +32,12 @@
 }
 
 :host /deep/ h3 {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    padding-left: 0;
-    color: #333;
+    color: #bbb;
+    margin-bottom: 0;
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
 }
 :host /deep/ h2 {
     position: absolute;
@@ -44,38 +50,49 @@
     font-weight: 100;
 }
 
+.bottom-shadow {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    height: 20px;
+    z-index: 10;
+    box-shadow: 0px -7px 29px 23px rgba(255,255,255,1);
+}
+
 @media screen and (max-width: @size-md) {
     :host {
+        width: 100%;
         height: @header-height-md;
-    
-        .titlebar {
-            left: @mg-left-sm;
-            text-align: right;
+        box-shadow: 0px -1px 17px 15px rgba(255,255,255,1);
 
-            :host /deep/ h2, h3 {
-                position: absolute;
-                top: 8px;
-                right: 0;
-                padding-right: @padding-sm * 2;
-            }
+        .titlebar {
+            padding-left: 32px;
+            background: white;
+            height: 100%;
+        }
+
+        .bottom-shadow {
+            display: block;
         }
     }
 }
 
 @media screen and (max-width: @size-sm) {
-    :host {
-        height: @header-height-sm;
+    // :host {
+    //     height: @header-height-sm;
     
-        .titlebar {
-            left: @mg-left-sm;
-            text-align: right;
-            :host /deep/ h2, h3 {
-                position: absolute;
-                top: 8px;
-                right: 0;
-                padding-right: @padding-sm * 2;
-                font-size: 2.5rem;
-            }
-        }
-    }
+    //     .titlebar {
+    //         left: @mg-left-sm;
+    //         text-align: right;
+    //         :host /deep/ h2, h3 {
+    //             position: absolute;
+    //             top: 8px;
+    //             right: 0;
+    //             padding-right: @padding-sm * 2;
+    //             font-size: 2.5rem;
+    //         }
+    //     }
+    // }
 }

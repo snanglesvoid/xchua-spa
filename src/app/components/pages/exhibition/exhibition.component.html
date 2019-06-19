@@ -1,7 +1,99 @@
 <app-page-header>
-  <h3>Exhibition</h3>
+  <h3 routerLink="/exhibitions">
+    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <app-typewriter [text]="'Exhibitions'"></app-typewriter>
+  </h3>
 </app-page-header>
 
 <app-page-body>
-  Exhibition page works
+  <app-spinner *ngIf="loading"></app-spinner>
+  <app-scrollpane *ngIf="exhibition" (scrolled)="onScrolled($event)">
+    <div class="heading">
+      <h1 class="title">
+        <app-typewriter [text]="exhibitionTitle"></app-typewriter>
+      </h1>
+      <p *ngIf="exhibition.start && exhibition.end" class="date">
+        {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp;
+        {{ exhibition.location.location }}
+      </p>
+      <ul class="artist-links">
+        <li *ngFor="let artist of exhibition.artists">
+          <a routerLink="/artist/{{ artist.slug }}">
+            {{ artist.name.first + ' ' + artist.name.last }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <br />
+
+    <!-- appScrollTo [ratio]="0.99"
+  (inViewport)="coverViewportChange($event)" -->
+    <div
+      class="cover-picture"
+      [class.stick]="coverStick"
+      [style.filter]="coverFilter"
+    >
+      <app-smart-image
+        [image]="exhibition.coverPicture"
+        size="0"
+        imageClass="cover-picture-img"
+      >
+      </app-smart-image>
+    </div>
+
+    <div class="cover-picture placeholder" *ngIf="coverStick"></div>
+
+    <div
+      class="text"
+      appScrollTo
+      [ratio]="0.3"
+      (inViewport)="textViewportChange($event)"
+      [style.opacity]="textViewportState < 1 ? 1 : 0"
+    >
+      <app-html-block [content]="exhibition.text"></app-html-block>
+    </div>
+
+    <div class="gallery" modalImages>
+      <div class="container">
+        <!-- appScrollTo [ratio]="0.01" -->
+        <!-- (inViewport)="picturesMasonryViewportChange($event)" -->
+        <!-- *ngIf="showPicturesMasonry" -->
+        <app-masonry #masonry>
+          <div
+            #gridItem
+            class="grid-item"
+            *ngFor="let image of exhibition.pictures"
+            appScrollTo
+            [ratio]="0.4"
+            (inViewport)="inViewportChange(image, $event)"
+            [class.in-view]="image.animationState < 1"
+          >
+            <app-smart-image
+              [image]="image"
+              size="3"
+              [hoverFx]="true"
+            ></app-smart-image>
+          </div>
+        </app-masonry>
+      </div>
+      <div class="container">
+        <!-- appScrollTo [ratio]="0.01" -->
+        <!-- (inViewport)="artworksMasonryViewportChange($event)" -->
+        <!-- *ngIf="showArtworksMasonry" -->
+        <app-masonry #artworksMasonry>
+          <div
+            #gridItem
+            class="grid-item"
+            *ngFor="let artwork of exhibition.artworks"
+            appScrollTo
+            [ratio]="0.4"
+            (inViewport)="inViewportChange(artwork, $event)"
+            [class.in-view]="artwork.animationState < 1"
+          >
+            <app-artwork [artwork]="artwork" size="3"></app-artwork>
+          </div>
+        </app-masonry>
+      </div>
+    </div>
+  </app-scrollpane>
 </app-page-body>

@@ -1,0 +1,11 @@
+<app-page-header>
+  <h3 *ngIf="post">
+    <app-typewriter [text]="postTitle()"></app-typewriter>
+  </h3>
+</app-page-header>
+
+<app-page-body>
+  <app-scrollpane>
+    <div *ngIf="post" [innerHtml]="post.content.extended"></div>
+  </app-scrollpane>
+</app-page-body>

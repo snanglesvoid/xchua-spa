@@ -1,51 +1,70 @@
 <app-page-header>
-  <h3><app-snippet snippet='artists-title'></app-snippet></h3>
+  <h3><app-snippet snippet="artists-title"></app-snippet></h3>
 </app-page-header>
 
 <app-page-body>
-  <div class="flexbox">
-    <div class="list-container">
-      <app-scrollpane>
-        <app-scrollpane-section #residentSection snippet='artists-resident' active="true">
-          <ul class="artists-list">
-            <li class="artist-link" *ngFor="let artist of residentArtists"
-              [class.section-active]='residentSection.active'
-              (mouseenter)="artistMouseover(artist)"
-              (mouseleave)="artistMouseout(artist)"
-            >
-              <a href="/artist/{{artist.slug}}">
-                {{artist.name}}
-              </a>
-            </li>
-          </ul>
-        </app-scrollpane-section>
-        <app-scrollpane-section #guestSection snippet='artists-guest'>
-          <ul class="artists-list">
-            <li class="artist-link" *ngFor="let artist of guestArtists"
-              [class.section-active]='guestSection.active'
-              (mouseenter)="artistMouseover(artist)"
-              (mouseleave)="artistMouseout(artist)"
-            >
-              <a href="/artist/{{artist.slug}}">
-                {{artist.name}}
-              </a>
-            </li>
-          </ul>
-        </app-scrollpane-section>
-        <!-- <app-scrollpane-section #guestSection2 snippet='artists-guest'>
-            <ul class="artists-list">
-              <li class="artist-link" *ngFor="let artist of guestArtists2"
-                [class.section-active]='guestSection2.active'
-                (mouseenter)="artistMouseover(artist)"
-                (mouseleave)="artistMouseout(artist)"
-              >
-                <a href="/artist/{{artist.slug}}">
-                  {{artist.name}}
-                </a>
-              </li>
-            </ul>
-          </app-scrollpane-section> -->
-      </app-scrollpane>
-    </div>
+  <div class="list-container">
+    <app-scrollpane [showLines]="false">
+      <app-scrollpane-section
+        #residentSection
+        snippet="artists-resident"
+        active="true"
+      >
+        <ul class="artists-list">
+          <li
+            class="artist-link"
+            *ngFor="let artist of residentArtists; let i = index"
+            [class.section-active]="residentSection.active"
+            [@linkEnter]="linkEnter(i)"
+            (@linkEnter.done)="allAnimationsDone(i)"
+            (mouseenter)="artistMouseover(artist)"
+            (press)="artistMouseover(artist)"
+          >
+            <!-- appScrollTo [offset]="158"
+            (scrolledTo)="artistMouseover(artist)" -->
+            <a routerLink="/artist/{{ artist.slug }}">
+              {{ artist.name.first + ' ' + artist.name.last }}
+            </a>
+          </li>
+        </ul>
+      </app-scrollpane-section>
+      <app-scrollpane-section #guestSection snippet="artists-guest">
+        <ul class="artists-list">
+          <li
+            class="artist-link"
+            *ngFor="let artist of guestArtists; let i = index"
+            [class.section-active]="guestSection.active"
+            [@linkEnter]="linkEnter(i + residentArtists.length)"
+            (mouseenter)="artistMouseover(artist)"
+            (press)="artistMouseover(artist)"
+          >
+            <a routerLink="/artist/{{ artist.slug }}">
+              {{ artist.name.first + ' ' + artist.name.last }}
+            </a>
+          </li>
+        </ul>
+      </app-scrollpane-section>
+
+      <div style="height: 300px;"></div>
+    </app-scrollpane>
+  </div>
+  <div class="picture-container" *ngIf="showPreview">
+    <app-slideshow
+      *ngIf="!loading"
+      animation="fade"
+      transitionDuration="600ms"
+      easingFunction="ease"
+      imageClass="preview"
+      imageFit="contain"
+      [images]="previewPictures"
+      [currentSlide]="previewImage"
+      [imageSize]="previewImageSize"
+      [style.opacity]="progress.done ? 1 : 0"
+      (imageLoadProgress)="progressChanged($event)"
+    >
+    </app-slideshow>
+    <app-spinner [style.opacity]="!progress.done ? 1 : 0">
+      <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
+    </app-spinner>
   </div>
 </app-page-body>

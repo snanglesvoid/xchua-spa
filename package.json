@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --aot --build-optimizer",
+    "build:stats": "ng build --stats-json --prod --aot --build-optimizer",
+    "analyze": "webpack-bundle-analyzer dist/xc-hua/stats.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,10 +21,24 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@cloudinary/angular-5.x": "^1.0.2",
+    "@types/gsap": "^1.20.2",
+    "@types/hammerjs": "^2.0.36",
+    "@types/imagesloaded": "^4.1.1",
+    "@types/packery": "^1.4.31",
     "bezier-js": "^2.4.0",
+    "cloudinary-core": "^2.6.3",
     "core-js": "^2.5.4",
+    "gsap": "^2.1.3",
+    "hammerjs": "^2.0.8",
+    "imagesloaded": "^4.1.4",
     "ng-animate-scroll": "^7.1.0",
+    "ngx-device-detector": "^1.3.5",
+    "packery": "^2.1.2",
+    "parallax-js": "^3.1.0",
+    "postprocessing": "^6.5.0",
     "rxjs": "~6.3.3",
+    "three": "^0.105.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
@@ -45,6 +61,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }

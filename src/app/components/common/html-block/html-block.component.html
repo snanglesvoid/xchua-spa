@@ -1,0 +1,19 @@
+
+<div class="content" #container 
+[innerHtml]="content"
+(panleft)="nextPage()"
+(panright)="previousPage()"
+>
+   
+</div>
+
+<a class="press-btn page-nav next" (click)="nextPage()"
+  *ngIf="showNext"
+>
+  <i class="fa fa-angle-double-right"></i>    
+</a>
+<a class="press-btn page-nav prev" (click)="previousPage()"
+  *ngIf="showPrev"
+>
+  <i class="fa fa-angle-double-left"></i>    
+</a>

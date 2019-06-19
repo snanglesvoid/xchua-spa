@@ -1,8 +1,9 @@
+@import '../../../../styles/variables.less';
 
 button {
     position: fixed;
     left: -44px;
-    top: 14px;
+    top: 30px;
     font-size: 3rem;
     z-index: 1000;
     border: 0;
@@ -92,5 +93,14 @@ button.open:hover {
         // background: blue;
         transform: translateY(-30px) rotate(-44deg);
         height: 2px;
+    }
+}
+
+@media screen and (max-width: @size-md) {
+    button {
+        left: -40px;
+        top: -18px;
+        transform: rotate(17deg) scale(.66);
+        animation-name: blinksmall;
     }
 }

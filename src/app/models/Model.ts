@@ -13,6 +13,8 @@ export abstract class Model {
     public populate(field: string) : Promise<any> {
         return Promise.resolve('Nothing to populate')
     }
+
+    public animationState: any
 }
 
 export interface Name { first: string, last: string }

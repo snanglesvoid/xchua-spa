@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="column left">
+    <app-exhibitions-list-item
+      *ngFor="let e of berlin; trackBy: trackByFn"
+      [exhibition]="e" class="inner-left"
+    >
+    </app-exhibitions-list-item>
+  </div>
+  <div class="column right">
+    <app-exhibitions-list-item
+      *ngFor="let e of beijing; trackBy: trackByFn"
+      [exhibition]="e" class="inner-right"
+    >
+    </app-exhibitions-list-item>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div
+  *ngIf="modal.isOpen"
+  class="modal-container"
+  [@fadeIn]="true"
+  (click)="modal.close()"
+  #container
+>
+  <div class="top">
+    <app-slideshow
+      [images]="modal.images"
+      animation="fade"
+      transitionDuration="800ms"
+      imageClass="modal-img"
+      [imageSize]="imageSize"
+      [currentSlide]="modal.active"
+      (panleft)="next($event)"
+      (panRight)="previous($event)"
+    >
+    </app-slideshow>
+
+    <app-slideshow-controller
+      *ngIf="!modal.loading"
+      [slideshow]="slideshow"
+      (animationDone)="animationFinished()"
+    >
+    </app-slideshow-controller>
+  </div>
+  <div class="bottom">
+    <a class="previous-image-button" (click)="previous($event)">&#10094;</a>
+    <div class="caption" (click)="captionClicked($event)">
+      <div class="content" *ngIf="!modal.loading && artwork && animationDone">
+        <p>
+          <app-typewriter
+            class="artist-name"
+            [text]="artistName"
+            [interval]="50"
+          >
+          </app-typewriter>
+          <br />
+          <app-typewriter [text]="artworkTitleText" [interval]="40">
+          </app-typewriter>
+          <br />
+          <!-- <span *ngIf="artwork.series &&"></span> -->
+          <app-typewriter [text]="artwork.description" [interval]="25">
+          </app-typewriter>
+          <br />
+          <app-typewriter [text]="artwork.dimensions" [interval]="90">
+          </app-typewriter>
+        </p>
+      </div>
+    </div>
+    <a class="next-image-button" (click)="next($event)">&#10095;</a>
+  </div>
+</div>

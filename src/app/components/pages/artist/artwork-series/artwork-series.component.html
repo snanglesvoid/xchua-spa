@@ -1,0 +1,36 @@
+<div class="placeholder"></div>
+
+<div class="banner" modalImages>
+  <h1>{{ series.title }}</h1>
+  <div class="view-switcher">
+    <img
+      src="assets/images/carousel.png"
+      (click)="view = 0"
+      [class.active]="view == 0"
+    />
+    <img
+      src="assets/images/collage.png"
+      (click)="view = 1"
+      [class.active]="view == 1"
+    />
+  </div>
+
+  <div class="container">
+    <app-masonry #masonry [row]="view == 0">
+      <div #gridItem class="grid-item" *ngFor="let artwork of series.artworks">
+        <app-artwork
+          [artwork]="artwork"
+          size="3"
+          [imageClass]="view"
+        ></app-artwork>
+      </div>
+    </app-masonry>
+  </div>
+
+  <div
+    style="height: 100px;"
+    appScrollTo
+    [ratio]="0.3"
+    (inViewport)="bottomViewport($event)"
+  ></div>
+</div>

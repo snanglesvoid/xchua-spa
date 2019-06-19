@@ -9,35 +9,45 @@
     width: @mg-left;
     overflow: hidden;
     box-sizing: border-box;
+    
     // border: 1px dotted gray;
     padding-top: 32px;
 }
 
 
-@media screen and (max-width: @size-md) {
-    :host {
-        position: fixed;
-        top: 0;
-        left: @mg-left-sm;
-        height: @header-height-sm;
-        width: auto;
-        padding-top: 6px;
-    }
-}
+// @media screen and (max-width: @size-md) {
+//     :host {
+//         position: fixed;
+//         top: 0;
+//         left: @mg-left-sm;
+//         height: @header-height-sm;
+//         width: auto;
+//         padding-top: 6px;
+//     }
+// }
 
-@media screen and (max-width: @size-sm) {
-    :host {
+@media screen and (max-width: @size-md) {
+    :host /deep/ {
         position: fixed;
-        top: @header-height-sm;
+        top: 32px;
         left: unset;
         height: auto;
         width: auto;
         bottom: unset;
-        margin-top: -36px;
-        right: 12px;
-        ul.tabs {
+        margin-top: 0;
+        right: 16px;
+        padding-top: 0;
+        .tabs {
             flex-direction: row;
+            margin-top:0;
+            
         }
+    }
+    :host /deep/ .tabs li {
+        padding-left: 12px !important;
+    }
+    :host /deep/ .tabs li.subsection {
+        display: none;
     }
 }
 
@@ -53,7 +63,7 @@
         color: @color-fg-dark;
         transition: all .5s;
         font-size: 1.5rem;
-        line-height: 3.5rem;
+        line-height: 1.5rem;
         position: relative;
         padding-left: 32px;
         cursor: pointer;
@@ -65,6 +75,10 @@
             width: 100%;
         }
     }
+    li.subsection {
+        padding-left: 48px;
+        text-transform: lowercase;
+    }
     li.active {
         a {
             color: black;
@@ -72,7 +86,7 @@
     }
     li:hover {
         a {
-            color: black;
+            // color: red !important;
         }
     }
 }
@@ -84,17 +98,4 @@
 }
 .tab.active {
     display: block;
-}
-
-@media screen and (max-width: @size-md) {
-    .tabs {
-        padding-left: @padding-md;
-    }
-}
-
-
-@media screen and (max-width: @size-sm) {
-    .tabs {
-        padding-left: @padding-sm;
-    }
 }

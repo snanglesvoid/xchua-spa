@@ -1,13 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, AfterContentInit, AfterContentChecked } from '@angular/core';
 
 @Component({
   selector: 'app-scrollpane-section',
   templateUrl: './scrollpane-section.component.html',
   styleUrls: ['./scrollpane-section.component.less']
 })
-export class ScrollpaneSectionComponent implements OnInit {
+export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, AfterContentChecked {
 
   @Input() snippet: string
+  @Input() subsection: boolean = false
+  @Input() scrollToOffset: number = 0
 
   @Output() requestScroll = new EventEmitter<boolean>()
   @Output() activeChange = new EventEmitter<boolean>()
@@ -27,10 +29,11 @@ export class ScrollpaneSectionComponent implements OnInit {
 
   @ViewChild('hr') hr: ElementRef
 
-  public get offsetTop() {
+  public get offsetTop(): number {
     return this.el.nativeElement.offsetTop
+    // return this.el.nativeElement.getBoundingClientRect().top
   }
-  public get height() {
+  public get height(): number {
     return this.el.nativeElement.getBoundingClientRect().height
   }
   public get lineConnectionPoint() {
@@ -56,5 +59,15 @@ export class ScrollpaneSectionComponent implements OnInit {
   ngOnInit() {
     this.el.nativeElement.id = this.snippet
   }
+
+  @ViewChild('projected') projected: ElementRef
+  ngAfterContentInit() {
+    this.isEmpty = this.projected.nativeElement.getBoundingClientRect().height < 3
+  }
+  ngAfterContentChecked() {
+    this.isEmpty = this.projected.nativeElement.getBoundingClientRect().height < 3
+  }
+
+  isEmpty: boolean = true
 
 }

@@ -1,7 +1,49 @@
 <app-page-header>
-  <h3>Fairs</h3>
+  <h3><app-snippet snippet="fairs-title"></app-snippet></h3>
 </app-page-header>
 
 <app-page-body>
-  Fairs page works
+  <app-scrollpane>
+    <div class="fairs-list">
+      <div
+        class="fair-card"
+        *ngFor="let fair of fairs | async"
+        [@fade]="true"
+        [@listAnimation]="fair.animationState"
+      >
+        <div *ngIf="fair.thumbnail.exists">
+          <app-smart-image
+            [image]="fair.thumbnail"
+            [hoverFx]="true"
+            size="2"
+          ></app-smart-image>
+        </div>
+        <div class="fair-description">
+          <h3>
+            <app-typewriter
+              [text]="fair.title"
+              (finished)="fair.animationState = 'finished'"
+            >
+            </app-typewriter>
+          </h3>
+          <p *ngIf="fair.start && fair.end" class="date">
+            {{ fair.start | date }} &nbsp;to&nbsp;{{ fair.end | date }}
+          </p>
+          <ul class="artist-links">
+            <li
+              *ngFor="
+                let artist of fair.animationState !== 'finished'
+                  ? []
+                  : fair.artists
+              "
+            >
+              <a routerLink="/artist/{{ artist.slug }}">
+                {{ artist.name.first + ' ' + artist.name.last }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </app-scrollpane>
 </app-page-body>

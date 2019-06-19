@@ -1,0 +1,25 @@
+<div *ngIf="post">
+  <div class="post-img-container">
+    <app-smart-image
+      *ngIf="post.image && post.image.exists"
+      [image]="post.image"
+      size="2"
+      imageClass="post-img"
+    >
+    </app-smart-image>
+  </div>
+
+  <div class="post-content">
+    <h2 class="post-title">
+      <a routerLink="/post/{{ post.slug }}">{{ post.title }}</a>
+    </h2>
+    <div style="position: relative;" [innerHtml]="post.content.brief"></div>
+    <p class="read-more" *ngIf="post.content.extended">
+      <a routerLink="/post/{{ post.slug }}">
+        <app-snippet snippet="read-more"></app-snippet>
+      </a>
+    </p>
+  </div>
+</div>
+
+<app-spinner *ngIf="!post"></app-spinner>

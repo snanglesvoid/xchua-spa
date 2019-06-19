@@ -1,0 +1,61 @@
+:host {
+    position: relative;
+    display: block;
+
+    .caption {
+        position: absolute;
+        top:0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(255,255,255,0.7);
+        padding-bottom: 8px;
+        padding-right: 8px;
+        transition: opacity .7s ease;
+        opacity: 0;
+
+        .inner {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 1rem;
+            a {
+                font-weight: bold;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            a:hover {
+                color: grey;
+            }
+    
+            p {
+                text-align: right;
+                line-height: 1.5rem;            
+                font-size: 1.2rem;
+            }
+    
+            .artist-link {
+                text-decoration: none;
+                text-align: right;
+                font-size: 1.5rem;
+                line-height: 2rem;
+                display: block;
+            }
+        }
+    }
+
+    app-smart-image {
+        transition: filter .7s ease, opacity .7s ease;
+    }
+}
+
+:host:hover {
+    .caption {
+        opacity: 1;
+    }
+    app-smart-image {
+        filter: grayscale(100%);
+        // filter: saturate(20%);
+        // opacity: 0.6;
+    }
+}

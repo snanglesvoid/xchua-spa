@@ -1,0 +1,28 @@
+<app-smart-image
+  [image]="artwork.image"
+  [size]="size"
+  [hoverFx]="false"
+  [imageClass]="imageClass"
+>
+</app-smart-image>
+<!-- <img [src]="imageUrl" alt="" [class]="imageClass" /> -->
+
+<div class="caption" (click)="captionClicked()">
+  <div class="inner" #caption>
+    <p>
+      <a class="artist-link">
+        {{ artwork.artistName }}
+      </a>
+      {{ artwork.title }}
+      <span *ngIf="artwork.year">,&nbsp;{{ artwork.year }}</span>
+      <br />
+      <!-- <span *ngIf="artwork.series &&"></span> -->
+      <span *ngIf="artwork.description">
+        {{ artwork.description }} <br />
+      </span>
+      <span *ngIf="artwork.dimensions">
+        {{ artwork.dimensions }}
+      </span>
+    </p>
+  </div>
+</div>

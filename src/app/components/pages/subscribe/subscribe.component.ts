@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubscribeComponent implements OnInit {
 
+  submitted: boolean = false
+  
   constructor() { }
 
   ngOnInit() {
+  }
+
+  subscribe() {
+    
   }
 
 }

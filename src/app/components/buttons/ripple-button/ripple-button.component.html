@@ -1,0 +1,10 @@
+<button>
+  <ng-content></ng-content>
+
+  <div class="ripple" *ngFor="let ripple of ripples"
+    [@rippleList]="ripples.length"
+    [style.top]="ripple.y"
+    [style.left]="ripple.x"
+  >
+  </div>
+</button>

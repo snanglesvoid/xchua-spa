@@ -1,0 +1,55 @@
+@import '../../../../styles/variables.less';
+
+:host {
+    display: block;
+    z-index: 999;
+    overflow: hidden;
+    height: 100px;
+}
+
+
+.footer {
+    width: 100vw;
+    height: 100px;
+    
+    .footer-content {
+        // border-top: 1px solid @color-logo-dot;
+        padding-top: 12px;
+        width: 100%;
+        height: 100%;
+        background: rgba(55, 51, 52, 0.7);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: 
+            transform 1s ease,
+            opacity 1s ease;
+
+        text-align: center;
+
+        p {
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            color: #ccc;
+
+            a {
+                color: #ccc;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.footer.in-viewport {
+    .footer-content {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: @size-sm+1) {
+    :host {
+        margin-left: -190px;
+    }
+
+}

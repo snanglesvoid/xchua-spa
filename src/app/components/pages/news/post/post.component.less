@@ -1,0 +1,49 @@
+@import '../../../../../styles/variables.less';
+
+:host {
+    display: block;
+    width: 100%;
+    position: relative;
+    .post-content {
+        width: 49%;
+        display: inline-block;
+        vertical-align: top;
+        .post-title {
+            a {
+                text-decoration: none;
+                font-style: italic;
+            }
+        }
+    }
+    .post-img-container {
+        width: 50%;     
+        display: inline-block;
+    }
+    min-height: 240px;
+    padding-top: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid grey;
+}
+
+:host /deep/ .post-img img {
+    width: 100%;
+    max-height: 480px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+}
+
+@media screen and (max-width: @size-sm) {
+    .post-content {
+        width: 62%;
+    }
+    .post-img {
+        width: 37%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .post-content {
+        padding-left: 16px;
+    }
+}

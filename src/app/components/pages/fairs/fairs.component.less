@@ -1,0 +1,160 @@
+@import '../../../../styles/variables.less';
+
+ul.artist-links {
+    list-style-type: none;
+    display: block;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    // margin-bottom: 12px;
+    li {
+        list-style-type: none;
+        text-transform: capitalize;
+        display: inline;
+        text-decoration: none;
+        color: #bbb;
+        transition: all .25s ease;
+        font-size: 1.5rem;
+        a {
+            text-decoration: none;
+            color: #bbb;
+            transition: all .25s ease;
+            font-size: 1.5rem;
+        }
+    }
+
+    li:hover {
+        a {
+            color: #000;
+        }
+    }
+
+    li::after {
+        content: ', ';
+        color: #bbb;
+        white-space: pre;
+    }
+
+    li:last-child::after {
+        content: '';
+    }
+}
+
+:host /deep/ img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.row {
+    border-bottom: 1px solid lightgray;
+}
+
+.fairs-list {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+// .fair-card {
+//     width: 50%;
+//     height: 480px;
+//     padding: 16px;
+//     margin-bottom: 32px;
+//     img {
+//         width: 100%;
+//         height: 300px;
+//         object-fit: cover;
+//     }
+
+//     h3 {
+//         font-size: 3rem;
+//         margin-bottom: 0;
+//     }
+//     p {
+//         font-size: 1.5rem;
+//     }
+// }
+
+@media screen and (max-width: @size-sm) {
+    .fair-card {
+        padding: 0;
+
+        .fair-description {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    .fairs-list {
+        .col-sm-12 {
+            padding-left: 0;
+            padding-right: 0
+        }
+    }
+}
+
+@media screen and (min-width: @size-lg) {
+    .fair-card {
+        height: 580px;
+        img {
+            height: 400px;
+        }
+    }
+}
+
+.fair-card {
+    min-width: 480px;
+    width: 50%;
+    height: 480px;
+    padding: 16px;
+    // border-bottom: 1px solid grey;
+    margin-bottom: 32px;
+    display: block;
+    
+
+    h3 {
+        // font-style: italic;
+        text-transform: capitalize;
+        font-size: 3rem;
+        margin-bottom: 0;
+        cursor: pointer;
+        white-space: nowrap;
+
+        a {
+            text-decoration: none;
+            font-weight: 700;
+        }
+    }
+    p {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+        margin-top: .5rem;
+    }
+    p.date {
+        font-style: italic;
+    }
+}
+
+@media screen and (min-width: @size-sm) {
+    :host.right {
+        float: right;
+        text-align: right;
+    }
+    
+    :host.left {
+        float: left;
+        padding-left: 0;
+    }
+}
+
+@media screen and (max-width: @size-sm) {
+    :host {
+        padding: 0;
+
+        .ex-description {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}

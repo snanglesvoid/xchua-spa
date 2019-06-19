@@ -1,7 +1,110 @@
 <app-page-header>
-  <h3>Artist</h3>
+  <h3 routerLink="/artists">
+    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <app-snippet snippet="artists-title"></app-snippet>
+  </h3>
 </app-page-header>
 
 <app-page-body>
-  Artist page works
+  <div
+    class="background"
+    *ngIf="!loading"
+    [style.opacity]="progress.done ? 1 : 0"
+  >
+    <app-slideshow
+      [images]="backgroundImages"
+      [currentIndex]="currentBackgroundIndex"
+      animation="fade"
+      transitionDuration="1600ms"
+      (slideChanged)="backgroundSlideChanged($event)"
+      (imageLoadProgress)="backgroundLoadingProgress($event)"
+      imageClass="background-img"
+      [imageSize]="backgroundImageSize"
+    >
+    </app-slideshow>
+  </div>
+
+  <!-- <div class="sidebar-background" [style.opacity]="tabbarHidden ? 0 : 1">
+  </div> -->
+
+  <div
+    class="down-arrow"
+    [style.opacity]="tabbarHidden || !arrowHidden ? 1 : 0"
+    [style.pointer-events]="tabbarHidden || !arrowHidden ? 'all' : 'none'"
+    (click)="downArrowClicked()"
+  >
+    <div class="arrow" style="animation-delay: 0ms">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="arrow" style="animation-delay: 100ms">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="arrow" style="animation-delay: 200ms">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+    <div class="arrow" style="animation-delay: 300ms">
+      <i class="fa fa-chevron-down"></i>
+    </div>
+  </div>
+
+  <app-scrollpane *ngIf="!loading" [class.tabbar-hidden]="tabbarHidden">
+    <app-scrollpane-section
+      snippet="artist-works"
+      (activeChange)="sectionActiveChange(null, $event, -1, true)"
+    >
+      <h1 class="artist-name">
+        {{ artistName() }}
+      </h1>
+    </app-scrollpane-section>
+
+    <div style="height: 200px;"></div>
+
+    <app-scrollpane-section
+      *ngFor="let s of series | async; let i = index"
+      [snippet]="s.title"
+      subsection="true"
+      (activeChange)="sectionActiveChange(s, $event, i)"
+      [scrollToOffset]="200"
+    >
+      <app-artwork-series
+        *ngIf="expression"
+        [series]="s"
+        (bottomReached)="showArrow($event)"
+      >
+      </app-artwork-series>
+    </app-scrollpane-section>
+
+    <div style="height: 100px;"></div>
+
+    <app-scrollpane-section
+      #cvSection
+      snippet="artist-biography"
+      (activeChange)="sectionActiveChange(null, $event)"
+    >
+      <div
+        class="text"
+        appScrollTo
+        [ratio]="0.8"
+        (inViewport)="textViewportState = $event"
+        [style.opacity]="textViewportState < 1 ? 1 : 0"
+      >
+        <app-html-block [content]="artist.biography"></app-html-block>
+      </div>
+    </app-scrollpane-section>
+
+    <div style="height: 100px;"></div>
+
+    <app-scrollpane-section
+      #exhibitionSection
+      snippet="artist-exhibitions"
+      (activeChange)="sectionActiveChange(null, $event)"
+    >
+      <app-exhibitions-list
+        [exhibitions]="exhibitions | async"
+      ></app-exhibitions-list>
+      <div style="height: 350px;"></div>
+    </app-scrollpane-section>
+
+    <div style="height: 200px;"></div>
+  </app-scrollpane>
 </app-page-body>

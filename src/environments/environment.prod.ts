@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiPrefix: 'https://api.xchua-galerie.com/api/'
+  apiPrefix: 'https://galerie-xchua.com/api'
 };

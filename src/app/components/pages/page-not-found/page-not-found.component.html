@@ -1,7 +1,15 @@
 <app-page-header>
-  <h3>404 Not Found</h3>
+  <h3>
+    <app-typewriter text="404 Not Found">
+    </app-typewriter>
+  </h3>
 </app-page-header>
 
 <app-page-body>
-  <p>Sorry, We couldn't find the page you're looking for.</p>
+  <app-scrollpane [showLines]="false">
+    <p>
+      <app-typewriter text="Sorry, We couldn't find the page you're looking for.">
+      </app-typewriter>
+    </p>
+  </app-scrollpane>
 </app-page-body>

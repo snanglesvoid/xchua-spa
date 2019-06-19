@@ -1,0 +1,39 @@
+.container {
+    position: relative;
+    display: block;
+    height: 100%;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+cl-image, app-smart-image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+:host /deep/ cl-image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+:host /deep/ cl-image.contain img,
+:host /deep/ app-smart-image.contain cl-image img {
+    object-fit: contain;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    height: 100%;
+}
+:host /deep/ cl-image.cover img,
+:host /deep/ app-smart-image.cover cl-image img {
+    object-fit: cover;
+}
+
+:host /deep/ cl-image.flip,
+:host /deep/ app-smart-image.flip cl-image {
+    transform: 'rotateY(90deg)';
+}
