@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule, Routes } from '@angular/router'
 import { HttpClientModule } from '@angular/common/http'
-import { NgModule } from '@angular/core'
+import { NgModule, Injectable } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { CloudinaryModule } from '@cloudinary/angular-5.x'
 import { Cloudinary } from 'cloudinary-core/cloudinary-core-shrinkwrap'
@@ -73,6 +73,7 @@ import { ArtworkSeriesComponent } from './components/pages/artist/artwork-series
 import { ProgressBarComponent } from './components/common/progress-bar/progress-bar.component'
 import { FooterComponent } from './components/common/footer/footer.component'
 
+@Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
   buildHammer(element: HTMLElement) {
     let mc = new Hammer(element, {

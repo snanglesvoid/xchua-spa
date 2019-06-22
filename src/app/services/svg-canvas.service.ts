@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import * as Bezier from 'bezier-js'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SvgCanvasService {
-
-  constructor() { 
+  constructor() {
     this.elements = []
     this.initCanvas()
     // let c = this.circle()
@@ -14,16 +13,38 @@ export class SvgCanvasService {
     // c.center = { x: 200, y: 200 }
     // c.radius = 50;
     // ;(window as any).Bezier = Bezier
+
+    window.addEventListener('click', e => this.windowClick(e))
   }
 
   private svgContainer: HTMLElement
   private svg: SVGSVGElement
   private g: SVGGElement
+  private gan: SVGGElement
 
   private elements: CanvasElement[]
 
-  private initCanvas() {
+  // <animate attributeType="CSS" attributeName="opacity"
+  //          from="1" to="0" dur="5s" repeatCount="indefinite" />
 
+  private windowClick(event: MouseEvent) {
+    // console.log('window click')
+    // let cs = [0, 1, 2, 3, 4].map(i => {
+    //   let c = this.circle()
+    //   c.center = { x: event.clientX, y: event.clientY }
+    //   c.stroke = '#373334'
+    //   c.fill = 'none'
+    //   c.className = 'svg-ripple'
+    //   c.radius = 8
+    //   let e = c.getElement()
+    //   e.style.animationDelay = `${i * 80}ms`
+    //   e.style.transformOrigin = `${event.clientX}px ${event.clientY}px`
+    //   return c
+    // })
+    // setTimeout(() => cs.forEach(c => this.deleteElement(c)), 1000)
+  }
+
+  private initCanvas() {
     this.svgContainer = document.createElement('div')
     this.svgContainer.style.position = 'fixed'
     this.svgContainer.style.top = '0'
@@ -39,15 +60,16 @@ export class SvgCanvasService {
     this.svgContainer.appendChild(this.svg)
 
     this.g = document.createElementNS('http://www.w3.org/2000/svg', 'g')
+    this.gan = document.createElementNS('http://www.w3.org/2000/svg', 'g')
     // this.g.setAttribute('transform', 'translate(0,-100)')
     this.svg.appendChild(this.g)
-    
+    this.svg.appendChild(this.gan)
+
     window.addEventListener('resize', event => this.resize())
     this.resize()
-
-    ;(window as any).canvas = this;
+    ;(window as any).canvas = this
   }
-  
+
   private resize() {
     let viewportRect = this.svgContainer.getBoundingClientRect()
 
@@ -64,9 +86,7 @@ export class SvgCanvasService {
     this.render()
   }
 
-  private render() {
-
-  }
+  private render() {}
 
   public clear() {
     this.elements.forEach(e => {
@@ -101,17 +121,19 @@ export class SvgCanvasService {
     return polyline
   }
   public deleteElement(e: CanvasElement) {
-    this.g.removeChild(e.getElement())
-    this.elements = this.elements.filter(x => x !== e)
+    if (e) {
+      this.g.removeChild(e.getElement())
+      this.elements = this.elements.filter(x => x !== e)
+    }
   }
 }
 
 export interface CanvasPoint {
-  x: number;
-  y: number;
+  x: number
+  y: number
 }
 abstract class CanvasElement {
-  public abstract getElement() : SVGElement
+  public abstract getElement(): SVGElement
 
   public get transform() {
     return this.getElement().getAttribute('transform')
@@ -120,7 +142,7 @@ abstract class CanvasElement {
     this.getElement().setAttribute('transform', t)
   }
 
-  public get className () {
+  public get className() {
     return this.getElement().getAttribute('class')
   }
   public set className(value) {
@@ -129,7 +151,6 @@ abstract class CanvasElement {
 }
 
 export class CanvasCircle extends CanvasElement {
-
   private circle: SVGCircleElement
 
   public get center() {
@@ -157,16 +178,31 @@ export class CanvasCircle extends CanvasElement {
     this.circle.setAttribute('fill', value)
   }
 
+  public get stroke() {
+    return this.circle.getAttribute('stroke')
+  }
+  public set stroke(value: string) {
+    this.circle.setAttribute('stroke', value)
+  }
+  public get strokeWidth() {
+    return this.circle.getAttribute('stroke-width')
+  }
+  public set strokeWidth(value: string) {
+    this.circle.setAttribute('stroke-width', value)
+  }
+
   constructor() {
     super()
-    this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
+    this.circle = document.createElementNS(
+      'http://www.w3.org/2000/svg',
+      'circle'
+    )
   }
 
   getElement(): SVGCircleElement {
     return this.circle
   }
 }
-
 
 export class CanvasRect extends CanvasElement {
   private rect: SVGRectElement
@@ -184,9 +220,9 @@ export class CanvasRect extends CanvasElement {
 export class CanvasLine extends CanvasElement {
   private line: SVGLineElement
 
-  private _stroke : string
-  private _strokeWidth : string
-  private _strokeLinecap : string
+  private _stroke: string
+  private _strokeWidth: string
+  private _strokeLinecap: string
 
   public get start(): CanvasPoint {
     return {
@@ -240,7 +276,12 @@ export class CanvasLine extends CanvasElement {
   }
 
   private setStyle() {
-    this.line.setAttribute('style', `stroke:${this._stroke}; stroke-width:${this._strokeWidth}; stroke-linecap:${this._strokeLinecap}`)
+    this.line.setAttribute(
+      'style',
+      `stroke:${this._stroke}; stroke-width:${
+        this._strokeWidth
+      }; stroke-linecap:${this._strokeLinecap}`
+    )
   }
 }
 
@@ -322,18 +363,24 @@ export class CanvasBezier extends CanvasElement {
   }
 
   private render() {
-    if (this._points.length < 3) return 
+    if (this._points.length < 3) return
     this.bezier = new Bezier(this._points)
     let ps = this.bezier.getLUT(this._resolution)
     let p0 = ps.shift(1)
-    let d = `M${p0.x} ${p0.y} ${ps.map(p => `L${p.x} ${p.y}`).reduce((a,b)=>a+' '+b)} ${this._close ? 'Z' : ''}`
+    let d = `M${p0.x} ${p0.y} ${ps
+      .map(p => `L${p.x} ${p.y}`)
+      .reduce((a, b) => a + ' ' + b)} ${this._close ? 'Z' : ''}`
     this.path.setAttribute('d', d)
   }
- 
-  private setStyle() {
-    this.path.setAttribute('style', `stroke:${this._stroke};stroke-width:${this._strokeWidth};stroke-linecap:${this._strokeLinecap};fill:${this._fill}`)
-  }
 
+  private setStyle() {
+    this.path.setAttribute(
+      'style',
+      `stroke:${this._stroke};stroke-width:${
+        this._strokeWidth
+      };stroke-linecap:${this._strokeLinecap};fill:${this._fill}`
+    )
+  }
 }
 
 export class CanvasPolyline extends CanvasElement {
@@ -398,13 +445,20 @@ export class CanvasPolyline extends CanvasElement {
   }
 
   private setStyle() {
-    this.path.setAttribute('style', `stroke:${this._stroke};stroke-width:${this._strokeWidth};stroke-linecap:${this._strokeLinecap};fill:${this._fill}`)
+    this.path.setAttribute(
+      'style',
+      `stroke:${this._stroke};stroke-width:${
+        this._strokeWidth
+      };stroke-linecap:${this._strokeLinecap};fill:${this._fill}`
+    )
   }
   private render() {
-    if (this._points.length < 3) return 
+    if (this._points.length < 3) return
     let ps = [...this.points]
     let p0 = ps.shift()
-    let d = `M${p0.x} ${p0.y} ${ps.map(p => `L${p.x} ${p.y}`).reduce((a,b)=>a+' '+b)} ${this._close ? 'Z' : ''}`
+    let d = `M${p0.x} ${p0.y} ${ps
+      .map(p => `L${p.x} ${p.y}`)
+      .reduce((a, b) => a + ' ' + b)} ${this._close ? 'Z' : ''}`
     this.path.setAttribute('d', d)
   }
   getElement() {

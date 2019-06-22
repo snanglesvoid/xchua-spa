@@ -1,106 +1,103 @@
 @import '../../../../styles/variables.less';
 
 button {
-    position: fixed;
-    left: -44px;
-    top: 30px;
-    font-size: 3rem;
-    z-index: 1000;
-    border: 0;
-    background: transparent;
-    transition: all .7s ease;
-    transform: rotate(17deg);
-    outline: 0;
-    animation-name: blink;
-    animation-duration: 1.2s;
-    animation-timing-function: ease;
-    div {
-        width: 100px;
-        height: 3px;
-        background-color: #bbb;
-        margin-top: 24px;
-        margin-bottom: 24px;
-        transition: all .7s ease;
-        transition: 
-            margin-bottom 0.7s ease,
-            margin-top 0.7s ease,
-            transform .7s ease;
-    }
-    div:first-child {
-        background-color: #f1f1f1;
-        height: 3px;
-    }
+  position: fixed;
+  left: -44px;
+  top: 30px;
+  font-size: 3rem;
+  z-index: 1000;
+  border: 0;
+  background: transparent;
+  transition: all 0.7s ease;
+  transform: rotate(17deg);
+  outline: 0;
+  animation-name: blink;
+  animation-duration: 1.2s;
+  animation-timing-function: ease;
+  div {
+    width: 100px;
+    height: 3px;
+    background-color: #bbb;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    transition: all 0.7s ease;
+    transition: margin-bottom 0.7s ease, margin-top 0.7s ease,
+      transform 0.7s ease, background-color 1s ease;
+    // box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+  div:first-child {
+    background-color: #f1f1f1;
+  }
 }
 button:hover {
-    div {
-        // background-color: @color-fg-dark-highlight;
-        margin-bottom: 28px;
-        margin-top: 28px;
-        transform: rotate(-180deg);
-    }    
+  div {
+    // background-color: @color-fg-dark-highlight;
+    margin-bottom: 28px;
+    margin-top: 28px;
+    transform: rotate(-180deg);
+  }
 }
 button:focus {
-    outline: 0;
+  outline: 0;
 }
-
 
 button.open {
-    transform: rotate(0);
-    left:54px;
-    div {
-        width: 46px;
-    }
-    div:first-child {
-        // background: green;
-        transform: translateY(16px) translateX(0px) rotate(30deg);
-        height: 3px;
+  transform: rotate(0);
+  left: 54px;
+  div {
+    width: 46px;
+  }
+  div:first-child {
+    // background: green;
+    transform: translateY(16px) translateX(0px) rotate(30deg);
+    height: 3px;
 
-        z-index: 1001;
-    }
-    div:nth-child(2) {
-        // background: red;
-        height: 2px;
-        transform: translateY(-14px);
-        z-index: 1002;
-    }
-    div:nth-child(3) {
-        // background: blue;
-        transform: translateY(-30px) rotate(-44deg);
-        height: 2px;
-    }
+    z-index: 1001;
+  }
+  div:nth-child(2) {
+    // background: red;
+    height: 2px;
+    transform: translateY(-14px);
+    z-index: 1002;
+  }
+  div:nth-child(3) {
+    // background: blue;
+    transform: translateY(-30px) rotate(-44deg);
+    height: 2px;
+  }
 }
 button.open:hover {
-    transform: scale(1.2,1.2);
-    div {
-        transform: rotate(0);
-        margin-bottom: 24px;
-        margin-top: 24px;
-        // width: 4px;
-    }
-    div:first-child {
-        // background: green;
-        transform: translateY(16px) translateX(0px) rotate(30deg);
-        height: 3px;
-        z-index: 1001;
-    }
-    div:nth-child(2) {
-        // background: red;
-        height: 2px;
-        transform: translateY(-14px);
-        z-index: 1002;
-    }
-    div:nth-child(3) {
-        // background: blue;
-        transform: translateY(-30px) rotate(-44deg);
-        height: 2px;
-    }
+  transform: scale(1.2, 1.2);
+  div {
+    transform: rotate(0);
+    margin-bottom: 24px;
+    margin-top: 24px;
+    // width: 4px;
+  }
+  div:first-child {
+    // background: green;
+    transform: translateY(16px) translateX(0px) rotate(30deg);
+    height: 3px;
+    z-index: 1001;
+  }
+  div:nth-child(2) {
+    // background: red;
+    height: 2px;
+    transform: translateY(-14px);
+    z-index: 1002;
+  }
+  div:nth-child(3) {
+    // background: blue;
+    transform: translateY(-30px) rotate(-44deg);
+    height: 2px;
+  }
 }
 
 @media screen and (max-width: @size-md) {
-    button {
-        left: -40px;
-        top: -18px;
-        transform: rotate(17deg) scale(.66);
-        animation-name: blinksmall;
-    }
+  button {
+    left: -40px;
+    top: -18px;
+    transform: rotate(17deg) scale(0.66);
+    animation-name: blinksmall;
+  }
 }

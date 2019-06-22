@@ -1,7 +1,9 @@
 <div class="placeholder"></div>
 
 <div class="banner" modalImages>
-  <h1>{{ series.title }}</h1>
+  <h1>
+    <app-snippet [snippet]="series.title"></app-snippet>
+  </h1>
   <div class="view-switcher">
     <img
       src="assets/images/carousel.png"
@@ -15,20 +17,52 @@
     />
   </div>
 
-  <div class="container">
-    <app-masonry #masonry [row]="view == 0">
+  <div #container class="container">
+    <!-- (mouseenter)="containerMouseEnter($event)"
+    (mouseleave)="containerMouseLeave($event)"
+    (mousemove)="containerMouseMove($event)" -->
+    <div
+      *ngIf="view == 0"
+      class="left"
+      (click)="masonry.previousPicture()"
+    ></div>
+    <div *ngIf="view == 0" class="right" (click)="masonry.nextPicture()"></div>
+    <div *ngIf="view == 0">
+      <!-- <button (click)="masonry.previousPicture()">prev</button>
+      <button (click)="masonry.nextPicture()">next</button> -->
+      <div *ngIf="activeWork" class="aw-caption">
+        <p>
+          <span style="font-size: 1.8rem; line-height:2.1rem; opacity: 0.7;">
+            {{ activeWork.title
+            }}<span *ngIf="activeWork.year">,&nbsp;{{ activeWork.year }}</span>
+          </span>
+          <br />
+          <span *ngIf="activeWork.description">
+            {{ activeWork.description }} <br />
+          </span>
+          <span *ngIf="activeWork.dimensions">
+            {{ activeWork.dimensions }}
+          </span>
+        </p>
+      </div>
+    </div>
+    <app-masonry
+      #masonry
+      [row]="view == 0"
+      (centerItemIndex)="activeIndex($event)"
+    >
       <div #gridItem class="grid-item" *ngFor="let artwork of series.artworks">
         <app-artwork
           [artwork]="artwork"
           size="3"
-          [imageClass]="view"
+          [imageClass]="view == 0 ? 'carousel' : 'collage'"
         ></app-artwork>
       </div>
     </app-masonry>
   </div>
 
   <div
-    style="height: 100px;"
+    style="height: 60px;"
     appScrollTo
     [ratio]="0.3"
     (inViewport)="bottomViewport($event)"

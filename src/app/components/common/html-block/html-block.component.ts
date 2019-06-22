@@ -1,29 +1,34 @@
-import { Component, OnInit, Input, HostListener, ElementRef, ViewChild, AfterContentInit } from '@angular/core';
-import { EasingFunctionsService } from 'src/app/services/easing-functions.service';
-
+import {
+  Component,
+  OnInit,
+  Input,
+  HostListener,
+  ElementRef,
+  ViewChild,
+  AfterContentInit,
+} from '@angular/core'
+import { EasingFunctionsService } from 'src/app/services/easing-functions.service'
+import { observeProperty } from 'src/app/lib/observeProperty'
+import { delay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-html-block',
   templateUrl: './html-block.component.html',
-  styleUrls: ['./html-block.component.less']
+  styleUrls: ['./html-block.component.less'],
 })
 export class HtmlBlockComponent implements OnInit, AfterContentInit {
+  constructor(private easingFunctions: EasingFunctionsService) {}
 
-  
-  constructor(
-    private easingFunctions: EasingFunctionsService,
-    private el: ElementRef
-  ) { }
-  
   ngOnInit() {
-    ;(window as any).block = this
+    this.content$.pipe(delay(100)).subscribe(_ => this.onResize())
   }
-  
+
   ngAfterContentInit() {
-    setTimeout(() => this.onResize(), 100)
+    // setTimeout(() => this.onResize(), 100)
   }
 
   @Input() content: string
+  content$ = observeProperty(this, 'content')
 
   @ViewChild('container') div: ElementRef
 
@@ -45,33 +50,38 @@ export class HtmlBlockComponent implements OnInit, AfterContentInit {
     let start
 
     let step = timestamp => {
-      start = (!start) ? timestamp : start
+      start = !start ? timestamp : start
       const time = timestamp - start
-      const ratio = this.easingFunctions.easeInOutQuad(Math.min(time / duration, 1))
+      const ratio = this.easingFunctions.easeInOutQuad(
+        Math.min(time / duration, 1)
+      )
       el.scrollTo(startingX + diff * ratio, 0)
       if (time < duration) {
         window.requestAnimationFrame(step)
-      }
-      else if (callback) {
+      } else if (callback) {
         callback()
       }
     }
     window.requestAnimationFrame(step)
   }
 
-  get columnWidth () {
+  get columnWidth() {
     return this.div.nativeElement.getBoundingClientRect().width + 80
   }
   nextPage() {
     // console.log('next')
     let columnWidth = this.columnWidth
-    this.scrollTo(this.div.nativeElement.scrollLeft + columnWidth, () => this.onResize())
+    this.scrollTo(this.div.nativeElement.scrollLeft + columnWidth, () =>
+      this.onResize()
+    )
   }
 
   previousPage() {
     // console.log('prev')
     let columnWidth = this.columnWidth
-    this.scrollTo(this.div.nativeElement.scrollLeft - columnWidth, () => this.onResize())
+    this.scrollTo(this.div.nativeElement.scrollLeft - columnWidth, () =>
+      this.onResize()
+    )
   }
 
   showPagePrev() {
@@ -79,9 +89,11 @@ export class HtmlBlockComponent implements OnInit, AfterContentInit {
   }
 
   showPageNext() {
-    let el : HTMLElement = this.div.nativeElement
+    let el: HTMLElement = this.div.nativeElement
     // console.log(el.scrollWidth - el.scrollLeft, '>', Math.ceil(el.getBoundingClientRect().width))
-    return Math.floor(el.scrollWidth - el.scrollLeft) - 10 > Math.ceil(el.getBoundingClientRect().width)
+    return (
+      Math.floor(el.scrollWidth - el.scrollLeft) - 10 >
+      Math.ceil(el.getBoundingClientRect().width)
+    )
   }
-
 }

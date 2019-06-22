@@ -48,8 +48,8 @@ export class CloudinaryImage extends Model {
     return clone
   }
 
-  public limit(height, width) {
-    return `http://res.cloudinary.com/xc-hua/image/upload/c_limit,h_${height},w_${width}/${
+  public limit(width, height) {
+    return `https://res.cloudinary.com/xc-hua/image/upload/c_limit,h_${height},w_${width}/${
       this.id
     }`
   }

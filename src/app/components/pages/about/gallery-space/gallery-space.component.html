@@ -1,37 +1,50 @@
-
-<div class="column1" 
-    [class.open]="open">
-    <h1>{{gallery.location}}</h1>
-    <h2>12 - 6pm</h2>
-    <p>Tuesday - Saturday</p>
-    <p class="info">
-        <span style="font-weight: 600;">Xc.HuA Gallery</span>
-        <br>
-        <span [innerHtml]="gallery.address"></span>
-        <span *ngIf="gallery.phone">{{gallery.phone}}</span>
-        <br>
-    </p>
+<div class="column1" [class.open]="open">
+  <h1>{{ gallery.location }}</h1>
+  <h2>12 - 6pm</h2>
+  <p>Tuesday - Saturday</p>
+  <p class="info">
+    <span style="font-weight: 600;">Xc.HuA Gallery</span>
+    <br />
+    <span [innerHtml]="gallery.address"></span>
+    <span *ngIf="gallery.phone">{{ gallery.phone }}</span>
+    <br />
+  </p>
 </div>
-<cl-image class="column2" 
-    [public-id]="gallery.image.id"
-    [class.open]="open"
-    *ngIf="gallery.image"
-    (click)="open=!open"
-    (swipeleft)="open = true"
-    (swiperight)="open = false"
->  
+<cl-image
+  class="column2"
+  [public-id]="gallery.image.id"
+  [class.open]="open"
+  *ngIf="gallery.image"
+  (click)="open = !open"
+  (swipeleft)="open = true"
+  (swiperight)="open = false"
+>
 </cl-image>
-<div class="column3"
-    [class.open]="open">
-    <div *ngIf="open" class="about" [@text]="true">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non augue tellus. Sed gravida leo in ex cursus pellentesque. Quisque tellus tortor, rutrum sed sem accumsan, elementum volutpat lacus. Nullam id convallis purus. Proin velit metus, euismod a euismod non, auctor eget erat. Vivamus in efficitur sapien, sit amet placerat est. Pellentesque ac risus scelerisque ipsum lobortis porta eget a arcu. Duis in ullamcorper justo.
-        </p>
-        <p>
-            Donec pretium nulla eu magna pharetra, sed porta libero semper. Duis ornare nibh quis magna luctus interdum. In id nisi sit amet neque consectetur cursus nec ac neque. Integer at suscipit libero, eget lacinia eros. Donec semper urna convallis ultrices tincidunt. Etiam venenatis ut neque quis accumsan. Quisque rhoncus porta metus, quis elementum nisi vehicula nec. Vivamus lacinia, lorem vitae efficitur mollis, ante quam feugiat ex, in finibus tortor mauris id orci. Nulla sed augue rhoncus, interdum turpis semper, laoreet nisl. Praesent tempus lectus eget arcu vulputate, sit amet consequat urna fermentum. Aliquam quis lacus faucibus, dapibus diam in, porta nunc. Nunc et dui ac dui aliquam tempor laoreet quis ipsum.
-        </p>
-    </div> 
-    <div *ngIf="!open" class="rotate" [@text]="true">
-        location in {{gallery.location}}...
-    </div>
+<div class="column3" [class.open]="open">
+  <div *ngIf="open" class="about" [@text]="true">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non augue
+      tellus. Sed gravida leo in ex cursus pellentesque. Quisque tellus tortor,
+      rutrum sed sem accumsan, elementum volutpat lacus. Nullam id convallis
+      purus. Proin velit metus, euismod a euismod non, auctor eget erat. Vivamus
+      in efficitur sapien, sit amet placerat est. Pellentesque ac risus
+      scelerisque ipsum lobortis porta eget a arcu. Duis in ullamcorper justo.
+    </p>
+    <p>
+      Donec pretium nulla eu magna pharetra, sed porta libero semper. Duis
+      ornare nibh quis magna luctus interdum. In id nisi sit amet neque
+      consectetur cursus nec ac neque. Integer at suscipit libero, eget lacinia
+      eros. Donec semper urna convallis ultrices tincidunt. Etiam venenatis ut
+      neque quis accumsan. Quisque rhoncus porta metus, quis elementum nisi
+      vehicula nec. Vivamus lacinia, lorem vitae efficitur mollis, ante quam
+      feugiat ex, in finibus tortor mauris id orci. Nulla sed augue rhoncus,
+      interdum turpis semper, laoreet nisl. Praesent tempus lectus eget arcu
+      vulputate, sit amet consequat urna fermentum. Aliquam quis lacus faucibus,
+      dapibus diam in, porta nunc. Nunc et dui ac dui aliquam tempor laoreet
+      quis ipsum.
+    </p>
+  </div>
+  <div *ngIf="!open" class="rotate" [@text]="true">
+    location in {{ gallery.location }}...
+  </div>
 </div>

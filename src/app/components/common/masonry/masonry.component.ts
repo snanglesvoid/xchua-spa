@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   Input,
+  Output,
   AfterContentInit,
   ElementRef,
   ContentChildren,
@@ -10,15 +11,15 @@ import {
   HostListener,
   ViewChild,
   HostBinding,
+  EventEmitter,
 } from '@angular/core'
 import { ClientService } from 'src/app/services/client.service'
 import { observeProperty } from 'src/app/lib/observeProperty'
-import { Observable, fromEvent, Subject } from 'rxjs'
-import { throttleTime } from 'rxjs/operators'
+import { Observable, Subject } from 'rxjs'
+import { throttleTime, skip } from 'rxjs/operators'
+import { EasingFunctionsService } from 'src/app/services/easing-functions.service'
 
 declare const Packery
-
-let count = 0
 
 @Component({
   selector: 'app-masonry',
@@ -26,7 +27,11 @@ let count = 0
   styleUrls: ['./masonry.component.less'],
 })
 export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
-  constructor(private client: ClientService, private el: ElementRef) {}
+  constructor(
+    private client: ClientService,
+    private el: ElementRef,
+    private easingFunctions: EasingFunctionsService
+  ) {}
 
   private packery
 
@@ -34,28 +39,35 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
     this.scrollEventT$ = this.scrollEvent$.pipe(throttleTime(80))
     this.scrollEventT$.subscribe(x => this.onScroll(x))
     this.resizeEventT$ = this.resizeEvent$.pipe(throttleTime(150))
-    this.resizeEventT$.subscribe(_ => this.resize())
+    this.resizeEventT$.subscribe(_ => {
+      this.resize()
+      setTimeout(() => {
+        this.pack()
+      }, 100)
+    })
   }
 
   ngOnDestroy() {}
 
   ngAfterContentInit() {
-    ;(window as any)['masonry' + count++] = this
-    this.row$.subscribe(_ => setTimeout(_ => this.pack(), 100))
-    if (this.gridItems.length > 0) {
-      this.gridItems.first.nativeElement.style.transform =
-        'scale(3.0) translate(0, 0)'
-      this.gridItems.first.nativeElement.style['z-index'] = 1
-    }
+    this.row$
+      .pipe(
+        //tap(console.log),
+        skip(1)
+      )
+      .subscribe(_ => setTimeout(_ => this.pack(), 100))
     this.resize()
+    setTimeout(_ => this.pack(), 100)
   }
 
-  @HostListener('window:resize')
   pack() {
-    console.log('pack')
+    this.gridItems.forEach(
+      x => (x.nativeElement.style.transition = 'transform 0')
+    )
     if (this.row) {
       return this.packRow()
     }
+    let t = new Date()
     let width = this.el.nativeElement.getBoundingClientRect().width
     let cols =
       width <= this.client.sizeSm
@@ -91,14 +103,15 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
         transitionDuration: this.transitionDuration,
         stagger: 30,
       })
-    }
-    setTimeout(() => {
-      this.packery.options.originTop = true
+    } else {
+      // this.packery.options.originTop = true
       this.packery.layout()
-    }, 100)
+    }
+    console.log('pack took ', new Date().getTime() - t.getTime(), 'ms')
   }
 
   packRow() {
+    let t = new Date()
     let width =
       this.rowItemWidth * this.gridItems.length +
       this.gutter * (this.gridItems.length + 1) +
@@ -106,14 +119,6 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
 
     this.grid.nativeElement.style.width = width + 'px'
     this.grid.nativeElement.style['min-height'] = 3 * this.rowItemHeight + 'px'
-
-    // console.log('imgs', this.grid.nativeElement.querySelectorAll('img'))
-    // ;(this.grid.nativeElement as HTMLDivElement)
-    //   .querySelectorAll('img')
-    //   .forEach(x => {
-    //     x.style.width = this.rowItemWidth + 'px'
-    //     x.style.height = this.rowItemHeight + 'px'
-    //   })
 
     this.gridItems.forEach(x => {
       x.nativeElement.style.width = this.rowItemWidth + 'px'
@@ -125,17 +130,21 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
         gutter: this.gutter,
         transitionDuration: this.transitionDuration,
         stagger: 30,
+        // originTop: false,
       })
-    }
-    setTimeout(() => {
-      this.packery.options.originTop = false
+    } else {
+      // this.packery.options.originTop = false
       this.packery.layout()
-    }, 100)
+    }
+    setTimeout(_ => {
+      this.onScroll(null)
+    }, 1000)
+    console.log('pack row took ', new Date().getTime() - t.getTime(), 'ms')
   }
 
   imagesLoaded(event) {
-    console.log('masonry images loaded', event)
-    setTimeout(() => this.pack(), 100)
+    // console.log('masonry images loaded', event)
+    setTimeout(() => this.pack(), 20)
   }
 
   @HostListener('scroll', ['$event'])
@@ -144,29 +153,51 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
   }
   scrollEvent$: Subject<any> = new Subject<any>()
   scrollEventT$: Observable<any>
-  onScroll(event?) {
-    console.log('scrolled')
+  onScroll(_?: any) {
+    // console.log('scrolled')
+    // let t = new Date()
     if (!this.row) return
     let element: HTMLDivElement = this.el.nativeElement
     let gridItems = this.gridItems.toArray()
+    let transformBefore = `translate(-50%, ${this.rowItemWidth}px) scale(1.0)`
+    let transformActive = `translate(0, ${this.rowItemWidth}px) scale(3.0)`
+    let transformAfter = `translate(50%, ${this.rowItemWidth}px) scale(1.0)`
+    let transformPrevious = `translate(-50%, ${
+      this.rowItemWidth
+    }px) scale(1.25)`
+    let transformNext = `translate(50%, ${this.rowItemWidth}px) scale(1.25)`
     let i
+    for (i = 0; i < gridItems.length; ++i) {
+      gridItems[i].nativeElement.style.transition = 'transform .4s ease'
+      gridItems[i].nativeElement.style.cursor = 'auto'
+    }
     for (
       i = 0;
       i * (this.rowItemWidth + this.gutter) <
-        element.scrollLeft - this.rowItemWidth && i < gridItems.length - 1;
+        element.scrollLeft - this.rowItemWidth / 2 && i < gridItems.length - 1;
       i++
     ) {
-      gridItems[i].nativeElement.style.transform =
-        'scale(1.0) translate(-50%, 0)'
+      gridItems[i].nativeElement.style.transform = transformBefore
       gridItems[i].nativeElement.style['z-index'] = 0
     }
-    gridItems[i].nativeElement.style.transform = 'scale(3.0) translate(0, 0)'
-    gridItems[i].nativeElement.style['z-index'] = 1
-    for (i = i + 1; i < gridItems.length; i++) {
-      gridItems[i].nativeElement.style.transform =
-        'scale(1.0) translate(50%, 0)'
+    if (i > 0) {
+      gridItems[i - 1].nativeElement.style.transform = transformPrevious
+      gridItems[i - 1].nativeElement.style['z-index'] = 1
+    }
+    gridItems[i].nativeElement.style.transform = transformActive
+    gridItems[i].nativeElement.style['z-index'] = 2
+    gridItems[i].nativeElement.style.cursor =
+      'url(/assets/cursors/zoom-in.svg), auto'
+    this.centerItemIndex.emit(i)
+    if (i + 1 < gridItems.length) {
+      gridItems[i + 1].nativeElement.style.transform = transformNext
+      gridItems[i + 1].nativeElement.style['z-index'] = 1
+    }
+    for (i = i + 2; i < gridItems.length; i++) {
+      gridItems[i].nativeElement.style.transform = transformAfter
       gridItems[i].nativeElement.style['z-index'] = 0
     }
+    // console.log('scrolled took',new Date().getTime() - t.getTime(), 'ms')
   }
 
   @ViewChild('grid') grid: ElementRef
@@ -191,10 +222,6 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
     this.rowItemWidth =
       w <= this.client.sizeSm ? 100 : w <= this.client.sizeMd ? 150 : 200
     console.log('resize', w, this.rowItemWidth)
-    setTimeout(() => {
-      this.pack()
-      this.onScroll()
-    }, 100)
   }
 
   private _rowItemWidth: number = 100
@@ -216,6 +243,30 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
     return width / 2 - this.rowItemHeight / 2
   }
 
+  scrollBy(dx: number) {
+    let duration = 50 + Math.abs(0.5 * dx)
+    let el: HTMLDivElement = this.el.nativeElement
+    const startingX = el.scrollLeft
+    let start
+    let step = timestamp => {
+      start = !start ? timestamp : start
+      const time = timestamp - start
+      let ratio = this.easingFunctions.easeOutQuad(Math.min(time / duration, 1))
+      el.scrollLeft = startingX + dx * ratio
+      if (time < duration) {
+        window.requestAnimationFrame(step)
+      }
+    }
+    window.requestAnimationFrame(step)
+  }
+
+  nextPicture() {
+    this.scrollBy(this.rowItemWidth + this.gutter)
+  }
+  previousPicture() {
+    this.scrollBy(-this.rowItemWidth - this.gutter)
+  }
+
   @HostBinding('class.row_100') get row_100() {
     return this.rowItemWidth == 100
   }
@@ -225,4 +276,5 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
   @HostBinding('class.row_200') get row_200() {
     return this.rowItemWidth == 200
   }
+  @Output() centerItemIndex = new EventEmitter<number>()
 }

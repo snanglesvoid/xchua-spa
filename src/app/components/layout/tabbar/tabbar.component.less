@@ -1,19 +1,18 @@
-@import "../../../../styles/variables.less";
+@import '../../../../styles/variables.less';
 
 :host {
-    position: fixed;
-    z-index: 3;
-    left:0;
-    top: @header-height;
-    bottom: 64px;
-    width: @mg-left;
-    overflow: hidden;
-    box-sizing: border-box;
-    
-    // border: 1px dotted gray;
-    padding-top: 32px;
-}
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: @header-height;
+  bottom: 64px;
+  width: @mg-left;
+  overflow: hidden;
+  box-sizing: border-box;
 
+  // border: 1px dotted gray;
+  padding-top: 32px;
+}
 
 // @media screen and (max-width: @size-md) {
 //     :host {
@@ -27,75 +26,74 @@
 // }
 
 @media screen and (max-width: @size-md) {
-    :host /deep/ {
-        position: fixed;
-        top: 32px;
-        left: unset;
-        height: auto;
-        width: auto;
-        bottom: unset;
-        margin-top: 0;
-        right: 16px;
-        padding-top: 0;
-        .tabs {
-            flex-direction: row;
-            margin-top:0;
-            
-        }
+  :host /deep/ {
+    position: fixed;
+    top: 32px;
+    left: unset;
+    height: auto;
+    width: auto;
+    bottom: unset;
+    margin-top: 0;
+    right: 16px;
+    padding-top: 0;
+    .tabs {
+      flex-direction: row;
+      margin-top: 0;
     }
-    :host /deep/ .tabs li {
-        padding-left: 12px !important;
-    }
-    :host /deep/ .tabs li.subsection {
-        display: none;
-    }
+  }
+  :host /deep/ .tabs li {
+    padding-left: 12px !important;
+  }
+  :host /deep/ .tabs li.subsection {
+    display: none;
+  }
 }
 
 :host /deep/ .tabs {
-    display: flex;
-    list-style-type: none;
-    margin-bottom: 0;
-    flex-direction: column;
-    padding-left: @padding;
-    li {
-        display: block;
-        text-transform: uppercase;
-        color: @color-fg-dark;
-        transition: all .5s;
-        font-size: 1.5rem;
-        line-height: 1.5rem;
-        position: relative;
-        padding-left: 32px;
-        cursor: pointer;
-        a {
-            text-decoration: none;
-            color: #bbb;
-            transition: all .4s ease;
-            display: block;
-            width: 100%;
-        }
+  display: flex;
+  list-style-type: none;
+  margin-bottom: 0;
+  flex-direction: column;
+  padding-left: @padding;
+  li {
+    display: block;
+    text-transform: uppercase;
+    color: @color-fg-dark;
+    transition: all 0.5s;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    a {
+      text-decoration: none;
+      color: #bbb;
+      transition: all 0.4s ease;
+      display: block;
+      width: 100%;
     }
-    li.subsection {
-        padding-left: 48px;
-        text-transform: lowercase;
+  }
+  li.subsection {
+    padding-left: 32px;
+    // text-transform: lowercase;
+  }
+  li.active {
+    a {
+      color: black;
     }
-    li.active {
-        a {
-            color: black;
-        }
+  }
+  li:hover {
+    a {
+      // color: red !important;
     }
-    li:hover {
-        a {
-            // color: red !important;
-        }
-    }
+  }
 }
 
 .tab {
-    display: none;
-    transition: all 1s ease;
-    height: 100%;
+  display: none;
+  transition: all 1s ease;
+  height: 100%;
 }
 .tab.active {
-    display: block;
+  display: block;
 }

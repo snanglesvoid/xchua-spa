@@ -1,4 +1,4 @@
-<cl-image
+<!-- <cl-image
   *ngIf="imageExists"
   [public-id]="publicId"
   [class]="imageClass"
@@ -13,13 +13,22 @@
   >
 
   </cl-transformation>
-</cl-image>
+</cl-image> -->
+<img
+  *ngIf="image.exists"
+  [src]="imageUrl"
+  [class]="imageClass"
+  (load)="onImagesLoaded()"
+  (click)="click()"
+/>
+
+<!-- [@fade]="loading ? 'out' : 'in'" -->
 <!-- <app-spinner [@fade]="loading ? 'in' : 'out'" *ngIf="loading"> 
 
 </app-spinner> -->
-<div class="placeholder" *ngIf="!imageExists">
+<!-- <div class="placeholder" *ngIf="!imageExists">
   <h3>...</h3>
-</div>
+</div> -->
 
 <!-- <div class="info">
   <p *ngIf="resolution">reso: (w:{{resolution.width}}, h:{{resolution.height}})</p>

@@ -6,14 +6,12 @@ import {
   EventEmitter,
   HostBinding,
   ElementRef,
-  ChangeDetectionStrategy,
+  AfterContentInit,
 } from '@angular/core'
 import { CloudinaryImage, Artwork } from 'src/app/models'
 import { ClientService } from 'src/app/services/client.service'
-import { trigger, state, transition, animate, style } from '@angular/animations'
+// import { trigger, state, transition, animate, style } from '@angular/animations'
 
-export type ImageType = CloudinaryImage | Artwork
-// export type ImageSize = 'FULLSCREEN' | 'LARGE' | 'HALFSCREEN' | 'SMALL'
 export enum ImageSize {
   FULLSCREEN = 0,
   LARGE = 1,
@@ -26,48 +24,27 @@ export enum ImageSize {
   templateUrl: './smart-image.component.html',
   styleUrls: ['./smart-image.component.less'],
   animations: [
-    trigger('fade', [
-      state('in', style({ opacity: 1 })),
-      state('out', style({ opacity: 0 })),
-      transition('in <=> out', animate('600ms ease')),
-    ]),
+    // trigger('fade', [
+    //   state('in', style({ opacity: 1 })),
+    //   state('out', style({ opacity: 0 })),
+    //   transition('in <=> out', animate('600ms ease')),
+    // ]),
   ],
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SmartImageComponent implements OnInit {
+export class SmartImageComponent implements OnInit, AfterContentInit {
   constructor(private client: ClientService, private el: ElementRef) {}
 
-  private _image: ImageType
-  @Input()
-  public get image() {
-    return this._image
-  }
-  public set image(image: ImageType) {
-    this._image = image
-  }
-
-  private _loading = true
-  public get loading() {
-    return this._loading
-  }
-
   onImagesLoaded() {
-    setTimeout(() => {
-      this._loading = false
-      this.loaded.emit('loaded')
-    }, 10)
+    // console.log('loaded!')
+    this.loading = false
+    this.loaded.emit('loaded')
   }
 
-  @Output()
-  loaded = new EventEmitter<any>()
-
-  private _resolution: { width: number; height: number } = {
-    width: 0,
-    height: 0,
-  }
-  public get resolution() {
-    return this._resolution
-  }
+  @Input() image: CloudinaryImage
+  @Input() imageClass: string = ''
+  @Output() loaded = new EventEmitter<any>()
+  @Output() imageClicked = new EventEmitter<SmartImageComponent>()
 
   private _size: ImageSize
   @Input()
@@ -76,7 +53,7 @@ export class SmartImageComponent implements OnInit {
   }
   public set size(value: ImageSize) {
     this._size = value
-    this._resolution =
+    this.resolution =
       value == ImageSize.SMALL
         ? this.client.smallImageRes
         : value == ImageSize.HALFSCREEN
@@ -88,32 +65,25 @@ export class SmartImageComponent implements OnInit {
         : this.client.smallImageRes
   }
 
-  @HostBinding('class.hover-fx')
-  hover_fx: boolean = false
-  @Input()
-  public get hoverFx() {
-    return this.hover_fx
-  }
-  public set hoverFx(value) {
-    this.hover_fx = value && this.client.isDesktop
+  loading = true
+  resolution: { width: number; height: number } = {
+    width: 0,
+    height: 0,
   }
 
-  @Input() imageClass: string = ''
-
-  public get publicId() {
-    return this._image instanceof Artwork
-      ? this._image.image.id
-      : this._image.id
+  get imageUrl() {
+    return this.image.limit(this.resolution.width, this.resolution.height)
   }
 
-  public get imageExists() {
-    return this.image && this.image instanceof Artwork
-      ? this.image.image.exists
-      : (this.image as CloudinaryImage).exists
-  }
-
-  @Output() imageLoaded = new EventEmitter<any>()
-  @Output() imageClicked = new EventEmitter<SmartImageComponent>()
+  // @HostBinding('class.hover-fx')
+  // hover_fx: boolean = false
+  // @Input()
+  // public get hoverFx() {
+  //   return this.hover_fx
+  // }
+  // public set hoverFx(value) {
+  //   this.hover_fx = value && this.client.isDesktop
+  // }
 
   click() {
     // console.log('image click')
@@ -121,8 +91,17 @@ export class SmartImageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this._resolution.width == 0) {
-      this._resolution = this.client.smallImageRes
+    if (this.resolution.width == 0) {
+      this.resolution = this.client.smallImageRes
     }
+  }
+
+  // time: Date = new Date()
+  ngAfterContentInit() {
+    // console.log(
+    //   'smart-image init: ',
+    //   new Date().getTime() - this.time.getTime(),
+    //   'ms'
+    // )
   }
 }

@@ -59,11 +59,14 @@
       [images]="previewPictures"
       [currentSlide]="previewImage"
       [imageSize]="previewImageSize"
-      [style.opacity]="progress.done ? 1 : 0"
       (imageLoadProgress)="progressChanged($event)"
+      [class.hidden]="!progress.done"
     >
     </app-slideshow>
-    <app-spinner [style.opacity]="!progress.done ? 1 : 0">
+    <app-spinner
+      *ngIf="!progress.done"
+      [style.opacity]="!progress.done ? 1 : 0"
+    >
       <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
     </app-spinner>
   </div>

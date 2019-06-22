@@ -106,6 +106,8 @@ export class ArtistsComponent implements OnInit {
   }
 
   progressChanged(event) {
+    console.log('progress changed ', event)
+    this.progress.ratio = event.ratio
     if (event.ratio >= 1) {
       if (!this.previewImage) {
         this.previewImage = this.previewPictures[0]
