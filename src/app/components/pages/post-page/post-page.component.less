@@ -1,0 +1,16 @@
+@import '../../../../styles/variables.less';
+
+app-page-header {
+  pointer-events: all;
+  h3 {
+    transition: all 0.5s ease;
+    cursor: pointer;
+    outline: none !important;
+  }
+  h3:hover {
+    color: @color-logo-dot;
+  }
+}
+:host /deep/ app-page-header .titlebar {
+  pointer-events: all;
+}

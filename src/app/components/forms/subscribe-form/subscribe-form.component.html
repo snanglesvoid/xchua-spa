@@ -1,57 +1,78 @@
 <div class="limit-width">
-
   <div *ngIf="submitted">
     <p class="message">
       <app-snippet [snippet]="submitted.status"></app-snippet>
     </p>
   </div>
 
-<input type="hidden" name="action" value="subscribe">
+  <input type="hidden" name="action" value="subscribe" />
 
-<div class="form-group" [class.has-error]="validationErrors.firstname">
-  <label for="firstname">
-    <app-snippet snippet="subscribe-firstname"></app-snippet>
-  </label>
-  <input class="form-control" type="text" name="firstname" [(ngModel)]="data.firstname"
-  [placeholder]="placeholder('firstname') | snippet:language.language | async">
-</div>
-
-<div class="form-group" [class.has-error]="validationErrors.lastname">
-  <label for="lastname">
-    <app-snippet snippet="subscribe-lastname"></app-snippet>
-  </label>
-  <input type="text" class="form-control" name="lastname" [(ngModel)]="data.lastname"
-  [placeholder]="placeholder('lastname') | snippet:language.language | async">
-</div>
-<div class="form-group" [class.has-error]="validationErrors.email">
-  <label for="email">
-    <app-snippet snippet="subscribe-email"></app-snippet>
-  </label>
-  <input class="form-control" type="email" name="email" [(ngModel)]="data.email"
-  [placeholder]="placeholder('email') | snippet:language.language | async">
-</div>
-
-<div class="form-group check" [class.has-error]="validationErrors.agree">
-  <span>
-    <app-snippet snippet='data-policy-agree'></app-snippet>&nbsp;
-    <a href="/texts/data-protection-agreement" target='_blank'>
-      <em><app-snippet snippet='data-policy-name'></app-snippet></em>.
-    </a>
-  </span>
-  <div class="checkmark-container">
-    <input type="checkbox" name="data-agree" [(ngModel)]="data['data-agree']">
-    <span class="checkmark"></span>
+  <div class="form-group" [class.has-error]="validationErrors.firstname">
+    <label for="firstname">
+      <app-snippet snippet="subscribe-firstname"></app-snippet>
+    </label>
+    <input
+      class="form-control"
+      type="text"
+      name="firstname"
+      [(ngModel)]="data.firstname"
+      [placeholder]="
+        placeholder('firstname') | snippet: language.language | async
+      "
+    />
   </div>
-</div>
 
-<div class="form-group">
-  <hr>
-</div>
+  <div class="form-group" [class.has-error]="validationErrors.lastname">
+    <label for="lastname">
+      <app-snippet snippet="subscribe-lastname"></app-snippet>
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      name="lastname"
+      [(ngModel)]="data.lastname"
+      [placeholder]="
+        placeholder('lastname') | snippet: language.language | async
+      "
+    />
+  </div>
+  <div class="form-group" [class.has-error]="validationErrors.email">
+    <label for="email">
+      <app-snippet snippet="subscribe-email"></app-snippet>
+    </label>
+    <input
+      class="form-control"
+      type="email"
+      name="email"
+      [(ngModel)]="data.email"
+      [placeholder]="placeholder('email') | snippet: language.language | async"
+    />
+  </div>
 
-<div class="form-actions">
-  <button class="btn btn-primary" (click)="subscribe()">
-    <app-snippet snippet="subscribe-button"></app-snippet>
-  </button>
-</div>
+  <div class="form-group check" [class.has-error]="validationErrors.agree">
+    <span>
+      <app-snippet snippet="data-policy-agree"></app-snippet>&nbsp;
+      <a href="/pages/data-protection-agreement" target="_blank">
+        <em><app-snippet snippet="data-policy-name"></app-snippet></em>.
+      </a>
+    </span>
+    <div class="checkmark-container">
+      <input
+        type="checkbox"
+        name="data-agree"
+        [(ngModel)]="data['data-agree']"
+      />
+      <span class="checkmark"></span>
+    </div>
+  </div>
 
+  <div class="form-group">
+    <hr />
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="subscribe()">
+      <app-snippet snippet="subscribe-button"></app-snippet>
+    </button>
+  </div>
 </div>

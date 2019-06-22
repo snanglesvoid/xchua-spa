@@ -13,6 +13,7 @@
     <h2 class="post-title">
       <a routerLink="/post/{{ post.slug }}">{{ post.title }}</a>
     </h2>
+    <p>{{ post.publishedDate | date }}</p>
     <div style="position: relative;" [innerHtml]="post.content.brief"></div>
     <p class="read-more" *ngIf="post.content.extended">
       <a routerLink="/post/{{ post.slug }}">

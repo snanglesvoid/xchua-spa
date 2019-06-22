@@ -1,17 +1,62 @@
 <app-nav-toggle (toggled)="navToggled($event)" [open]="isOpen"></app-nav-toggle>
 
-<div id="sidenav" class="sidenav" [@open-close]="isOpen ? 'open' : 'closed'" [class.open]='isOpen'>
-  <br>
-  <br>
+<div
+  id="sidenav"
+  class="sidenav"
+  [@open-close]="isOpen ? 'open' : 'closed'"
+  [class.open]="isOpen"
+>
+  <br />
+  <br />
   <!-- <app-scrollpane [boxShadows]="false" [noPadding]="true"> -->
-    <app-navlink (clicked)="navToggled(false)" href="/" section='home' snippet='menu-home'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/artists" section='artists' snippet='menu-artists'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/exhibitions" section='exhibitions' snippet='menu-exhibitions'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/fairs" section='fairs' snippet='menu-fairs'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/libary" section='libary' snippet='menu-libary'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/news" section='news' snippet='menu-news'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/about" section='aboout' snippet='menu-about'></app-navlink>
-    <app-navlink (clicked)="navToggled(false)" href="/contact" section='contact' snippet='menu-contact'></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/"
+    section="home"
+    snippet="menu-home"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/artists"
+    section="artists"
+    snippet="menu-artists"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/exhibitions"
+    section="exhibitions"
+    snippet="menu-exhibitions"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/fairs"
+    section="fairs"
+    snippet="menu-fairs"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/libary"
+    section="libary"
+    snippet="menu-libary"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/news"
+    section="news"
+    snippet="menu-news"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/about"
+    section="aboout"
+    snippet="menu-about"
+  ></app-navlink>
+  <app-navlink
+    (clicked)="navToggled(false)"
+    href="/contact"
+    section="contact"
+    snippet="menu-contact"
+  ></app-navlink>
   <!-- </app-scrollpane> -->
   <app-language-select></app-language-select>
 </div>
