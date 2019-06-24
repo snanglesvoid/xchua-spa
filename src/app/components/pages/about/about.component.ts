@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ApiService } from 'src/app/services/api.service'
 import { GallerySpace } from 'src/app/models/GallerySpace'
 import { Router } from '@angular/router'
+import { SnippetService } from 'src/app/services/snippet.service'
+import { from } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-about',
@@ -14,7 +17,16 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   gallerySpaces: GallerySpace[] = []
 
-  constructor(private api: ApiService, private router: Router) {}
+  statements$ = from(this.snippet.getTextblock('abouttext')).pipe(
+    tap(console.log),
+    map(x => x.content)
+  )
+
+  constructor(
+    private api: ApiService,
+    private router: Router,
+    private snippet: SnippetService
+  ) {}
 
   ngOnInit() {
     this.dataChangeSubscription = this.api.gallerySpaces.dataChanged.subscribe(

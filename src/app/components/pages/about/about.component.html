@@ -1,17 +1,23 @@
 <app-page-header>
   <h3><app-snippet snippet="about-title"></app-snippet></h3>
 </app-page-header>
-  
-<app-page-body>
- 
-  <app-scrollpane [showLines]="false" [boxShadows]="false">
 
-    <app-scrollpane-section 
-    *ngFor="let space of gallerySpaces"
-    [snippet]='space.location'
+<app-page-body>
+  <app-scrollpane [showLines]="false" [boxShadows]="false">
+    <app-scrollpane-section snippet="about-spaces">
+      <div style="height: 20px;"></div>
+    </app-scrollpane-section>
+    <app-scrollpane-section
+      *ngFor="let space of gallerySpaces"
+      [snippet]="space.location"
+      subsection="true"
     >
       <app-gallery-space [gallery]="space"></app-gallery-space>
     </app-scrollpane-section>
-    <app-spinner *ngIf="loading"></app-spinner>
+    <div style="height: 60px;"></div>
+    <app-scrollpane-section snippet="about-statements">
+      <div class="statements" [innerHtml]="statements$ | async"></div>
+    </app-scrollpane-section>
+    <div style="height: 40vh;"></div>
   </app-scrollpane>
 </app-page-body>

@@ -1,18 +1,20 @@
-<div class="scrollpane" #scrollpane
->
+<div class="scrollpane" #scrollpane>
   <div class="scrollpane-content" [style.padding-top]="noPadding ? 0 : ''">
     <ng-content></ng-content>
   </div>
-  
 </div>
 
 <app-tabbar *ngIf="sections && sections.length > 0">
-  <li *ngFor="let s of sections" [class.active]='s.active' [class.subsection]="s.subsection">
+  <li
+    *ngFor="let s of sections"
+    [class.active]="s.active || s.childActive"
+    [class.subsection]="s.subsection"
+  >
     <div *ngIf="!s.isEmpty">
       <a (click)="scrollToSection(s)">
         <app-snippet [snippet]="s.snippet"></app-snippet>
       </a>
-      <hr #hr *ngIf="s !== sections.last">
+      <hr #hr *ngIf="s !== sections.last" />
     </div>
   </li>
 </app-tabbar>

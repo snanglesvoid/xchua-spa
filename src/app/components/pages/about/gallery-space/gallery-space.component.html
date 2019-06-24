@@ -20,6 +20,15 @@
   (swiperight)="open = false"
 >
 </cl-image>
+<div class="column4">
+  <p class="info">
+    <span style="font-weight: 600;">Xc.HuA Gallery</span>
+    <br />
+    <span [innerHtml]="gallery.address"></span>
+    <span *ngIf="gallery.phone">{{ gallery.phone }}</span>
+    <br />
+  </p>
+</div>
 <div class="column3" [class.open]="open">
   <div *ngIf="open" class="about" [@text]="true">
     <!-- <p>

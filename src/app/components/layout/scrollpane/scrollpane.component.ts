@@ -145,6 +145,18 @@ export class ScrollpaneComponent
   ngAfterContentInit() {
     if (this.sections && this.sections.length > 0) {
       this.initSections()
+      this.sections.changes.subscribe(_ => {
+        this.sections.forEach(s => {
+          s.activeChange.subscribe(_ => {
+            if (!s.active) return
+            if (!s.subsection) {
+              this.sections.first.childActive = false
+            } else if (s.active) {
+              this.sections.first.childActive = true
+            }
+          })
+        })
+      })
     }
     window.addEventListener('resize', this.resizeListener)
   }

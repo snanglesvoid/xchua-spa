@@ -30,22 +30,26 @@
     <div class="caption" (click)="captionClicked($event)">
       <div class="content" *ngIf="!modal.loading && artwork && animationDone">
         <p>
-          <app-typewriter
+          <!-- <app-typewriter
             class="artist-name"
             [text]="artistName"
             [interval]="50"
           >
-          </app-typewriter>
+          </app-typewriter> -->
+          {{ artistName }}
           <br />
-          <app-typewriter [text]="artworkTitleText" [interval]="40">
-          </app-typewriter>
+          <!-- <app-typewriter [text]="artworkTitleText" [interval]="40">
+          </app-typewriter> -->
+          {{ artworkTitleText }}
           <br />
           <!-- <span *ngIf="artwork.series &&"></span> -->
-          <app-typewriter [text]="artwork.description" [interval]="25">
-          </app-typewriter>
+          <!-- <app-typewriter [text]="artwork.description" [interval]="25">
+          </app-typewriter> -->
+          {{ artwork.description }}
           <br />
-          <app-typewriter [text]="artwork.dimensions" [interval]="90">
-          </app-typewriter>
+          <!-- <app-typewriter [text]="artwork.dimensions" [interval]="90">
+          </app-typewriter> -->
+          {{ artwork.dimensions }}
         </p>
       </div>
     </div>

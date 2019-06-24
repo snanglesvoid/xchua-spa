@@ -1,12 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, AfterContentInit, AfterContentChecked } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  AfterContentInit,
+  AfterContentChecked,
+} from '@angular/core'
 
 @Component({
   selector: 'app-scrollpane-section',
   templateUrl: './scrollpane-section.component.html',
-  styleUrls: ['./scrollpane-section.component.less']
+  styleUrls: ['./scrollpane-section.component.less'],
 })
-export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, AfterContentChecked {
-
+export class ScrollpaneSectionComponent
+  implements OnInit, AfterContentInit, AfterContentChecked {
   @Input() snippet: string
   @Input() subsection: boolean = false
   @Input() scrollToOffset: number = 0
@@ -14,6 +24,7 @@ export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, Aft
   @Output() requestScroll = new EventEmitter<boolean>()
   @Output() activeChange = new EventEmitter<boolean>()
 
+  childActive: boolean
   private _active: boolean = false
   @Input()
   get active() {
@@ -39,8 +50,8 @@ export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, Aft
   public get lineConnectionPoint() {
     let r = (this.hr.nativeElement as HTMLHRElement).getBoundingClientRect()
     return {
-      x : r.left,
-      y : r.top + r.height / 2.0
+      x: r.left,
+      y: r.top + r.height / 2.0,
     }
   }
   public get hrRect() {
@@ -52,9 +63,7 @@ export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, Aft
     this.activeChange.emit(value)
   }
 
-  constructor(
-    public el: ElementRef
-  ) { }
+  constructor(public el: ElementRef) {}
 
   ngOnInit() {
     this.el.nativeElement.id = this.snippet
@@ -62,12 +71,13 @@ export class ScrollpaneSectionComponent implements OnInit, AfterContentInit, Aft
 
   @ViewChild('projected') projected: ElementRef
   ngAfterContentInit() {
-    this.isEmpty = this.projected.nativeElement.getBoundingClientRect().height < 3
+    this.isEmpty =
+      this.projected.nativeElement.getBoundingClientRect().height < 3
   }
   ngAfterContentChecked() {
-    this.isEmpty = this.projected.nativeElement.getBoundingClientRect().height < 3
+    this.isEmpty =
+      this.projected.nativeElement.getBoundingClientRect().height < 3
   }
 
   isEmpty: boolean = true
-
 }
