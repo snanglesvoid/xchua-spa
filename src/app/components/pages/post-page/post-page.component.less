@@ -7,8 +7,12 @@ app-page-header {
     cursor: pointer;
     outline: none !important;
   }
-  h3:hover {
-    color: @color-logo-dot;
+}
+body.desktop {
+  app-page-header {
+    h3:hover {
+      color: @color-logo-dot;
+    }
   }
 }
 :host /deep/ app-page-header .titlebar {

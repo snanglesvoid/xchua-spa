@@ -3,149 +3,153 @@
 @list-width: 256px;
 
 .flexbox {
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
 }
 
-.golden-ratio-2, .golden-ratio-1 {
-    position: relative;
+.golden-ratio-2,
+.golden-ratio-1 {
+  position: relative;
 }
 
 @media screen and (min-width: @size-md) {
-    
-    .golden-ratio-2 {
-        width: 62%;
-        padding-right: 64px;
-        height: 100%;
-        max-height: 100%;
-    }
-    
-    .golden-ratio-1 {
-        width: 38%;
-        height: 100%;
-        max-height: 100%;
-    }
+  .golden-ratio-2 {
+    width: 62%;
+    padding-right: 64px;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .golden-ratio-1 {
+    width: 38%;
+    height: 100%;
+    max-height: 100%;
+  }
 }
 
 @media screen and (max-width: @size-md) {
+  .golden-ratio-2 {
+    width: 100%;
+    padding: @padding-sm;
+    // height: 62%;
+    height: 100%;
+    max-height: 100%;
+    padding-right: 64px;
+  }
 
-    .golden-ratio-2 {
-        width: 100%;
-        padding: @padding-sm;
-        // height: 62%;
-        height: 100%;
-        max-height: 100%;
-        padding-right: 64px;
-
-    }
-    
-    .golden-ratio-1 {
-        // width: 100%;
-        width: 0;
-        padding: @padding-sm;
-        max-height: 100%;
-        // height: 38%;
-    }    
+  .golden-ratio-1 {
+    // width: 100%;
+    width: 0;
+    padding: @padding-sm;
+    max-height: 100%;
+    // height: 38%;
+  }
 }
 
 @media screen and (max-width: @size-sm) {
-    .golden-ratio-2 {
-        padding-right: @padding-sm * 2;
-        padding-left: @padding-sm * 2;
+  .golden-ratio-2 {
+    padding-right: @padding-sm * 2;
+    padding-left: @padding-sm * 2;
 
-        height: 100%;
-        max-height: 100%;
-    }
+    height: 100%;
+    max-height: 100%;
+  }
 }
 
 :host /deep/ .picture-container {
-    width: calc(62% - 130px);
-    padding-top: 158px;
-    padding-bottom: 10vh;
-    height: 100vh;
-    position: fixed;
-    right: 0;
-    top: 0;
-
+  width: calc(62% - 130px);
+  padding-top: 158px;
+  padding-bottom: 10vh;
+  height: 100vh;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .list-container {
-    min-width: @list-width;
-    width: 38%;
-    max-height: 100%;
-    padding-bottom: 30px;
-    .artists-list {
-        
-        font-size: 2rem;
-        list-style-type: none;
-        padding-left: 0;
-        margin: 0;
-        
-        li {
-            text-transform: capitalize;
-            // line-height: 4rem;
-            font-size: 2vw;
-            line-height: 3.5vw;
-            a {   
-                text-decoration: none;
-                color: #bbb;
-                transition: all .25s ease;
-            }
-        }
-        
-        li.active a, li.section-active a {
-            color: #000;
-        }
-        li a:hover {
-            color: #000;
-        }
-        li.section-active a:hover {
-            color: #bbb;
-        }
-        h4 {
-            font-size: 2rem;
-            line-height: 3rem;
-            color: #bbb;
-            margin-top: .5rem;
-            margin-bottom: 0;
-            text-transform: uppercase;
-            text-decoration: underline;
-        }
+  min-width: @list-width;
+  width: 38%;
+  max-height: 100%;
+  padding-bottom: 30px;
+  .artists-list {
+    font-size: 2rem;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+      text-transform: capitalize;
+      // line-height: 4rem;
+      font-size: 2vw;
+      line-height: 3.5vw;
+      a {
+        text-decoration: none;
+        color: #bbb;
+        transition: all 0.25s ease;
+      }
     }
+
+    li.active a,
+    li.section-active a {
+      color: #000;
+    }
+
+    h4 {
+      font-size: 2rem;
+      line-height: 3rem;
+      color: #bbb;
+      margin-top: 0.5rem;
+      margin-bottom: 0;
+      text-transform: uppercase;
+      text-decoration: underline;
+    }
+  }
 }
 
+body.desktop {
+  .list-container {
+    .artists-list {
+      li a:hover {
+        color: #000;
+      }
+      li.section-active a:hover {
+        color: #bbb;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: @size-md) {
-    .picture-container {
-        width: 0;
-        display: none;
-    }
-    .list-container {
-        width: 100%;
-        padding-left: 22px;
-        
-        .artists-list {
-            margin-top: 0px;
-        }
-    }
-}
+  .picture-container {
+    width: 0;
+    display: none;
+  }
+  .list-container {
+    width: 100%;
+    padding-left: 22px;
 
+    .artists-list {
+      margin-top: 0px;
+    }
+  }
+}
 
 @media screen and (max-width: 1000px) {
-    .list-container {
-        .artists-list {
-            li {
-                font-size: 2rem;
-                line-height: 3.5rem;
-            }
-        }
+  .list-container {
+    .artists-list {
+      li {
+        font-size: 2rem;
+        line-height: 3.5rem;
+      }
     }
+  }
 }
 
-app-spinner, app-slideshow  {
-    transition: opacity 1s ease;
+app-spinner,
+app-slideshow {
+  transition: opacity 1s ease;
 }

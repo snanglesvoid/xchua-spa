@@ -1,72 +1,75 @@
 @import '../../../../../styles/variables.less';
 
 .exhibition-card {
-    transform: translateY(400px);
-    transition: all 1s ease;
-    opacity: 0;
-
+  transform: translateY(400px);
+  transition: all 1s ease;
+  opacity: 0;
 }
 
 .in-view {
-    transform: translateY(0);
-    opacity: 1;
+  transform: translateY(0);
+  opacity: 1;
 
-    // .ex-description {
-    //     transform: translateX(0) !important;
-    // }
+  // .ex-description {
+  //     transform: translateX(0) !important;
+  // }
+}
+
+body.desktop {
+  ul.artist-links {
+    li:hover {
+      a {
+        color: #000;
+      }
+    }
+  }
 }
 
 ul.artist-links {
+  list-style-type: none;
+  display: block;
+  padding-left: 0;
+  margin: 0;
+  margin-bottom: 8px;
+  // margin-bottom: 12px;
+  li {
     list-style-type: none;
-    display: block;
-    padding-left: 0;
-    margin: 0;
-    margin-bottom: 8px;
-    // margin-bottom: 12px;
-    li {
-        list-style-type: none;
-        text-transform: capitalize;
-        display: inline;
-        text-decoration: none;
-        color: #bbb;
-        transition: all .25s ease;
-        font-size: 1.5rem;
-        a {
-            text-decoration: none;
-            color: #bbb;
-            transition: all .25s ease;
-            font-size: 1.5rem;
-        }
+    text-transform: capitalize;
+    display: inline;
+    text-decoration: none;
+    color: #bbb;
+    transition: all 0.25s ease;
+    font-size: 1.5rem;
+    a {
+      text-decoration: none;
+      color: #bbb;
+      transition: all 0.25s ease;
+      font-size: 1.5rem;
     }
+  }
 
-    li:hover {
-        a {
-            color: #000;
-        }
-    }
+  li::after {
+    content: ', ';
+    color: #bbb;
+    white-space: pre;
+  }
 
-    li::after {
-        content: ', ';
-        color: #bbb;
-        white-space: pre;
-    }
-
-    li:last-child::after {
-        content: '';
-    }
+  li:last-child::after {
+    content: '';
+  }
 }
 
 :host /deep/ img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    cursor: pointer;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  cursor: pointer;
 }
 
 // :host.inner-right {
-    // .ex-description {
-    //     transform: translateX(120%);
-    // }
+// .ex-description {
+//     transform: translateX(120%);
+// }
 // }
 // :host.inner-left {
 //     .ex-description {
@@ -75,62 +78,62 @@ ul.artist-links {
 // }
 
 :host {
-    width: 100%;
-    height: 420px;
-    padding: 16px;
-    padding-top: 0;
-    // border-bottom: 1px solid grey;
-    margin-bottom: 32px;
-    display: block;
-    .ex-description {
-        overflow: hidden;
-        transition: transform 600ms 400ms ease-out;
-    }
+  width: 100%;
+  height: 420px;
+  padding: 16px;
+  padding-top: 0;
+  // border-bottom: 1px solid grey;
+  margin-bottom: 32px;
+  display: block;
+  .ex-description {
+    overflow: hidden;
+    transition: transform 600ms 400ms ease-out;
+  }
 
-    h3 {
-        // font-style: italic;
-        text-transform: capitalize;
-        font-size: 3rem;
-        margin-bottom: 0;
-        cursor: pointer;
-        white-space: nowrap;
-        overflow-x: hidden;
-        overflow-y: visible;
-        text-overflow: ellipsis;
-        padding-bottom: 1rem;
-        margin-bottom: -1rem;
+  h3 {
+    // font-style: italic;
+    text-transform: capitalize;
+    font-size: 3rem;
+    margin-bottom: 0;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: visible;
+    text-overflow: ellipsis;
+    padding-bottom: 1rem;
+    margin-bottom: -1rem;
 
-        a {
-            text-decoration: none;
-            font-weight: 700;
-        }
+    a {
+      text-decoration: none;
+      font-weight: 700;
     }
-    p {
-        font-size: 1.5rem;
-        margin-top: .75rem;
-        margin-bottom: 0;
-    }
-    p.date {
-        font-style: italic;
-    }
+  }
+  p {
+    font-size: 1.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+  }
+  p.date {
+    font-style: italic;
+  }
 }
 
 @media screen and (max-width: @size-sm) {
-    :host {
-        padding: 0;
+  :host {
+    padding: 0;
 
-        .ex-description {
-            padding-left: 15px;
-            padding-right: 15px;
-        }
+    .ex-description {
+      padding-left: 15px;
+      padding-right: 15px;
     }
+  }
 }
 
 @media screen and (min-width: @size-lg) {
-    :host {
-        height: 600px;
-    }
-    :host /deep/ img {
-        height: 440px;
-    }
+  :host {
+    height: 600px;
+  }
+  :host /deep/ img {
+    height: 440px;
+  }
 }

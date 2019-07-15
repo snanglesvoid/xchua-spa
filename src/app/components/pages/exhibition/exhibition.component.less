@@ -7,8 +7,23 @@ app-page-header {
     cursor: pointer;
     outline: none !important;
   }
-  h3:hover {
-    color: @color-logo-dot;
+  // h3:hover {
+
+  // }
+}
+
+body.desktop {
+  app-page-header {
+    h3:hover {
+      color: @color-logo-dot;
+    }
+  }
+  ul.artists-links {
+    li:hover {
+      a {
+        color: #000;
+      }
+    }
   }
 }
 :host /deep/ app-page-header .titlebar {
@@ -69,12 +84,6 @@ ul.artist-links {
       color: #bbb;
       transition: all 0.25s ease;
       font-size: 1.5rem;
-    }
-  }
-
-  li:hover {
-    a {
-      color: #000;
     }
   }
 

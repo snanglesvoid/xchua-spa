@@ -100,6 +100,8 @@ export class ClientService {
     }
     window.addEventListener('resize', resize)
     resize()
+
+    document.body.classList.add(this.isDesktop ? 'desktop' : 'touch')
   }
 
   private _fullScreenImageResolution = {
