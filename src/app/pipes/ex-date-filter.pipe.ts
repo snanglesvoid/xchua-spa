@@ -1,13 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Exhibition } from '../models/Exhibition';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators'
+import { Pipe, PipeTransform } from '@angular/core'
+import { Exhibition } from '../models/Exhibition'
 
 @Pipe({
-  name: 'exDateFilter'
+  name: 'exDateFilter',
 })
 export class ExDateFilterPipe implements PipeTransform {
-
   transform(value: Exhibition[], args?: any): any {
     if (!value) return value
     // console.log('pipe transform')
@@ -21,6 +18,6 @@ export class ExDateFilterPipe implements PipeTransform {
     if (args === 'current') {
       return value.filter(x => x.end >= d && x.start <= d)
     }
+    return []
   }
-
 }

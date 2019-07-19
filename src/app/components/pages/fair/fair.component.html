@@ -1,0 +1,70 @@
+<app-page-header>
+  <h3 routerLink="/fairs">
+    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <app-snippet snippet="fairs-title"></app-snippet>
+  </h3>
+</app-page-header>
+
+<app-page-body>
+  <app-spinner *ngIf="loading"></app-spinner>
+  <app-scrollpane *ngIf="fair">
+    <div class="heading">
+      <h1 class="title">
+        <app-typewriter [text]="fairTitle"></app-typewriter>
+      </h1>
+      <p *ngIf="fair.start && fair.end" class="date">
+        {{ fair.start | date }}&nbsp;to {{ fair.end | date }}
+      </p>
+      <ul class="artist-links">
+        <li *ngFor="let artist of fair.artists">
+          <a routerLink="/artist/{{ artist.slug }}">
+            {{ artist.name.first + ' ' + artist.name.last }}
+          </a>
+        </li>
+      </ul>
+    </div>
+    <br />
+    <div class="cover-picture">
+      <app-smart-image
+        [image]="fair.thumbnail"
+        size="0"
+        imageClass="cover-picture-img"
+      >
+      </app-smart-image>
+    </div>
+
+    <div class="cover-picture-placeholder" *ngIf="coverStick"></div>
+
+    <div
+      class="text"
+      appScrollTo
+      [ratio]="0.3"
+      (inViewport)="textViewportChange($event)"
+      [style.opacity]="textViewportState < 1 ? 1 : 0"
+    >
+      <app-html-block [content]="fair.text"></app-html-block>
+    </div>
+
+    <div class="gallery" modalImages>
+      <div class="container">
+        <app-masonry #masonry>
+          <div
+            class="grid-item"
+            #gridItem
+            *ngFor="let image of fair.pictures"
+            appScrollTo
+            [ratio]="0.4"
+            (inViewport)="inViewportChange(image, $event)"
+            [class.in-view]="image.animationState < 1"
+          >
+            <app-smart-image
+              [image]="image"
+              size="3"
+              imageClass="hover-fx"
+            ></app-smart-image>
+          </div>
+        </app-masonry>
+      </div>
+    </div>
+  </app-scrollpane>
+</app-page-body>

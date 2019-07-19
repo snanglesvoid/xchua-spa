@@ -33,12 +33,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     total: number
     ratio: number
   } = {
-      loaded: 0,
-      total: 1,
-      ratio: 0,
-    }
+    loaded: 0,
+    total: 1,
+    ratio: 0,
+  }
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {}
 
   private _dataChangeSubscription
   private _intervalSubscription
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.loading = true
     await this.api.frontPageImages.waitForData()
     this.slides = [...this.api.frontPageImages.data]
-    this.slides.forEach(x => x.animationState = 'out')
+    this.slides.forEach(x => (x.animationState = 'out'))
     this.images = this.slides.map(x => x.image)
     this.imageUrls = this.images.map(x => {
       return x.url

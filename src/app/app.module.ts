@@ -72,6 +72,9 @@ import { SlideshowControllerComponent } from './components/common/slideshow-cont
 import { ArtworkSeriesComponent } from './components/pages/artist/artwork-series/artwork-series.component'
 import { ProgressBarComponent } from './components/common/progress-bar/progress-bar.component'
 import { FooterComponent } from './components/common/footer/footer.component'
+import { FairComponent } from './components/pages/fair/fair.component'
+import { FairDateFilterPipe } from './pipes/fair-date-filter.pipe';
+import { DateRangePipe } from './pipes/date-range.pipe'
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -131,6 +134,11 @@ const appRoutes: Routes = [
     data: { animation: 'FairsPage' },
   },
   {
+    path: 'fair/:slug',
+    component: FairComponent,
+    data: { animation: 'FairPage' },
+  },
+  {
     path: 'libary',
     component: LibaryComponent,
     data: { animation: 'LibaryPage' },
@@ -176,6 +184,7 @@ const appRoutes: Routes = [
     ContactFormComponent,
     SubscribeFormComponent,
     FairsComponent,
+    FairComponent,
     LibaryComponent,
     PageComponent,
     SubscribeComponent,
@@ -213,6 +222,8 @@ const appRoutes: Routes = [
     ArtworkSeriesComponent,
     ProgressBarComponent,
     FooterComponent,
+    FairDateFilterPipe,
+    DateRangePipe,
   ],
   imports: [
     BrowserModule,
