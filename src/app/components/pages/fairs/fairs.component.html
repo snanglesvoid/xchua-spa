@@ -29,7 +29,7 @@
               </app-typewriter>
             </h3>
             <p *ngIf="fair.start && fair.end" class="date">
-              {{ fair.start | date }} &nbsp;to&nbsp;{{ fair.end | date }}
+              {{ fair | dateRange: lang.language }}
             </p>
             <ul class="artist-links">
               <li

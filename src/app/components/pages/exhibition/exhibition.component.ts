@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { ApiService } from 'src/app/services/api.service'
 import { CloudinaryImage } from 'src/app/models'
 import { DomSanitizer } from '@angular/platform-browser'
+import { LanguageService } from 'src/app/services/language.service'
 
 @Component({
   selector: 'app-exhibition',
@@ -27,7 +28,8 @@ export class ExhibitionComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    public lang: LanguageService
   ) {}
 
   ngOnInit() {

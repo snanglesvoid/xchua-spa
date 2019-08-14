@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ApiService } from 'src/app/services/api.service'
 import { Fair, CloudinaryImage } from 'src/app/models'
+import { LanguageService } from 'src/app/services/language.service'
 
 @Component({
   selector: 'app-fair',
@@ -12,7 +13,8 @@ export class FairComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    public lang: LanguageService
   ) {}
 
   private _fair: Fair

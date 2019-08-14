@@ -12,8 +12,9 @@
       <h1 class="title">
         <app-typewriter [text]="exhibitionTitle"></app-typewriter>
       </h1>
+      <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
       <p *ngIf="exhibition.start && exhibition.end" class="date">
-        {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp;
+        {{ exhibition | dateRange: lang.language }},&nbsp;
         {{ exhibition.location.location }}
       </p>
       <ul class="artist-links">

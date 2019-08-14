@@ -1,8 +1,15 @@
-import { Component, OnInit, Input, HostBinding, ElementRef } from '@angular/core';
-import { Exhibition } from 'src/app/models/Exhibition';
+import {
+  Component,
+  OnInit,
+  Input,
+  HostBinding,
+  ElementRef,
+} from '@angular/core'
+import { Exhibition } from 'src/app/models/Exhibition'
 
-import { trigger, state, animate, style, transition } from '@angular/animations';
-import { ViewportPosition } from 'src/app/directives/scroll-to.directive';
+import { trigger, state, animate, style, transition } from '@angular/animations'
+import { ViewportPosition } from 'src/app/directives/scroll-to.directive'
+import { LanguageService } from 'src/app/services/language.service'
 
 @Component({
   selector: 'app-exhibitions-list-item',
@@ -12,27 +19,23 @@ import { ViewportPosition } from 'src/app/directives/scroll-to.directive';
     trigger('inOut', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('600ms ease-out' ,style({ opacity : 1}))
+        animate('600ms ease-out', style({ opacity: 1 })),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
-        animate('600ms ease-out', style({ opacity: 0 }))
-      ])
-    ])
-  ]
+        animate('600ms ease-out', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class ExhibitionsListItemComponent implements OnInit {
-
   @Input() exhibition: Exhibition
 
   @HostBinding('@inOut') inOut = true
 
-  constructor(
-    private el: ElementRef
-  ) { }
+  constructor(private el: ElementRef, public lang: LanguageService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   viewportPosition: ViewportPosition = 0
 
@@ -40,5 +43,4 @@ export class ExhibitionsListItemComponent implements OnInit {
     // console.log('in Viewport Changed for', this.el.nativeElement, event)
     this.viewportPosition = event
   }
-
 }

@@ -74,7 +74,8 @@ import { ProgressBarComponent } from './components/common/progress-bar/progress-
 import { FooterComponent } from './components/common/footer/footer.component'
 import { FairComponent } from './components/pages/fair/fair.component'
 import { FairDateFilterPipe } from './pipes/fair-date-filter.pipe';
-import { DateRangePipe } from './pipes/date-range.pipe'
+import { DateRangePipe } from './pipes/date-range.pipe';
+import { GlShelfComponent } from './components/gl/gl-shelf/gl-shelf.component'
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -224,6 +225,7 @@ const appRoutes: Routes = [
     FooterComponent,
     FairDateFilterPipe,
     DateRangePipe,
+    GlShelfComponent,
   ],
   imports: [
     BrowserModule,

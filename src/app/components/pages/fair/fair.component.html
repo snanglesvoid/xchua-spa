@@ -13,7 +13,7 @@
         <app-typewriter [text]="fairTitle"></app-typewriter>
       </h1>
       <p *ngIf="fair.start && fair.end" class="date">
-        {{ fair.start | date }}&nbsp;to {{ fair.end | date }}
+        {{ fair | dateRange: lang.language }}
       </p>
       <ul class="artist-links">
         <li *ngFor="let artist of fair.artists">
