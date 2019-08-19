@@ -46,8 +46,14 @@ ul.artist-links {
 :host /deep/ img {
   width: 100%;
   height: 300px;
-  object-fit: cover;
   cursor: pointer;
+}
+
+:host /deep/ img.contain {
+  object-fit: contain;
+}
+:host /deep/ img.cover {
+  object-fit: contain;
 }
 
 .row {

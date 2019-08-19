@@ -6,6 +6,7 @@ app-page-header {
     transition: all 0.5s ease;
     cursor: pointer;
     outline: none !important;
+    font-weight: 300;
   }
 }
 
@@ -18,7 +19,7 @@ body.desktop {
   ul.artist-links {
     li:hover {
       a {
-        color: #000;
+        color: #bbb;
       }
     }
   }
@@ -36,10 +37,11 @@ body.desktop {
   h1.title {
     position: absolute;
     top: 158px;
-    font-size: 4rem;
+    font-size: 3rem;
     margin: 0;
     transform: translateY(-100%);
     margin-top: -26px;
+    font-weight: 300;
   }
 }
 
@@ -73,12 +75,12 @@ ul.artist-links {
     text-transform: capitalize;
     display: inline;
     text-decoration: none;
-    color: #bbb;
+    // color: #bbb;
     transition: all 0.25s ease;
     font-size: 1.5rem;
     a {
       text-decoration: none;
-      color: #bbb;
+      // color: #bbb;
       transition: all 0.25s ease;
       font-size: 1.5rem;
     }
@@ -86,7 +88,7 @@ ul.artist-links {
 
   li::after {
     content: ', ';
-    color: #bbb;
+    // color: #bbb;
     white-space: pre;
   }
 
@@ -140,17 +142,18 @@ app-page-body {
 
     a {
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 300;
     }
   }
   p {
-    font-size: 2rem;
-    line-height: 2.5rem;
+    font-size: 1.5rem;
+    // line-height: 2.5rem;
+    font-weight: 400;
     margin-top: 0.75rem;
     margin-bottom: 0;
   }
   p.date {
-    font-style: italic;
+    // font-style: italic;
   }
 }
 
@@ -185,4 +188,5 @@ app-page-body {
     white-space: nowrap;
     text-overflow: ellipsis;
   }
+  margin-top: -2.5rem;
 }

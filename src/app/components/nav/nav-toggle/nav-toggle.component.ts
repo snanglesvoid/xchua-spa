@@ -19,13 +19,13 @@ export class NavToggleComponent implements OnInit {
   }
 
   constructor() {}
-  idx = 0
+  // idx = 0
   ngOnInit() {
-    interval(1000).subscribe(_ => {
-      this.idx--
-      this.idx += 3
-      this.idx %= 3
-    })
+    // interval(1000).subscribe(_ => {
+    //   this.idx--
+    //   this.idx += 3
+    //   this.idx %= 3
+    // })
   }
 
   toggleNav() {

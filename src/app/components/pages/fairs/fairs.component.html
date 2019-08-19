@@ -15,7 +15,7 @@
           <div *ngIf="fair.thumbnail.exists">
             <app-smart-image
               [image]="fair.thumbnail"
-              imageClass="hover-fx"
+              imageClass="hover-fx {{ fair.thumbnailImageFit }}"
               size="2"
               routerLink="/fair/{{ fair.slug }}"
             ></app-smart-image>

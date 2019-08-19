@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core'
-import { LanguageService } from '../services/language.service'
 
 const mns = [
   'Jan',
@@ -28,24 +27,17 @@ function formatDateChinese(date: Date) {
 }
 
 @Pipe({
-  name: 'dateRange',
+  name: 'xcDate',
 })
-export class DateRangePipe implements PipeTransform {
-  transform(value: { start: Date; end: Date }, lang?: string): any {
-    let start = value.start
-    let end = value.end
-
-    //todo remove year if equal
-
+export class XcDatePipe implements PipeTransform {
+  transform(value: Date, lang?: string): any {
     switch (lang) {
       case 'english':
-        return `${formatDateEnglish(start)} to ${formatDateEnglish(end)}`
+        return formatDateEnglish(value)
       case 'german':
-        return `${formatDateGerman(start)} - ${formatDateGerman(end)}`
+        return formatDateGerman(value)
       case 'chinese':
-        return `${formatDateChinese(start)} - ${formatDateChinese(end)}`
-      default:
-        throw 'unknown language'
+        return formatDateChinese(value)
     }
   }
 }

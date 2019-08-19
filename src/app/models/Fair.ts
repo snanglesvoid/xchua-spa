@@ -9,6 +9,7 @@ export interface FairModel {
   slug: string
   title: { english: string; german?: string; chinese?: string }
   thumbnail: CloudinaryImageModel
+  thumbnailImageFit: 'contain' | 'cover'
   date: { start: Date; end: Date }
   text: { english?: string; german?: string; chinese?: string }
   artists: (ArtistModel | string)[]
@@ -73,6 +74,10 @@ export class Fair extends Model {
   private _pictures: CloudinaryImage[]
   public get pictures() {
     return this._pictures
+  }
+
+  public get thumbnailImageFit() {
+    return this.model.thumbnailImageFit
   }
 
   public translate(language: Language) {

@@ -1,4 +1,10 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  HostListener,
+  ElementRef,
+  ViewChild,
+} from '@angular/core'
 import {
   Scene,
   WebGLRenderer,
@@ -14,9 +20,23 @@ import {
   LineSegments,
   EdgesGeometry,
   FrontSide,
+  Group,
+  TextureLoader,
+  MeshLambertMaterial,
+  PlaneBufferGeometry,
+  Color,
+  CanvasTexture,
 } from 'three'
 
-const LINE_MATERIAL = new LineBasicMaterial({ color: 0x888888 })
+import { THREEx } from 'src/app/lib/three-extras/threex.domevents'
+
+import { TweenMax, Expo } from 'gsap'
+
+// import { SVGRenderer } from 'src/app/lib/three-extras/renderers/SVGRenderer'
+import { ApiService } from 'src/app/services/api.service'
+import { LibArticle } from 'src/app/models/LibArticle'
+
+const LINE_MATERIAL = new LineBasicMaterial({ color: 0x888888, linewidth: 2 })
 const SURFACE_MATERIAL = new MeshPhongMaterial({
   color: 0xffffff,
   side: FrontSide,
@@ -29,7 +49,10 @@ const SURFACE_MATERIAL = new MeshPhongMaterial({
   styleUrls: ['./gl-shelf.component.less'],
 })
 export class GlShelfComponent implements OnInit {
-  constructor(private el: ElementRef<HTMLDivElement>) {}
+  constructor(
+    private el: ElementRef<HTMLDivElement>,
+    private api: ApiService
+  ) {}
 
   ngOnInit() {
     setTimeout(_ => this.setup(), 100)
@@ -39,15 +62,21 @@ export class GlShelfComponent implements OnInit {
   private setup() {
     this.scene = new Scene()
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true })
-    this.renderer.setClearColor(0xffffff, 1)
+    // this.renderer = new SVGRenderer()
+    this.renderer.setClearColor(new Color(0xffffff), 1)
     this.renderer.setPixelRatio(window.devicePixelRatio)
     // this.renderer.shadowMap.enabled = true
     // this.renderer.shadowMap.type = PCFSoftShadowMap
     this.camera = new PerspectiveCamera(75, 1, 0.01, 200)
     this.camera.position.z = 25
+    this.camera.position.y = 10
     this.resize()
     this.setupShelf()
     this.setupLights()
+    this.setupEvents()
+
+    this.loader = new TextureLoader()
+    setTimeout(_ => this.setupItems(), 25)
 
     this.el.nativeElement.appendChild(this.renderer.domElement)
     window.requestAnimationFrame(_ => this.animate())
@@ -58,16 +87,19 @@ export class GlShelfComponent implements OnInit {
     return wireframe
   }
   private setupShelf() {
+    this.group = new Group()
     //left board
     this.createBoard(0.5, 4 * this.rowHeight + 0.5, this.depth, -20.27, 0, 0)
     //right board
     this.createBoard(0.5, 4 * this.rowHeight + 0.5, this.depth, 20.27, 0, 0)
     //back board
-    // this.createBoard(this.shelfWidth, 3*this.rowHeight, .5, 0, 0, -6)
+    this.createBoard(this.shelfWidth, 4 * this.rowHeight, 0.5, 0, 0, -3.27)
     for (let i = -2; i < 3; ++i) {
       let y = i * this.rowHeight
-      this.createBoard(40, 0.5, 6, 0, y, 0)
+      this.createBoard(this.shelfWidth, 0.5, this.depth, 0, y, 0)
     }
+
+    this.scene.add(this.group)
   }
   private createBoard(w = 40, h = 0.5, d = 6, x = 0, y = 0, z = 0) {
     let boardGeometry = new BoxBufferGeometry(w, h, d)
@@ -76,14 +108,33 @@ export class GlShelfComponent implements OnInit {
     let board = new Mesh(boardGeometry, SURFACE_MATERIAL)
     board.castShadow = true
     board.receiveShadow = true
-    this.scene.add(boardWires)
-    this.scene.add(board)
+    this.group.add(boardWires)
+    this.group.add(board)
     return board
   }
   private setupLights() {
     this.ambience = new AmbientLight(this.lightColor, this.ambienceIntensity)
+
+    this.pointlight = new PointLight(0xffffff, 0.2)
+    this.pointlight.position.z = 10
+    this.pointlight.position.y = 50
+
+    this.scene.add(this.pointlight)
     this.scene.add(this.ambience)
   }
+  private insertItem(url: string, size: number, x, y, z) {
+    let material = new MeshLambertMaterial({
+      map: this.loader.load(url),
+      transparent: true,
+    })
+    let geometry = new PlaneBufferGeometry(size, size)
+    let mesh = new Mesh(geometry, material)
+    mesh.position.set(x, y, z)
+    this.items.push(mesh)
+    this.group.add(mesh)
+    return mesh
+  }
+  items: Mesh[] = []
   private createSpotlight(position: Vector3) {
     let spotlight = new SpotLight(
       this.lightColor,
@@ -106,38 +157,135 @@ export class GlShelfComponent implements OnInit {
     return spotlight
   }
 
+  private _dataChangeSubscription
+  private async setupItems() {
+    try {
+      await this.api.libArticles.waitForData()
+      this._data = this.api.libArticles.data
+      // this.insertItem('/assets/lib/3_resize.png', 0, 3, 0)
+      // this.insertItem('/assets/lib/2_resize.png', 12, 3, 0)
+      this.data.forEach((article, i) => {
+        let y = 0.25 + article.size / 2 + 15 * Math.floor(i / 3)
+        let x = -12 + 12 * (i % 3)
+        let mesh = this.insertItem(article.picture.url, article.size, x, y, 0)
+        this.domEvents.addEventListener(mesh, 'mouseover', event => {
+          // console.log('mesh mouseover', event, mesh)
+          TweenMax.to(mesh.position, 1, {
+            x: x * 0.75,
+            z: 10,
+            ease: Expo.easeOut,
+            onUpdate: _ => {},
+            onComplete: _ => {
+              article.animationState = this.textElement(article, mesh)
+            },
+          })
+        })
+        this.domEvents.addEventListener(mesh, 'mouseout', event => {
+          // console.log('mesh mouseout', event, mesh)
+          TweenMax.to(mesh.position, 1, {
+            x: x,
+            z: 0,
+            ease: Expo.easeOut,
+            onUpdate: _ => {},
+            onStart: _ => {
+              if (article.animationState) {
+                this.scene.remove(article.animationState)
+              }
+            },
+          })
+        })
+        this.domEvents.addEventListener(mesh, 'click', event => {
+          console.log('mesh click', event, mesh)
+        })
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  private textElement(article: LibArticle, mesh: Mesh) {
+    console.log('text element', article.title)
+    let canvas = this.textCanvas.nativeElement
+    let context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    context.fillStyle = '#424242'
+    context.font = '100px Barlow Condensed'
+    // context.font = '30px Arial'
+    context.fillText(article.title, 0, 80)
+    context.font = '60px Barlow Condensed'
+    context.fillText(article.description, 0, 160, 512)
+    let material = new MeshLambertMaterial({
+      map: new CanvasTexture(this.textCanvas.nativeElement),
+      transparent: true,
+    })
+    let geometry = new PlaneBufferGeometry(article.size, article.size)
+    let textMesh = new Mesh(geometry, material)
+    textMesh.position.set(
+      mesh.position.x,
+      mesh.position.y,
+      mesh.position.z - 15
+    )
+    TweenMax.to(textMesh.position, 1, {
+      x: mesh.position.x + 0.5 + article.size,
+      z: mesh.position.z,
+      ease: Expo.easeOut,
+    })
+    this.scene.add(textMesh)
+    return textMesh
+  }
+
+  private domEvents: any
+  private setupEvents() {
+    this.domEvents = new THREEx.DomEvents(this.camera, this.renderer.domElement)
+  }
+
   @HostListener('window:resize')
   resize() {
     let el = this.el.nativeElement
     this.width = el.getBoundingClientRect().width
     this.height = el.getBoundingClientRect().height
     this.camera.aspect = this.width / this.height
+    this.camera.position.z = (30 * 900) / this.width
     this.camera.updateProjectionMatrix()
     this.renderer.setSize(this.width, this.height)
   }
 
+  @HostListener('window:scroll')
   animate() {
     window.requestAnimationFrame(_ => this.animate())
+    if (this.renderer) {
+      this.renderer.render(this.scene, this.camera)
+    }
+  }
 
-    this.renderer.render(this.scene, this.camera)
+  @ViewChild('textCanvas') textCanvas: ElementRef<HTMLCanvasElement>
+
+  itemMouseover(item: Mesh, article: LibArticle) {}
+
+  private _data: LibArticle[]
+  public get data() {
+    return this._data
   }
 
   private width: number
   private height: number
   private depth: number = 6
   private rowHeight: number = 15
-  private shelfWidth: number = 30
+  private shelfWidth: number = 40
+  private itemSize = 10
 
   private scene: Scene
-  private renderer: WebGLRenderer | SVGRenderer
+  private renderer: WebGLRenderer
   private camera: PerspectiveCamera
 
   private lightColor = 0xffffff
-  private ambienceIntensity = 0.6
+  private ambienceIntensity = 0.95
   private ambience: AmbientLight
 
   private spotlightIntensity = 0.8
   private spotlights: SpotLight[] = []
   private pointlight: PointLight
-  private sphere
+  private loader: TextureLoader
+
+  private group: Group
 }

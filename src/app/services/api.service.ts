@@ -27,6 +27,7 @@ import {
 
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { LibArticle, LibArticleModel } from '../models/LibArticle'
 
 const apiPrefix = environment.apiPrefix
 
@@ -69,6 +70,11 @@ export class ApiService {
       '/artwork-series',
       ArtworkSeries
     )
+    this.libArticles = new Controller<LibArticleModel, LibArticle>(
+      this,
+      '/lib-articles',
+      LibArticle
+    )
   }
 
   public frontPageImages: Controller<FrontPageImageModel, FrontPageImage>
@@ -80,6 +86,7 @@ export class ApiService {
   public fairs: Controller<FairModel, Fair>
   public artworks: Controller<ArtworkModel, Artwork>
   public artworkSeries: Controller<ArtworkSeriesModel, ArtworkSeries>
+  public libArticles: Controller<LibArticleModel, LibArticle>
 
   public get apiPrefix() {
     return environment.apiPrefix
