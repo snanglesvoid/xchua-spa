@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32" width="32" height="32">
+<defs>
+  <path d="" id="f1Ww3kfrB"></path>
+  <path d="M32 32L16 16L32 0" id="dCLyoCalA"></path>
+  <mask id="maskc2IcJVwpOw" x="12" y="-4" width="24" height="40" maskUnits="userSpaceOnUse">
+  <rect x="12" y="-4" width="24" height="40" fill="white"></rect>
+  <use xlink:href="#dCLyoCalA" opacity="1" fill="black"></use>
+  </mask>
+</defs>
+<g>
+  <g>
+    <g>
+      <g>
+        <use xlink:href="#f1Ww3kfrB" opacity="1" fill-opacity="0" stroke="#000000" stroke-width="1" stroke-opacity="1"></use>
+      </g>
+    </g>
+    <g>
+      <g mask="url(#maskc2IcJVwpOw)">
+        <use xlink:href="#dCLyoCalA" opacity="1" fill-opacity="0" stroke="#eeeeee" stroke-width="4" stroke-opacity="1"></use>
+      </g>
+    </g>
+  </g>
+</g>
+</svg>

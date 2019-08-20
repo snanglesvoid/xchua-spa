@@ -21,6 +21,7 @@ import {
 } from 'src/app/models'
 import { ScrollpaneComponent } from 'src/app/components/layout/scrollpane/scrollpane.component'
 import { ImageSize } from 'src/app/components/common/smart-image/smart-image.component'
+import { LanguageService } from 'src/app/services/language.service'
 
 @Component({
   selector: 'app-artist',
@@ -51,6 +52,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
     return this._currentBackgroundIndex
   }
   artist$: Observable<Artist>
+  artist: Artist
   biography$: Observable<string>
   artistName$: Observable<string>
   exhibitions$: Observable<Exhibition[]>
@@ -61,7 +63,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private api: ApiService
+    private api: ApiService,
+    private lang: LanguageService
   ) {}
 
   ngOnInit() {
@@ -75,6 +78,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
         }
       }),
       map(artists => artists[0]),
+      tap(artist => (this.artist = artist)),
       share()
     )
 

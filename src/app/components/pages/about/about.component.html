@@ -5,18 +5,74 @@
 <app-page-body>
   <app-scrollpane [showLines]="false" [boxShadows]="false">
     <app-scrollpane-section snippet="about-spaces">
-      <div style="height: 20px;"></div>
-    </app-scrollpane-section>
-    <app-scrollpane-section
-      *ngFor="let space of gallerySpaces"
-      [snippet]="space.location"
-      subsection="true"
-    >
-      <app-gallery-space [gallery]="space"></app-gallery-space>
+      <!-- <app-gallery-space [gallery]="space"></app-gallery-space> -->
+      <div class="headers" *ngIf="gallerySpaces && gallerySpaces.length">
+        <h3 [class.inactive]="activeIndex == 1" (click)="scrollLeft()">
+          {{ gallerySpaces[0].location }}
+        </h3>
+        <h3 [class.inactive]="activeIndex == 0" (click)="scrollRight()">
+          {{ gallerySpaces[1].location }}
+        </h3>
+      </div>
+      <div
+        class="pictures"
+        #pictures
+        (panRight)="scrollLeft()"
+        (panLeft)="scrollRight()"
+      >
+        <app-smart-image
+          [image]="gallerySpaces[0].image"
+          size="1"
+          *ngIf="gallerySpaces && gallerySpaces.length"
+          [class.active]="activeIndex == 0"
+        ></app-smart-image>
+        <div
+          class="left"
+          (click)="scrollRight()"
+          [class.active]="activeIndex == 0"
+        >
+          <img
+            [style.opacity]="isMobile ? 1 : 0"
+            src="/assets/cursors/arrow-right-white.svg"
+            alt=""
+          />
+        </div>
+        <div
+          class="right"
+          (click)="scrollLeft()"
+          [class.active]="activeIndex == 1"
+        >
+          <img
+            [style.opacity]="isMobile ? 1 : 0"
+            src="/assets/cursors/arrow-left-white.svg"
+            alt=""
+          />
+        </div>
+        <app-smart-image
+          [image]="gallerySpaces[1].image"
+          size="1"
+          *ngIf="gallerySpaces && gallerySpaces.length"
+          [class.active]="activeIndex == 1"
+        ></app-smart-image>
+      </div>
+      <div class="addresses">
+        <div
+          *ngFor="let s of gallerySpaces; let i = index"
+          [class.inactive]="activeIndex == 1 - i"
+          [class.left]="i == 0"
+          [class.right]="i == 1"
+        >
+          <p class="info">
+            <span [innerHtml]="s.address"></span>
+            <span *ngIf="s.phone">{{ s.phone }}</span>
+          </p>
+        </div>
+      </div>
     </app-scrollpane-section>
     <div style="height: 60px;"></div>
     <app-scrollpane-section snippet="about-statements">
-      <div class="statements" [innerHtml]="statements$ | async"></div>
+      <!-- <div class="statements" [innerHtml]="statements$ | async"></div> -->
+      <app-html-block [content]="statements$ | async"></app-html-block>
     </app-scrollpane-section>
     <div style="height: 40vh;"></div>
   </app-scrollpane>
