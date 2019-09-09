@@ -1,21 +1,22 @@
-<div class="container"
+<div
+  class="container"
   [ngStyle]="containerStyles()"
   (imagesLoaded)="containerStyles()"
 >
-<app-smart-image
-  *ngFor="let x of images;"
-  [imageClass]="imageClass"
-  [class.flip]="animation === 'flip'"
-  [class.contain]="imageFit === 'contain'"
-  [class.cover]="imageFit === 'cover'"
-  [@fade]="x.animationState.fade"
-  [@flip]="x.animationState.flip"
+  <app-smart-image
+    *ngFor="let x of images"
+    [imageClass]="imageClass"
+    [class.contain]="(x.imageFit || imageFit) === 'contain'"
+    [class.cover]="(x.imageFit || imageFit) === 'cover'"
+    [@fade]="x.animationState.fade"
+    [image]="x"
+    [size]="imageSize"
+    (loaded)="imageLoaded($event)"
+    style="opacity: 0;"
+  >
+  </app-smart-image>
+  <!-- [class.flip]="animation === 'flip'" -->
+  <!-- [@flip]="x.animationState.flip"
   [@slideRight]="x.animationState.slideRight"
-  [@slideLeft]="x.animationState.slideLeft"
-  [image]="x"
-  [size]="imageSize"
-  (loaded)="imageLoaded($event)"
->
-</app-smart-image>
+  [@slideLeft]="x.animationState.slideLeft" -->
 </div>
-

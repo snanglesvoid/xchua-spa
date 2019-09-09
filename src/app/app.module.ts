@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms'
 import { CloudinaryModule } from '@cloudinary/angular-5.x'
 import { Cloudinary } from 'cloudinary-core/cloudinary-core-shrinkwrap'
 import { DeviceDetectorModule } from 'ngx-device-detector'
+import { CookieService } from 'ngx-cookie-service'
 
 import { AppComponent } from './app.component'
 import { SpinnerComponent } from './components/spinner/spinner.component'
@@ -73,10 +74,12 @@ import { ArtworkSeriesComponent } from './components/pages/artist/artwork-series
 import { ProgressBarComponent } from './components/common/progress-bar/progress-bar.component'
 import { FooterComponent } from './components/common/footer/footer.component'
 import { FairComponent } from './components/pages/fair/fair.component'
-import { FairDateFilterPipe } from './pipes/fair-date-filter.pipe';
-import { DateRangePipe } from './pipes/date-range.pipe';
-import { GlShelfComponent } from './components/gl/gl-shelf/gl-shelf.component';
+import { FairDateFilterPipe } from './pipes/fair-date-filter.pipe'
+import { DateRangePipe } from './pipes/date-range.pipe'
+import { GlShelfComponent } from './components/gl/gl-shelf/gl-shelf.component'
 import { XcDatePipe } from './pipes/xc-date.pipe'
+import { FairCardComponent } from './components/pages/fairs/fair-card/fair-card.component'
+import { SlideshowCursorControllerComponent } from './components/common/slideshow-cursor-controller/slideshow-cursor-controller.component'
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -228,6 +231,8 @@ const appRoutes: Routes = [
     DateRangePipe,
     GlShelfComponent,
     XcDatePipe,
+    FairCardComponent,
+    SlideshowCursorControllerComponent,
   ],
   imports: [
     BrowserModule,
@@ -245,6 +250,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     SnippetService,
+    CookieService,
     SvgCanvasService,
     {
       provide: HAMMER_GESTURE_CONFIG,

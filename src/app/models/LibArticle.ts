@@ -11,6 +11,22 @@ export interface LibArticleModel {
   pictures: CloudinaryImageModel[]
   description: { english?: string; chinese?: string; german?: string }
   size: number
+  width: number
+  x: number
+  y: number
+  z: number
+  rotation: {
+    x: number
+    y: number
+    z: number
+  }
+}
+
+export interface ShelfRowModel {
+  _id: string
+  index: number
+  height: number
+  items: LibArticleModel[]
 }
 
 export class LibArticle extends Model {
@@ -56,11 +72,53 @@ export class LibArticle extends Model {
   public get size() {
     return this.model.size
   }
+  public get width() {
+    return this.model.width
+  }
+
+  public get x() {
+    return this.model.x
+  }
+  public get y() {
+    return this.model.y
+  }
+  public get z() {
+    return this.model.z
+  }
+  public get rotation() {
+    return this.model.rotation
+  }
 
   public translate(language: Language) {
     this._title = this.model.title[language] || this.model.title.english
     this._description = this.model.description
       ? this.model.description[language] || this.model.description.english || ''
       : ''
+  }
+}
+
+export class ShelfRow extends Model {
+  constructor(api: ApiService, private model: ShelfRowModel) {
+    super(api)
+    this._items = this.model.items.map(x => new LibArticle(api, x))
+  }
+
+  private _items: LibArticle[]
+  public get items() {
+    return this._items
+  }
+
+  public get id() {
+    return this.model._id
+  }
+  public get height() {
+    return this.model.height
+  }
+  public get index() {
+    return this.model.index
+  }
+
+  public translate(language: Language) {
+    this._items.forEach(x => x.translate(language))
   }
 }

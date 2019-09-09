@@ -41,6 +41,7 @@ export class CloudinaryImage extends Model {
     return this.model.resource_type
   }
 
+  public imageFit?: 'cover' | 'contain'
   public caption?: Artwork
 
   public clone() {
@@ -49,9 +50,7 @@ export class CloudinaryImage extends Model {
   }
 
   public limit(width, height) {
-    return `https://res.cloudinary.com/xc-hua/image/upload/c_limit,h_${height},w_${width}/${
-      this.id
-    }`
+    return `https://res.cloudinary.com/xc-hua/image/upload/c_limit,h_${height},w_${width}/${this.id}`
   }
 
   translate(language: Language) {}

@@ -11,6 +11,7 @@ import {
   PerspectiveCamera,
   AmbientLight,
   SpotLight,
+  HemisphereLight,
   Vector3,
   BoxBufferGeometry,
   Mesh,
@@ -26,6 +27,11 @@ import {
   PlaneBufferGeometry,
   Color,
   CanvasTexture,
+  PCFSoftShadowMap,
+  DoubleSide,
+  NoBlending,
+  PCFShadowMap,
+  RectAreaLight,
 } from 'three'
 
 import { THREEx } from 'src/app/lib/three-extras/threex.domevents'
@@ -34,14 +40,33 @@ import { TweenMax, Expo } from 'gsap'
 
 // import { SVGRenderer } from 'src/app/lib/three-extras/renderers/SVGRenderer'
 import { ApiService } from 'src/app/services/api.service'
-import { LibArticle } from 'src/app/models/LibArticle'
+import { LibArticle, ShelfRow } from 'src/app/models/LibArticle'
+
+export enum KEY_CODE {
+  RIGHT_ARROW = 39,
+  LEFT_ARROW = 37,
+  UP_ARROW = 38,
+  DOWN_ARROW = 40,
+}
 
 const LINE_MATERIAL = new LineBasicMaterial({ color: 0x888888, linewidth: 2 })
-const SURFACE_MATERIAL = new MeshPhongMaterial({
-  color: 0xffffff,
-  side: FrontSide,
-  shadowSide: FrontSide,
-})
+const SURFACE_MATERIAL =
+  // new MeshPhongMaterial({
+  //   color: 0xffffff,
+  //   // side: FrontSide,
+  //   shadowSide: FrontSide,
+  // })
+
+  new MeshPhongMaterial({
+    // color: 0x156289,
+    color: 0xffffff,
+    emissive: 0x000000,
+    specular: 0x111111,
+    side: FrontSide,
+    flatShading: false,
+    shininess: 30,
+    blending: NoBlending,
+  })
 
 @Component({
   selector: 'gl-shelf',
@@ -65,13 +90,16 @@ export class GlShelfComponent implements OnInit {
     // this.renderer = new SVGRenderer()
     this.renderer.setClearColor(new Color(0xffffff), 1)
     this.renderer.setPixelRatio(window.devicePixelRatio)
-    // this.renderer.shadowMap.enabled = true
-    // this.renderer.shadowMap.type = PCFSoftShadowMap
+    this.renderer.shadowMap.enabled = true
+    // this.renderer.shadowMap.
+    this.renderer.shadowMap.type = PCFSoftShadowMap
+    this.renderer.shadowMap.type = 2
+
     this.camera = new PerspectiveCamera(75, 1, 0.01, 200)
     this.camera.position.z = 25
     this.camera.position.y = 10
     this.resize()
-    this.setupShelf()
+    // this.setupShelf()
     this.setupLights()
     this.setupEvents()
 
@@ -88,16 +116,27 @@ export class GlShelfComponent implements OnInit {
   }
   private setupShelf() {
     this.group = new Group()
+
+    let totalHeight = 0
+    this._data.forEach(sr => (totalHeight += sr.height))
+    this.totalHeight = totalHeight
     //left board
-    this.createBoard(0.5, 4 * this.rowHeight + 0.5, this.depth, -20.27, 0, 0)
+    this.createBoard(0.5, totalHeight + 0.5, this.depth, -20.27, 0, 0)
     //right board
-    this.createBoard(0.5, 4 * this.rowHeight + 0.5, this.depth, 20.27, 0, 0)
+    this.createBoard(0.5, totalHeight + 0.5, this.depth, 20.27, 0, 0)
     //back board
-    this.createBoard(this.shelfWidth, 4 * this.rowHeight, 0.5, 0, 0, -3.27)
-    for (let i = -2; i < 3; ++i) {
-      let y = i * this.rowHeight
-      this.createBoard(this.shelfWidth, 0.5, this.depth, 0, y, 0)
-    }
+    this.createBoard(this.shelfWidth, totalHeight + 0.5, 0.5, 0, 0, -3.27)
+
+    let h = -totalHeight / 2
+    this._data.forEach(row => {
+      this.createBoard(this.shelfWidth, 0.5, this.depth, 0, h, 0)
+      h += row.height
+    })
+    this.createBoard(this.shelfWidth, 0.5, this.depth, 0, h, 0)
+    // for (let i = -2; i < 3; ++i) {
+    //   let y = i * this.rowHeight
+    //   this.createBoard(this.shelfWidth, 0.5, this.depth, 0, y, 0)
+    // }
 
     this.scene.add(this.group)
   }
@@ -115,21 +154,33 @@ export class GlShelfComponent implements OnInit {
   private setupLights() {
     this.ambience = new AmbientLight(this.lightColor, this.ambienceIntensity)
 
-    this.pointlight = new PointLight(0xffffff, 0.2)
+    this.pointlight = new PointLight(0xffffff, 0.8)
     this.pointlight.position.z = 10
     this.pointlight.position.y = 50
+    this.pointlight.position.z = 30
+    this.pointlight.castShadow = true
+    this.pointlight.shadow.radius = 4.0
+    this.pointlight.shadow.mapSize.width = 1024
+    this.pointlight.shadow.mapSize.height = 1024
+    this.pointlight.shadow.bias = 0 //-0.0001
 
     this.scene.add(this.pointlight)
     this.scene.add(this.ambience)
   }
-  private insertItem(url: string, size: number, x, y, z) {
+  private insertItem(url: string, size: number, width: number, x, y, z) {
     let material = new MeshLambertMaterial({
       map: this.loader.load(url),
+      blending: NoBlending,
+      side: FrontSide,
+      // shadowSide: FrontSide,
       transparent: true,
     })
-    let geometry = new PlaneBufferGeometry(size, size)
+    // let geometry = new PlaneBufferGeometry(size, size)
+    let geometry = new BoxBufferGeometry(size, width, 0, 100, 100)
     let mesh = new Mesh(geometry, material)
     mesh.position.set(x, y, z)
+    mesh.castShadow = true
+    mesh.receiveShadow = true
     this.items.push(mesh)
     this.group.add(mesh)
     return mesh
@@ -162,41 +213,69 @@ export class GlShelfComponent implements OnInit {
     try {
       await this.api.libArticles.waitForData()
       this._data = this.api.libArticles.data
-      // this.insertItem('/assets/lib/3_resize.png', 0, 3, 0)
-      // this.insertItem('/assets/lib/2_resize.png', 12, 3, 0)
-      this.data.forEach((article, i) => {
-        let y = 0.25 + article.size / 2 + 15 * Math.floor(i / 3)
-        let x = -12 + 12 * (i % 3)
-        let mesh = this.insertItem(article.picture.url, article.size, x, y, 0)
-        this.domEvents.addEventListener(mesh, 'mouseover', event => {
-          // console.log('mesh mouseover', event, mesh)
-          TweenMax.to(mesh.position, 1, {
-            x: x * 0.75,
-            z: 10,
-            ease: Expo.easeOut,
-            onUpdate: _ => {},
-            onComplete: _ => {
-              article.animationState = this.textElement(article, mesh)
-            },
+
+      this.setupShelf()
+
+      let y = -this.totalHeight / 2
+      this.data.forEach(row => {
+        row.items.forEach(article => {
+          let mesh = this.insertItem(
+            article.picture.url,
+            article.width,
+            article.size,
+            article.x,
+            article.y + y + 0.25 + article.size / 2,
+            article.z
+          )
+          mesh.rotation.set(
+            article.rotation.x,
+            article.rotation.y,
+            article.rotation.z
+          )
+          this.domEvents.addEventListener(mesh, 'mouseover', event => {
+            // console.log('mesh mouseover', event, mesh)
+            TweenMax.to(mesh.position, 1, {
+              x: article.x * 0.75,
+              z: 10,
+              ease: Expo.easeOut,
+              onUpdate: _ => {},
+              onComplete: _ => {
+                article.animationState = this.textElement(article, mesh)
+              },
+            })
+
+            TweenMax.to(mesh.rotation, 1, {
+              x: 0,
+              y: 0,
+              z: 0,
+            })
+          })
+          this.domEvents.addEventListener(mesh, 'mouseout', event => {
+            // console.log('mesh mouseout', event, mesh)
+            TweenMax.to(mesh.position, 1, {
+              x: article.x,
+              z: article.z,
+
+              ease: Expo.easeOut,
+              onUpdate: _ => {},
+              onStart: _ => {
+                if (article.animationState) {
+                  this.scene.remove(article.animationState)
+                }
+              },
+            })
+
+            TweenMax.to(mesh.rotation, 1, {
+              x: article.rotation.x,
+              y: article.rotation.y,
+              z: article.rotation.z,
+            })
+          })
+          this.domEvents.addEventListener(mesh, 'click', event => {
+            console.log('mesh click', event, mesh)
           })
         })
-        this.domEvents.addEventListener(mesh, 'mouseout', event => {
-          // console.log('mesh mouseout', event, mesh)
-          TweenMax.to(mesh.position, 1, {
-            x: x,
-            z: 0,
-            ease: Expo.easeOut,
-            onUpdate: _ => {},
-            onStart: _ => {
-              if (article.animationState) {
-                this.scene.remove(article.animationState)
-              }
-            },
-          })
-        })
-        this.domEvents.addEventListener(mesh, 'click', event => {
-          console.log('mesh click', event, mesh)
-        })
+        y += row.height
       })
     } catch (error) {
       console.error(error)
@@ -258,11 +337,34 @@ export class GlShelfComponent implements OnInit {
     }
   }
 
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.keyCode === KEY_CODE.RIGHT_ARROW) {
+      this.camera.position.z += 0.5
+      event.preventDefault()
+    }
+
+    if (event.keyCode === KEY_CODE.LEFT_ARROW) {
+      this.camera.position.z -= 0.5
+      event.preventDefault()
+    }
+
+    if (event.keyCode === KEY_CODE.UP_ARROW) {
+      this.camera.position.y += 1
+      event.preventDefault()
+    }
+
+    if (event.keyCode === KEY_CODE.DOWN_ARROW) {
+      this.camera.position.y -= 1
+      event.preventDefault()
+    }
+  }
+
   @ViewChild('textCanvas') textCanvas: ElementRef<HTMLCanvasElement>
 
   itemMouseover(item: Mesh, article: LibArticle) {}
 
-  private _data: LibArticle[]
+  private _data: ShelfRow[]
   public get data() {
     return this._data
   }
@@ -272,6 +374,7 @@ export class GlShelfComponent implements OnInit {
   private depth: number = 6
   private rowHeight: number = 15
   private shelfWidth: number = 40
+  private totalHeight: number = 0
   private itemSize = 10
 
   private scene: Scene
@@ -279,7 +382,7 @@ export class GlShelfComponent implements OnInit {
   private camera: PerspectiveCamera
 
   private lightColor = 0xffffff
-  private ambienceIntensity = 0.95
+  private ambienceIntensity = 0.8 //0.95
   private ambience: AmbientLight
 
   private spotlightIntensity = 0.8

@@ -34,6 +34,7 @@
     "i": "^0.3.6",
     "imagesloaded": "^4.1.4",
     "ng-animate-scroll": "^7.1.0",
+    "ngx-cookie-service": "^2.2.0",
     "ngx-device-detector": "^1.3.5",
     "npm": "^6.10.3",
     "packery": "^2.1.2",

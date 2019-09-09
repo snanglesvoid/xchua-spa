@@ -1,0 +1,57 @@
+<div class="grid">
+  <div class="description">
+    <h3>
+      <a routerLink="/fair/{{ fair.slug }}">
+        <app-typewriter [text]="fair.title"></app-typewriter>
+      </a>
+    </h3>
+    <div class="inner-grid">
+      <p *ngIf="fair.start && fair.end" class="date">
+        {{ fair | dateRange: lang.language }}
+      </p>
+      <ul class="artist-links">
+        <li *ngFor="let artist of fair.artists">
+          <a routerLink="/artist/{{ artist.slug }}">
+            {{ artist.name.first + ' ' + artist.name.last }}
+          </a>
+        </li>
+      </ul>
+
+      <p class="read-more">
+        <a routerLink="/fair/{{ fair.slug }}"
+          >Read more <i class="fa fa-angle-double-right"></i
+        ></a>
+      </p>
+    </div>
+    <!-- <div class="text-intro">
+      <app-html-block [content]="fair.text"></app-html-block>
+    </div> -->
+  </div>
+  <div class="slideshow-container">
+    <app-slideshow
+      [images]="images"
+      [currentSlide]="image"
+      imageFit="cover"
+      imageClass="slideshow-img"
+      animation="fade"
+      transitionDuration="600ms"
+      imageSize="1"
+      #slideshow
+      (imageLoadProgress)="progressChanged($event)"
+      [class.hidden]="!progress.done"
+    ></app-slideshow>
+    <app-spinner
+      *ngIf="!progress.done"
+      [style.display]="!progress.done ? 'block' : 'none'"
+    >
+      <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
+    </app-spinner>
+
+    <app-slideshow-cursor-controller
+      [slideshow]="slideshow"
+      *ngIf="images.length && images.length > 1"
+      [small]="isSmall"
+    >
+    </app-slideshow-cursor-controller>
+  </div>
+</div>

@@ -6,7 +6,12 @@
   <app-scrollpane>
     <app-scrollpane-section #upcomingSection snippet="exhibitions-upcoming">
       <div class="fairs-list">
-        <div
+        <app-fair-card
+          *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
+          [fair]="fair"
+          [@listAnimation]="fair.animationState"
+        ></app-fair-card>
+        <!-- <div
           class="fair-card"
           *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
           [@fade]="true"
@@ -45,12 +50,17 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div> -->
       </div>
     </app-scrollpane-section>
     <app-scrollpane-section #pastSection snippet="exhibitions-past">
       <div class="fairs-list">
-        <div
+        <app-fair-card
+          *ngFor="let fair of fairs | async | fairDateFilter: 'past'"
+          [fair]="fair"
+          [@listAnimation]="fair.animationState"
+        ></app-fair-card>
+        <!-- <div
           class="fair-card"
           *ngFor="let fair of fairs | async | fairDateFilter: 'past'"
           [@fade]="true"
@@ -89,8 +99,7 @@
               </li>
             </ul>
           </div>
-        </div>
-        <br />
+        </div> -->
       </div>
     </app-scrollpane-section>
     <div style="height: 400px;"></div>
