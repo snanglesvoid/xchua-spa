@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._dataChangeSubscription = this.api.frontPageImages.dataChanged.subscribe(
       () => {
-        this.updateData()
+        // this.updateData()
       }
     )
     this.updateData()
