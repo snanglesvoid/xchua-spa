@@ -8,6 +8,10 @@ import { CloudinaryModule } from '@cloudinary/angular-5.x'
 import { Cloudinary } from 'cloudinary-core/cloudinary-core-shrinkwrap'
 import { DeviceDetectorModule } from 'ngx-device-detector'
 import { CookieService } from 'ngx-cookie-service'
+import {
+  NgcCookieConsentModule,
+  NgcCookieConsentConfig,
+} from 'ngx-cookieconsent'
 
 import { AppComponent } from './app.component'
 import { SpinnerComponent } from './components/spinner/spinner.component'
@@ -167,6 +171,36 @@ const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponent },
 ]
 
+let cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: 'galerie-xchua.com',
+  },
+  position: 'bottom',
+  theme: 'block',
+  palette: {
+    popup: {
+      background: '#ffffff',
+      text: '#373334',
+      link: '#424242',
+    },
+    button: {
+      background: '#ffffff',
+      text: '#373334',
+      border: '1px solid #424242',
+    },
+  },
+  type: 'info',
+  content: {
+    message:
+      'This website uses cookies to ensure you get the best experience on our website.',
+    dismiss: 'Got it!',
+    deny: 'Refuse cookies',
+    link: 'Learn more',
+    href: 'https://cookiesandyou.com',
+    policy: 'Cookie Policy',
+  },
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -247,6 +281,7 @@ const appRoutes: Routes = [
       }
     ),
     DeviceDetectorModule.forRoot(),
+    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   providers: [
     SnippetService,

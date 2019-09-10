@@ -23,10 +23,14 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.less"],
+            "styles": [
+              "src/styles.less",
+              "./node_modules/cookieconsent/build/cookieconsent.min.css"
+            ],
             "scripts": [
               "./node_modules/gsap/umd/TweenMax.js",
-              "./node_modules/gsap/umd/ScrollToPlugin.js"
+              "./node_modules/gsap/umd/ScrollToPlugin.js",
+              "./node_modules/cookieconsent/build/cookieconsent.min.js"
             ],
             "es5BrowserSupport": true
           },

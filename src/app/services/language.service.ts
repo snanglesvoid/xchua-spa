@@ -15,7 +15,11 @@ export class LanguageService {
       this._lang = languageCookie as Language
     } else {
       this._lang = 'english'
-      this.cookie.set('language', 'english')
+      if (this.cookie.get('consent')) {
+        this.cookie.set('language', 'english', 365)
+      } else {
+        console.warn('no cookie consent')
+      }
     }
     if (this._lang == 'chinese') {
       document.title = '户尔空间'
@@ -29,7 +33,11 @@ export class LanguageService {
   }
   public set language(value: Language) {
     this._lang = value
-    this.cookie.set('language', value)
+    if (this.cookie.get('consent')) {
+      this.cookie.set('language', value, 365)
+    } else {
+      console.warn('no cookie consent')
+    }
     if (value == 'chinese') {
       document.title = '户尔空间'
     } else {

@@ -63,7 +63,7 @@ export class SlideshowComponent implements OnInit, AfterContentInit, OnDestroy {
     return this._currentSlide
   }
   public set currentSlide(slide) {
-    console.log('set current slide', slide)
+    // console.log('set current slide', slide)
     this.images.forEach(x => (x.animationState = this.state('out')))
     if (!slide) {
       this._currentSlide = undefined
