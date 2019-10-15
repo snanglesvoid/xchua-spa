@@ -56,6 +56,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
   biography$: Observable<string>
   artistName$: Observable<string>
   exhibitions$: Observable<Exhibition[]>
+  hasExhibitions$: Observable<boolean>
   series$: Observable<ArtworkSeries[]>
   seriesDelayed$: Observable<ArtworkSeries[]>
   backgroundImages$: Observable<CloudinaryImage[]>
@@ -117,6 +118,11 @@ export class ArtistComponent implements OnInit, OnDestroy {
       }),
       share()
     )
+
+    this.hasExhibitions$ = this.exhibitions$.pipe(
+      map(xs => xs.length && xs.length > 0)
+    )
+
     this.loaded$ = this.loadingProgess$.pipe(
       filter(x => x.series && x.backgroundImages && x.exhibitions),
       tap(_ => console.log('loaded!'))

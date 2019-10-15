@@ -86,7 +86,7 @@
     <app-scrollpane-section
       #exhibitionSection
       snippet="artist-exhibitions"
-      [navlink]="artist && artist.exhibitions && artist.exhibitions.length > 0"
+      [navlink]="hasExhibitions$ | async"
       (activeChange)="sectionActiveChange(null, $event)"
     >
       <app-exhibitions-list
