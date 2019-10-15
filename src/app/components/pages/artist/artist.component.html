@@ -43,6 +43,7 @@
     <app-scrollpane-section
       snippet="artist-works"
       (activeChange)="sectionActiveChange(null, $event, -1, true)"
+      [navlink]="hasSeries"
     >
       <h1 class="artist-name">
         {{ artistName$ | async }}
@@ -85,6 +86,7 @@
     <app-scrollpane-section
       #exhibitionSection
       snippet="artist-exhibitions"
+      [navlink]="artist && artist.exhibitions && artist.exhibitions.length > 0"
       (activeChange)="sectionActiveChange(null, $event)"
     >
       <app-exhibitions-list

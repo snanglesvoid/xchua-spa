@@ -10,13 +10,27 @@ export class LanguageService {
   constructor(private cookie: CookieService) {
     ;(window as any).languageService = this
 
-    let languageCookie = this.cookie.get('language')
+    let languageCookie = this.cookie.get('_language')
+    let browserLanguage = this.cookie.get('language')
     if (languageCookie) {
       this._lang = languageCookie as Language
+    } else if (browserLanguage) {
+      if (browserLanguage.startsWith('zh')) {
+        this._lang = 'chinese'
+      } else if (browserLanguage.startsWith('de')) {
+        this._lang = 'german'
+      } else {
+        this._lang = 'english'
+      }
+      if (this.cookie.get('consent')) {
+        this.cookie.set('_language', this._lang, 365)
+      } else {
+        console.log('no cookie consent')
+      }
     } else {
       this._lang = 'english'
       if (this.cookie.get('consent')) {
-        this.cookie.set('language', 'english', 365)
+        this.cookie.set('_language', 'english', 365)
       } else {
         console.warn('no cookie consent')
       }
@@ -34,7 +48,7 @@ export class LanguageService {
   public set language(value: Language) {
     this._lang = value
     if (this.cookie.get('consent')) {
-      this.cookie.set('language', value, 365)
+      this.cookie.set('_language', value, 365)
     } else {
       console.warn('no cookie consent')
     }

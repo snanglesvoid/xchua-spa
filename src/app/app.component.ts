@@ -9,6 +9,7 @@ import {
 } from 'ngx-cookieconsent'
 import { Subscription } from 'rxjs'
 import { CookieService } from 'ngx-cookie-service'
+import { LanguageService } from './services/language.service'
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { CookieService } from 'ngx-cookie-service'
 export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private ccs: NgcCookieConsentService,
-    private cookie: CookieService
+    private cookie: CookieService,
+    private lang: LanguageService
   ) {}
 
   title = 'xc-hua'
@@ -52,6 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
       // you can use this.ccs.getConfig() to do stuff...
       console.log('ccs popup close')
       this.cookie.set('consent', 'true', 365)
+      this.cookie.set('_language', this.lang.language)
     })
 
     this.initializeSubscription = this.ccs.initialize$.subscribe(

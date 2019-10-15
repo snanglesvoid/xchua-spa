@@ -19,6 +19,7 @@ export class ScrollpaneSectionComponent
   implements OnInit, AfterContentInit, AfterContentChecked {
   @Input() snippet: string
   @Input() subsection: boolean = false
+  @Input() navlink: boolean = true
   @Input() scrollToOffset: number = 0
 
   @Output() requestScroll = new EventEmitter<boolean>()

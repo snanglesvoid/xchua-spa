@@ -10,7 +10,7 @@
     [class.active]="s.active || s.childActive"
     [class.subsection]="s.subsection"
   >
-    <div *ngIf="!s.isEmpty">
+    <div *ngIf="!s.isEmpty && s.navlink">
       <a (click)="scrollToSection(s)">
         <app-snippet [snippet]="s.snippet"></app-snippet>
       </a>

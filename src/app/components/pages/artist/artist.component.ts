@@ -59,12 +59,13 @@ export class ArtistComponent implements OnInit, OnDestroy {
   series$: Observable<ArtworkSeries[]>
   seriesDelayed$: Observable<ArtworkSeries[]>
   backgroundImages$: Observable<CloudinaryImage[]>
+  hasSeries = true
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
-    private lang: LanguageService
+    public lang: LanguageService
   ) {}
 
   ngOnInit() {
@@ -92,9 +93,10 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
     this.series$ = this.artist$.pipe(
       switchMap(artist => this.api.artworkSeries.withArgs(artist.id)),
-      tap(_ => {
-        console.log('series evaluated')
+      tap(xs => {
+        console.log('series evaluated', xs)
         this.loadingState.series = true
+        this.hasSeries = xs && xs.length > 1
         this.loadingProgess$.next(this.loadingState)
       }),
       share()
