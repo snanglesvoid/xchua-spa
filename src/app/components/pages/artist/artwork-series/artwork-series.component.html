@@ -2,7 +2,8 @@
 
 <div class="banner" modalImages>
   <h1>
-    <app-snippet [snippet]="series.title"></app-snippet>
+    {{ series.title == "more-series" ? "More" : series.title }}
+    <!-- <app-snippet [snippet]="series.title"></app-snippet> -->
   </h1>
   <div class="view-switcher">
     <img
@@ -61,10 +62,10 @@
     </app-masonry>
   </div>
 
-  <div
+  <!-- <div
     style="height: 60px;"
     appScrollTo
     [ratio]="0.3"
     (inViewport)="bottomViewport($event)"
-  ></div>
+  ></div> -->
 </div>

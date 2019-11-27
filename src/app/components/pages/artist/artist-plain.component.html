@@ -1,0 +1,56 @@
+<app-page-header>
+  <h3 routerLink="/artists">
+    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <app-snippet snippet="artists-title"></app-snippet>
+  </h3>
+</app-page-header>
+
+<app-page-body>
+  <app-scrollpane>
+    <div class="heading">
+      <h1 class="title">
+        <app-typewriter [text]="artistName$ | async"></app-typewriter>
+      </h1>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <app-scrollpane-section snippet="artist-works" navlink="true">
+      <div class="series-list">
+        <div *ngFor="let s of series$ | async; let i = index">
+          <app-artwork-series [series]="s" (bottomReached)="showArrow($event)">
+          </app-artwork-series>
+          <hr />
+        </div>
+      </div>
+    </app-scrollpane-section>
+
+    <!-- <div style="height: 100px;"></div> -->
+
+    <app-scrollpane-section
+      #cvSection
+      snippet="artist-biography"
+      (activeChange)="sectionActiveChange(null, $event)"
+    >
+      <div class="text" [style.opacity]="1">
+        <app-html-block [content]="biography$ | async"></app-html-block>
+      </div>
+    </app-scrollpane-section>
+
+    <div style="height: 100px;"></div>
+
+    <app-scrollpane-section
+      #exhibitionSection
+      snippet="artist-exhibitions"
+      [navlink]="hasExhibitions$ | async"
+      (activeChange)="sectionActiveChange(null, $event)"
+    >
+      <app-exhibitions-list
+        [exhibitions]="exhibitions$ | async"
+      ></app-exhibitions-list>
+      <div style="height: 350px;"></div>
+    </app-scrollpane-section>
+
+    <div style="height: 50px;"></div>
+  </app-scrollpane>
+</app-page-body>

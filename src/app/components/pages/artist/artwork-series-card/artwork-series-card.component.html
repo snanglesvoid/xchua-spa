@@ -1,0 +1,49 @@
+<div class="grid">
+  <div class="description">
+    <h3>
+      <app-typewriter [text]="series.title"></app-typewriter>
+    </h3>
+    <!-- <div class="inner-grid">
+      <p>
+        <span style="font-size: 1.8rem; line-height:2.1rem; opacity: 0.7;">
+          {{ activeWork.title
+          }}<span *ngIf="activeWork.year">,&nbsp;{{ activeWork.year }}</span>
+        </span>
+        <br />
+        <span *ngIf="activeWork.description">
+          {{ activeWork.description }} <br />
+        </span>
+        <span *ngIf="activeWork.dimensions">
+          {{ activeWork.dimensions }}
+        </span>
+      </p>
+    </div> -->
+  </div>
+
+  <div class="slideshow-container">
+    <app-slideshow
+      [images]="images"
+      [currentSlide]="image"
+      imageFit="cover"
+      imageClass="slideshow-img"
+      animation="fade"
+      transitionDuration="600ms"
+      imageSize="1"
+      #slideshow
+    ></app-slideshow>
+    <!-- (imageLoadProgress)="progressChanged($event)" -->
+    <!-- <app-spinner
+      *ngIf="!progress.done"
+      [style.display]="!progress.done ? 'block' : 'none'"
+    >
+      <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
+    </app-spinner> -->
+
+    <app-slideshow-cursor-controller
+      [slideshow]="slideshow"
+      *ngIf="images.length && images.length > 1"
+      [small]="isSmall"
+    >
+    </app-slideshow-cursor-controller>
+  </div>
+</div>

@@ -83,7 +83,8 @@ import { DateRangePipe } from './pipes/date-range.pipe'
 import { GlShelfComponent } from './components/gl/gl-shelf/gl-shelf.component'
 import { XcDatePipe } from './pipes/xc-date.pipe'
 import { FairCardComponent } from './components/pages/fairs/fair-card/fair-card.component'
-import { SlideshowCursorControllerComponent } from './components/common/slideshow-cursor-controller/slideshow-cursor-controller.component'
+import { SlideshowCursorControllerComponent } from './components/common/slideshow-cursor-controller/slideshow-cursor-controller.component';
+import { ArtworkSeriesCardComponent } from './components/pages/artist/artwork-series-card/artwork-series-card.component'
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -267,6 +268,7 @@ let cookieConfig: NgcCookieConsentConfig = {
     XcDatePipe,
     FairCardComponent,
     SlideshowCursorControllerComponent,
+    ArtworkSeriesCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
 </app-page-header>
 
 <app-page-body>
-  <div class="background" [style.opacity]="progress.done ? 1 : 0">
+  <div class="background" [style.opacity]="0">
     <app-slideshow
       [images]="backgroundImages$ | async"
       [currentIndex]="currentBackgroundIndex"
@@ -19,7 +19,7 @@
     >
     </app-slideshow>
   </div>
-  <div class="sidebar-background"></div>
+  <!-- <div class="sidebar-background"></div> -->
   <div
     class="down-arrow"
     [style.opacity]="tabbarHidden || !arrowHidden ? 1 : 0"

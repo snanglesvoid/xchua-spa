@@ -38,7 +38,7 @@ export class SlideshowComponent implements OnInit, AfterContentInit, OnDestroy {
     this._images = value.filter(x => x);
     this.currentIndex = -1;
     this._imagesLoaded = 0;
-    value.forEach(x => console.log("as: ", x.animationState.fade));
+    // value.forEach(x => console.log("as: ", x.animationState.fade));
     this.images.forEach(x => (x.animationState = this.state("out")));
     this.setTransitionTimer();
   }
