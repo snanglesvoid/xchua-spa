@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables.less';
+@import "../../../../../styles/variables.less";
 
 :host {
   display: block;
@@ -12,7 +12,7 @@
   margin-bottom: 3rem;
   grid-template-rows: 100%;
   grid-template-columns: 400px 1fr 32px;
-  grid-template-areas: 'a b';
+  grid-template-areas: "a b";
 }
 
 @media screen and (max-width: @size-md) {
@@ -27,7 +27,7 @@
     grid-template-rows: auto auto;
     grid-gap: 0;
     grid-template-columns: 100%;
-    grid-template-areas: 'a' 'b';
+    grid-template-areas: "a" "b";
   }
 
   .description {
@@ -47,13 +47,13 @@
     }
 
     li::after {
-      content: ', ';
+      content: ", ";
       color: #bbb;
       white-space: pre;
     }
 
     li:last-child::after {
-      content: '';
+      content: "";
     }
   }
 }

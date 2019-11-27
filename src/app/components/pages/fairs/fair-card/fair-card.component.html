@@ -12,7 +12,7 @@
       <ul class="artist-links">
         <li *ngFor="let artist of fair.artists">
           <a routerLink="/artist/{{ artist.slug }}">
-            {{ artist.name.first + ' ' + artist.name.last }}
+            {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
       </ul>
@@ -39,7 +39,6 @@
       imageSize="1"
       #slideshow
       (imageLoadProgress)="progressChanged($event)"
-      [class.hidden]="!progress.done"
     ></app-slideshow>
     <app-spinner
       *ngIf="!progress.done"

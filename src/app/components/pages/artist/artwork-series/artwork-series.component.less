@@ -1,4 +1,4 @@
-@import '../../../../../styles/variables.less';
+@import "../../../../../styles/variables.less";
 
 :host {
   display: block;
@@ -13,7 +13,7 @@
   position: absolute;
   // right: 16px;
   // top: 74px;
-  top: 0;
+  top: -4rem;
   right: 0;
   text-align: right;
 
@@ -21,8 +21,8 @@
     line-height: 1.6rem;
     font-size: 1.4rem;
     margin: 0;
-    max-width: 260px;
-    white-space: nowrap;
+    max-width: 180px;
+    // white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -69,7 +69,7 @@
       bottom: 0;
       left: 0;
       z-index: 2;
-      cursor: url('/assets/cursors/arrow-left.svg'), auto;
+      cursor: url("/assets/cursors/arrow-left.svg"), auto;
       background: transparent;
     }
     .right {
@@ -79,7 +79,7 @@
       bottom: 0;
       right: 0;
       z-index: 2;
-      cursor: url('/assets/cursors/arrow-right.svg'), auto;
+      cursor: url("/assets/cursors/arrow-right.svg"), auto;
       background: transparent;
     }
   }
