@@ -1,0 +1,22 @@
+<div class="container">
+  <!-- <app-smart-image
+    *ngFor="let x of images"
+    [imageClass]="imageClass"
+    [class.contain]="(x.imageFit || imageFit) === 'contain'"
+    [class.cover]="(x.imageFit || imageFit) === 'cover'"
+    [image]="x"
+    [size]="imageSize"
+    (loaded)="imageLoaded($event)"
+  >
+  </app-smart-image> -->
+
+  <img
+    *ngFor="let x of images"
+    [class]="imageClass"
+    [class.contain]="(x.imageFit || imageFit) === 'contain'"
+    [class.cover]="(x.imageFit || imageFit) === 'cover'"
+    [class.active]="x == currentSlide"
+    (load)="imageLoaded($event)"
+    [src]="x.limit(1024, 1024)"
+  />
+</div>

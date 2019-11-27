@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  display: none;
+  transition: opacity 0.5s ease;
+}
+
+:host.visible {
+  .container {
+    display: block;
+  }
+}
+
+app-smart-image,
+img {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+
+  transition: opacity 0.5s ease;
+}
+
+app-smart-image.active,
+img.active {
+  opacity: 1;
+}
+
+:host /deep/ img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+:host /deep/ img.contain,
+:host /deep/ app-smart-image.contain img {
+  object-fit: contain;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+}
+:host /deep/ img.cover,
+:host /deep/ app-smart-image.cover img {
+  object-fit: cover;
+}

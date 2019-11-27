@@ -9,48 +9,7 @@
         <app-fair-card
           *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
           [fair]="fair"
-          [@listAnimation]="fair.animationState"
         ></app-fair-card>
-        <!-- <div
-          class="fair-card"
-          *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
-          [@fade]="true"
-          [@listAnimation]="fair.animationState"
-        >
-          <div *ngIf="fair.thumbnail.exists">
-            <app-smart-image
-              [image]="fair.thumbnail"
-              imageClass="hover-fx {{ fair.thumbnailImageFit }}"
-              size="2"
-              routerLink="/fair/{{ fair.slug }}"
-            ></app-smart-image>
-          </div>
-          <div class="fair-description">
-            <h3 routerLink="/fair/{{ fair.slug }}">
-              <app-typewriter
-                [text]="fair.title"
-                (finished)="fair.animationState = 'finished'"
-              >
-              </app-typewriter>
-            </h3>
-            <p *ngIf="fair.start && fair.end" class="date">
-              {{ fair | dateRange: lang.language }}
-            </p>
-            <ul class="artist-links">
-              <li
-                *ngFor="
-                  let artist of fair.animationState !== 'finished'
-                    ? []
-                    : fair.artists
-                "
-              >
-                <a routerLink="/artist/{{ artist.slug }}">
-                  {{ artist.name.first + ' ' + artist.name.last }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div> -->
       </div>
     </app-scrollpane-section>
     <app-scrollpane-section #pastSection snippet="exhibitions-past">
@@ -58,48 +17,7 @@
         <app-fair-card
           *ngFor="let fair of fairs | async | fairDateFilter: 'past'"
           [fair]="fair"
-          [@listAnimation]="fair.animationState"
         ></app-fair-card>
-        <!-- <div
-          class="fair-card"
-          *ngFor="let fair of fairs | async | fairDateFilter: 'past'"
-          [@fade]="true"
-          [@listAnimation]="fair.animationState"
-        >
-          <div *ngIf="fair.thumbnail.exists">
-            <app-smart-image
-              [image]="fair.thumbnail"
-              imageClass="hover-fx"
-              size="2"
-              routerLink="/fair/{{ fair.slug }}"
-            ></app-smart-image>
-          </div>
-          <div class="fair-description">
-            <h3 routerLink="/fair/{{ fair.slug }}">
-              <app-typewriter
-                [text]="fair.title"
-                (finished)="fair.animationState = 'finished'"
-              >
-              </app-typewriter>
-            </h3>
-            <p *ngIf="fair.start && fair.end" class="date">
-              {{ fair.start | date }} &nbsp;to&nbsp;{{ fair.end | date }}
-            </p>
-            <ul class="artist-links">
-              <li
-                *ngFor="
-                  let artist of fair.animationState !== 'finished'
-                    ? []
-                    : fair.artists
-                "
-              >
-                <a routerLink="/artist/{{ artist.slug }}">
-                  {{ artist.name.first + ' ' + artist.name.last }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div> -->
       </div>
     </app-scrollpane-section>
     <div style="height: 400px;"></div>

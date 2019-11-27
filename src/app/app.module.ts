@@ -84,6 +84,7 @@ import { GlShelfComponent } from "./components/gl/gl-shelf/gl-shelf.component";
 import { XcDatePipe } from "./pipes/xc-date.pipe";
 import { FairCardComponent } from "./components/pages/fairs/fair-card/fair-card.component";
 import { SlideshowCursorControllerComponent } from "./components/common/slideshow-cursor-controller/slideshow-cursor-controller.component";
+import { SlideshowSimpleComponent } from './components/common/slideshow-simple/slideshow-simple.component';
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -266,7 +267,8 @@ let cookieConfig: NgcCookieConsentConfig = {
     GlShelfComponent,
     XcDatePipe,
     FairCardComponent,
-    SlideshowCursorControllerComponent
+    SlideshowCursorControllerComponent,
+    SlideshowSimpleComponent
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,7 @@
     <app-slideshow
       [images]="images"
       [currentSlide]="image"
+      (slideChanged)="slideChanged($event)"
       imageFit="cover"
       imageClass="slideshow-img"
       animation="fade"

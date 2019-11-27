@@ -37,7 +37,7 @@ export class FairCardComponent implements OnInit {
   };
 
   progressChanged(event) {
-    console.log("progress changed ", event);
+    // console.log("progress changed ", event);
     this.progress.ratio = event.ratio;
     if (event.ratio >= 1) {
       setTimeout(() => {
@@ -54,5 +54,10 @@ export class FairCardComponent implements OnInit {
     return (
       this.el.nativeElement.getBoundingClientRect().width <= this.client.sizeMd
     );
+  }
+
+  slideChanged($event) {
+    console.log("slide changed", $event);
+    console.log(this.images.map(x => x.animationState.fade.value));
   }
 }
