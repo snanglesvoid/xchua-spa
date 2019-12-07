@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 button {
   position: fixed;
@@ -17,7 +17,8 @@ button {
   div {
     width: 100px;
     height: 3px;
-    background-color: #bbb;
+    background-color: #000;
+    // border-bottom: 1px solid white; // #bbb;
     margin-top: 24px;
     margin-bottom: 24px;
     transition: all 0.7s ease;
@@ -26,14 +27,14 @@ button {
     // box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.2);
   }
   div:first-child {
-    background-color: #f1f1f1;
+    background-color: #00ffff;
   }
 }
 button:hover {
-  div {
+  div:first-child {
     // background-color: @color-fg-dark-highlight;
-    margin-bottom: 28px;
-    margin-top: 28px;
+    // margin-bottom: 28px;
+    // margin-top: 28px;
     transform: rotate(-180deg);
   }
 }
@@ -46,6 +47,7 @@ button.open {
   left: 54px;
   div {
     width: 46px;
+    background-color: white;
   }
   div:first-child {
     // background: green;
@@ -53,6 +55,7 @@ button.open {
     height: 3px;
 
     z-index: 1001;
+    background-color: #ff0000;
   }
   div:nth-child(2) {
     // background: red;

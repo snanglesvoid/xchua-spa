@@ -1,5 +1,7 @@
-<app-page-header>
-  <h3><app-snippet snippet="about-title"></app-snippet></h3>
+<app-page-header [scrollpane]="scrollpane" style="pointer-events: all;">
+  <ng-container section>
+    <app-snippet snippet="about-title"></app-snippet>
+  </ng-container>
 </app-page-header>
 
 <app-page-body>

@@ -84,7 +84,7 @@ import { GlShelfComponent } from "./components/gl/gl-shelf/gl-shelf.component";
 import { XcDatePipe } from "./pipes/xc-date.pipe";
 import { FairCardComponent } from "./components/pages/fairs/fair-card/fair-card.component";
 import { SlideshowCursorControllerComponent } from "./components/common/slideshow-cursor-controller/slideshow-cursor-controller.component";
-import { SlideshowSimpleComponent } from './components/common/slideshow-simple/slideshow-simple.component';
+import { SlideshowSimpleComponent } from "./components/common/slideshow-simple/slideshow-simple.component";
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -109,7 +109,7 @@ const appRoutes: Routes = [
     data: { animation: "ArtistsPage" }
   },
   {
-    path: "artist/:slug",
+    path: "artists/:slug",
     component: ArtistComponent,
     data: { animation: "ArtistPage" }
   },
@@ -119,7 +119,7 @@ const appRoutes: Routes = [
     data: { animation: "ExhibitionsPage" }
   },
   {
-    path: "exhibition/:slug",
+    path: "exhibitions/:slug",
     component: ExhibitionComponent,
     data: { animation: "ExhibitionPage" }
   },
@@ -144,7 +144,7 @@ const appRoutes: Routes = [
     data: { animation: "FairsPage" }
   },
   {
-    path: "fair/:slug",
+    path: "fairs/:slug",
     component: FairComponent,
     data: { animation: "FairPage" }
   },
@@ -155,7 +155,7 @@ const appRoutes: Routes = [
   },
   { path: "news", component: NewsComponent, data: { animation: "NewsPage" } },
   {
-    path: "post/:slug",
+    path: "news/:slug",
     component: PostPageComponent,
     data: { animation: "PostPage" }
   },

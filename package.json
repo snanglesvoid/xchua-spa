@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod --aot --build-optimizer",
-    "build:stats": "ng build --stats-json --prod --aot --build-optimizer",
+    "build:stats": "ng build --stats-json --prod --aot --build-optimizer --base-href /demo",
     "analyze": "webpack-bundle-analyzer dist/xc-hua/stats.json",
     "test": "ng test",
     "lint": "ng lint",

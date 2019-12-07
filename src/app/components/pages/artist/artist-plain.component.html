@@ -1,19 +1,34 @@
-<app-page-header>
-  <h3 routerLink="/artists">
-    <i class="fa fa-angle-double-left"></i>&nbsp;
-    <app-snippet snippet="artists-title"></app-snippet>
-  </h3>
+<app-page-header [scrollpane]="scrollpane">
+  <!-- <h3 routerLink="/artists">
+    <i class="fa fa-angle-double-left"></i
+    ><span style="display: inline-block; width: .5rem;"></span>
+    <app-snippet snippet="artists-title"></app-snippet><br />
+    &nbsp;&#x21b3;
+    <span style="text-transform: uppercase; color: red;">
+      <app-typewriter [text]="artistName$ | async"></app-typewriter>
+    </span>
+  </h3> -->
+  <ng-container section>
+    <span routerLink="/artists" style="cursor: pointer;">
+      <i class="fa fa-angle-double-left" style="margin-right: .5rem;"></i>
+      <app-snippet snippet="artists-title"></app-snippet>
+    </span>
+  </ng-container>
+  <ng-container subsection>
+    <app-typewriter [text]="artistName$ | async"></app-typewriter>
+  </ng-container>
+  <ng-container scrollLinks> </ng-container>
 </app-page-header>
 
 <app-page-body>
   <app-scrollpane>
-    <div class="heading">
+    <!-- <div class="heading">
       <h1 class="title">
         <app-typewriter [text]="artistName$ | async"></app-typewriter>
       </h1>
-    </div>
+    </div> -->
 
-    <div style="height: 100px;"></div>
+    <!-- <div style="height: 152px;"></div> -->
 
     <app-scrollpane-section snippet="artist-works" navlink="true">
       <div class="series-list">

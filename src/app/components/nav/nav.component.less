@@ -1,4 +1,4 @@
-@import '../../../styles/variables.less';
+@import "../../../styles/variables.less";
 
 @sn-width: 280px;
 @sn-width-sm: 200px;
@@ -15,8 +15,7 @@
   top: 0;
   left: -@sn-width;
   max-width: 100%;
-  background-color: @color-bg-dark;
-  background: rgba(0, 0, 0, 0);
+  background: #000;
   overflow-x: visible;
   padding-top: 100px;
   transition: all 0.5s ease;
@@ -25,43 +24,43 @@
   box-shadow: -7px -1px 5px -2px rgba(0, 0, 0, 0.2);
 }
 
-.sidenav::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: -1;
+// .sidenav::before {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 0;
+//   bottom: 0;
+//   pointer-events: none;
+//   z-index: -1;
 
-  transition: all 0.5s ease;
+//   transition: all 0.5s ease;
 
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+10,000000+100&1+0,1+0,0.9+10,0+100 */
-  background: -moz-linear-gradient(
-    left,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.9) 10%,
-    rgba(0, 0, 0, 0) 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    left,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.9) 10%,
-    rgba(0, 0, 0, 0) 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.9) 10%,
-    rgba(0, 0, 0, 0) 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+//   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+10,000000+100&1+0,1+0,0.9+10,0+100 */
+//   background: -moz-linear-gradient(
+//     left,
+//     rgba(0, 0, 0, 1) 0%,
+//     rgba(0, 0, 0, 0.9) 10%,
+//     rgba(0, 0, 0, 0) 100%
+//   ); /* FF3.6-15 */
+//   background: -webkit-linear-gradient(
+//     left,
+//     rgba(0, 0, 0, 1) 0%,
+//     rgba(0, 0, 0, 0.9) 10%,
+//     rgba(0, 0, 0, 0) 100%
+//   ); /* Chrome10-25,Safari5.1-6 */
+//   background: linear-gradient(
+//     to right,
+//     rgba(0, 0, 0, 1) 0%,
+//     rgba(0, 0, 0, 0.9) 10%,
+//     rgba(0, 0, 0, 0) 100%
+//   ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+//   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
 
-  content: '';
-}
-.sidenav.open::before {
-  width: 100vw;
-}
+//   content: '';
+// }
+// .sidenav.open::before {
+//   width: 100vw;
+// }
 
 .sidenav.open {
   left: 0;

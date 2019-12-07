@@ -1,5 +1,10 @@
 <app-page-header>
-  <h3><app-snippet snippet="artists-title"></app-snippet></h3>
+  <ng-container section>
+    <app-snippet snippet="artists-title"></app-snippet>
+  </ng-container>
+  <!-- <ng-container subsection>
+    <app-typewriter [text]="'subsection'"></app-typewriter>
+  </ng-container> -->
 </app-page-header>
 
 <app-page-body>
@@ -9,6 +14,7 @@
         #residentSection
         snippet="artists-resident"
         active="true"
+        [navlink]="false"
       >
         <ul class="artists-list">
           <li
@@ -22,13 +28,13 @@
           >
             <!-- appScrollTo [offset]="158"
             (scrolledTo)="artistMouseover(artist)" -->
-            <a routerLink="/artist/{{ artist.slug }}">
-              {{ artist.name.first + ' ' + artist.name.last }}
+            <a routerLink="/artists/{{ artist.slug }}">
+              {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>
         </ul>
       </app-scrollpane-section>
-      <app-scrollpane-section #guestSection snippet="artists-guest">
+      <!-- <app-scrollpane-section #guestSection snippet="artists-guest">
         <ul class="artists-list">
           <li
             class="artist-link"
@@ -39,13 +45,13 @@
             (press)="artistMouseover(artist)"
           >
             <a routerLink="/artist/{{ artist.slug }}">
-              {{ artist.name.first + ' ' + artist.name.last }}
+              {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>
         </ul>
-      </app-scrollpane-section>
+      </app-scrollpane-section> -->
 
-      <div style="height: 300px;"></div>
+      <!-- <div style="height: 300px;"></div> -->
     </app-scrollpane>
   </div>
   <div class="picture-container" *ngIf="showPreview">

@@ -1,6 +1,27 @@
 <div class="titlebar">
-  <ng-content></ng-content>
+  <h3 class="section">
+    <ng-content select="[section]"></ng-content>
+  </h3>
+  <h3 class="subsection">
+    <ng-content select="[subsection]"></ng-content>
+  </h3>
+  <!-- <div class="scrollLinks">
+    <ng-content select="[scrollLinks]"></ng-content>
+  </div> -->
+  <div class="scroll-links" *ngIf="scrollpane">
+    <ul>
+      <ng-container *ngFor="let s of scrollpane.sections">
+        <li
+          [class.active]="s.active"
+          [class.subsection]="s.subsection"
+          *ngIf="!s.isEmpty && s.navlink"
+        >
+          <a (click)="scrollpane.scrollToSection(s)">
+            <app-snippet [snippet]="s.snippet"></app-snippet>
+          </a>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
 </div>
-<div class="bottom-shadow">
-  
-</div>
+<div class="bottom-shadow"></div>

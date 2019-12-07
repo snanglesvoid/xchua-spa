@@ -13,11 +13,11 @@
     [image]="exhibition.coverPicture"
     imageClass="hover-fx"
     size="2"
-    routerLink="/exhibition/{{ exhibition.slug }}"
+    routerLink="/exhibitions/{{ exhibition.slug }}"
   ></app-smart-image>
   <div class="ex-description">
     <h3>
-      <a routerLink="/exhibition/{{ exhibition.slug }}">
+      <a routerLink="/exhibitions/{{ exhibition.slug }}">
         {{ exhibition.title }}
       </a>
     </h3>
@@ -29,8 +29,8 @@
     <ul class="artist-links">
       <div *ngIf="exhibition.artists.length === 1">
         <li *ngFor="let artist of exhibition.artists">
-          <a routerLink="/artist/{{ artist.slug }}">
-            {{ artist.name.first + ' ' + artist.name.last }}
+          <a routerLink="/artists/{{ artist.slug }}">
+            {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
       </div>

@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 .headers {
   width: 100%;
@@ -8,6 +8,7 @@
   h3 {
     font-size: 4.5rem;
     transition: all 0.5s ease;
+    color: red;
   }
   h3:first-child {
     float: left;
@@ -17,7 +18,7 @@
     text-align: right;
   }
   h3.inactive {
-    color: #bbb;
+    color: black;
   }
 }
 
@@ -47,10 +48,10 @@
     transform: translateX(0);
   }
   .left {
-    cursor: url('/assets/cursors/arrow-right-white.svg'), auto;
+    cursor: url("/assets/cursors/arrow-right-white.svg"), auto;
   }
   .right {
-    cursor: url('/assets/cursors/arrow-left-white.svg'), auto;
+    cursor: url("/assets/cursors/arrow-left-white.svg"), auto;
   }
 
   .left,
@@ -112,13 +113,18 @@
   margin-bottom: -40px;
 }
 
+app-page-body {
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 @media screen and (min-width: @size-md) {
   app-page-body {
     padding-right: 32px;
     max-width: 900px;
   }
   .headers {
-    margin-top: -66px;
     padding-left: 0;
     padding-right: 0;
   }

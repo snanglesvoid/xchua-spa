@@ -1,31 +1,29 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 :host {
   display: block;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 9rem;
+  left: 7rem;
   // right: 0;
-  width: 190px;
-  height: @header-height;
+  width: auto; //190px;
+  height: auto; //@header-height;
   // border: 1px solid red;
   box-sizing: border-box;
-  z-index: 2;
+  z-index: 20;
   background: transparent;
   pointer-events: none;
   overflow: visible;
 }
 
 .titlebar {
-  position: absolute;
-  pointer-events: none;
+  // position: absolute;
+  // pointer-events: none;
 
-  top: 0;
-  left: 0;
-  height: 50px;
+  height: auto;
   width: 100%;
-  padding-left: 46px;
-  padding-top: 32px;
+  padding-left: 0; //46px;
+  padding-top: 0; //32px;
 
   overflow: visible;
   white-space: nowrap;
@@ -33,13 +31,13 @@
   // border: 1px dotted grey;
 }
 
-:host /deep/ h3 {
-  color: #bbb;
+h3 {
+  color: #000;
+  font-size: 2.5rem;
   margin-bottom: 0;
-  font-size: 1.5rem;
   margin-top: 0;
   margin-bottom: 0;
-  text-transform: uppercase;
+  text-transform: lowercase;
 }
 :host /deep/ h2 {
   position: absolute;
@@ -50,6 +48,55 @@
   font-size: 3rem;
   color: #333;
   // font-weight: 100;
+}
+
+h3.subsection {
+  color: red;
+  text-transform: uppercase;
+}
+h3.subsection:not(:empty)::before {
+  content: "\021B3";
+  font-size: 2rem;
+  vertical-align: top;
+  display: inline-block;
+  width: 2rem;
+  padding-left: 0.5rem;
+}
+
+.scroll-links {
+  ul {
+    // padding-left: 0;
+    // list-style-type: none;
+    // display: flex;
+    // justify-content: space-between;
+    margin: 0;
+    font-size: 2rem;
+    padding-left: 0;
+    margin-left: 2rem;
+    li {
+      max-height: 0px;
+      overflow: hidden;
+      margin-right: 0.5rem;
+      transition: max-height 0.5s ease-out;
+      a {
+        color: black;
+        text-transform: lowercase;
+      }
+    }
+    li.active {
+      // display: list-item;
+      max-height: 4rem;
+    }
+    li.active a {
+      color: black;
+    }
+  }
+  ul:hover {
+    background: white;
+    li {
+      max-height: 4rem;
+    }
+  }
 }
 
 .bottom-shadow {

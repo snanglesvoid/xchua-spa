@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 @list-width: 256px;
 
@@ -14,6 +14,10 @@
 .golden-ratio-2,
 .golden-ratio-1 {
   position: relative;
+}
+
+:host /deep/ .preview {
+  object-position: top;
 }
 
 @media screen and (min-width: @size-md) {
@@ -61,20 +65,20 @@
 }
 
 :host /deep/ .picture-container {
-  width: calc(62% - 130px);
+  width: 50%;
   padding-top: 158px;
   padding-bottom: 10vh;
+  float: right;
   height: 100vh;
-  position: fixed;
-  right: 0;
-  top: 0;
+  position: relative;
 }
 
 .list-container {
   min-width: @list-width;
-  width: 38%;
+  width: 50%; //38%;
   max-height: 100%;
   padding-bottom: 30px;
+  float: left;
   .artists-list {
     font-size: 3rem;
     line-height: 4.5rem;
@@ -83,17 +87,16 @@
     margin: 0;
 
     li {
-      text-transform: capitalize;
-      // line-height: 4rem;
-      // font-size: 3vw;
-      // line-height: 5.25vw;
-      font-size: 3rem;
-      line-height: 4.5rem;
+      text-transform: uppercase;
+      font-size: 2.5vw;
+      line-height: 4vw;
+      // font-size: 2.5rem;
+      // line-height: 4.5rem;
       // font-weight: 300;
       a {
         text-decoration: none;
         color: #bbb;
-        transition: all 0.25s ease;
+        // transition: all 0.25s ease;
       }
     }
 
@@ -114,15 +117,13 @@
   }
 }
 
-body.desktop {
-  .list-container {
-    .artists-list {
-      li a:hover {
-        color: #000;
-      }
-      li.section-active a:hover {
-        color: #bbb;
-      }
+.list-container {
+  .artists-list {
+    li a:hover {
+      color: red;
+    }
+    li.section-active a:hover {
+      color: red;
     }
   }
 }

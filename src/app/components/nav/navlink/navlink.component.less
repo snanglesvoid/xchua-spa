@@ -1,17 +1,29 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: lowercase;
   font-size: 2rem;
   color: @color-fg-dark;
   display: block;
-  transition: all 0.3s ease;
+  // transition: all 0.3s ease;
   padding-left: 64px;
+  position: relative;
+  mix-blend-mode: difference;
 }
-body.desktop {
-  a:hover {
-    color: @color-fg-dark-highlight;
-  }
+a:hover {
+  color: #f00; //@color-fg-dark-highlight;
 }
+
+a:hover::before,
+a.active::before {
+  content: "\021B3";
+  position: absolute;
+  left: 5rem;
+  top: 6px;
+  font-size: 2rem;
+}
+
+// body.desktop {
+// }
