@@ -28,6 +28,7 @@ export class FairCardComponent implements OnInit {
   }
 
   @Input() fair: Fair;
+  @Input() showPictures: boolean = true;
 
   images: CloudinaryImage[] = [];
   image?: CloudinaryImage;

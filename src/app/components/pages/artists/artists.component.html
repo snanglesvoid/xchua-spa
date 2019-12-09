@@ -9,6 +9,7 @@
         #residentSection
         snippet="artists-resident"
         active="true"
+        [navlink]="false"
       >
         <ul class="artists-list">
           <li
@@ -23,12 +24,12 @@
             <!-- appScrollTo [offset]="158"
             (scrolledTo)="artistMouseover(artist)" -->
             <a routerLink="/artist/{{ artist.slug }}">
-              {{ artist.name.first + ' ' + artist.name.last }}
+              {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>
         </ul>
       </app-scrollpane-section>
-      <app-scrollpane-section #guestSection snippet="artists-guest">
+      <!-- <app-scrollpane-section #guestSection snippet="artists-guest">
         <ul class="artists-list">
           <li
             class="artist-link"
@@ -39,11 +40,11 @@
             (press)="artistMouseover(artist)"
           >
             <a routerLink="/artist/{{ artist.slug }}">
-              {{ artist.name.first + ' ' + artist.name.last }}
+              {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>
         </ul>
-      </app-scrollpane-section>
+      </app-scrollpane-section> -->
 
       <div style="height: 300px;"></div>
     </app-scrollpane>

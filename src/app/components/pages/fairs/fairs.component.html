@@ -9,6 +9,7 @@
         <app-fair-card
           *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
           [fair]="fair"
+          [showPictures]="false"
         ></app-fair-card>
       </div>
     </app-scrollpane-section>

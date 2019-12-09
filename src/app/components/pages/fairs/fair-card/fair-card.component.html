@@ -28,7 +28,7 @@
       <app-html-block [content]="fair.text"></app-html-block>
     </div> -->
   </div>
-  <div class="slideshow-container">
+  <div class="slideshow-container" *ngIf="showPictures">
     <app-slideshow
       [images]="images"
       [currentSlide]="image"
