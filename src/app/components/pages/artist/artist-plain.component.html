@@ -34,6 +34,12 @@
     >
       <div class="text" [style.opacity]="1">
         <app-html-block [content]="biography$ | async"></app-html-block>
+        <a [href]="cvUploadHref$ | async" target="_blank">
+          <app-snippet
+            *ngIf="hasCvUpload"
+            snippet="artists-cv-link"
+          ></app-snippet>
+        </a>
       </div>
     </app-scrollpane-section>
 

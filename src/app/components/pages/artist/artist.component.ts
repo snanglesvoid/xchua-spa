@@ -22,6 +22,7 @@ import {
 import { ScrollpaneComponent } from "src/app/components/layout/scrollpane/scrollpane.component";
 import { ImageSize } from "src/app/components/common/smart-image/smart-image.component";
 import { LanguageService } from "src/app/services/language.service";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 
 @Component({
   selector: "app-artist",
@@ -60,13 +61,15 @@ export class ArtistComponent implements OnInit, OnDestroy {
   series$: Observable<ArtworkSeries[]>;
   seriesDelayed$: Observable<ArtworkSeries[]>;
   backgroundImages$: Observable<CloudinaryImage[]>;
+  cvUploadHref$: Observable<SafeUrl>;
   hasSeries = true;
-
+  hasCvUpload = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
-    public lang: LanguageService
+    public lang: LanguageService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
@@ -101,6 +104,18 @@ export class ArtistComponent implements OnInit, OnDestroy {
         this.loadingProgess$.next(this.loadingState);
       }),
       share()
+    );
+
+    this.cvUploadHref$ = this.artist$.pipe(
+      tap(x => console.log("upload", x.cvUpload)),
+      filter(x => x.cvUpload !== undefined),
+      map(x => x.cvUpload),
+      tap(_ => (this.hasCvUpload = true)),
+      map(x =>
+        this.sanitizer.bypassSecurityTrustUrl(
+          `https:galerie-xchua.com/api/upload/${x.filename}`
+        )
+      )
     );
 
     this.seriesDelayed$ = this.series$.pipe(delayWhen(_ => this.loaded$));
