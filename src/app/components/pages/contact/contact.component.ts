@@ -9,6 +9,7 @@ import { LOGO_COMPONENT } from "../../logo/logo.component";
 })
 export class ContactComponent implements OnInit, OnDestroy {
   enquirySubmitted: boolean = false;
+  submitted: boolean = false;
 
   constructor() {}
 
