@@ -1,14 +1,27 @@
 <app-page-header>
-  <h3><app-snippet snippet="contact-title"></app-snippet></h3>
+  <h3><app-snippet snippet="menu-contact"></app-snippet></h3>
 </app-page-header>
 
 <app-page-body>
   <app-scrollpane>
+    <h1><app-snippet snippet="contact-title"></app-snippet></h1>
     <div *ngIf="enquirySubmitted">
       <h3>
-        <app-snippet snippet='contact-thanks'></app-snippet>
+        <app-snippet snippet="contact-thanks"></app-snippet>
       </h3>
     </div>
     <app-contact-form *ngIf="!enquirySubmitted"></app-contact-form>
-  </app-scrollpane>  
+
+    <hr />
+
+    <h1><app-snippet snippet="subscribe-title"></app-snippet></h1>
+    <div *ngIf="submitted">
+      <h3>
+        <app-snippet snippet="subscribe-thanks"></app-snippet>
+      </h3>
+    </div>
+    <app-subscribe-form *ngIf="!submitted"></app-subscribe-form>
+
+    <div style="height: 40vh;"></div>
+  </app-scrollpane>
 </app-page-body>

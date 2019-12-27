@@ -1,5 +1,14 @@
 @import "../../../../styles/variables.less";
 
+:host {
+  display: block;
+  background: black;
+}
+
+:host ::ng-deep app-tabbar .tabs li a {
+  color: white;
+}
+
 body.desktop {
   ul.artist-links {
     li:hover {

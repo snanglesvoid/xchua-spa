@@ -1,9 +1,35 @@
+@import "../../../../styles/variables.less";
+
 :host {
-    display: block;
-    padding: 8px;
-    padding-right: 16px;
+  display: block;
+  padding: 8px;
+  padding-right: 16px;
+  text-align: center;
 }
 
 .form-actions {
-    text-align: left;
+  max-width: 400px;
+  text-align: right;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.form-group.check {
+  span {
+    color: white;
+  }
+  max-width: 400px;
+  text-align: unset;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+:host ::ng-deep a span,
+:host ::ng-deep a {
+  color: white;
+}
+
+:host ::ng-deep a:hover span,
+:host ::ng-deep a:hover {
+  color: @color-highlight;
 }

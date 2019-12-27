@@ -1,9 +1,27 @@
+@import "../../../../styles/variables.less";
+
 :host {
-    display: block;
-    padding: 8px;
-    padding-right: 16px;
+  display: block;
+  padding: 8px;
+  padding-right: 16px;
 }
 
 #email2 {
-    display: none;
+  display: none;
+}
+
+.form-group.check {
+  span {
+    color: white;
+  }
+}
+
+:host ::ng-deep a span,
+:host ::ng-deep a {
+  color: white;
+}
+
+:host ::ng-deep a:hover span,
+:host ::ng-deep a:hover {
+  color: @color-highlight;
 }

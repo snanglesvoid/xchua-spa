@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 app-page-header {
   pointer-events: all;
@@ -36,7 +36,7 @@ body.desktop {
 @media screen and (min-width: @size-md) {
   h1.title {
     position: absolute;
-    top: 158px;
+    top: 80px;
     font-size: 3rem;
     margin: 0;
     transform: translateY(-100%);
@@ -87,13 +87,13 @@ ul.artist-links {
   }
 
   li::after {
-    content: ', ';
+    content: ", ";
     // color: #bbb;
     white-space: pre;
   }
 
   li:last-child::after {
-    content: '';
+    content: "";
   }
 }
 

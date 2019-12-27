@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 .full-page {
   height: 100%;
@@ -40,7 +40,8 @@ body.desktop {
   opacity: 0;
 
   h2,
-  h2 a {
+  h2 a,
+  h2 a em {
     transition: all 0.4s ease;
     background: inherit;
     text-transform: uppercase;
@@ -48,6 +49,12 @@ body.desktop {
     margin-top: 0;
     margin-bottom: 0;
     text-decoration: none;
+    font-weight: 600 !important;
+    color: black;
+  }
+
+  h2 a:hover {
+    color: @color-highlight;
   }
 
   h3 {
@@ -55,11 +62,15 @@ body.desktop {
     background: inherit;
     margin-top: 0;
     margin-bottom: 0;
+    font-weight: 600 !important;
+  }
+  h3.subtitle {
+    color: @color-highlight !important;
   }
 }
 .slideshow-title.left {
-  bottom: 12.5%;
-  left: 12.5%;
+  bottom: 8rem;
+  left: 8rem;
   h2,
   h2 a,
   h3 {
@@ -79,8 +90,8 @@ body.desktop {
   }
 }
 .slideshow-title.right {
-  bottom: 25%;
-  right: 20%;
+  bottom: 8rem;
+  right: 8rem;
   h2,
   h2 a,
   h3 {
@@ -100,8 +111,8 @@ body.desktop {
   }
 }
 .slideshow-title.top {
-  top: 12.5%;
-  right: 12.5%;
+  top: 8rem;
+  right: 8rem;
   h2,
   h2 a,
   h3 {
@@ -149,8 +160,9 @@ body.desktop {
 .slideshow-title.dark {
   h2,
   h2 a,
+  h2 a em,
   h3 {
-    color: @color-fg-light;
+    color: black;
   }
 }
 

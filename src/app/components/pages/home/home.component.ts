@@ -1,74 +1,83 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ApiService } from 'src/app/services/api.service'
-import { FrontPageImage } from 'src/app/models/FrontPageImage'
-import { CloudinaryImage } from 'src/app/models/CloudinaryImage'
-import { interval } from 'rxjs'
-import { trigger, style, animate, transition, state } from '@angular/animations'
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ApiService } from "src/app/services/api.service";
+import { FrontPageImage } from "src/app/models/FrontPageImage";
+import { CloudinaryImage } from "src/app/models/CloudinaryImage";
+import { interval } from "rxjs";
+import {
+  trigger,
+  style,
+  animate,
+  transition,
+  state
+} from "@angular/animations";
+import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
+import { LOGO_COMPONENT } from "../../logo/logo.component";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.less'],
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.less"],
   animations: [
-    trigger('fade', [
-      state('in', style({ opacity: 1 })),
-      state('out', style({ opacity: 0 })),
-      transition('in => out', animate('500ms 0ms ease')),
-      transition('out => in', animate('500ms 500ms ease')),
-      transition('void => in', [style({ opacity: 0 }), animate('500ms ease')]),
-    ]),
-  ],
+    trigger("fade", [
+      state("in", style({ opacity: 1 })),
+      state("out", style({ opacity: 0 })),
+      transition("in => out", animate("500ms 0ms ease")),
+      transition("out => in", animate("500ms 500ms ease")),
+      transition("void => in", [style({ opacity: 0 }), animate("500ms ease")])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  slides: FrontPageImage[]
-  images: CloudinaryImage[] = []
-  imageUrls: string[] = []
-  displacementImage: string = 'assets/images/displacement/1.jpg'
-  activeSlide: FrontPageImage
-  activeIndex = 0
+  slides: FrontPageImage[];
+  images: CloudinaryImage[] = [];
+  imageUrls: string[] = [];
+  displacementImage: string = "assets/images/displacement/1.jpg";
+  activeSlide: FrontPageImage;
+  activeIndex = 0;
 
-  loading: boolean = true
+  loading: boolean = true;
   progress: {
-    loaded: number
-    total: number
-    ratio: number
+    loaded: number;
+    total: number;
+    ratio: number;
   } = {
     loaded: 0,
     total: 1,
-    ratio: 0,
-  }
+    ratio: 0
+  };
 
   constructor(private api: ApiService) {}
 
-  private _dataChangeSubscription
-  private _intervalSubscription
+  private _dataChangeSubscription;
+  private _intervalSubscription;
   ngOnInit() {
     this._dataChangeSubscription = this.api.frontPageImages.dataChanged.subscribe(
       () => {
         // this.updateData()
       }
-    )
-    this.updateData()
+    );
+    this.updateData();
     this._intervalSubscription = interval(8000).subscribe(x => {
-      this.slides.forEach(s => (s.animationState = 'out'))
-      this.activeIndex = x
-    })
+      this.slides.forEach(s => (s.animationState = "out"));
+      this.activeIndex = x;
+    });
   }
 
   ngOnDestroy() {
-    this._dataChangeSubscription.unsubscribe()
-    this._intervalSubscription.unsubscribe()
+    this._dataChangeSubscription.unsubscribe();
+    this._intervalSubscription.unsubscribe();
+    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
   }
 
   async updateData() {
-    this.loading = true
-    await this.api.frontPageImages.waitForData()
-    this.slides = [...this.api.frontPageImages.data]
-    this.slides.forEach(x => (x.animationState = 'out'))
-    this.images = this.slides.map(x => x.image)
+    this.loading = true;
+    await this.api.frontPageImages.waitForData();
+    this.slides = [...this.api.frontPageImages.data];
+    this.slides.forEach(x => (x.animationState = "out"));
+    this.images = this.slides.map(x => x.image);
     this.imageUrls = this.images.map(x => {
-      return x.url
-    })
+      return x.url;
+    });
     // this.loading = false
   }
 
@@ -81,15 +90,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   '\n slide title: ',
     //   this.slides[event.index].title
     // )
-    this.activeSlide = this.slides[event.index]
-    this.activeSlide.animationState = 'in'
+    this.activeSlide = this.slides[event.index];
+    this.activeSlide.animationState = "in";
+    let color =
+      this.activeSlide.textColor == "bright"
+        ? "white"
+        : this.activeSlide.textColor == "dark"
+        ? "black"
+        : this.activeSlide.customColor;
+    console.log(this.activeSlide, color);
+    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = color;
   }
 
   classesFor(slide: FrontPageImage) {
-    let res: any = {}
-    res[slide.textPlacement] = true
-    res[slide.textColor] = true
-    return res
+    let res: any = {};
+    res[slide.textPlacement] = true;
+    res[slide.textColor] = true;
+    return res;
   }
 
   slideshowContentRendered(event) {
@@ -98,9 +115,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   slideshowLoadingProgress(event) {
     // console.log('slideshow loading progress', event)
-    this.progress.ratio = event.ratio
+    this.progress.ratio = event.ratio;
     if (event.ratio >= 1) {
-      setTimeout(() => (this.loading = false), 800)
+      setTimeout(() => (this.loading = false), 800);
     }
   }
 }

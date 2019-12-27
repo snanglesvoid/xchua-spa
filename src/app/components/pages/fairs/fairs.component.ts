@@ -1,47 +1,55 @@
-import { Component, OnInit } from '@angular/core'
-import { ApiService } from 'src/app/services/api.service'
-import { Fair } from 'src/app/models'
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ApiService } from "src/app/services/api.service";
+import { Fair } from "src/app/models";
 import {
   trigger,
   query,
   style,
   animate,
   transition,
-  stagger,
-} from '@angular/animations'
-import { LanguageService } from 'src/app/services/language.service'
+  stagger
+} from "@angular/animations";
+import { LanguageService } from "src/app/services/language.service";
+import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
+import { LOGO_COMPONENT } from "../../logo/logo.component";
 
 @Component({
-  selector: 'app-fairs',
-  templateUrl: './fairs.component.html',
-  styleUrls: ['./fairs.component.less'],
+  selector: "app-fairs",
+  templateUrl: "./fairs.component.html",
+  styleUrls: ["./fairs.component.less"],
   animations: [
-    trigger('fade', [
-      transition(':enter', [
+    trigger("fade", [
+      transition(":enter", [
         style({ opacity: 0.0 }),
-        animate('1s ease', style({ opacity: 1.0 })),
-      ]),
+        animate("1s ease", style({ opacity: 1.0 }))
+      ])
     ]),
-    trigger('listAnimation', [
-      transition('* <=> *', [
+    trigger("listAnimation", [
+      transition("* <=> *", [
         query(
-          ':enter',
+          ":enter",
           [
             style({ opacity: 0.0 }),
-            stagger(250, [animate('2s ease', style({ opacity: 1.0 }))]),
+            stagger(250, [animate("2s ease", style({ opacity: 1.0 }))])
           ],
           { optional: true }
-        ),
-      ]),
-    ]),
-  ],
+        )
+      ])
+    ])
+  ]
 })
-export class FairsComponent implements OnInit {
+export class FairsComponent implements OnInit, OnDestroy {
   constructor(private api: ApiService, public lang: LanguageService) {}
 
-  fairs: Promise<Fair[]>
+  fairs: Promise<Fair[]>;
 
   ngOnInit() {
-    this.fairs = this.api.fairs.waitForData()
+    this.fairs = this.api.fairs.waitForData();
+
+    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "white";
+  }
+
+  ngOnDestroy() {
+    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
   }
 }

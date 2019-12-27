@@ -21,16 +21,11 @@
         {{ exhibition.title }}
       </a>
     </h3>
-    <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
-    <p *ngIf="exhibition.start && exhibition.end" class="date">
-      {{ exhibition | dateRange: lang.language }},&nbsp;
-      {{ exhibition.location.location }}
-    </p>
     <ul class="artist-links">
       <div *ngIf="exhibition.artists.length === 1">
         <li *ngFor="let artist of exhibition.artists">
           <a routerLink="/artist/{{ artist.slug }}">
-            {{ artist.name.first + ' ' + artist.name.last }}
+            {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
       </div>
@@ -38,5 +33,15 @@
         <app-snippet snippet="exhibitions-group-exhibition"></app-snippet>
       </li>
     </ul>
+    <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
+    <p *ngIf="exhibition.start && exhibition.end" class="date">
+      <span class="gt-america">
+        {{ exhibition | dateRange: lang.language }}
+      </span>
+      <br />
+      <span class="gt-america">
+        {{ exhibition.location.location }}
+      </span>
+    </p>
   </div>
 </div>

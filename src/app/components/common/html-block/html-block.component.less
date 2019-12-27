@@ -1,4 +1,4 @@
-@import '../../../../styles//variables.less';
+@import "../../../../styles//variables.less";
 
 :host {
   display: block;
@@ -10,6 +10,7 @@
   padding-top: 0;
   padding-bottom: 40px;
   padding-right: 24px;
+  text-align: left;
 }
 
 @media screen and (max-width: @size-sm) {
@@ -29,7 +30,7 @@
   overflow-x: hidden;
   overflow-y: hidden;
   max-height: 100%;
-  max-width: 600px;
+  // max-width: 600px;
 }
 
 .page-nav {
@@ -59,27 +60,51 @@ body.desktop {
 :host /deep/ p {
   margin-top: 2rem;
   margin-bottom: 0rem;
-  line-height: 2.2rem;
+  line-height: 1.2;
+  font-size: 1.5rem;
+  color: black;
   // font-weight: 300;
-  // font-family: 'GT America Mono', sans-serif, 'FZJunHeiS-M-GB';
+  font-family: "GT America Mono", sans-serif, "FZJunHeiS-M-GB";
   // font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
-  font-family: 'Barlow Semi Condensed', sans-serif, 'FZJunHeiS-M-GB';
+  // font-family: 'Barlow Semi Condensed', sans-serif, 'FZJunHeiS-M-GB';
 
   * {
-    // font-family: 'GT America Mono', sans-serif, 'FZJunHeiS-M-GB';
+    font-family: "GT America Mono", sans-serif, "FZJunHeiS-M-GB";
     // font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
-    font-family: 'Barlow Semi Condensed', sans-serif, 'FZJunHeiS-M-GB';
+    // font-family: 'Barlow Semi Condensed', sans-serif, 'FZJunHeiS-M-GB';
   }
 }
 
-:host /deep/ h3 {
-  font-size: 30px;
+:host ::ng-deep a {
+  border-bottom: 1px solid @color-highlight;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep a:hover {
+  color: @color-highlight;
+}
+
+:host /deep/ h3,
+:host /deep/ h3 em,
+:host /deep/ h3 a,
+:host /deep/ h3 strong {
+  font-size: 2.5rem;
+  line-height: 1.2;
   margin-bottom: 0.5rem;
   margin-top: 0;
+  color: @color-highlight;
+  font-weight: 600;
+
+  font-family: "Work Sans", sans-serif, "FZJunHeiS-M-GB" !important;
+
   // font-weight: 300;
   // font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
+}
 
-  * {
-    // font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
-  }
+:host /deep/ h3 {
+  padding-top: 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid @color-highlight;
 }

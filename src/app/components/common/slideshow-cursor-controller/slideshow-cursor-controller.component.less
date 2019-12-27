@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 :host {
   display: flex;
@@ -11,25 +11,27 @@
   z-index: 5;
   .left {
     width: 50%;
-    cursor: url('/assets/cursors/arrow-left-white.svg'), auto;
+    cursor: url("/assets/cursors/arrow-left-white.svg"), auto;
   }
   .right {
     width: 50%;
-    cursor: url('/assets/cursors/arrow-right-white.svg'), auto;
+    cursor: url("/assets/cursors/arrow-right-white.svg"), auto;
   }
 
   .number {
     position: absolute;
-    left: 100%;
-    bottom: 0;
+    right: 0;
+    top: 100%;
     min-width: 48px;
+    text-align: right;
     p {
       margin: 0;
-      padding-left: 0.9rem;
-      padding-right: 0.9rem;
+      padding-left: 0;
+      padding-right: 0;
       font-size: 1.8rem;
       line-height: 1.8rem;
       letter-spacing: 1.5px;
+      color: @color-highlight;
     }
   }
 }

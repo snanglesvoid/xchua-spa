@@ -18,7 +18,7 @@
       >
       </app-slideshow>
     </div>
-    <div class="layer" data-depth="0.4" style="pointer-events: all;">
+    <div class="layer" data-depth="0.2" style="pointer-events: all;">
       <div>
         <div
           *ngFor="let slide of slides"
@@ -26,11 +26,8 @@
           [ngClass]="classesFor(slide)"
           [@fade]="slide.animationState"
         >
-          <h3
-            class="subtitle"
-            [style.color]="slide.customColor"
-            *ngIf="slide.animationState == 'in'"
-          >
+          <h3 class="subtitle gt-america" *ngIf="slide.animationState == 'in'">
+            <!-- [style.color]="slide.customColor" -->
             {{ slide.subtitle }}
           </h3>
           <h2 class="title" *ngIf="slide.animationState == 'in'">

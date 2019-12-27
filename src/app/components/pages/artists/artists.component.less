@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 @list-width: 256px;
 
@@ -62,12 +62,16 @@
 
 :host /deep/ .picture-container {
   width: calc(62% - 130px);
-  padding-top: 158px;
+  padding-top: 80px;
   padding-bottom: 10vh;
   height: 100vh;
   position: fixed;
   right: 0;
   top: 0;
+}
+
+:host ::ng-deep .preview {
+  object-position: top;
 }
 
 .list-container {
@@ -76,32 +80,35 @@
   max-height: 100%;
   padding-bottom: 30px;
   .artists-list {
-    font-size: 3rem;
-    line-height: 4.5rem;
+    font-size: 2rem;
+    line-height: 2rem;
     list-style-type: none;
     padding-left: 0;
     margin: 0;
 
     li {
-      text-transform: capitalize;
+      text-transform: uppercase;
       // line-height: 4rem;
       // font-size: 3vw;
       // line-height: 5.25vw;
-      font-size: 3rem;
-      line-height: 4.5rem;
+      font-size: 2rem;
+      line-height: 2rem;
+      padding-bottom: 3rem;
       // font-weight: 300;
       a {
         text-decoration: none;
-        color: #bbb;
-        transition: all 0.25s ease;
+        color: #000;
+        // transition: all 0.25s ease;
+        font-weight: 600;
       }
     }
 
-    li.active a,
-    li.section-active a {
-      color: #000;
+    li:hover {
+      a {
+        text-decoration: underline;
+        color: @color-highlight;
+      }
     }
-
     h4 {
       font-size: 2rem;
       line-height: 3rem;
@@ -110,19 +117,6 @@
       margin-bottom: 0;
       text-transform: uppercase;
       text-decoration: underline;
-    }
-  }
-}
-
-body.desktop {
-  .list-container {
-    .artists-list {
-      li a:hover {
-        color: #000;
-      }
-      li.section-active a:hover {
-        color: #bbb;
-      }
     }
   }
 }

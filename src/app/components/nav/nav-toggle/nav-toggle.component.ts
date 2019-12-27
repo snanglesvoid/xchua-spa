@@ -1,24 +1,27 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
-import { interval } from 'rxjs'
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+
+export var NAV_TOGGLE: NavToggleComponent;
 
 @Component({
-  selector: 'app-nav-toggle',
-  templateUrl: './nav-toggle.component.html',
-  styleUrls: ['./nav-toggle.component.less'],
+  selector: "app-nav-toggle",
+  templateUrl: "./nav-toggle.component.html",
+  styleUrls: ["./nav-toggle.component.less"]
 })
 export class NavToggleComponent implements OnInit {
-  @Output() toggled = new EventEmitter<Boolean>()
+  @Output() toggled = new EventEmitter<Boolean>();
 
-  private _open: boolean = false
+  private _open: boolean = false;
   @Input()
   get open() {
-    return this._open
+    return this._open;
   }
   set open(value) {
-    this._open = value
+    this._open = value;
   }
 
-  constructor() {}
+  constructor() {
+    NAV_TOGGLE = this;
+  }
   // idx = 0
   ngOnInit() {
     // interval(1000).subscribe(_ => {
@@ -29,7 +32,9 @@ export class NavToggleComponent implements OnInit {
   }
 
   toggleNav() {
-    this._open = !this._open
-    this.toggled.emit(this._open)
+    this._open = !this._open;
+    this.toggled.emit(this._open);
   }
+
+  color = "black";
 }

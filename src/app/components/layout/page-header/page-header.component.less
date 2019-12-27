@@ -1,9 +1,9 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 :host {
   display: block;
   position: fixed;
-  top: 0;
+  top: 80px;
   left: 0;
   // right: 0;
   width: 190px;
@@ -17,15 +17,15 @@
 }
 
 .titlebar {
-  position: absolute;
+  // position: absolute;
   pointer-events: none;
 
-  top: 0;
-  left: 0;
-  height: 50px;
-  width: 100%;
-  padding-left: 46px;
-  padding-top: 32px;
+  // top: 0;
+  // left: 0;
+  // height: 50px;
+  // width: 100%;
+  padding-left: 40px;
+  padding-top: 0px;
 
   overflow: visible;
   white-space: nowrap;
@@ -34,12 +34,17 @@
 }
 
 :host /deep/ h3 {
-  color: #bbb;
+  color: @color-highlight;
   margin-bottom: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
+  line-height: 2rem;
   margin-top: 0;
   margin-bottom: 0;
   text-transform: uppercase;
+}
+
+:host ::ng-deep h3 span {
+  font-weight: 600 !important;
 }
 :host /deep/ h2 {
   position: absolute;

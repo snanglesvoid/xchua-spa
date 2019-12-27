@@ -6,7 +6,7 @@
       </a>
     </h3>
     <div class="inner-grid">
-      <p *ngIf="fair.start && fair.end" class="date">
+      <p *ngIf="fair.start && fair.end" class="date gt-america">
         {{ fair | dateRange: lang.language }}
       </p>
       <ul class="artist-links">
@@ -20,8 +20,8 @@
       <p class="read-more">
         <a routerLink="/fair/{{ fair.slug }}">
           <app-snippet snippet="read-more"></app-snippet>
-          <i class="fa fa-angle-double-right"></i
-        ></a>
+          <!-- <i class="fa fa-angle-double-right"></i -->
+        </a>
       </p>
     </div>
     <!-- <div class="text-intro">
