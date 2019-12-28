@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+:host ::ng-deep .scrollpane-content {
+  max-width: 800px;
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+@media screen and (min-width: 1200px) {
+  :host ::ng-deep app-page-body {
+    margin-left: 0;
+  }
+}

@@ -1,4 +1,9 @@
 <div *ngIf="post">
+  <h2 class="post-title">
+    <a routerLink="/posts/{{ post.slug }}">{{ post.title }}</a>
+  </h2>
+  <p class="date gt-america">{{ post.publishedDate | date }}</p>
+
   <div class="post-img-container">
     <app-smart-image
       *ngIf="post.image && post.image.exists"
@@ -10,13 +15,9 @@
   </div>
 
   <div class="post-content">
-    <h2 class="post-title">
-      <a routerLink="/post/{{ post.slug }}">{{ post.title }}</a>
-    </h2>
-    <p style="margin: 0;">{{ post.publishedDate | date }}</p>
     <div style="position: relative;" [innerHtml]="post.content.brief"></div>
     <p class="read-more" *ngIf="post.content.extended">
-      <a routerLink="/post/{{ post.slug }}">
+      <a routerLink="/posts/{{ post.slug }}">
         <app-snippet snippet="read-more"></app-snippet>
       </a>
     </p>

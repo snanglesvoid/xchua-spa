@@ -2,14 +2,18 @@
   <div class="column left">
     <app-exhibitions-list-item
       *ngFor="let e of berlin; trackBy: trackByFn"
-      [exhibition]="e" class="inner-left"
+      [exhibition]="e"
+      class="inner-left"
+      [highlight]="highlight"
     >
     </app-exhibitions-list-item>
   </div>
   <div class="column right">
     <app-exhibitions-list-item
       *ngFor="let e of beijing; trackBy: trackByFn"
-      [exhibition]="e" class="inner-right"
+      [exhibition]="e"
+      class="inner-right"
+      [highlight]="highlight"
     >
     </app-exhibitions-list-item>
   </div>

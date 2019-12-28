@@ -1,24 +1,24 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-navlink',
-  templateUrl: './navlink.component.html',
-  styleUrls: ['./navlink.component.less']
+  selector: "app-navlink",
+  templateUrl: "./navlink.component.html",
+  styleUrls: ["./navlink.component.less"]
 })
 export class NavlinkComponent implements OnInit {
+  @Input() href: string;
+  @Input() section: string;
+  @Input() snippet: string;
 
-  @Input() href: string
-  @Input() section: string
-  @Input() snippet: string
+  @Output() clicked = new EventEmitter<any>();
 
-  @Output() clicked = new EventEmitter<any>()
+  @Input() active: boolean = false;
 
-  active: boolean = false
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  
+  linkClicked($event) {
+    this.clicked.emit($event);
   }
-
 }

@@ -26,18 +26,18 @@
   // opacity: 0;
 }
 
-body.desktop {
-  .slideshow-title {
-    a:hover {
-      opacity: 0.7;
-      text-decoration: none;
-    }
+.slideshow-title {
+  h2 a:hover {
+    // opacity: 0.7;
+    color: @color-highlight;
+    text-decoration: underline;
   }
 }
 
 .slideshow-title {
   position: absolute;
   opacity: 0;
+  z-index: 6;
 
   h2,
   h2 a,
@@ -175,4 +175,17 @@ h3 {
 
 app-parallax {
   transition: opacity 1s ease;
+}
+
+.numbers {
+  p {
+    color: @color-highlight;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 3rem;
+  }
+
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
 }

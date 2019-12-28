@@ -7,6 +7,7 @@ import {
   transition,
   keyframes
 } from "@angular/animations";
+import { Router } from "@angular/router";
 
 export var LOGO_COMPONENT: LogoComponent;
 
@@ -90,7 +91,7 @@ export class LogoComponent implements OnInit {
   private logoHover: boolean = false;
   private linksHover: boolean = false;
 
-  constructor() {
+  constructor(private router: Router) {
     LOGO_COMPONENT = this;
     (window as any).LOGO_COMPONENT = LOGO_COMPONENT;
   }
@@ -128,5 +129,7 @@ export class LogoComponent implements OnInit {
     this.animationState = this.logoHover || this.linksHover ? "big" : "small";
   }
 
-  logoClick() {}
+  logoClick() {
+    this.router.navigate(["/"]);
+  }
 }

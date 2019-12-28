@@ -57,15 +57,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     );
     this.updateData();
-    this._intervalSubscription = interval(8000).subscribe(x => {
-      this.slides.forEach(s => (s.animationState = "out"));
-      this.activeIndex = x;
-    });
+    // this._intervalSubscription = interval(8000).subscribe(x => {
+    //   this.slides.forEach(s => (s.animationState = "out"));
+    //   this.activeIndex = x;
+    // });
   }
 
   ngOnDestroy() {
     this._dataChangeSubscription.unsubscribe();
-    this._intervalSubscription.unsubscribe();
+    // this._intervalSubscription.unsubscribe();
     NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
   }
 
@@ -90,6 +90,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   '\n slide title: ',
     //   this.slides[event.index].title
     // )
+    this.slides.forEach(s => (s.animationState = "out"));
+    this.activeIndex = event.index;
     this.activeSlide = this.slides[event.index];
     this.activeSlide.animationState = "in";
     let color =

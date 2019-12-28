@@ -1,4 +1,4 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 app-page-header {
   pointer-events: all;
@@ -8,13 +8,40 @@ app-page-header {
     outline: none !important;
   }
 }
-body.desktop {
-  app-page-header {
-    h3:hover {
-      color: @color-logo-dot;
-    }
-  }
+
+h1 {
+  color: @color-highlight;
+  font-weight: 600;
 }
-:host /deep/ app-page-header .titlebar {
+
+.date {
+  text-transform: uppercase;
+  color: black;
+  font-size: 2rem;
+}
+
+:host ::ng-deep app-page-header .titlebar {
   pointer-events: all;
+}
+:host app-page-body {
+  text-align: center;
+}
+
+:host ::ng-deep .scrollpane-content {
+  max-width: 800px;
+  width: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+:host ::ng-deep app-smart-image {
+  width: 50%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+@media screen and (min-width: 1200px) {
+  :host ::ng-deep app-page-body {
+    margin-left: 0;
+  }
 }

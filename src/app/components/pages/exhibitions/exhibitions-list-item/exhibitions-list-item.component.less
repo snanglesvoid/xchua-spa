@@ -46,7 +46,7 @@ ul.artist-links {
       text-decoration: none;
       color: black;
       font-weight: 600;
-      transition: all 0.25s ease;
+      // transition: all 0.25s ease;
       font-size: 2rem;
       line-height: 1;
     }
@@ -125,6 +125,10 @@ ul.artist-links {
       color: black;
       font-weight: 600;
     }
+    a:hover {
+      text-decoration: underline;
+      color: @color-highlight;
+    }
   }
   p {
     font-size: 1.5rem;
@@ -159,4 +163,16 @@ ul.artist-links {
   :host /deep/ img {
     height: 440px;
   }
+}
+
+:host.highlight {
+  height: auto !important;
+  p.date,
+  p.date span {
+    color: @color-highlight;
+  }
+}
+
+:host.highlight ::ng-deep img {
+  height: 70vh;
 }

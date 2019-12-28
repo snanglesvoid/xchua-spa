@@ -1,36 +1,40 @@
 :host {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    .column {
-        width: 50%;
-    }
-    .column.left {
-
-    }
-    .column.right {
-
-    }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  .column {
+    width: 50%;
+  }
+  .column.left {
+  }
+  .column.right {
+  }
 }
 
-:host.single-col {
-    .row {
-        .column {
-            width: 100%;
-        }
+:host.single-col,
+:host.highlight {
+  .row {
+    .column {
+      width: 100%;
     }
+  }
+}
+
+:host.highlight {
+  app-exhibitions-list-item.inner-right {
+    text-align: left;
+  }
 }
 
 :host app-exhibitions-list-item.inner-right {
-    text-align: right;
+  text-align: right;
 }
 :host.single-col app-exhibitions-list-item.inner-right {
-    text-align: left;
+  text-align: left;
 }
-

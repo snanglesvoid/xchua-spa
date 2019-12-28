@@ -17,7 +17,7 @@
       </p>
       <ul class="artist-links">
         <li *ngFor="let artist of fair.artists">
-          <a routerLink="/artist/{{ artist.slug }}">
+          <a routerLink="/artists/{{ artist.slug }}">
             {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
@@ -45,7 +45,7 @@
       <app-html-block [content]="fair.text"></app-html-block>
     </div>
 
-    <div class="gallery" modalImages>
+    <!-- <div class="gallery" modalImages>
       <div class="container">
         <app-masonry #masonry>
           <div
@@ -65,6 +65,33 @@
           </div>
         </app-masonry>
       </div>
+    </div> -->
+    <div class="gallery" *ngIf="fair">
+      <!-- (slideChanged)="slideChanged($event)" -->
+      <app-slideshow
+        [images]="fair.pictures"
+        [currentSlide]="fair.pictures.length > 0 ? fair.pictures[0] : null"
+        imageFit="cover"
+        imageClass="slideshow-img"
+        animation="fade"
+        transitionDuration="600ms"
+        imageSize="1"
+        #slideshow
+      ></app-slideshow>
+      <!-- (imageLoadProgress)="progressChanged($event)" -->
+      <!-- <app-spinner
+        *ngIf="!progress.done"
+        [style.display]="!progress.done ? 'block' : 'none'"
+      >
+        <app-progress-bar [progress]="progress.ratio"></app-progress-bar>
+      </app-spinner> -->
+
+      <app-slideshow-cursor-controller
+        [slideshow]="slideshow"
+        *ngIf="fair.pictures.length && fair.pictures.length > 1"
+        [small]="isSmall"
+      >
+      </app-slideshow-cursor-controller>
     </div>
   </app-scrollpane>
 </app-page-body>

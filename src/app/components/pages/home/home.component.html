@@ -15,10 +15,15 @@
         (imageLoadProgress)="slideshowLoadingProgress($event)"
         imageClass="slideshow-img"
         imageSize="0"
+        #slideshow
       >
       </app-slideshow>
     </div>
-    <div class="layer" data-depth="0.2" style="pointer-events: all;">
+    <div class="layer" data-depth="0.0" style="pointer-events: all;">
+      <app-slideshow-cursor-controller
+        [slideshow]="slideshow"
+        *ngIf="slides"
+      ></app-slideshow-cursor-controller>
       <div>
         <div
           *ngFor="let slide of slides"
@@ -44,6 +49,15 @@
           </h3>
         </div>
       </div>
+
+      <div class="numbers" *ngIf="slides">
+        <p>{{ (activeIndex % slides.length) + 1 }}&frasl;{{ slides.length }}</p>
+      </div>
+
+      <app-slideshow-cursor-controller
+        [slideshow]="slideshow"
+        *ngIf="slides"
+      ></app-slideshow-cursor-controller>
     </div>
   </app-parallax>
   <app-spinner *ngIf="loading">

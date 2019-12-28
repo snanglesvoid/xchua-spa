@@ -23,7 +23,7 @@
           >
             <!-- appScrollTo [offset]="158"
             (scrolledTo)="artistMouseover(artist)" -->
-            <a routerLink="/artist/{{ artist.slug }}">
+            <a routerLink="/artists/{{ artist.slug }}">
               {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>
@@ -39,7 +39,7 @@
             (mouseenter)="artistMouseover(artist)"
             (press)="artistMouseover(artist)"
           >
-            <a routerLink="/artist/{{ artist.slug }}">
+            <a routerLink="/artists/{{ artist.slug }}">
               {{ artist.name.first + " " + artist.name.last }}
             </a>
           </li>

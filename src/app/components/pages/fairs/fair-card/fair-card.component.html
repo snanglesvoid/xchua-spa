@@ -1,7 +1,7 @@
 <div class="grid">
   <div class="description">
     <h3>
-      <a routerLink="/fair/{{ fair.slug }}">
+      <a routerLink="/fairs/{{ fair.slug }}">
         <app-typewriter [text]="fair.title"></app-typewriter>
       </a>
     </h3>
@@ -11,14 +11,14 @@
       </p>
       <ul class="artist-links">
         <li *ngFor="let artist of fair.artists">
-          <a routerLink="/artist/{{ artist.slug }}">
+          <a routerLink="/artists/{{ artist.slug }}">
             {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
       </ul>
 
       <p class="read-more">
-        <a routerLink="/fair/{{ fair.slug }}">
+        <a routerLink="/fairs/{{ fair.slug }}">
           <app-snippet snippet="read-more"></app-snippet>
           <!-- <i class="fa fa-angle-double-right"></i -->
         </a>

@@ -1,6 +1,6 @@
 <app-page-header>
   <h3 routerLink="/news">
-    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <!-- <i class="fa fa-angle-double-left"></i>&nbsp; -->
     <app-snippet snippet="news-title"></app-snippet>
     <!-- <app-typewriter [text]="postTitle()"></app-typewriter> -->
   </h3>
@@ -8,10 +8,10 @@
 
 <app-page-body>
   <app-scrollpane *ngIf="post">
-    <h1>{{ postTitle() }}</h1>
-    <p>{{ post.publishedDate | date }}</p>
     <app-smart-image [image]="post.image" size="0"></app-smart-image>
     <!-- <div *ngIf="post" [innerHtml]="post.content.extended"></div> -->
+    <h1>{{ postTitle() }}</h1>
+    <p class="date gt-america">{{ post.publishedDate | date }}</p>
     <app-html-block [content]="post.content.extended"></app-html-block>
   </app-scrollpane>
 </app-page-body>

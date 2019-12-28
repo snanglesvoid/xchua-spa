@@ -93,11 +93,10 @@ ul.artist-links {
 }
 
 .gallery {
-  background: rgba(255, 255, 255, 0.8);
-  padding-bottom: 100px;
-  -webkit-box-shadow: 0px -16px 37px 54px rgba(255, 255, 255, 0.8);
-  -moz-box-shadow: 0px -16px 37px 54px rgba(255, 255, 255, 0.8);
-  box-shadow: 0px -16px 37px 54px rgba(255, 255, 255, 0.8);
+  position: relative;
+  max-width: 600px;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 app-page-body {
@@ -158,4 +157,10 @@ app-page-body {
   :host ::ng-deep app-page-body {
     margin-left: 0;
   }
+}
+
+app-slideshow {
+  display: block;
+  width: 100%;
+  height: 400px;
 }

@@ -15,24 +15,28 @@
     href="/"
     section="home"
     snippet="menu-home"
+    [active]="section == 'home'"
   ></app-navlink>
   <app-navlink
     (clicked)="navToggled(false)"
     href="/artists"
     section="artists"
     snippet="menu-artists"
+    [active]="section == 'artists'"
   ></app-navlink>
   <app-navlink
     (clicked)="navToggled(false)"
     href="/exhibitions"
     section="exhibitions"
     snippet="menu-exhibitions"
+    [active]="section == 'exhibitions'"
   ></app-navlink>
   <app-navlink
     (clicked)="navToggled(false)"
     href="/fairs"
     section="fairs"
     snippet="menu-fairs"
+    [active]="section == 'fairs'"
   ></app-navlink>
   <!-- <app-navlink
     (clicked)="navToggled(false)"
@@ -45,18 +49,21 @@
     href="/news"
     section="news"
     snippet="menu-news"
+    [active]="section == 'news'"
   ></app-navlink>
   <app-navlink
     (clicked)="navToggled(false)"
     href="/about"
     section="aboout"
     snippet="menu-about"
+    [active]="section == 'about'"
   ></app-navlink>
   <app-navlink
     (clicked)="navToggled(false)"
     href="/contact"
     section="contact"
     snippet="menu-contact"
+    [active]="section == 'contact'"
   ></app-navlink>
   <!-- </app-scrollpane> -->
   <app-language-select></app-language-select>

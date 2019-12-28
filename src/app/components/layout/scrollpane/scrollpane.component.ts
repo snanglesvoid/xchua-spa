@@ -20,6 +20,7 @@ import {
   CanvasPolyline
 } from "src/app/services/svg-canvas.service";
 import { ClientService } from "src/app/services/client.service";
+import { CONTEXT } from "@angular/core/src/render3/interfaces/view";
 
 @Component({
   selector: "app-scrollpane",
@@ -126,7 +127,7 @@ export class ScrollpaneComponent
     private easingFunctions: EasingFunctionsService,
     private client: ClientService
   ) {
-    // ;(window as any).sp = this
+    (window as any).sp = this;
   }
 
   clientSizeChangeSubscription;
@@ -174,10 +175,13 @@ export class ScrollpaneComponent
         this.scrollToSection(s);
       });
     });
+    // this.sections.forEach(x => x.setActiveNoScroll(false));
+    // this.sections.find(x => !x.isEmpty).setActiveNoScroll(true);
     this.updateActiveSections = () => {
       let top = this.offsetTop;
       if (this.top) {
-        let section = this.sections.first;
+        // let section = this.sections.first;
+        let section = this.sections.find(x => !x.isEmpty);
         this.sections.forEach(s => s.setActiveNoScroll(s == section));
         return;
       }

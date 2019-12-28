@@ -1,6 +1,6 @@
 <app-page-header>
   <h3 routerLink="/exhibitions">
-    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <!-- <i class="fa fa-angle-double-left"></i>&nbsp; -->
     <app-snippet snippet="exhibitions-title"></app-snippet>
   </h3>
 </app-page-header>
@@ -13,14 +13,14 @@
         <app-typewriter [text]="exhibitionTitle"></app-typewriter>
       </h1>
       <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
-      <p *ngIf="exhibition.start && exhibition.end" class="date">
+      <p *ngIf="exhibition.start && exhibition.end" class="date gt-america">
         {{ exhibition | dateRange: lang.language }},&nbsp;
         {{ exhibition.location.location }}
       </p>
       <ul class="artist-links">
         <li *ngFor="let artist of exhibition.artists">
-          <a routerLink="/artist/{{ artist.slug }}">
-            {{ artist.name.first + ' ' + artist.name.last }}
+          <a routerLink="/artists/{{ artist.slug }}">
+            {{ artist.name.first + " " + artist.name.last }}
           </a>
         </li>
       </ul>
@@ -29,11 +29,7 @@
 
     <!-- appScrollTo [ratio]="0.99"
   (inViewport)="coverViewportChange($event)" -->
-    <div
-      class="cover-picture"
-      [class.stick]="coverStick"
-      [style.filter]="coverFilter"
-    >
+    <div class="cover-picture">
       <app-smart-image
         [image]="exhibition.coverPicture"
         size="0"
@@ -42,8 +38,10 @@
       </app-smart-image>
     </div>
 
-    <div class="cover-picture placeholder" *ngIf="coverStick"></div>
+    <!-- <div class="sticky-placeholder" stlye="height:100vh;"></div> -->
 
+    <!-- <div class="cover-picture placeholder" *ngIf="coverStick"></div> -->
+    <br /><br />
     <div
       class="text"
       appScrollTo

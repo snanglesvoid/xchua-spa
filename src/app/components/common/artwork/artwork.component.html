@@ -9,11 +9,11 @@
 <div class="caption" (click)="captionClicked()">
   <div class="inner" #caption>
     <p>
-      <a class="artist-link">
-        {{ artwork.artistName }}
-      </a>
-      {{ artwork.title }}
-      <span *ngIf="artwork.year">,&nbsp;{{ artwork.year }}</span>
+      <a class="artist-link">{{ artwork.artistName }}</a>
+      {{ artwork.title
+      }}<span *ngIf="artwork.year" class="gt-america"
+        >,&nbsp;{{ artwork.year }}</span
+      >
       <br />
       <!-- <span *ngIf="artwork.series &&"></span> -->
       <span *ngIf="artwork.description">

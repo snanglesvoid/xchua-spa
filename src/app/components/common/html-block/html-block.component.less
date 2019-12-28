@@ -54,10 +54,10 @@ body.desktop {
   left: 12px;
 }
 
-:host /deep/ p:first-child {
+:host ::ng-deep p:first-child {
   margin-top: 0;
 }
-:host /deep/ p {
+:host ::ng-deep p {
   margin-top: 2rem;
   margin-bottom: 0rem;
   line-height: 1.2;
@@ -86,10 +86,10 @@ body.desktop {
   color: @color-highlight;
 }
 
-:host /deep/ h3,
-:host /deep/ h3 em,
-:host /deep/ h3 a,
-:host /deep/ h3 strong {
+:host ::ng-deep h3,
+:host ::ng-deep h3 em,
+:host ::ng-deep h3 a,
+:host ::ng-deep h3 strong {
   font-size: 2.5rem;
   line-height: 1.2;
   margin-bottom: 0.5rem;
@@ -103,8 +103,13 @@ body.desktop {
   // font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
 }
 
-:host /deep/ h3 {
+:host ::ng-deep h3 {
   padding-top: 2rem;
   margin-top: 3rem;
   border-top: 1px solid @color-highlight;
+}
+
+:host ::ng-deep a {
+  border-bottom: 1px solid @color-highlight;
+  display: inline-block;
 }

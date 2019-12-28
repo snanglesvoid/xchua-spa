@@ -1,24 +1,56 @@
-@import '../../../../../styles/variables.less';
+@import "../../../../../styles/variables.less";
+
+:host ::ng-deep {
+  .post-content {
+    width: 61%;
+    padding-right: 1rem;
+    display: inline-block;
+    vertical-align: top;
+    p {
+      color: black !important;
+      margin-top: 0;
+
+      a {
+        color: black !important;
+        text-transform: uppercase;
+        border-bottom: 1px solid @color-highlight;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:hover span {
+        color: @color-highlight;
+      }
+    }
+  }
+}
 
 :host {
+  .post-title {
+    a {
+      text-decoration: none;
+      // font-weight: 300;
+      font-style: normal;
+      font-weight: 600;
+      color: @color-highlight;
+    }
+    max-width: 62%;
+    margin-bottom: 0;
+  }
+
+  p.date {
+    margin: 0;
+    color: black;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
   display: block;
   width: 100%;
   position: relative;
-  .post-content {
-    width: 49%;
-    display: inline-block;
-    vertical-align: top;
-    .post-title {
-      a {
-        text-decoration: none;
-        // font-weight: 300;
-        font-style: normal;
-      }
-      margin-bottom: 0;
-    }
-  }
+
   .post-img-container {
-    width: 50%;
+    width: 38%;
     display: inline-block;
   }
   min-height: 240px;

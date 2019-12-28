@@ -1,4 +1,4 @@
-<app-page-header>
+<!-- <app-page-header>
   <h3 *ngIf="data">
     <app-typewriter
       [text]="data.title"
@@ -7,10 +7,18 @@
     >
     </app-typewriter>
   </h3>
-</app-page-header>
+</app-page-header> -->
 
 <app-page-body>
   <app-scrollpane>
+    <h3 *ngIf="data">
+      <app-typewriter
+        [text]="data.title"
+        (finished)="writing = false"
+        interval="50"
+      >
+      </app-typewriter>
+    </h3>
     <div
       *ngIf="data"
       [@fadeIn]="true"

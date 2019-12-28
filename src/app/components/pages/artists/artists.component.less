@@ -61,11 +61,11 @@
 }
 
 :host /deep/ .picture-container {
-  width: calc(62% - 130px);
+  width: 50%;
   padding-top: 80px;
   padding-bottom: 10vh;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   right: 0;
   top: 0;
 }
@@ -74,11 +74,16 @@
   object-position: top;
 }
 
+:host ::ng-deep app-tabbar {
+  display: none;
+}
+
 .list-container {
   min-width: @list-width;
-  width: 38%;
+  width: 50%;
   max-height: 100%;
   padding-bottom: 30px;
+  padding-left: 4rem;
   .artists-list {
     font-size: 2rem;
     line-height: 2rem;
@@ -137,17 +142,30 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .list-container {
-    .artists-list {
-      li {
-        font-size: 2rem;
-        line-height: 3.5rem;
-      }
-    }
-  }
+  // .list-container {
+  //   .artists-list {
+  //     li {
+  //       font-size: 2rem;
+  //       line-height: 3.5rem;
+  //     }
+  //   }
+  // }
 }
 
 app-spinner,
 app-slideshow {
   transition: opacity 1s ease;
 }
+
+:host ::ng-deep app-page-body .page {
+  max-width: 900px;
+  // margin-left: 50%;
+  // transform: translateX(-50%);
+  width: 100%;
+}
+
+// @media screen and (min-width: 1600px) {
+//   :host ::ng-deep app-page-body {
+//     margin-left: 0;
+//   }
+// }

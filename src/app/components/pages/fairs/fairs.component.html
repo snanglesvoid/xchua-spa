@@ -3,13 +3,14 @@
 </app-page-header>
 
 <app-page-body>
-  <app-scrollpane style="max-width: 1200px;">
+  <app-scrollpane>
     <app-scrollpane-section #upcomingSection snippet="exhibitions-upcoming">
       <div class="fairs-list">
         <app-fair-card
           *ngFor="let fair of fairs | async | fairDateFilter: 'upcoming'"
           [fair]="fair"
           [showPictures]="false"
+          [highlight]="true"
         ></app-fair-card>
       </div>
     </app-scrollpane-section>
