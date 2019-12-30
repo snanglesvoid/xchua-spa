@@ -23,6 +23,7 @@ import { ScrollpaneComponent } from "src/app/components/layout/scrollpane/scroll
 import { ImageSize } from "src/app/components/common/smart-image/smart-image.component";
 import { LanguageService } from "src/app/services/language.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { ScrollpaneSectionComponent } from "../../layout/scrollpane-section/scrollpane-section.component";
 
 @Component({
   selector: "app-artist",
@@ -73,6 +74,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    (window as any).ac = this;
     this.artist$ = this.route.paramMap.pipe(
       delay(5),
       map(data => data.get("slug")),
@@ -113,7 +115,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
       tap(_ => (this.hasCvUpload = true)),
       map(x =>
         this.sanitizer.bypassSecurityTrustUrl(
-          `https:galerie-xchua.com/api/upload/${x.filename}`
+          `https://galerie-xchua.com/api/upload/${x.filename}`
         )
       )
     );
@@ -219,4 +221,19 @@ export class ArtistComponent implements OnInit, OnDestroy {
   }
 
   backgroundImageSize: ImageSize = ImageSize.FULLSCREEN;
+
+  @ViewChild("worksSection") worksSection: ScrollpaneSectionComponent;
+  @ViewChild("cvSection") cvSection: ScrollpaneSectionComponent;
+  @ViewChild("exhibitionsSection")
+  exhibitionsSection: ScrollpaneSectionComponent;
+
+  scrollToSeries(s: ArtworkSeries) {
+    let section = this.scrollpane.sections.find(x => x.snippet == s.title);
+    this.scrollpane.scrollToSection(section);
+  }
+
+  isSeriesActive(s: ArtworkSeries) {
+    let section = this.scrollpane.sections.find(x => x.snippet == s.title);
+    return section && section.active;
+  }
 }

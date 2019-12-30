@@ -5,6 +5,12 @@
   overflow: unset !important;
 }
 
+:host ::ng-deep app-html-block .content h3 {
+  margin-top: 0 !important;
+  border-top: 0;
+  padding-top: 0;
+}
+
 app-page-header {
   pointer-events: all;
   h3 {
@@ -15,10 +21,15 @@ app-page-header {
   }
 }
 
-.date {
+.sticky {
+  position: sticky;
+  top: 80px;
+}
+
+p.date {
   text-transform: uppercase;
   color: black;
-  font-size: 2rem;
+  font-size: 2rem !important;
 }
 
 :host ::ng-deep app-page-header .titlebar {
@@ -179,6 +190,7 @@ app-page-body {
 
 :host ::ng-deep .heading {
   text-align: center;
+  // margin-top: -2rem;
   h1.title {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -186,6 +198,10 @@ app-page-body {
     font-weight: 600;
     text-transform: uppercase;
     font-style: italic;
+    font-size: 4rem;
+    line-height: 4rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
     span {
       color: black;
       font-weight: 600;

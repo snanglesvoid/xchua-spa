@@ -108,7 +108,7 @@ export class ScrollpaneComponent
   }
 
   @Input() noPadding: boolean = false;
-  @Input() scrollOffset: number = 158;
+  @Input() scrollOffset: number = 80; //158;
 
   @Output() reachStart = new EventEmitter<any>();
   @Output() reachEnd = new EventEmitter<any>();
@@ -205,28 +205,29 @@ export class ScrollpaneComponent
     setTimeout(() => this.updateLines(), 50);
   }
 
-  scrollTo(y: number, callback = null, duration = 250) {
+  scrollTo(y: number, callback = null, duration = 500) {
     const diff = y - this.offsetTop;
     if (diff == 0) return;
     // const duration = Math.abs(diff * 2.5)
-    duration += Math.abs(0.5 * diff);
+    // duration += Math.abs(0.5 * diff);
     const startingY = this.offsetTop;
     let start;
 
-    let step = timestamp => {
-      start = !start ? timestamp : start;
-      const time = timestamp - start;
-      let ratio = this.easingFunctions.easeOutQuad(
-        Math.min(time / duration, 1)
-      );
-      this.offsetTop = startingY + diff * ratio;
-      if (time < duration) {
-        window.requestAnimationFrame(step);
-      } else {
-        if (callback) callback();
-      }
-    };
-    window.requestAnimationFrame(step);
+    this.offsetTop = y;
+    // let step = timestamp => {
+    //   start = !start ? timestamp : start;
+    //   const time = timestamp - start;
+    //   let ratio = this.easingFunctions.easeOutQuad(
+    //     Math.min(time / duration, 1)
+    //   );
+    //   this.offsetTop = startingY + diff * ratio;
+    //   if (time < duration) {
+    //     window.requestAnimationFrame(step);
+    //   } else {
+    //     if (callback) callback();
+    //   }
+    // };
+    // window.requestAnimationFrame(step);
   }
 
   scrollToSection(section: ScrollpaneSectionComponent, duration = 250) {

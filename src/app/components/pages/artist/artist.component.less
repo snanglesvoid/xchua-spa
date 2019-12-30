@@ -2,6 +2,13 @@
 
 @background-color: rgba(255, 255, 255, 0.95);
 
+:host ::ng-deep app-exhibitions-list {
+  max-width: 800px;
+}
+:host ::ng-deep app-exhibitions-list-item {
+  padding: 0 !important;
+}
+
 app-page-header {
   pointer-events: all;
   h3 {
@@ -17,34 +24,101 @@ body.desktop {
     }
   }
 }
-:host /deep/ app-page-header .titlebar {
+:host ::ng-deep app-page-header .titlebar {
   pointer-events: all;
 }
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: opacity 1s ease;
-  pointer-events: none;
-  filter: blur(6px);
-  z-index: -2;
+:host ::ng-deep app-tabbar {
+  display: none;
 }
 
-@media screen and (min-width: @size-md) {
+:host ::ng-deep .heading {
+  margin-top: -8rem;
+  padding-top: 6rem;
+  padding-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 1);
   h1.title {
-    position: absolute;
-    top: 80px;
+    color: black;
     font-size: 4rem;
+    line-height: 4rem;
     margin: 0;
-    transform: translateY(-100%);
-    margin-top: -26px;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: top;
+    span {
+      font-weight: 600;
+      color: black;
+    }
   }
-  .background {
-    left: 190px !important;
+
+  ul.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    margin-left: 8rem;
+    padding-top: 14px;
+    li {
+      display: inline-block;
+      text-transform: uppercase;
+      position: relative;
+      margin-right: 2rem;
+      vertical-align: top;
+      a {
+        display: inline-block;
+        color: black;
+      }
+      cursor: pointer;
+      ul.submenu {
+        padding-top: 0.5rem;
+        // position: absolute;
+        list-style-type: none;
+        display: none;
+        padding: 0;
+        margin: 0;
+        line-height: 1.25;
+        width: 0;
+
+        li {
+          display: block;
+          white-space: nowrap;
+          text-transform: capitalize;
+          font-size: 1.5rem;
+          width: auto;
+          // line-height: 1;
+
+          a {
+            border-bottom: 1px solid transparent;
+          }
+        }
+        li:hover a {
+          border-bottom: 1px solid @color-highlight;
+        }
+      }
+    }
+    li:hover a {
+      border-bottom: 1px solid @color-highlight;
+    }
+    li.active a {
+      border-bottom: 1px solid @color-highlight;
+    }
+    li:hover {
+      ul.submenu {
+        display: block;
+      }
+    }
   }
+}
+
+:host ::ng-deep .page {
+  overflow: unset !important;
+}
+
+app-html-block {
+  max-width: 800px;
 }
 
 .text {
@@ -163,4 +237,17 @@ body.desktop {
 
 app-html-block {
   padding-top: 24px !important;
+}
+
+@media screen and (min-width: 1600px) {
+  :host ::ng-deep app-page-body {
+    margin-left: 0;
+  }
+}
+
+:host ::ng-deep .scrollpane-content {
+  max-width: 1200px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }

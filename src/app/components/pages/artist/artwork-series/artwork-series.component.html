@@ -5,7 +5,7 @@
     <!-- {{ series.title == "more-series" ? "More" : series.title }} -->
     <app-snippet [snippet]="series.title"></app-snippet>
   </h1>
-  <div class="view-switcher">
+  <!-- <div class="view-switcher">
     <img
       src="assets/images/carousel.png"
       (click)="view = 0"
@@ -16,21 +16,19 @@
       (click)="view = 1"
       [class.active]="view == 1"
     />
-  </div>
+  </div> -->
 
   <div #container class="container">
     <!-- (mouseenter)="containerMouseEnter($event)"
     (mouseleave)="containerMouseLeave($event)"
     (mousemove)="containerMouseMove($event)" -->
-    <div
+    <!-- <div
       *ngIf="view == 0"
       class="left"
       (click)="masonry.previousPicture()"
     ></div>
-    <div *ngIf="view == 0" class="right" (click)="masonry.nextPicture()"></div>
-    <div *ngIf="view == 0">
-      <!-- <button (click)="masonry.previousPicture()">prev</button>
-      <button (click)="masonry.nextPicture()">next</button> -->
+    <div *ngIf="view == 0" class="right" (click)="masonry.nextPicture()"></div> -->
+    <!-- <div *ngIf="view == 0">
       <div *ngIf="activeWork" class="aw-caption">
         <p>
           <span style="font-size: 1.8rem; line-height:2.1rem; opacity: 0.7;">
@@ -46,18 +44,20 @@
           </span>
         </p>
       </div>
-    </div>
+    </div> -->
     <app-masonry
       #masonry
       [row]="view == 0"
       (centerItemIndex)="activeIndex($event)"
+      [gutter]="48"
     >
       <div #gridItem class="grid-item" *ngFor="let artwork of series.artworks">
         <app-artwork
           [artwork]="artwork"
           size="3"
-          [imageClass]="view == 0 ? 'carousel' : 'collage'"
+          imageClass="collage"
         ></app-artwork>
+        <!-- [imageClass]="view == 0 ? 'carousel' : 'collage'" -->
       </div>
     </app-masonry>
   </div>

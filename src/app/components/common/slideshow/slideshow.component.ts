@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   OnDestroy,
-  AfterContentInit
+  AfterContentInit,
+  ElementRef
 } from "@angular/core";
 import { CloudinaryImage } from "src/app/models/CloudinaryImage";
 import { animations } from "./slideshow.animations";
@@ -95,7 +96,7 @@ export class SlideshowComponent implements OnInit, AfterContentInit, OnDestroy {
     }
   }
 
-  constructor() {}
+  constructor(private el: ElementRef<HTMLDivElement>) {}
 
   ngOnInit() {
     this.setTransitionTimer();
@@ -138,6 +139,12 @@ export class SlideshowComponent implements OnInit, AfterContentInit, OnDestroy {
     } else {
       return { value: "void", params: { time: "0ms", easingFunction: "ease" } };
     }
+  }
+
+  getImageElement(index) {
+    let element = this.el.nativeElement;
+    let images = element.querySelectorAll("img");
+    return images[index];
   }
 
   state(value) {

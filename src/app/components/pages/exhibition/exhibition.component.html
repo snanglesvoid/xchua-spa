@@ -21,7 +21,7 @@
         </li>
       </ul>
       <p *ngIf="exhibition.start && exhibition.end" class="date gt-america">
-        {{ exhibition | dateRange: lang.language }}&nbsp;|&nbsp;
+        {{ exhibition | dateRange: lang.language }}&nbsp;|
         {{ exhibition.location.location }}
       </p>
     </div>
@@ -30,48 +30,54 @@
     <!-- <div class="sticky-placeholder"></div> -->
     <div class="grid">
       <div class="text">
-        <app-html-block [content]="exhibition.text"></app-html-block>
+        <app-html-block
+          [content]="exhibition.text"
+          [collapsed]="true"
+        ></app-html-block>
       </div>
       <div class="right">
-        <div class="cover-picture">
-          <app-smart-image
-            [image]="exhibition.coverPicture"
-            size="0"
-            imageClass="cover-picture-img"
-          >
-          </app-smart-image>
-        </div>
+        <div class="sticky">
+          <div class="cover-picture">
+            <app-smart-image
+              [image]="exhibition.coverPicture"
+              size="0"
+              imageClass="cover-picture-img"
+            >
+            </app-smart-image>
+          </div>
 
-        <div class="gallery" modalImages>
-          <div class="container">
-            <!-- appScrollTo [ratio]="0.01" -->
-            <!-- (inViewport)="picturesMasonryViewportChange($event)" -->
-            <!-- *ngIf="showPicturesMasonry" -->
-            <app-masonry #masonry>
-              <div
-                #gridItem
-                class="grid-item"
-                *ngFor="let image of exhibition.pictures"
-                appScrollTo
+          <div class="gallery" modalImages>
+            <div class="container">
+              <!-- appScrollTo [ratio]="0.01" -->
+              <!-- (inViewport)="picturesMasonryViewportChange($event)" -->
+              <!-- *ngIf="showPicturesMasonry" -->
+              <app-masonry #masonry>
+                <div
+                  #gridItem
+                  class="grid-item"
+                  *ngFor="let image of exhibition.pictures"
+                  class="in-view"
+                >
+                  <!-- appScrollTo
                 [ratio]="0.4"
                 (inViewport)="inViewportChange(image, $event)"
-                [class.in-view]="image.animationState < 1"
-              >
-                <app-smart-image
-                  [image]="image"
-                  size="3"
-                  imageClass="hover-fx"
-                ></app-smart-image>
-              </div>
-            </app-masonry>
+                [class.in-view]="image.animationState < 1" -->
+                  <app-smart-image
+                    [image]="image"
+                    size="3"
+                    imageClass="hover-fx"
+                  ></app-smart-image>
+                </div>
+              </app-masonry>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
+    <br /><br />
     <div class="gallery" modalImages>
       <div class="container">
-        <app-masonry #artworksMasonry>
+        <app-masonry #artworksMasonry [gutter]="48">
           <div
             #gridItem
             class="grid-item"

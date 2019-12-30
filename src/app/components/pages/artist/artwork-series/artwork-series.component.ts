@@ -5,45 +5,45 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef,
-} from '@angular/core'
+  ElementRef
+} from "@angular/core";
 // import { trigger, animate, style } from '@angular/animations'
-import { ArtworkSeries, Artwork } from 'src/app/models'
+import { ArtworkSeries, Artwork } from "src/app/models";
 import {
   CanvasPolyline,
-  SvgCanvasService,
-} from 'src/app/services/svg-canvas.service'
+  SvgCanvasService
+} from "src/app/services/svg-canvas.service";
 
 enum ViewState {
   CAROUSEL = 0,
-  COLLAGE = 1,
+  COLLAGE = 1
 }
 
 @Component({
-  selector: 'app-artwork-series',
-  templateUrl: './artwork-series.component.html',
-  styleUrls: ['./artwork-series.component.less'],
-  animations: [],
+  selector: "app-artwork-series",
+  templateUrl: "./artwork-series.component.html",
+  styleUrls: ["./artwork-series.component.less"],
+  animations: []
 })
 export class ArtworkSeriesComponent implements OnInit {
   constructor(private canvas: SvgCanvasService) {}
 
   ngOnInit() {
-    ;(window as any)['series_' + new Date().getTime()] = this
+    (window as any)["series_" + new Date().getTime()] = this;
   }
 
-  @Input() series: ArtworkSeries
+  @Input() series: ArtworkSeries;
 
-  @Output() loaded = new EventEmitter<any>()
-  @Output() bottomReached = new EventEmitter<boolean>()
+  @Output() loaded = new EventEmitter<any>();
+  @Output() bottomReached = new EventEmitter<boolean>();
 
   bottomViewport($event) {
-    this.bottomReached.emit($event == 0)
+    this.bottomReached.emit($event == 0);
   }
 
   activeIndex($event) {
-    console.log($event)
-    this.activeWork = this.series.artworks[$event]
+    console.log($event);
+    this.activeWork = this.series.artworks[$event];
   }
 
   // @ViewChild('container') container: ElementRef
@@ -88,7 +88,7 @@ export class ArtworkSeriesComponent implements OnInit {
   //   }
   // }
 
-  activeWork: Artwork
+  activeWork: Artwork;
 
-  view: ViewState = ViewState.CAROUSEL
+  view: ViewState = ViewState.COLLAGE;
 }

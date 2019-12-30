@@ -1,15 +1,10 @@
-<div
-  *ngIf="modal.isOpen"
-  class="modal-container"
-  [@fadeIn]="true"
-  (click)="modal.close()"
-  #container
->
+<div *ngIf="modal.isOpen" class="modal-container" [@fadeIn]="true" #container>
+  <!-- (click)="modal.close()" -->
   <div class="top">
     <app-slideshow
       [images]="modal.images"
       animation="fade"
-      transitionDuration="800ms"
+      transitionDuration="100ms"
       imageClass="modal-img"
       [imageSize]="imageSize"
       [currentSlide]="modal.active"
@@ -18,17 +13,21 @@
     >
     </app-slideshow>
 
-    <app-slideshow-controller
+    <app-slideshow-cursor-controller
       *ngIf="!modal.loading"
       [slideshow]="slideshow"
       (animationDone)="animationFinished()"
     >
-    </app-slideshow-controller>
+    </app-slideshow-cursor-controller>
   </div>
   <div class="bottom">
-    <a class="previous-image-button" (click)="previous($event)">&#10094;</a>
+    <!-- <a class="previous-image-button" (click)="previous($event)">&#10094;</a> -->
     <div class="caption" (click)="captionClicked($event)">
-      <div class="content" *ngIf="!modal.loading && artwork && animationDone">
+      <div
+        class="content"
+        *ngIf="!modal.loading && artwork"
+        [style.padding-left]="offsetLeft"
+      >
         <p>
           <!-- <app-typewriter
             class="artist-name"
@@ -36,11 +35,14 @@
             [interval]="50"
           >
           </app-typewriter> -->
-          {{ artistName }}
+          <span class="artist-name">
+            {{ artistName }}
+          </span>
           <br />
           <!-- <app-typewriter [text]="artworkTitleText" [interval]="40">
           </app-typewriter> -->
           {{ artworkTitleText }}
+          <span class="gt-america">{{ artworkYear }}</span>
           <br />
           <!-- <span *ngIf="artwork.series &&"></span> -->
           <!-- <app-typewriter [text]="artwork.description" [interval]="25">
@@ -53,6 +55,6 @@
         </p>
       </div>
     </div>
-    <a class="next-image-button" (click)="next($event)">&#10095;</a>
+    <!-- <a class="next-image-button" (click)="next($event)">&#10095;</a> -->
   </div>
 </div>

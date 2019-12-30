@@ -5,7 +5,8 @@ import {
   HostListener,
   ElementRef,
   ViewChild,
-  AfterContentInit
+  AfterContentInit,
+  HostBinding
 } from "@angular/core";
 import { EasingFunctionsService } from "src/app/services/easing-functions.service";
 import { observeProperty } from "src/app/lib/observeProperty";
@@ -19,8 +20,9 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 })
 export class HtmlBlockComponent implements OnInit, AfterContentInit {
   constructor(
-    private easingFunctions: EasingFunctionsService,
-    private sanitizer: DomSanitizer
+    // private easingFunctions: EasingFunctionsService,
+    private sanitizer: DomSanitizer,
+    private el: ElementRef
   ) {}
 
   ngOnInit() {
@@ -28,7 +30,7 @@ export class HtmlBlockComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    // setTimeout(() => this.onResize(), 100)
+    setTimeout(() => this.onResize(), 100);
   }
 
   @Input() content: string;
@@ -42,66 +44,77 @@ export class HtmlBlockComponent implements OnInit, AfterContentInit {
 
   @HostListener("window:resize")
   onResize() {
-    this.showPrev = this.showPagePrev();
-    this.showNext = this.showPageNext();
+    // this.showPrev = this.showPagePrev();
+    // this.showNext = this.showPageNext();
+    // let h = Math.ceil(
+    //   this.el.nativeElement.getBoundingClientRect().height + 80
+    // );
+    // console.log("h = ", h, "w.h = ", window.innerHeight);
+    // if (h < window.innerHeight) {
+    //   this.collapsed = false;
+    // }
   }
 
-  showPrev = false;
-  showNext = true;
+  @HostBinding("class.collapsed")
+  @Input()
+  collapsed = false;
 
-  scrollTo(x: number, callback = null) {
-    if (x < 0) x = 0;
-    const duration = 1000;
-    const el: HTMLElement = this.div.nativeElement;
-    const startingX = el.scrollLeft;
-    const diff = x - startingX;
-    let start;
+  // showPrev = false;
+  // showNext = true;
 
-    let step = timestamp => {
-      start = !start ? timestamp : start;
-      const time = timestamp - start;
-      const ratio = this.easingFunctions.easeInOutQuad(
-        Math.min(time / duration, 1)
-      );
-      el.scrollTo(startingX + diff * ratio, 0);
-      if (time < duration) {
-        window.requestAnimationFrame(step);
-      } else if (callback) {
-        callback();
-      }
-    };
-    window.requestAnimationFrame(step);
-  }
+  // scrollTo(x: number, callback = null) {
+  //   if (x < 0) x = 0;
+  //   const duration = 1000;
+  //   const el: HTMLElement = this.div.nativeElement;
+  //   const startingX = el.scrollLeft;
+  //   const diff = x - startingX;
+  //   let start;
 
-  get columnWidth() {
-    return this.div.nativeElement.getBoundingClientRect().width + 80;
-  }
-  nextPage() {
-    // console.log('next')
-    let columnWidth = this.columnWidth;
-    this.scrollTo(this.div.nativeElement.scrollLeft + columnWidth, () =>
-      this.onResize()
-    );
-  }
+  //   let step = timestamp => {
+  //     start = !start ? timestamp : start;
+  //     const time = timestamp - start;
+  //     const ratio = this.easingFunctions.easeInOutQuad(
+  //       Math.min(time / duration, 1)
+  //     );
+  //     el.scrollTo(startingX + diff * ratio, 0);
+  //     if (time < duration) {
+  //       window.requestAnimationFrame(step);
+  //     } else if (callback) {
+  //       callback();
+  //     }
+  //   };
+  //   window.requestAnimationFrame(step);
+  // }
 
-  previousPage() {
-    // console.log('prev')
-    let columnWidth = this.columnWidth;
-    this.scrollTo(this.div.nativeElement.scrollLeft - columnWidth, () =>
-      this.onResize()
-    );
-  }
+  // get columnWidth() {
+  //   return this.div.nativeElement.getBoundingClientRect().width + 80;
+  // }
+  // nextPage() {
+  //   // console.log('next')
+  //   let columnWidth = this.columnWidth;
+  //   this.scrollTo(this.div.nativeElement.scrollLeft + columnWidth, () =>
+  //     this.onResize()
+  //   );
+  // }
 
-  showPagePrev() {
-    return this.div.nativeElement.scrollLeft > 0;
-  }
+  // previousPage() {
+  //   // console.log('prev')
+  //   let columnWidth = this.columnWidth;
+  //   this.scrollTo(this.div.nativeElement.scrollLeft - columnWidth, () =>
+  //     this.onResize()
+  //   );
+  // }
 
-  showPageNext() {
-    let el: HTMLElement = this.div.nativeElement;
-    // console.log(el.scrollWidth - el.scrollLeft, '>', Math.ceil(el.getBoundingClientRect().width))
-    return (
-      Math.floor(el.scrollWidth - el.scrollLeft) - 10 >
-      Math.ceil(el.getBoundingClientRect().width)
-    );
-  }
+  // showPagePrev() {
+  //   return this.div.nativeElement.scrollLeft > 0;
+  // }
+
+  // showPageNext() {
+  //   let el: HTMLElement = this.div.nativeElement;
+  //   // console.log(el.scrollWidth - el.scrollLeft, '>', Math.ceil(el.getBoundingClientRect().width))
+  //   return (
+  //     Math.floor(el.scrollWidth - el.scrollLeft) - 10 >
+  //     Math.ceil(el.getBoundingClientRect().width)
+  //   );
+  // }
 }

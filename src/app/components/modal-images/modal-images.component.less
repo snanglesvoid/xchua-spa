@@ -1,4 +1,12 @@
-@import '../../../styles/variables.less';
+@import "../../../styles/variables.less";
+
+:host ::ng-deep .number {
+  top: calc(100% + 70px) !important;
+  right: 4rem !important;
+  p {
+    font-size: 3rem !important;
+  }
+}
 
 :host {
   position: fixed;
@@ -18,18 +26,17 @@
     .top {
       padding-top: 8px;
       width: 100%;
-      height: calc(100% - 140px);
+      height: calc(100% - 120px);
       text-align: center;
       position: relative;
     }
 
     .bottom {
-      height: 140px;
+      height: 120px;
       width: 100%;
       display: flex;
-      text-align: center !important;
 
-      color: @color-fg-dark !important;
+      color: white !important;
 
       a {
         text-decoration: none;
@@ -40,35 +47,26 @@
 
       .caption {
         padding-top: 8px;
-        width: 70%;
+        width: 100%;
         * {
-          color: @color-fg-dark !important;
+          color: white !important;
         }
         p {
-          text-align: right;
-          font-size: 1.2rem;
-          line-height: 1.5rem;
-        }
-        .artist-name {
-          // color: #fff;
+          // text-align: right;
+          // font-size: 1.2rem;
+          // line-height: 1.5rem;
           font-size: 1.5rem;
-          line-height: 2rem;
+          line-height: 1;
+          margin-top: 0;
         }
       }
     }
   }
 }
 
-body.dektop {
-  :host {
-    .modal-container {
-      .bottom {
-        a:hover {
-          color: #fff;
-        }
-      }
-    }
-  }
+.artist-name {
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .previous-image-button {

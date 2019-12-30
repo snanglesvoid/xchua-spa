@@ -74,20 +74,31 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
     let cols =
       width <= this.client.sizeSm
         ? 1
-        : width <= 780 // this.client.sizeMd
+        : width <= 781 // this.client.sizeMd
         ? 2
         : width <= this.client.sizeXl
         ? 3
         : 4;
 
-    let { itemWidth, gutter } =
-      cols == 1
-        ? { itemWidth: "100%", gutter: 12 }
-        : cols == 2
-        ? { itemWidth: "calc(50% - 6px)", gutter: 12 }
-        : cols == 3
-        ? { itemWidth: "calc(33% - 8px)", gutter: 12 }
-        : { itemWidth: "calc(25% - 9px)", gutter: 12 };
+    // let { itemWidth, gutter } =
+    //   cols == 1
+    //     ? { itemWidth: "100%", gutter: 12 }
+    //     : cols == 2
+    //     ? { itemWidth: "calc(50% - 6px)", gutter: 12 }
+    //     : cols == 3
+    //     ? { itemWidth: "calc(33% - 8px)", gutter: 12 }
+    //     : { itemWidth: "calc(25% - 9px)", gutter: 12 };
+    let gutter = this.gutter;
+    let itemWidth;
+    if (cols == 1) {
+      itemWidth = "100%";
+    } else if (cols == 2) {
+      itemWidth = `calc(50% - ${this.gutter / 2}px)`;
+    } else if (cols == 3) {
+      itemWidth = `calc(33% - ${(2 * this.gutter) / 3}px)`;
+    } else {
+      itemWidth = `calc(25% - ${(3 * this.gutter) / 4}px)`;
+    }
 
     this.gridItems.forEach(item => {
       let e: HTMLDivElement = item.nativeElement;
@@ -203,7 +214,7 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
   @ViewChild("grid") grid: ElementRef;
   @ContentChildren("gridItem") gridItems: QueryList<ElementRef>;
 
-  gutter: number = 12;
+  @Input() gutter: number = 12;
   @Input() transitionDuration: string = "0.5s";
 
   @HostBinding("class.row")

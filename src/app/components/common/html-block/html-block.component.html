@@ -1,14 +1,15 @@
-<div
-  class="content"
-  #container
-  [innerHtml]="safeContent"
-  (panleft)="nextPage()"
-  (panright)="previousPage()"
-></div>
+<div class="content" #container [innerHtml]="safeContent"></div>
 
-<a class="press-btn page-nav next" (click)="nextPage()" *ngIf="showNext">
+<!-- <div class="read-more">
+  <a (click)="collapsed = false">Read More</a>
+</div> -->
+
+<!-- (panleft)="nextPage()"
+  (panright)="previousPage()" -->
+
+<!-- <a class="press-btn page-nav next" (click)="nextPage()" *ngIf="showNext">
   <i class="fa fa-angle-double-right"></i>
 </a>
 <a class="press-btn page-nav prev" (click)="previousPage()" *ngIf="showPrev">
   <i class="fa fa-angle-double-left"></i>
-</a>
+</a> -->

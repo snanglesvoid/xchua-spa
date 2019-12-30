@@ -1,6 +1,6 @@
 <app-page-header>
   <h3 routerLink="/artists">
-    <i class="fa fa-angle-double-left"></i>&nbsp;
+    <!-- <i class="fa fa-angle-double-left"></i>&nbsp; -->
     <app-snippet snippet="artists-title"></app-snippet>
   </h3>
 </app-page-header>
@@ -9,28 +9,71 @@
   <app-scrollpane>
     <div class="heading">
       <h1 class="title">
-        <app-typewriter [text]="artistName$ | async"></app-typewriter>
+        <!-- <app-typewriter [text]="artistName$ | async"></app-typewriter> -->
+        <span>{{ artistName$ | async }}</span>
       </h1>
+      <ul class="menu">
+        <li
+          [class.active]="
+            worksSection && (worksSection.active || worksSection.childActive)
+          "
+        >
+          <a (click)="scrollpane.scrollToSection(worksSection)">{{
+            "artist-works" | snippet | async
+          }}</a>
+          <ul class="submenu" *ngIf="hasSeries">
+            <li
+              *ngFor="let s of series$ | async; let i = index"
+              (click)="scrollToSeries(s)"
+            >
+              <a>
+                <!-- <app-snippet [snippet]="s.title"></app-snippet> -->
+                {{ s.title | snippet | async }}
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- *ngIf="!cvSection.isEmpty" -->
+        <li
+          [class.active]="cvSection && cvSection.active"
+          (click)="scrollpane.scrollToSection(cvSection)"
+        >
+          <a>{{ "artist-biography" | snippet | async }}</a>
+        </li>
+        <li
+          *ngIf="hasExhibitions$ | async"
+          [class.active]="exhibitionsSection && exhibitionsSection.active"
+          (click)="scrollpane.scrollToSection(exhibitionsSection)"
+        >
+          <a>{{ "artist-exhibitions" | snippet | async }}</a>
+        </li>
+      </ul>
     </div>
 
-    <div style="height: 100px;"></div>
+    <!-- <div style="height: 100px;"></div> -->
 
-    <app-scrollpane-section snippet="artist-works" navlink="true">
-      <div class="series-list">
-        <div *ngFor="let s of series$ | async; let i = index">
-          <app-artwork-series [series]="s" (bottomReached)="showArrow($event)">
-          </app-artwork-series>
-          <hr />
-        </div>
-      </div>
+    <app-scrollpane-section snippet="artist-works" navlink="true" #worksSection>
+      <div class="series-list"></div>
     </app-scrollpane-section>
 
-    <!-- <div style="height: 100px;"></div> -->
+    <app-scrollpane-section
+      *ngFor="let s of series$ | async; let i = index"
+      [snippet]="s.title"
+      subsection="true"
+      [scrollToOffset]="0"
+    >
+      <app-artwork-series [series]="s" (bottomReached)="showArrow($event)">
+      </app-artwork-series>
+      <!-- <hr /> -->
+    </app-scrollpane-section>
+
+    <div style="height: 100px;"></div>
 
     <app-scrollpane-section
       #cvSection
       snippet="artist-biography"
       (activeChange)="sectionActiveChange(null, $event)"
+      [scrollToOffset]="-10"
     >
       <div class="text" [style.opacity]="1">
         <app-html-block [content]="biography$ | async"></app-html-block>
@@ -43,20 +86,21 @@
       </div>
     </app-scrollpane-section>
 
-    <div style="height: 100px;"></div>
-
     <app-scrollpane-section
-      #exhibitionSection
+      #exhibitionsSection
       snippet="artist-exhibitions"
       [navlink]="hasExhibitions$ | async"
       (activeChange)="sectionActiveChange(null, $event)"
+      [scrollToOffset]="100"
     >
+      <div style="height: 150px;" *ngIf="hasExhibitions$ | async"></div>
       <app-exhibitions-list
         [exhibitions]="exhibitions$ | async"
+        [highlight]="true"
       ></app-exhibitions-list>
-      <div style="height: 350px;"></div>
+      <div style="height: 350px;" *ngIf="hasExhibitions$ | async"></div>
     </app-scrollpane-section>
 
-    <div style="height: 50px;"></div>
+    <!-- <div style="height: 50px;"></div> -->
   </app-scrollpane>
 </app-page-body>
