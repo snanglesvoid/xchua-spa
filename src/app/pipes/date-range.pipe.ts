@@ -34,7 +34,7 @@ const mnsG = [
 function formatDateEnglish(date: Date, month = true, year: boolean = true) {
   if (year) {
     return month
-      ? `${mns[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`
+      ? `${mns[date.getMonth()]} ${date.getDate()} ${date.getFullYear()}`
       : `${date.getDate()}, ${date.getFullYear()}`;
   } else if (month) {
     return `${mns[date.getMonth()]} ${date.getDate()}`;
@@ -45,7 +45,7 @@ function formatDateEnglish(date: Date, month = true, year: boolean = true) {
 
 function formatDateGerman(date: Date, month = true, year: boolean = true) {
   if (year) {
-    return `${date.getDate()}. ${mnsG[date.getMonth()]}, ${date.getFullYear()}`;
+    return `${date.getDate()}.${mnsG[date.getMonth()]} ${date.getFullYear()}`;
   } else if (month) {
     return `${date.getDate()}.${mnsG[date.getMonth()]}`;
   } else {
@@ -80,17 +80,15 @@ export class DateRangePipe implements PipeTransform {
     } else if (start.getMonth() !== end.getMonth()) {
       switch (lang) {
         case "english":
-          return `${formatDateEnglish(
-            start,
-            true,
-            false
-          )} - ${formatDateEnglish(end)}`;
+          return `${formatDateEnglish(start, true, false)}-${formatDateEnglish(
+            end
+          )}`;
         case "german":
-          return `${formatDateGerman(start, true, false)} - ${formatDateGerman(
+          return `${formatDateGerman(start, true, false)}-${formatDateGerman(
             end
           )}`;
         case "chinese":
-          return `${formatDateChinese(start)} - ${formatDateChinese(
+          return `${formatDateChinese(start)}-${formatDateChinese(
             end,
             true,
             false
@@ -101,17 +99,17 @@ export class DateRangePipe implements PipeTransform {
     } else {
       switch (lang) {
         case "english":
-          return `${formatDateEnglish(
-            start,
-            true,
-            false
-          )} - ${formatDateEnglish(end, false, true)}`;
+          return `${formatDateEnglish(start, true, false)}-${formatDateEnglish(
+            end,
+            false,
+            true
+          )}`;
         case "german":
-          return `${formatDateGerman(start, false, false)} - ${formatDateGerman(
+          return `${formatDateGerman(start, false, false)}-${formatDateGerman(
             end
           )}`;
         case "chinese":
-          return `${formatDateChinese(start)} - ${formatDateChinese(
+          return `${formatDateChinese(start)}-${formatDateChinese(
             end,
             false,
             false

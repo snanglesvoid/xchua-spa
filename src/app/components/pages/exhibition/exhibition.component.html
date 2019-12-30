@@ -13,10 +13,6 @@
         <app-typewriter [text]="exhibitionTitle"></app-typewriter>
       </h1>
       <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
-      <p *ngIf="exhibition.start && exhibition.end" class="date gt-america">
-        {{ exhibition | dateRange: lang.language }},&nbsp;
-        {{ exhibition.location.location }}
-      </p>
       <ul class="artist-links">
         <li *ngFor="let artist of exhibition.artists">
           <a routerLink="/artists/{{ artist.slug }}">
@@ -24,61 +20,57 @@
           </a>
         </li>
       </ul>
+      <p *ngIf="exhibition.start && exhibition.end" class="date gt-america">
+        {{ exhibition | dateRange: lang.language }}&nbsp;|&nbsp;
+        {{ exhibition.location.location }}
+      </p>
     </div>
     <br />
 
-    <!-- appScrollTo [ratio]="0.99"
-  (inViewport)="coverViewportChange($event)" -->
-    <div class="cover-picture">
-      <app-smart-image
-        [image]="exhibition.coverPicture"
-        size="0"
-        imageClass="cover-picture-img"
-      >
-      </app-smart-image>
-    </div>
+    <!-- <div class="sticky-placeholder"></div> -->
+    <div class="grid">
+      <div class="text">
+        <app-html-block [content]="exhibition.text"></app-html-block>
+      </div>
+      <div class="right">
+        <div class="cover-picture">
+          <app-smart-image
+            [image]="exhibition.coverPicture"
+            size="0"
+            imageClass="cover-picture-img"
+          >
+          </app-smart-image>
+        </div>
 
-    <!-- <div class="sticky-placeholder" stlye="height:100vh;"></div> -->
-
-    <!-- <div class="cover-picture placeholder" *ngIf="coverStick"></div> -->
-    <br /><br />
-    <div
-      class="text"
-      appScrollTo
-      [ratio]="0.3"
-      (inViewport)="textViewportChange($event)"
-      [style.opacity]="textViewportState < 1 ? 1 : 0"
-    >
-      <app-html-block [content]="exhibition.text"></app-html-block>
+        <div class="gallery" modalImages>
+          <div class="container">
+            <!-- appScrollTo [ratio]="0.01" -->
+            <!-- (inViewport)="picturesMasonryViewportChange($event)" -->
+            <!-- *ngIf="showPicturesMasonry" -->
+            <app-masonry #masonry>
+              <div
+                #gridItem
+                class="grid-item"
+                *ngFor="let image of exhibition.pictures"
+                appScrollTo
+                [ratio]="0.4"
+                (inViewport)="inViewportChange(image, $event)"
+                [class.in-view]="image.animationState < 1"
+              >
+                <app-smart-image
+                  [image]="image"
+                  size="3"
+                  imageClass="hover-fx"
+                ></app-smart-image>
+              </div>
+            </app-masonry>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="gallery" modalImages>
       <div class="container">
-        <!-- appScrollTo [ratio]="0.01" -->
-        <!-- (inViewport)="picturesMasonryViewportChange($event)" -->
-        <!-- *ngIf="showPicturesMasonry" -->
-        <app-masonry #masonry>
-          <div
-            #gridItem
-            class="grid-item"
-            *ngFor="let image of exhibition.pictures"
-            appScrollTo
-            [ratio]="0.4"
-            (inViewport)="inViewportChange(image, $event)"
-            [class.in-view]="image.animationState < 1"
-          >
-            <app-smart-image
-              [image]="image"
-              size="3"
-              imageClass="hover-fx"
-            ></app-smart-image>
-          </div>
-        </app-masonry>
-      </div>
-      <div class="container">
-        <!-- appScrollTo [ratio]="0.01" -->
-        <!-- (inViewport)="artworksMasonryViewportChange($event)" -->
-        <!-- *ngIf="showArtworksMasonry" -->
         <app-masonry #artworksMasonry>
           <div
             #gridItem
