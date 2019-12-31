@@ -9,6 +9,10 @@
   color: white;
 }
 
+:host ::ng-deep app-page-header {
+  background: black;
+}
+
 body.desktop {
   ul.artist-links {
     li:hover {
@@ -165,14 +169,20 @@ ul.artist-links {
   }
 }
 
-@media screen and (max-width: @size-sm) {
-  :host {
-    padding: 0;
+// @media screen and (max-width: @size-sm) {
+//   :host {
+//     padding: 0;
 
-    .ex-description {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
+//   }
+// }
+
+@media screen and (max-width: @size-md) {
+  .ex-description {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  :host {
+    padding-top: 3rem;
   }
 }
 

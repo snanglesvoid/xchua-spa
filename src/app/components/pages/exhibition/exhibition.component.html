@@ -29,6 +29,14 @@
 
     <!-- <div class="sticky-placeholder"></div> -->
     <div class="grid">
+      <div class="mobile-cover">
+        <app-smart-image
+          [image]="exhibition.coverPicture"
+          size="0"
+          imageClass="cover-picture-img"
+        >
+        </app-smart-image>
+      </div>
       <div class="text">
         <app-html-block
           [content]="exhibition.text"

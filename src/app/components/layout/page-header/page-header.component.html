@@ -1,6 +1,8 @@
 <div class="titlebar">
   <ng-content></ng-content>
 </div>
-<div class="bottom-shadow">
-  
-</div>
+<div
+  class="bottom-shadow"
+  [style.box-shadow]="bottomShadow"
+  [style.background]="color"
+></div>

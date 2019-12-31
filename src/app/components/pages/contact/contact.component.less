@@ -1,3 +1,5 @@
+@import "../../../../styles/variables.less";
+
 :host {
   display: block;
   background: black;
@@ -26,5 +28,11 @@ hr {
 @media screen and (min-width: 800px) {
   :host ::ng-deep app-page-body {
     margin-left: 0;
+  }
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep app-page-header {
+    background: black !important;
   }
 }

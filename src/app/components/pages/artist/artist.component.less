@@ -189,52 +189,6 @@ app-html-block {
   }
 }
 
-@media screen and (min-width: @size-md) {
-  .artist-name {
-    margin-left: -190px;
-  }
-
-  .sidebar-background {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 190px;
-    background: @background-color;
-    transition: opacity 1s ease;
-  }
-
-  .sidebar-background {
-    position: fixed;
-    width: 190px;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    background: #fff;
-    z-index: -1;
-  }
-}
-
-:host /deep/ .background-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100% !important;
-  width: 100% !important;
-  max-height: unset !important;
-  max-width: unset !important;
-  object-fit: cover;
-}
-
-:host /deep/ app-tabbar {
-  opacity: 1;
-  transition: opacity 1s ease;
-}
-:host /deep/ .tabbar-hidden app-tabbar {
-  opacity: 0;
-}
-
 app-html-block {
   padding-top: 24px !important;
 }
@@ -250,4 +204,26 @@ app-html-block {
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep .heading {
+    padding-top: 5rem;
+    h1.title {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
+      padding-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul.menu {
+      padding-left: 1rem;
+      margin-left: 0;
+      display: block;
+      padding-top: 0;
+      li {
+        font-size: 1.5rem;
+      }
+    }
+  }
 }

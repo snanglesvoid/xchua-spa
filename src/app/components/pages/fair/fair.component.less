@@ -98,6 +98,7 @@ ul.artist-links {
   max-width: 600px;
   margin-left: 50%;
   transform: translateX(-50%);
+  width: 100%;
 }
 
 app-page-body {
@@ -164,4 +165,18 @@ app-slideshow {
   display: block;
   width: 100%;
   height: 400px;
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep app-page-header {
+    background: white !important;
+  }
+
+  .gallery {
+    height: 280px;
+  }
+
+  :host ::ng-deep .cover-picture-img {
+    max-width: 100vw;
+  }
 }

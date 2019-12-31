@@ -5,7 +5,8 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef
+  ElementRef,
+  HostListener
 } from "@angular/core";
 // import { trigger, animate, style } from '@angular/animations'
 import { ArtworkSeries, Artwork } from "src/app/models";
@@ -13,6 +14,7 @@ import {
   CanvasPolyline,
   SvgCanvasService
 } from "src/app/services/svg-canvas.service";
+import { ClientService } from "src/app/services/client.service";
 
 enum ViewState {
   CAROUSEL = 0,
@@ -26,10 +28,14 @@ enum ViewState {
   animations: []
 })
 export class ArtworkSeriesComponent implements OnInit {
-  constructor(private canvas: SvgCanvasService) {}
+  constructor(
+    private canvas: SvgCanvasService,
+    private client: ClientService
+  ) {}
 
   ngOnInit() {
     (window as any)["series_" + new Date().getTime()] = this;
+    // this.resize()
   }
 
   @Input() series: ArtworkSeries;
@@ -45,6 +51,8 @@ export class ArtworkSeriesComponent implements OnInit {
     console.log($event);
     this.activeWork = this.series.artworks[$event];
   }
+
+  gutter = 48;
 
   // @ViewChild('container') container: ElementRef
   // mouseX = 0

@@ -96,7 +96,7 @@
     margin-top: 0;
     position: sticky;
     z-index: 90;
-    top: 110px;
+    top: 109px;
     background: white;
     padding-bottom: 2rem;
     padding-top: 1rem;
@@ -141,5 +141,25 @@
     span {
       color: black;
     }
+  }
+}
+
+@media screen and (max-width: @size-md) {
+  .banner {
+    h1 {
+      top: 110px;
+      padding-left: 1rem;
+      font-size: 2rem;
+      padding-bottom: 0.5rem;
+      padding-top: 0.5rem;
+    }
+  }
+
+  :host /deep/ img.collage {
+    height: auto;
+    width: calc(100% - 2rem);
+    object-fit: contain;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }

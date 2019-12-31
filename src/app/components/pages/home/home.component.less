@@ -189,3 +189,46 @@ app-parallax {
   bottom: 4rem;
   right: 4rem;
 }
+
+@media screen and (max-width: @size-md) {
+  .numbers {
+    p {
+      font-size: 2.5rem;
+    }
+    right: 2rem;
+    bottom: unset;
+    top: 2rem;
+  }
+
+  .slideshow-title {
+    h3.subtitle {
+      font-size: 1.5rem;
+    }
+
+    h2.title {
+      font-size: 3rem;
+    }
+    h3.caption {
+      font-size: 2rem;
+    }
+  }
+
+  .slideshow-title.left {
+    bottom: 6rem;
+    left: 2rem;
+  }
+  .slideshow-title.right {
+    bottom: 6rem;
+    right: 2rem;
+  }
+  .slideshow-title.top {
+    top: 8rem;
+    right: 2rem;
+  }
+  .slideshow-title.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+}

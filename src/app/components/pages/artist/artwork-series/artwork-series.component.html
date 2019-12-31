@@ -49,7 +49,7 @@
       #masonry
       [row]="view == 0"
       (centerItemIndex)="activeIndex($event)"
-      [gutter]="48"
+      [gutter]="gutter"
     >
       <div #gridItem class="grid-item" *ngFor="let artwork of series.artworks">
         <app-artwork

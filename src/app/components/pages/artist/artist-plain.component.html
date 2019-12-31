@@ -19,7 +19,7 @@
           "
         >
           <a (click)="scrollpane.scrollToSection(worksSection)">{{
-            "artist-works" | snippet | async
+            "artist-works" | snippet: lang.language | async
           }}</a>
           <ul class="submenu" *ngIf="hasSeries">
             <li
@@ -28,7 +28,7 @@
             >
               <a>
                 <!-- <app-snippet [snippet]="s.title"></app-snippet> -->
-                {{ s.title | snippet | async }}
+                {{ s.title | snippet: lang.language | async }}
               </a>
             </li>
           </ul>
@@ -38,14 +38,14 @@
           [class.active]="cvSection && cvSection.active"
           (click)="scrollpane.scrollToSection(cvSection)"
         >
-          <a>{{ "artist-biography" | snippet | async }}</a>
+          <a>{{ "artist-biography" | snippet: lang.language | async }}</a>
         </li>
         <li
           *ngIf="hasExhibitions$ | async"
           [class.active]="exhibitionsSection && exhibitionsSection.active"
           (click)="scrollpane.scrollToSection(exhibitionsSection)"
         >
-          <a>{{ "artist-exhibitions" | snippet | async }}</a>
+          <a>{{ "artist-exhibitions" | snippet: lang.language | async }}</a>
         </li>
       </ul>
     </div>

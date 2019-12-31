@@ -78,3 +78,23 @@
     padding-left: 16px;
   }
 }
+
+@media screen and (max-width: @size-sm) {
+  :host {
+    .post-title {
+      max-width: calc(100% - 2rem);
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .date {
+      padding-left: 1rem;
+    }
+
+    .post-img-container {
+      width: 100%;
+    }
+    .post-content {
+      width: 100%;
+    }
+  }
+}

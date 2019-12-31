@@ -1,51 +1,40 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 :host {
-    display: block;
-    margin-left: @mg-left;
-    right: 0;
-    box-sizing: border-box;
-    z-index: -1;
+  display: block;
+  margin-left: @mg-left;
+  right: 0;
+  box-sizing: border-box;
+  z-index: -1;
 }
 
 .page {
-    min-height: 100vh;
-    padding-top: 0;
-    padding-right: 0;
-    padding-left: 0;
-    font-size: 2rem;
-    line-height: 2.5rem;
-    position: relative;
-    overflow: hidden;
-    a {
-		text-decoration: underline;
-	}
+  min-height: 100vh;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  a {
+    text-decoration: underline;
+  }
 }
 
 @media screen and (max-width: @size-md) {
-    .page {
-        // padding-left: 8px;
-        // padding-right: 8px;
-        // padding-top: 8px;
-    }
-
-    :host {
-        // top: @header-height-md;
-        // left: 0;
-        margin-top: @header-height-md;
-        margin-left: 0;
-    }
+  :host {
+    margin-top: 0; //@header-height-sm;
+    margin-left: 0;
+    padding-top: 6rem;
+  }
 }
 
-@media screen and (max-width: @size-sm) {
-    :host {
-        margin-top: @header-height-sm;
-        margin-left: 0;
-    }
-}
-
-@media screen and (min-width: @size-lg) {
-//    :host {
-//         padding-right: 100px;
-//     }
+@media screen and (max-width: @size-md) {
+  .page {
+    padding-top: 2rem;
+  }
+  //    :host {
+  //         padding-right: 100px;
+  //     }
 }

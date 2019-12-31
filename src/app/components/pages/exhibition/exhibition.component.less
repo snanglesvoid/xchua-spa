@@ -173,21 +173,6 @@ app-page-body {
   }
 }
 
-@media screen and (max-width: @size-sm) {
-  :host {
-    padding: 0;
-
-    .ex-description {
-      padding-left: 15px;
-      padding-right: 15px;
-    }
-
-    .heading {
-      padding-left: 12px;
-    }
-  }
-}
-
 :host ::ng-deep .heading {
   text-align: center;
   // margin-top: -2rem;
@@ -224,4 +209,65 @@ app-page-body {
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep app-page-header {
+    background: white !important;
+  }
+}
+
+.mobile-cover {
+  display: none;
+}
+
+@media screen and (max-width: @size-sm) {
+  :host {
+    padding: 0;
+
+    .ex-description {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .heading {
+      padding-left: 12px;
+    }
+  }
+
+  .sticky {
+    position: relative;
+    top: 0;
+  }
+
+  .grid {
+    grid-template-rows: auto;
+    grid-template-columns: 100%;
+
+    .mobile-cover {
+      display: block;
+      grid-row: 1;
+      grid-column: 1;
+      margin-bottom: 1rem;
+    }
+
+    .text {
+      grid-column: 1;
+      grid-row: 2;
+      // height: 200vh;
+
+      app-html-block {
+        position: relative;
+        top: 0px;
+      }
+    }
+    .right {
+      grid-row: 3;
+      grid-column: 1;
+
+      .cover-picture {
+        display: none;
+      }
+    }
+  }
 }
