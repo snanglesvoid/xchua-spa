@@ -7,32 +7,34 @@ import { DeviceDetectorService, DeviceInfo } from "ngx-device-detector";
 export class ClientService {
   constructor(private deviceDetector: DeviceDetectorService) {
     this.setup();
+    (window as any).clientService = this;
   }
 
   private setup() {
     this._deviceInfo = this.deviceDetector.getDeviceInfo();
     this._fullScreenImageResolution = this.isMobile
-      ? { width: 640, height: 1280 }
-      : this.screenMax <= 640
-      ? { width: 640, height: 1280 }
-      : this.screenMax <= 1024
-      ? { width: 1024, height: 1280 }
-      : this.screenMax <= 1280
-      ? { width: 1280, height: 1280 }
-      : this.screenMax <= 1600
-      ? { width: 1600, height: 1600 }
-      : this.screenMax <= 2048
       ? { width: 2048, height: 2048 }
-      : this.screenMax <= 2560
-      ? { width: 2560, height: 2560 }
-      : true
-      ? { width: 3840, height: 3840 }
-      : null;
+      : { width: 3840, height: 3840 };
+    // : this.screenMax <= 640
+    // ? { width: 640, height: 1280 }
+    // : this.screenMax <= 1024
+    // ? { width: 1024, height: 1280 }
+    // : this.screenMax <= 1280
+    // ? { width: 1280, height: 1280 }
+    // : this.screenMax <= 1600
+    // ? { width: 1600, height: 1600 }
+    // : this.screenMax <= 2048
+    // ? { width: 2048, height: 2048 }
+    // : this.screenMax <= 2560
+    // ? { width: 2560, height: 2560 }
+    // : true
+    // ? { width: 3840, height: 3840 }
+    // : null;
 
     this._largeImageResolution = this.isMobile
-      ? { width: 640, height: 1024 }
+      ? { width: 1024, height: 1024 }
       : this.screenMax <= 640
-      ? { width: 640, height: 1024 }
+      ? { width: 1024, height: 1024 }
       : this.screenMax <= 1024
       ? { width: 1024, height: 1024 }
       : this.screenMax <= 1280
@@ -48,39 +50,39 @@ export class ClientService {
       : null;
 
     this._halfScreenImageResolution = this.isMobile
-      ? { width: 640, height: 1024 }
-      : this.screenMax <= 640
-      ? { width: 640, height: 1024 }
-      : this.screenMax <= 1024
-      ? { width: 640, height: 1024 }
-      : this.screenMax <= 1280
-      ? { width: 640, height: 1024 }
-      : this.screenMax <= 1600
-      ? { width: 840, height: 1024 }
-      : this.screenMax <= 2048
       ? { width: 1024, height: 1024 }
+      : this.screenMax <= 640
+      ? { width: 1024, height: 1024 }
+      : this.screenMax <= 1024
+      ? { width: 1024, height: 1024 }
+      : this.screenMax <= 1280
+      ? { width: 1024, height: 1024 }
+      : this.screenMax <= 1600
+      ? { width: 1024, height: 1024 }
+      : this.screenMax <= 2048
+      ? { width: 1280, height: 1280 }
       : this.screenMax <= 2560
-      ? { width: 1280, height: 1024 }
+      ? { width: 1280, height: 1280 }
       : true
       ? { width: 2048, height: 1200 }
       : null;
 
     this._smallImageResolution = this.isMobile
-      ? { width: 320, height: 640 }
+      ? { width: 640, height: 640 }
       : this.screenMax <= 640
-      ? { width: 320, height: 640 }
+      ? { width: 640, height: 640 }
       : this.screenMax <= 1024
-      ? { width: 320, height: 640 }
+      ? { width: 640, height: 640 }
       : this.screenMax <= 1280
-      ? { width: 480, height: 960 }
+      ? { width: 960, height: 960 }
       : this.screenMax <= 1600
-      ? { width: 640, height: 1280 }
+      ? { width: 1280, height: 1280 }
       : this.screenMax <= 2048
-      ? { width: 640, height: 1280 }
+      ? { width: 1280, height: 1280 }
       : this.screenMax <= 2560
-      ? { width: 800, height: 1280 }
+      ? { width: 1280, height: 1280 }
       : true
-      ? { width: 1280, height: 1600 }
+      ? { width: 1600, height: 1600 }
       : null;
 
     const resize = () => {

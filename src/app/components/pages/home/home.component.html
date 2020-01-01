@@ -14,7 +14,7 @@
         (contentRendered)="slideshowContentRendered($event)"
         (imageLoadProgress)="slideshowLoadingProgress($event)"
         imageClass="slideshow-img"
-        imageSize="0"
+        [imageSize]="0"
         #slideshow
       >
       </app-slideshow>
@@ -51,6 +51,7 @@
         <h3
           class="current-exhibition"
           *ngIf="activeSlide && activeSlide.currentExhibition"
+          [style.color]="color"
         >
           <app-snippet snippet="current-exhibition"></app-snippet>
         </h3>

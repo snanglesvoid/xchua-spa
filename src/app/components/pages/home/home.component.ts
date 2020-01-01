@@ -101,8 +101,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         ? "black"
         : this.activeSlide.customColor;
     console.log(this.activeSlide, color);
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = color;
+    this.color = NAV_TOGGLE.color = LOGO_COMPONENT.textColor = color;
   }
+
+  color = "black";
 
   classesFor(slide: FrontPageImage) {
     let res: any = {};
