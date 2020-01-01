@@ -6,7 +6,7 @@
   >
     <div class="layer" data-depth="0.0">
       <app-slideshow
-        slideDuration="8000"
+        slideDuration="80000"
         [images]="images"
         animation="fade"
         transitionDuration="800ms"
@@ -48,6 +48,12 @@
             {{ slide.caption }}
           </h3>
         </div>
+        <h3
+          class="current-exhibition"
+          *ngIf="activeSlide && activeSlide.currentExhibition"
+        >
+          <app-snippet snippet="current-exhibition"></app-snippet>
+        </h3>
       </div>
 
       <div class="numbers" *ngIf="slides">

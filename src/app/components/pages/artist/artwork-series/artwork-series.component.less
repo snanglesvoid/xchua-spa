@@ -20,8 +20,8 @@
   // text-align: right;
 
   p {
-    line-height: 1.6rem;
-    font-size: 1.4rem;
+    line-height: 1.1;
+    font-size: 1.3rem;
     margin: 0;
     max-width: 180px;
     // white-space: nowrap;
@@ -37,8 +37,6 @@
   object-fit: contain;
 }
 :host /deep/ img.collage {
-  height: unset;
-  width: unset;
   object-fit: contain;
 }
 
@@ -96,10 +94,11 @@
     margin-top: 0;
     position: sticky;
     z-index: 90;
-    top: 109px;
+    top: 9.5rem; //96px;
     background: white;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     padding-top: 1rem;
+    font-size: 2rem;
 
     // position: absolute;
     // right: 16px;
@@ -147,7 +146,7 @@
 @media screen and (max-width: @size-md) {
   .banner {
     h1 {
-      top: 110px;
+      top: 10.6rem;
       padding-left: 1rem;
       font-size: 2rem;
       padding-bottom: 0.5rem;

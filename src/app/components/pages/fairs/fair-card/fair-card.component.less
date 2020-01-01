@@ -60,10 +60,14 @@
   }
 }
 
-:host /deep/ app-smart-image {
+:host ::ng-deep ul.artist-links li a {
+  font-weight: 600;
+}
+
+:host ::ng-deep app-smart-image {
   opacity: 0;
 }
-:host /deep/ .slideshow-img {
+:host ::ng-deep .slideshow-img {
   height: 100%;
   // object-position: top;
   // opacity: 0;
@@ -84,6 +88,7 @@
     margin-top: 0;
     margin-bottom: 0.5rem;
     text-transform: uppercasex;
+    font-size: 2rem;
   }
 
   .text-intro {
@@ -101,7 +106,7 @@
 
   .read-more {
     margin: 0;
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     text-transform: uppercase;
     a {
       text-decoration: none;
@@ -154,12 +159,12 @@ ul.artist-links {
     text-decoration: none;
     color: white;
     // transition: all 0.25s ease;
-    font-size: 1.8rem;
+    font-size: 2rem;
     a {
       text-decoration: none;
       color: white;
       // transition: all 0.25s ease;
-      font-size: 1.8rem;
+      font-size: 2rem;
       text-transform: uppercase;
     }
   }
@@ -184,9 +189,9 @@ ul.artist-links {
 
 ul.artist-links {
   li:hover {
-    color: @color-highlight;
+    // color: @color-highlight;
     a {
-      color: @color-highlight;
+      color: white;
       text-decoration: underline;
     }
   }
@@ -195,7 +200,6 @@ ul.artist-links {
 p.date {
   margin: 0;
   color: #555;
-  text-transform: uppercase;
 }
 
 :host.highlight p.date {

@@ -2,6 +2,7 @@
 
 :host ::ng-deep {
   .post-content {
+    display: none;
     width: 61%;
     padding-right: 1rem;
     display: inline-block;
@@ -26,22 +27,22 @@
 }
 
 :host {
+  text-align: center;
   .post-title {
     a {
       text-decoration: none;
       // font-weight: 300;
       font-style: normal;
       font-weight: 600;
-      color: @color-highlight;
+      color: black; // @color-highlight;
     }
-    max-width: 62%;
+    // max-width: 62%;
     margin-bottom: 0;
   }
 
   p.date {
     margin: 0;
     color: black;
-    text-transform: uppercase;
     margin-bottom: 1rem;
   }
 
@@ -50,20 +51,23 @@
   position: relative;
 
   .post-img-container {
-    width: 38%;
+    width: 100%;
+    max-width: 300px;
+    // margin-left: 50%;
+    // transform: translateX(-50%);
     display: inline-block;
   }
   min-height: 240px;
   padding-top: 32px;
   padding-bottom: 12px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid lightgray;
 }
 
 :host /deep/ .post-img img {
   width: 100%;
   max-height: 480px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  // margin-left: 50%;
+  // transform: translateX(-50%);
   object-fit: cover;
 }
 

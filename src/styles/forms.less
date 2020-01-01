@@ -13,7 +13,7 @@ label {
   width: 100%;
   height: 34px;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 1.1rem; //14px;
   line-height: 1.42857143;
   color: #fff;
   background-color: transparent;
@@ -83,7 +83,7 @@ button {
     border-left: none;
     border-right: none;
     border-top: none;
-    font-size: 16px;
+    font-size: 1.1rem; //16px;
   }
 
   .form-control:focus {
@@ -98,7 +98,9 @@ button {
     width: 82px;
     vertical-align: top;
     margin-top: 7px;
-    font-size: 16px;
+    // font-size: 16px;
+    font-size: 1.1rem;
+    line-height: 25px;
     text-transform: uppercase;
 
     span {
@@ -175,9 +177,11 @@ button {
       opacity: 0;
     }
   }
-  .checkmark-container:hover {
-    span.checkmark {
-      background: @color-highlight;
+  @media (hover: hover) {
+    .checkmark-container:hover {
+      span.checkmark {
+        background: @color-highlight;
+      }
     }
   }
 
@@ -186,7 +190,7 @@ button {
   }
   text-align: right;
   span {
-    font-size: 16px;
+    font-size: 1.1rem; //16px;
   }
 }
 
@@ -199,23 +203,25 @@ button {
     border-bottom: 1px solid @color-highlight;
     text-transform: uppercase;
     transition: all 0.4s ease;
-    font-size: 2rem;
+    font-size: 1.1rem; //2rem;
     padding: 0;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 8px;
+    padding-right: 6px;
+    padding-left: 6px;
+    padding-bottom: 0px;
     font-weight: 400;
     letter-spacing: 0;
     text-align: center;
     float: right;
   }
-  .btn.btn-primary:hover {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    color: #fff;
-    font-weight: 400;
-    border-width: 2px;
+  @media (hover: hover) {
+    .btn.btn-primary:hover {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      // color: #fff;
+      // font-weight: 400;
+      // border-width: 2px;
+    }
   }
 }
 

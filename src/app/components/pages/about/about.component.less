@@ -6,12 +6,12 @@
   padding-left: 0;
   padding-right: 0;
   h3 {
-    // font-size: 4.5rem;
     transition: all 0.5s ease;
     color: @color-highlight;
     text-transform: uppercase;
     margin-bottom: 0;
     margin-top: 1rem;
+    font-weight: 600;
   }
   h3:first-child {
     float: left;
@@ -26,7 +26,6 @@
 }
 
 .pictures {
-  width: 100%;
   overflow: hidden;
   margin-top: 2rem;
   position: relative;
@@ -91,6 +90,11 @@
     transform: translateX(0);
   }
 }
+
+:host ::ng-deep .addresses p {
+  line-height: 1.2;
+  font-size: 1.1rem;
+}
 .addresses {
   display: grid;
   grid-template-rows: minmax(100px, auto);
@@ -102,11 +106,13 @@
   }
   .left {
     grid-column: 1;
+    grid-row: 1;
   }
   .right {
     grid-column: 1;
+    grid-row: 1;
     text-align: right;
-    transform: translateY(-100%);
+    // transform: translateY(-100%);
   }
 
   .inactive,
@@ -128,7 +134,7 @@
 }
 
 .spaces-container {
-  max-width: 800px;
+  max-width: 600px;
   width: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -175,6 +181,10 @@
   .addresses {
     padding-left: 8px;
     padding-right: 8px;
+  }
+
+  .pictures {
+    width: 100%;
   }
 
   :host ::ng-deep app-html-block .content {

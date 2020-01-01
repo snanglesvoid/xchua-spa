@@ -30,8 +30,8 @@ ul.artist-links {
   display: block;
   padding-left: 0;
   margin: 0;
-  margin-bottom: 0;
-  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  margin-top: -0.5rem;
   // margin-bottom: 12px;
   li {
     list-style-type: none;
@@ -109,36 +109,35 @@ ul.artist-links {
     // font-style: italic;
     text-transform: uppercase;
     font-size: 2rem;
+    line-height: 1;
     margin-bottom: 0;
-    font-style: italic;
+    // font-style: italic;
     cursor: pointer;
     white-space: nowrap;
-    overflow-x: hidden;
-    overflow-y: visible;
-    text-overflow: ellipsis;
-    padding-bottom: 1rem;
-    margin-bottom: -1rem;
+    margin-bottom: 0;
 
     a {
       text-decoration: none;
       // font-weight: 300;
       color: black;
       font-weight: 600;
+      display: inline-block;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
     a:hover {
       text-decoration: underline;
-      color: @color-highlight;
+      //color: @color-highlight;
     }
   }
   p {
-    font-size: 1.5rem;
-    margin-top: 0.75rem;
+    // font-size: 1.5rem;
+    margin-top: 0;
     margin-bottom: 0;
     // font-weight: 400;
   }
   p.date {
-    // font-style: italic;
-    text-transform: uppercase;
     color: black;
     line-height: 1;
     margin-top: 0;
@@ -150,8 +149,8 @@ ul.artist-links {
     padding: 0;
 
     .ex-description {
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 }

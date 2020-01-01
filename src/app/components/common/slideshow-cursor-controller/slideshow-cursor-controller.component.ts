@@ -27,14 +27,14 @@ export class SlideshowCursorControllerComponent implements OnInit {
 
   ngOnInit() {}
 
-  @HostListener("panLeft")
+  @HostListener("panleft")
   next() {
-    // console.log('next', this.slideshow)
+    // console.log("next", this.slideshow);
     this.slideshow.nextSlide();
   }
-  @HostListener("panRight")
+  @HostListener("panright")
   previous() {
-    // console.log('prev', this.slideshow)
+    // console.log("prev", this.slideshow);
     this.slideshow.previousSlide();
   }
 

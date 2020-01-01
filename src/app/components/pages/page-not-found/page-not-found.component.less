@@ -1,4 +1,12 @@
+@import "../../../../styles/variables.less";
+
 :host {
   display: block;
   background: black;
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep app-scrollpane {
+    padding: 1rem;
+  }
 }

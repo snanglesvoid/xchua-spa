@@ -16,14 +16,14 @@
     </app-smart-image>
   </div>
 
-  <div class="post-content">
+  <!-- <div class="post-content">
     <div style="position: relative;" [innerHtml]="post.content.brief"></div>
     <p class="read-more" *ngIf="post.content.extended">
       <a routerLink="/posts/{{ post.slug }}">
         <app-snippet snippet="read-more"></app-snippet>
       </a>
     </p>
-  </div>
+  </div> -->
 </div>
 
 <app-spinner *ngIf="!post"></app-spinner>

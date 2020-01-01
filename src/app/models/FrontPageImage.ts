@@ -16,6 +16,7 @@ export interface FrontPageImageModel {
   textPlacement: TextPlacement;
   image: CloudinaryImageModel;
   listPriority: number;
+  currentExhibition: boolean;
 }
 
 export class FrontPageImage extends Model {
@@ -59,6 +60,9 @@ export class FrontPageImage extends Model {
   }
   public get listPriority() {
     return this.model.listPriority;
+  }
+  public get currentExhibition() {
+    return this.model.currentExhibition;
   }
 
   translate(language: Language) {

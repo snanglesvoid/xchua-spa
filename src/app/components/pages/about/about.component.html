@@ -6,14 +6,14 @@
   <app-scrollpane [showLines]="false" [boxShadows]="false">
     <app-scrollpane-section snippet="about-statements">
       <!-- <div class="statements" [innerHtml]="statements$ | async"></div> -->
-      <h3
+      <!-- <h3
         class="statements-title"
         *ngIf="gallerySpaces && gallerySpaces.length"
       >
         {{ gallerySpaces[0].location }}&nbsp;|&nbsp;{{
           gallerySpaces[1].location
         }}
-      </h3>
+      </h3> -->
       <app-html-block [content]="statements$ | async"></app-html-block>
       <br />
     </app-scrollpane-section>
@@ -70,7 +70,7 @@
             {{ gallerySpaces[1].location }}
           </h3>
         </div>
-        <div class="addresses">
+        <div class="addresses gt-america">
           <div
             *ngFor="let s of gallerySpaces; let i = index"
             [class.inactive]="activeIndex == 1 - i"

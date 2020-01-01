@@ -17,13 +17,7 @@ app-page-header {
     outline: none !important;
   }
 }
-body.desktop {
-  app-page-header {
-    h3:hover {
-      color: @color-logo-dot;
-    }
-  }
-}
+
 :host ::ng-deep app-page-header .titlebar {
   pointer-events: all;
 }
@@ -34,7 +28,7 @@ body.desktop {
 
 :host ::ng-deep .heading {
   margin-top: -8rem;
-  padding-top: 6rem;
+  padding-top: 6.5rem;
   padding-bottom: 1rem;
   position: sticky;
   top: 0;
@@ -42,12 +36,11 @@ body.desktop {
   background: rgba(255, 255, 255, 1);
   h1.title {
     color: black;
-    font-size: 4rem;
-    line-height: 4rem;
+    line-height: 1;
     margin: 0;
     text-transform: uppercase;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: bottom;
     span {
       font-weight: 600;
       color: black;
@@ -67,9 +60,11 @@ body.desktop {
       position: relative;
       margin-right: 2rem;
       vertical-align: top;
+      font-size: 2rem;
       a {
         display: inline-block;
         color: black;
+        font-weight: 600;
       }
       cursor: pointer;
       ul.submenu {
@@ -94,20 +89,27 @@ body.desktop {
             border-bottom: 1px solid transparent;
           }
         }
-        li:hover a {
-          border-bottom: 1px solid @color-highlight;
+
+        @media (hover: hover) {
+          li:hover a {
+            border-bottom: 1px solid @color-highlight;
+          }
         }
       }
     }
-    li:hover a {
-      border-bottom: 1px solid @color-highlight;
+    @media (hover: hover) {
+      li:hover a {
+        border-bottom: 1px solid @color-highlight;
+      }
     }
     li.active a {
       border-bottom: 1px solid @color-highlight;
     }
-    li:hover {
-      ul.submenu {
-        display: block;
+    @media (hover: hover) {
+      li:hover {
+        ul.submenu {
+          display: block;
+        }
       }
     }
   }
@@ -137,15 +139,6 @@ app-html-block {
 .grid-item.in-view {
   transform: translateY(0);
   opacity: 1;
-}
-
-.artist-name {
-  font-size: 5rem;
-  line-height: 7rem;
-  // font-weight: 200;
-  letter-spacing: 2px;
-  margin-bottom: 120px;
-  text-align: center;
 }
 
 @keyframes arrow-blink {
@@ -193,14 +186,14 @@ app-html-block {
   padding-top: 24px !important;
 }
 
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1400px) {
   :host ::ng-deep app-page-body {
     margin-left: 0;
   }
 }
 
 :host ::ng-deep .scrollpane-content {
-  max-width: 1200px;
+  max-width: 1000px;
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -210,8 +203,8 @@ app-html-block {
   :host ::ng-deep .heading {
     padding-top: 5rem;
     h1.title {
-      font-size: 2.5rem;
-      line-height: 2.5rem;
+      // font-size: 2.5rem;
+      // line-height: 2.5rem;
       padding-left: 1rem;
       margin-bottom: 0.5rem;
     }

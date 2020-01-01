@@ -89,15 +89,19 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
     //     ? { itemWidth: "calc(33% - 8px)", gutter: 12 }
     //     : { itemWidth: "calc(25% - 9px)", gutter: 12 };
     let gutter = this.gutter;
+    if (this.client.isMobile || this.client.isTablet) {
+      gutter = 12;
+    }
+    console.log("gutter", gutter);
     let itemWidth;
     if (cols == 1) {
       itemWidth = "100%";
     } else if (cols == 2) {
-      itemWidth = `calc(50% - ${this.gutter / 2}px)`;
+      itemWidth = `calc(50% - ${gutter / 2}px)`;
     } else if (cols == 3) {
-      itemWidth = `calc(33% - ${(2 * this.gutter) / 3}px)`;
+      itemWidth = `calc(33% - ${(2 * gutter) / 3}px)`;
     } else {
-      itemWidth = `calc(25% - ${(3 * this.gutter) / 4}px)`;
+      itemWidth = `calc(25% - ${(3 * gutter) / 4}px)`;
     }
 
     this.gridItems.forEach(item => {
@@ -106,13 +110,13 @@ export class MasonryComponent implements OnInit, OnDestroy, AfterContentInit {
       e.style.height = "auto";
     });
 
-    this.gutter = gutter;
+    // this.gutter = gutter;
 
     this.grid.nativeElement.style.width = "100%";
 
     if (!this.packery) {
       this.packery = new Packery(this.grid.nativeElement, {
-        gutter: this.gutter,
+        gutter: gutter,
         transitionDuration: this.transitionDuration,
         stagger: 30
       });

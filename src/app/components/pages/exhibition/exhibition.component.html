@@ -8,10 +8,10 @@
 <app-page-body>
   <app-spinner *ngIf="loading"></app-spinner>
   <app-scrollpane *ngIf="exhibition" (scrolled)="onScrolled($event)">
+    <h1 class="title">
+      <app-typewriter [text]="exhibitionTitle"></app-typewriter>
+    </h1>
     <div class="heading">
-      <h1 class="title">
-        <app-typewriter [text]="exhibitionTitle"></app-typewriter>
-      </h1>
       <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
       <ul class="artist-links">
         <li *ngFor="let artist of exhibition.artists">

@@ -26,10 +26,23 @@
   // opacity: 0;
 }
 
+h3.current-exhibition {
+  position: fixed;
+  text-transform: uppercase;
+  left: 0;
+  top: 50%;
+  transform: translateX(-29%) rotate(-90deg);
+  font-size: 2rem;
+  margin: 0;
+}
+:host ::ng-deep h3.current-exhibition span {
+  font-weight: 600;
+}
+
 .slideshow-title {
   h2 a:hover {
     // opacity: 0.7;
-    color: @color-highlight;
+    // color: @color-highlight;
     text-decoration: underline;
   }
 }
@@ -53,9 +66,9 @@
     color: black;
   }
 
-  h2 a:hover {
-    color: @color-highlight;
-  }
+  // h2 a:hover {
+  //   color: @color-highlight;
+  // }
 
   h3 {
     transition: all 0.4s ease;
@@ -63,9 +76,18 @@
     margin-top: 0;
     margin-bottom: 0;
     font-weight: 600 !important;
+    text-transform: uppercase;
   }
   h3.subtitle {
     color: @color-highlight !important;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    line-height: 2.8rem;
+  }
+
+  h2,
+  h3 {
+    line-height: 1 !important;
   }
 }
 .slideshow-title.left {
@@ -83,10 +105,12 @@
     animation-fill-mode: backwards;
   }
   h2 {
-    animation-name: moveInRight;
+    // animation-name: moveInRight;
+    animation-name: fadeIn;
   }
   h3 {
-    animation-name: moveInLeft;
+    // animation-name: moveInLeft;
+    animation-name: fadeIn;
   }
 }
 .slideshow-title.right {
@@ -104,10 +128,12 @@
     animation-fill-mode: backwards;
   }
   h2 {
-    animation-name: moveInLeft;
+    animation-name: fadeIn;
+    // animation-name: moveInLeft;
   }
   h3 {
-    animation-name: moveInRight;
+    animation-name: fadeIn;
+    // animation-name: moveInRight;
   }
 }
 .slideshow-title.top {
@@ -125,10 +151,12 @@
     animation-fill-mode: backwards;
   }
   h2 {
-    animation-name: moveInLeft;
+    animation-name: fadeIn;
+    // animation-name: moveInLeft;
   }
   h3 {
-    animation-name: moveInRight;
+    animation-name: fadeIn;
+    // animation-name: moveInRight;
   }
 }
 .slideshow-title.center {
@@ -147,7 +175,8 @@
     animation-fill-mode: backwards;
   }
   h2 {
-    animation-name: moveInLeft;
+    // animation-name: moveInLeft;
+    animation-name: fadeIn;
   }
 }
 .slideshow-title.bright {
@@ -166,12 +195,12 @@
   }
 }
 
-h2 {
-  font-size: 40px;
-}
-h3 {
-  font-size: 25px;
-}
+// h2 {
+//   font-size: 40px;
+// }
+// h3 {
+//   font-size: 25px;
+// }
 
 app-parallax {
   transition: opacity 1s ease;
@@ -182,7 +211,7 @@ app-parallax {
     color: @color-highlight;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   position: absolute;
@@ -193,25 +222,25 @@ app-parallax {
 @media screen and (max-width: @size-md) {
   .numbers {
     p {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
     right: 2rem;
     bottom: unset;
     top: 2rem;
   }
 
-  .slideshow-title {
-    h3.subtitle {
-      font-size: 1.5rem;
-    }
+  // .slideshow-title {
+  //   h3.subtitle {
+  //     font-size: 2.8rem;
+  //   }
 
-    h2.title {
-      font-size: 3rem;
-    }
-    h3.caption {
-      font-size: 2rem;
-    }
-  }
+  //   h2.title {
+  //     font-size: 2.8rem;
+  //   }
+  //   h3.caption {
+  //     font-size: 1.3rem;
+  //   }
+  // }
 
   .slideshow-title.left {
     bottom: 6rem;
