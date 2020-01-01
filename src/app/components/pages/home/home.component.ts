@@ -12,6 +12,7 @@ import {
 } from "@angular/animations";
 import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
 import { LOGO_COMPONENT } from "../../logo/logo.component";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-home",
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ratio: 0
   };
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, public lang: LanguageService) {}
 
   private _dataChangeSubscription;
   private _intervalSubscription;

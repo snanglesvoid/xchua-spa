@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  HostBinding,
+  OnDestroy
+} from "@angular/core";
 import {
   trigger,
   state,
@@ -7,6 +13,7 @@ import {
   style
 } from "@angular/animations";
 import { DomSanitizer } from "@angular/platform-browser";
+import { LanguageService } from "src/app/services/language.service";
 
 @Component({
   selector: "app-page-header",
@@ -20,7 +27,7 @@ import { DomSanitizer } from "@angular/platform-browser";
     ])
   ]
 })
-export class PageHeaderComponent implements OnInit {
+export class PageHeaderComponent implements OnInit, OnDestroy {
   @Input() big = false;
   @Input() color = "white";
 
@@ -30,10 +37,22 @@ export class PageHeaderComponent implements OnInit {
     );
   }
 
-  constructor(private sanitizer: DomSanitizer) {}
+  constructor(private sanitizer: DomSanitizer, private lang: LanguageService) {}
 
   ngOnInit() {
     // console.log('page header init')
     window.scroll(0, 0);
+
+    this.german = this.lang.language == "german";
+    this.sub = this.lang.languageChanged.subscribe(_ => {
+      this.german = this.lang.language == "german";
+    });
   }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+  sub: any;
+  @HostBinding("class.german")
+  german = false;
 }

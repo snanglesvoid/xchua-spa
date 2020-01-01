@@ -29,11 +29,17 @@
 h3.current-exhibition {
   position: fixed;
   text-transform: uppercase;
-  left: 0;
+  left: 4rem;
+  transform-origin: 0 0;
   top: 50%;
-  transform: translateX(-29%) rotate(-90deg);
+  transform: rotate(-90deg) translateX(-50%);
   font-size: 2rem;
   margin: 0;
+}
+h3.current-exhibition.chinese {
+  transform: translateY(-50%);
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
 }
 :host ::ng-deep h3.current-exhibition span {
   font-weight: 600;

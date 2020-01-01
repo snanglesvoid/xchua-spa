@@ -52,6 +52,7 @@
           class="current-exhibition"
           *ngIf="activeSlide && activeSlide.currentExhibition"
           [style.color]="color"
+          [class.chinese]="lang.language == 'chinese'"
         >
           <app-snippet snippet="current-exhibition"></app-snippet>
         </h3>

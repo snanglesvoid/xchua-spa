@@ -14,6 +14,15 @@
   padding-top: 0px;
 }
 
+:host.german ::ng-deep {
+  .tabs {
+    li {
+      padding-left: 6px;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
+  }
+}
 // @media screen and (max-width: @size-md) {
 //     :host {
 //         position: fixed;
@@ -26,7 +35,7 @@
 // }
 
 @media screen and (max-width: @size-md) {
-  :host /deep/ {
+  :host ::ng-deep {
     position: fixed;
     top: 4rem;
     height: auto;
@@ -37,7 +46,7 @@
     padding-top: 0;
     padding-left: 2rem;
     .tabs {
-      flex-direction: row;
+      flex-direction: row !important;
       margin-top: 0;
       padding-left: 0;
     }

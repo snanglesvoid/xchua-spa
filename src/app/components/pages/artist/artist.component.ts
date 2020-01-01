@@ -71,7 +71,9 @@ export class ArtistComponent implements OnInit, OnDestroy {
     private api: ApiService,
     public lang: LanguageService,
     private sanitizer: DomSanitizer
-  ) {}
+  ) {
+    (window as any).artistComponent = this;
+  }
 
   ngOnInit() {
     (window as any).ac = this;
@@ -88,6 +90,10 @@ export class ArtistComponent implements OnInit, OnDestroy {
       tap(artist => (this.artist = artist)),
       share()
     );
+
+    this.lang.languageChanged.subscribe(_ => {
+      this.ngOnInit();
+    });
 
     this.artistName$ = this.artist$.pipe(
       map(artist =>
