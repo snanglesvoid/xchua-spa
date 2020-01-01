@@ -20,6 +20,14 @@
     <app-scrollpane-section snippet="about-spaces">
       <div class="spaces-container">
         <!-- <app-gallery-space [gallery]="space"></app-gallery-space> -->
+        <div class="headers" *ngIf="gallerySpaces && gallerySpaces.length">
+          <h3 [class.inactive]="activeIndex == 1" (click)="scrollLeft()">
+            {{ gallerySpaces[0].location }}
+          </h3>
+          <h3 [class.inactive]="activeIndex == 0" (click)="scrollRight()">
+            {{ gallerySpaces[1].location }}
+          </h3>
+        </div>
         <div
           class="pictures"
           #pictures
@@ -62,14 +70,7 @@
             [class.active]="activeIndex == 1"
           ></app-smart-image>
         </div>
-        <div class="headers" *ngIf="gallerySpaces && gallerySpaces.length">
-          <h3 [class.inactive]="activeIndex == 1" (click)="scrollLeft()">
-            {{ gallerySpaces[0].location }}
-          </h3>
-          <h3 [class.inactive]="activeIndex == 0" (click)="scrollRight()">
-            {{ gallerySpaces[1].location }}
-          </h3>
-        </div>
+
         <div class="addresses gt-america">
           <div
             *ngFor="let s of gallerySpaces; let i = index"

@@ -47,4 +47,6 @@ export class NavComponent implements OnInit {
       }
     }
   }
+
+  contactHover = false;
 }

@@ -3,13 +3,13 @@
     <li *ngFor="let link of sociallinks">
       <a (click)="goTo(link)">
         <img
+          [class.invert]="color === 'white'"
           src="assets/images/artsy-logo.png"
           alt=""
           *ngIf="link.key == 'artsy'; else faLink"
-          style="height: 16px !important; width: 16px !important; object-fit: contain; vertical-align: top; margin-top: 2px;"
         />
         <ng-template #faLink>
-          <i class="fa {{ link.icon }}"></i>
+          <i class="fa {{ link.icon }}" [style.color]="color"></i>
         </ng-template>
       </a>
     </li>
