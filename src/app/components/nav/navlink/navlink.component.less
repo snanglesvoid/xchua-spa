@@ -35,10 +35,28 @@ a.active {
   color: @color-highlight;
 }
 
-a.active + .before {
+.before.active {
   background: @color-highlight;
 }
 
 a:hover + .before {
   border: 1px solid @color-highlight;
+}
+
+:host:hover .before {
+  border: 1px solid @color-highlight;
+}
+
+@media screen and (max-width: @size-sm) {
+  a {
+    padding-left: 8px;
+    display: inline-block;
+  }
+
+  .before {
+    position: relative;
+    display: inline-block;
+    top: unset;
+    left: unset;
+  }
 }
