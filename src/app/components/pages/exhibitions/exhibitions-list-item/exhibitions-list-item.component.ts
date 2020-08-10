@@ -5,7 +5,7 @@ import {
   HostBinding,
   ElementRef
 } from "@angular/core";
-import { Exhibition } from "src/app/models/Exhibition";
+import {Exhibition} from "src/app/models/Exhibition";
 
 import {
   trigger,
@@ -14,8 +14,8 @@ import {
   style,
   transition
 } from "@angular/animations";
-import { ViewportPosition } from "src/app/directives/scroll-to.directive";
-import { LanguageService } from "src/app/services/language.service";
+import {ViewportPosition} from "src/app/directives/scroll-to.directive";
+import {LanguageService} from "src/app/services/language.service";
 
 @Component({
   selector: "app-exhibitions-list-item",
@@ -24,12 +24,12 @@ import { LanguageService } from "src/app/services/language.service";
   animations: [
     trigger("inOut", [
       transition(":enter", [
-        style({ opacity: 0 }),
-        animate("600ms ease-out", style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate("600ms ease-out", style({opacity: 1}))
       ]),
       transition(":leave", [
-        style({ opacity: 1 }),
-        animate("600ms ease-out", style({ opacity: 0 }))
+        style({opacity: 1}),
+        animate("600ms ease-out", style({opacity: 0}))
       ])
     ])
   ]

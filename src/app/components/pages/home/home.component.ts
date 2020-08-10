@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ApiService } from "src/app/services/api.service";
-import { FrontPageImage } from "src/app/models/FrontPageImage";
-import { CloudinaryImage } from "src/app/models/CloudinaryImage";
-import { interval } from "rxjs";
+import {Component, OnInit, OnDestroy} from "@angular/core";
+import {ApiService} from "src/app/services/api.service";
+import {FrontPageImage} from "src/app/models/FrontPageImage";
+import {CloudinaryImage} from "src/app/models/CloudinaryImage";
+import {interval} from "rxjs";
 import {
   trigger,
   style,
@@ -10,9 +10,9 @@ import {
   transition,
   state
 } from "@angular/animations";
-import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
-import { LOGO_COMPONENT } from "../../logo/logo.component";
-import { LanguageService } from "src/app/services/language.service";
+import {NAV_TOGGLE} from "../../nav/nav-toggle/nav-toggle.component";
+import {LOGO_COMPONENT} from "../../logo/logo.component";
+import {LanguageService} from "src/app/services/language.service";
 
 @Component({
   selector: "app-home",
@@ -20,15 +20,17 @@ import { LanguageService } from "src/app/services/language.service";
   styleUrls: ["./home.component.less"],
   animations: [
     trigger("fade", [
-      state("in", style({ opacity: 1 })),
-      state("out", style({ opacity: 0 })),
+      state("in", style({opacity: 1})),
+      state("out", style({opacity: 0})),
       transition("in => out", animate("500ms 0ms ease")),
       transition("out => in", animate("500ms 500ms ease")),
-      transition("void => in", [style({ opacity: 0 }), animate("500ms ease")])
+      transition("void => in", [style({opacity: 0}), animate("500ms ease")])
     ])
   ]
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
+  constructor(private api: ApiService, public lang: LanguageService) {}
   slides: FrontPageImage[];
   images: CloudinaryImage[] = [];
   imageUrls: string[] = [];
@@ -42,15 +44,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     total: number;
     ratio: number;
   } = {
-    loaded: 0,
-    total: 1,
-    ratio: 0
-  };
-
-  constructor(private api: ApiService, public lang: LanguageService) {}
+      loaded: 0,
+      total: 1,
+      ratio: 0
+    };
 
   private _dataChangeSubscription;
   private _intervalSubscription;
+
+  color = "black";
   ngOnInit() {
     this._dataChangeSubscription = this.api.frontPageImages.dataChanged.subscribe(
       () => {
@@ -62,12 +64,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   this.slides.forEach(s => (s.animationState = "out"));
     //   this.activeIndex = x;
     // });
+    ; (window as any).nav.background = 'transparent';
   }
 
   ngOnDestroy() {
     this._dataChangeSubscription.unsubscribe();
     // this._intervalSubscription.unsubscribe();
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
+    /* NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black"; */
+    ; (window as any).nav.background = 'white';
   }
 
   async updateData() {
@@ -95,20 +99,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.activeIndex = event.index;
     this.activeSlide = this.slides[event.index];
     this.activeSlide.animationState = "in";
-    let color =
+    const color =
       this.activeSlide.textColor == "bright"
         ? "white"
         : this.activeSlide.textColor == "dark"
-        ? "black"
-        : this.activeSlide.customColor;
+          ? "black"
+          : this.activeSlide.customColor;
     console.log(this.activeSlide, color);
     this.color = NAV_TOGGLE.color = LOGO_COMPONENT.textColor = color;
   }
 
-  color = "black";
-
   classesFor(slide: FrontPageImage) {
-    let res: any = {};
+    const res: any = {};
     res[slide.textPlacement] = true;
     res[slide.textColor] = true;
     return res;

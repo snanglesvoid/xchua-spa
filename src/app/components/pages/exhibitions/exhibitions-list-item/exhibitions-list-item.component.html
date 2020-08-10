@@ -21,25 +21,25 @@
         {{ exhibition.title }}
       </a>
     </h3>
-    <ul class="artist-links">
-      <div *ngIf="exhibition.artists.length === 1">
-        <li *ngFor="let artist of exhibition.artists">
-          <a routerLink="/artists/{{ artist.slug }}">
-            {{ artist.name.first + " " + artist.name.last }}
-          </a>
-        </li>
-      </div>
-      <li *ngIf="exhibition.artists && exhibition.artists.length > 1">
-        <app-snippet snippet="exhibitions-group-exhibition"></app-snippet>
-      </li>
-    </ul>
+    <!-- <ul class="artist-links"> -->
+    <!--   <div *ngIf="exhibition.artists.length === 1"> -->
+    <!--     <li *ngFor="let artist of exhibition.artists"> -->
+    <!--       <a routerLink="/artists/{{ artist.slug }}"> -->
+    <!--         {{ artist.name.first + " " + artist.name.last }} -->
+    <!--       </a> -->
+    <!--     </li> -->
+    <!--   </div> -->
+    <!--   <li *ngIf="exhibition.artists && exhibition.artists.length > 1"> -->
+    <!--     <app-snippet snippet="exhibitions-group-exhibition"></app-snippet> -->
+    <!--   </li> -->
+    <!-- </ul> -->
     <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
     <p *ngIf="exhibition.start && exhibition.end" class="date">
-      <span class="gt-america">
+      <span>
         {{ exhibition | dateRange: lang.language }}
       </span>
-      <br />
-      <span class="gt-america">
+      &nbsp;|&nbsp;
+      <span>
         {{ exhibition.location.location }}
       </span>
     </p>

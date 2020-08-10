@@ -1,9 +1,20 @@
 <div class="language-select">
-  <a (click)="switchLang('english')" [class.active]="language == 'english'"
+  <a
+    (click)="switchLang('english')"
+    class="lang"
+    [class.active]="language == 'english'"
     >En</a
   >
-  <a (click)="switchLang('german')" [class.active]="language == 'german'">De</a>
-  <a (click)="switchLang('chinese')" [class.active]="language == 'chinese'"
+  <a
+    (click)="switchLang('german')"
+    class="lang"
+    [class.active]="language == 'german'"
+    >De</a
+  >
+  <a
+    (click)="switchLang('chinese')"
+    class="lang"
+    [class.active]="language == 'chinese'"
     >中<!-- 文 --></a
   >
 </div>

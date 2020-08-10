@@ -27,7 +27,7 @@ body.desktop {
 
 ul.artist-links {
   list-style-type: none;
-  display: block;
+  display: none;
   padding-left: 0;
   margin: 0;
   margin-bottom: 0.5rem;
@@ -108,19 +108,19 @@ ul.artist-links {
   h3 {
     // font-style: italic;
     text-transform: uppercase;
-    font-size: 2rem;
+    font-size: 2.5rem;
     line-height: 1;
     margin-bottom: 0;
     // font-style: italic;
     cursor: pointer;
     white-space: nowrap;
-    margin-bottom: 0;
+    margin-bottom: 0.5rem;
 
     a {
       text-decoration: none;
       // font-weight: 300;
       color: black;
-      font-weight: 600;
+      font-weight: 300;
       display: inline-block;
       max-width: 100%;
       // text-overflow: ellipsis;
@@ -166,10 +166,6 @@ ul.artist-links {
 
 :host.highlight {
   height: auto !important;
-  p.date,
-  p.date span {
-    color: @color-highlight;
-  }
 }
 
 :host.highlight ::ng-deep img {

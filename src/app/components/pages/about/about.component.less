@@ -1,5 +1,9 @@
 @import "../../../../styles/variables.less";
 
+app-page-body {
+  padding-top: 7rem;
+}
+
 .headers {
   width: 100%;
   height: 3.5rem;
@@ -143,11 +147,11 @@
 
 :host {
   display: block;
-  background: black;
+  background: white;
 }
 
 :host ::ng-deep app-tabbar .tabs li a {
-  color: white;
+  color: black;
 }
 
 :host ::ng-deep app-html-block {
@@ -157,7 +161,7 @@
   width: 100%;
 
   .content {
-    text-align: center;
+    text-align: left;
     p,
     h3,
     a,
@@ -166,7 +170,7 @@
     span,
     em,
     strong {
-      color: white !important;
+      color: black !important;
     }
   }
 }
@@ -193,6 +197,6 @@
   }
 
   :host ::ng-deep app-page-header {
-    background: black !important;
+    background: white !important;
   }
 }

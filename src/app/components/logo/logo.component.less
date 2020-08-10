@@ -1,17 +1,17 @@
-@import '../../../styles/variables.less';
+@import "../../../styles/variables.less";
 
 .logo {
-  position: fixed;
-  z-index: 400;
+  position: absolute;
   text-decoration: none;
   display: block;
-  top: 24px;
-  right: 30px;
+  top: 18px;
+  left: 12px;
   cursor: pointer;
+  padding-left: 2rem;
 
   svg {
-    width: 100px;
-    height: 32px;
+    width: auto;
+    height: 5rem;
   }
 }
 
@@ -51,8 +51,6 @@ body.desktop {
 
 @media screen and (max-width: @size-md) {
   .logo {
-    bottom: 12px;
-    right: 18px;
-    top: unset;
+    padding-left: 0;
   }
 }

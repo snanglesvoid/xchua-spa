@@ -8,6 +8,11 @@
 <app-page-body>
   <app-spinner *ngIf="loading"></app-spinner>
   <app-scrollpane *ngIf="exhibition" (scrolled)="onScrolled($event)">
+    <div class="heading">
+      <p class="date" style="margin-bottom: 0.75rem;">
+        {{ exhibition.location.location }}
+      </p>
+    </div>
     <h1 class="title">
       <app-typewriter [text]="exhibitionTitle"></app-typewriter>
     </h1>
@@ -20,11 +25,12 @@
           </a>
         </li>
       </ul>
-      <p *ngIf="exhibition.start && exhibition.end" class="date gt-america">
-        {{ exhibition | dateRange: lang.language }}&nbsp;|
-        {{ exhibition.location.location }}
+      <p *ngIf="exhibition.start && exhibition.end" class="date">
+        {{ exhibition | dateRange: lang.language }}
       </p>
     </div>
+    <br />
+    <br />
     <br />
 
     <!-- <div class="sticky-placeholder"></div> -->

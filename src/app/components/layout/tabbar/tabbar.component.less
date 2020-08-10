@@ -4,11 +4,11 @@
   position: fixed;
   z-index: 3;
   left: 0;
-  top: 100px; //@header-height;
-  bottom: 64px;
-  width: @mg-left;
+  right: 0;
+  top: 7rem; //@header-height;
   overflow: visible;
   box-sizing: border-box;
+  background: white;
 
   // border: 1px dotted gray;
   padding-top: 0px;
@@ -17,7 +17,7 @@
 :host.german ::ng-deep {
   .tabs {
     li {
-      padding-left: 6px;
+      // padding-left: 6px;
       font-size: 1.5rem;
       line-height: 1.5rem;
     }
@@ -65,46 +65,37 @@
   margin-bottom: 0;
   margin-top: 0;
   flex-direction: column;
-  padding-left: @padding;
-  padding-top: 10px;
+  padding-top: 0px;
+  padding-left: 32px;
   li {
     display: block;
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: @color-fg-dark;
     transition: all 0.5s;
     font-size: 2rem;
     white-space: nowrap;
     line-height: 2rem;
     position: relative;
-    padding-left: 24px;
     cursor: pointer;
     height: 3rem;
     a {
       text-decoration: none;
       // color: #fff;
       color: black;
+      opacity: 0.5;
       transition: all 0.4s ease;
       display: block;
       width: 100%;
     }
-    a:before {
-      content: "";
-      display: inline-block;
-      width: 1.25rem;
-      height: 1.25rem;
-      background: transparent; // @color-highlight;
-      margin-top: 0.5rem;
-      margin-right: 0.5rem;
-      border-radius: 50%;
-    }
   }
-  li.subsection {
-    // padding-left: 32px;
-    // text-transform: lowercase;
-  }
+  // li.subsection {
+  // padding-left: 32px;
+  // text-transform: lowercase;
+  // }
   li.active {
     a {
       color: @color-highlight;
+      opacity: 1;
     }
     a:before {
       background: @color-highlight;
@@ -119,4 +110,10 @@
 }
 .tab.active {
   display: block;
+}
+
+@media screen and (max-width: 1023px) {
+  :host {
+    display: none;
+  }
 }

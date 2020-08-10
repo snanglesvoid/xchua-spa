@@ -1,22 +1,24 @@
 <app-nav-toggle (toggled)="navToggled($event)" [open]="isOpen"></app-nav-toggle>
 
 <div
-  id="sidenav"
-  class="sidenav"
+  id="nav"
+  class="nav"
   [@open-close]="isOpen ? 'open' : 'closed'"
   [class.open]="isOpen"
+  [style.background]="background"
 >
-  <br />
+  <app-logo></app-logo>
+  <!-- <br /> -->
   <br />
   <br />
   <!-- <app-scrollpane [boxShadows]="false" [noPadding]="true"> -->
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/"
-    section="home"
-    snippet="menu-home"
-    [active]="section == 'home'"
-  ></app-navlink>
+  <!-- <app-navlink -->
+  <!--   (clicked)="navToggled(false)" -->
+  <!--   href="/" -->
+  <!--   section="home" -->
+  <!--   snippet="menu-home" -->
+  <!--   [active]="section == 'home'" -->
+  <!-- ></app-navlink> -->
   <!-- <app-navlink -->
   <!--   (clicked)="navToggled(false)" -->
   <!--   href="/artists" -->
@@ -69,7 +71,7 @@
     (mouseout)="contactHover = false"
   ></app-navlink>
 
-  <app-sociallinks color="white" [class.hover]="contactHover"></app-sociallinks>
+  <!-- <app-sociallinks color="white" [class.hover]="contactHover"></app-sociallinks> -->
   <!-- </app-scrollpane> -->
   <app-language-select></app-language-select>
 </div>

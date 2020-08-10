@@ -3,6 +3,18 @@
 @sn-width: 280px;
 @sn-width-sm: 200px;
 
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7rem;
+  background: white;
+  z-index: 999;
+
+  text-align: right;
+}
+
 .sidenav {
   .scrollpane-box-shadow,
   .scrollpane-box-shadow-top {
@@ -81,11 +93,19 @@ app-sociallinks.hover {
   left: 0;
 }
 
-@media screen and (max-width: @size-sm) {
-  :host {
-    text-align: center;
+@media screen and (max-width: @size-md) {
+  .nav {
+    padding-top: 8rem;
+    overflow: hidden;
+    height: 100vh;
+    max-height: 7rem;
+    transition: all 0.5s ease;
   }
-  .sidenav {
-    width: 100vw;
+  .nav.open {
+    max-height: 100vh;
+    background: black;
+  }
+  :host ::ng-deep .nav:not(.open) .language-select {
+    display: none;
   }
 }
