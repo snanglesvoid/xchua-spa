@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<app-tabbar *ngIf="sections && sections.length > 0">
+<app-tabbar *ngIf="showTabbar && sections && sections.length > 0">
   <ng-container *ngFor="let s of sections">
     <li
       [class.active]="s.active || s.childActive"

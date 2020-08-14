@@ -1,5 +1,10 @@
 <!-- <div class="before" [class.active]="active"></div> -->
-<a [routerLink]="href" [class.active]="active" (click)="clicked.emit($event)">
+<a
+  [routerLink]="href"
+  [class.active]="active"
+  class="nib"
+  (click)="clicked.emit($event)"
+>
   <!-- <app-snippet [snippet]="snippet"></app-snippet> -->
   {{ snippet | snippet | async }}
 </a>

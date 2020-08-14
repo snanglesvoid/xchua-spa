@@ -4,7 +4,7 @@
 
 <app-page-body>
   <app-spinner *ngIf="loading"></app-spinner>
-  <app-scrollpane [showLines]="false" #scrollpane>
+  <app-scrollpane [showLines]="false" [showTabbar]="true" #scrollpane>
     <app-scrollpane-section #upcomingSection snippet="exhibitions-upcoming">
       <app-exhibitions-list
         [exhibitions]="stream | async | exDateFilter: 'upcoming'"

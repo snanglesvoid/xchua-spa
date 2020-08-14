@@ -77,6 +77,54 @@
 }
 
 @font-face {
+  font-family: "Mier B";
+  src: url("/assets/fonts/2020/MierB/MierBRegular.eot");
+  src: url("/assets/fonts/2020/MierB/MierBRegular.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/2020/MierB/MierBRegular.woff2") format("woff2"),
+    url("/assets/fonts/2020/MierB/MierBRegular.woff") format("woff"),
+    url("/assets/fonts/2020/MierB/MierBRegular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nib Pro";
+  src: url("/assets/fonts/2020/NibPro/NibPro-Light.eot");
+  src: url("/assets/fonts/2020/NibPro/NibPro-Light.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/2020/NibPro/NibPro-Light.woff2") format("woff2"),
+    url("/assets/fonts/2020/NibPro/NibPro-Light.woff") format("woff"),
+    url("/assets/fonts/2020/NibPro/NibPro-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nib Pro";
+  src: url("/assets/fonts/2020/NibPro/NibPro-Regular.eot");
+  src: url("/assets/fonts/2020/NibPro/NibPro-Regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/2020/NibPro/NibPro-Regular.woff2") format("woff2"),
+    url("/assets/fonts/2020/NibPro/NibPro-Regular.woff") format("woff"),
+    url("/assets/fonts/2020/NibPro/NibPro-Regular.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nib Pro";
+  src: url("/assets/fonts/2020/NibPro/NibPro-SemiBold.eot");
+  src: url("/assets/fonts/2020/NibPro/NibPro-SemiBold?#iefix")
+      format("embedded-opentype"),
+    url("/assets/fonts/2020/NibPro/NibPro-SemiBold.woff2") format("woff2"),
+    url("/assets/fonts/2020/NibPro/NibPro-SemiBold.woff") format("woff"),
+    url("/assets/fonts/2020/NibPro/NibPro-SemiBold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "Work Sans";
   src: url("/assets/fonts/transfonter-latin/WorkSans-ExtraLight.eot");
   src: url("/assets/fonts/transfonter-latin/WorkSans-ExtraLight.eot?#iefix")
@@ -87,7 +135,7 @@
       format("woff"),
     url("/assets/fonts/transfonter-latin/WorkSans-ExtraLight.ttf")
       format("truetype");
-  font-weight: 200;
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -212,7 +260,8 @@
 
 * {
   // font-family: 'Barlow Condensed', sans-serif, 'FZJunHeiS-M-GB';
-  font-family: "Work Sans", sans-serif, "FZJunHeiS-M-GB";
+  // font-family: "Work Sans", sans-serif, "FZJunHeiS-M-GB";
+  font-family: "Mier B", sans-serif, "FZJunHeiS-M-GB";
   font-weight: 300;
 }
 
@@ -220,16 +269,26 @@
 //   font-family: 'GT America Mono', sans-serif, 'FZJunHeiS-M-GB';
 // }
 
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   * {
-//     font-family: 'Work Sans', sans-serif, 'FZJunHeiS-M-GB';
-//   }
-// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  * {
+    font-family: "Nib Pro", sans-serif, "FZJunHeiS-M-GB";
+  }
+}
+
+.mier,
+.mier * {
+  font-family: "Mier B", sans-serif, "FZJunHeiS-M-GB" !important;
+}
+
+.nib,
+.nib * {
+  font-family: "Nib Pro", sans-serif, "FZJunHeiS-M-GB" !important;
+}
 
 .work-sans {
   font-family: "Work Sans", sans-serif, "FZJunHeiS-M-GB" !important;
@@ -254,15 +313,3 @@
 html {
   font-size: 10px;
 }
-
-// @media screen and (max-width: 600px) {
-//   html {
-//     font-size: 9px;
-//   }
-// }
-
-// @media screen and (min-width: 1600px) {
-//   html {
-//     font-size: 12px;
-//   }
-// }

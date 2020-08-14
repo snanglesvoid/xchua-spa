@@ -46,6 +46,8 @@ export class ScrollpaneComponent
       this.updateLines();
     }
   }
+  @Input()
+  showTabbar = false;
 
   constructor(
     private svgCanvas: SvgCanvasService,
@@ -88,7 +90,7 @@ export class ScrollpaneComponent
     // console.log('scroll, pageYOffset', window.pageYOffset)
     this._last = this._top;
     this._top = window.pageYOffset;
-    if (this._last === this._top) {return;}
+    if (this._last === this._top) {return; }
     if (this._top > this._last) {
       this.scrolledDown();
     } else {
@@ -146,7 +148,7 @@ export class ScrollpaneComponent
       this.sections.changes.subscribe(_ => {
         this.sections.forEach(s => {
           s.activeChange.subscribe(() => {
-            if (!s.active) {return;}
+            if (!s.active) {return; }
             if (!s.subsection) {
               this.sections.first.childActive = false;
             } else if (s.active) {
@@ -204,7 +206,7 @@ export class ScrollpaneComponent
 
   scrollTo(y: number, callback = null, duration = 500) {
     const diff = y - this.offsetTop;
-    if (diff === 0) {return;}
+    if (diff === 0) {return; }
     // const duration = Math.abs(diff * 2.5)
     // duration += Math.abs(0.5 * diff);
     const startingY = this.offsetTop;
@@ -262,13 +264,13 @@ export class ScrollpaneComponent
     }
   }
   updateLines() {
-    if (!this.hrs || !this.showLines) {return;}
+    if (!this.hrs || !this.showLines) {return; }
     const hrs = this.hrs.toArray();
     this.sections
       .filter(s => s !== this.sections.last)
       .forEach((s, i) => {
         const line = this.lines[i];
-        if (!line) {return;}
+        if (!line) {return; }
         const hr: HTMLHRElement = hrs[i].nativeElement;
         const r = hr.getBoundingClientRect();
         const r1 = s.hrRect;

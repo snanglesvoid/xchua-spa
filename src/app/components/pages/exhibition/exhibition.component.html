@@ -9,7 +9,7 @@
   <app-spinner *ngIf="loading"></app-spinner>
   <app-scrollpane *ngIf="exhibition" (scrolled)="onScrolled($event)">
     <div class="heading">
-      <p class="date" style="margin-bottom: 0.75rem;">
+      <p class="date" style="margin-bottom: 1rem;">
         {{ exhibition.location.location }}
       </p>
     </div>
@@ -29,6 +29,12 @@
         {{ exhibition | dateRange: lang.language }}
       </p>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <br />
     <br />
     <br />
