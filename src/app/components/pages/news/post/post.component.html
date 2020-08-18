@@ -1,10 +1,20 @@
-<div *ngIf="post">
-  <h2 class="post-title">
-    <a routerLink="/posts/{{ post.slug }}">{{ post.title }}</a>
-  </h2>
-  <p class="date gt-america">
-    {{ post.publishedDate | xcDate: lang.language }}
-  </p>
+<div *ngIf="post" class="grid">
+  <div style="position: relative;">
+    <h2 class="post-title">
+      <a routerLink="/posts/{{ post.slug }}">{{ post.title }}</a>
+    </h2>
+
+    <p class="date">
+      {{ post.publishedDate | xcDate: lang.language }}
+    </p>
+
+    <p class="read-more">
+      <a routerLink="/posts/{{ post.slug }}">
+        <app-snippet snippet="read-more"></app-snippet>
+        <!-- <i class="fa fa-angle-double-right"></i -->
+      </a>
+    </p>
+  </div>
 
   <div class="post-img-container">
     <app-smart-image

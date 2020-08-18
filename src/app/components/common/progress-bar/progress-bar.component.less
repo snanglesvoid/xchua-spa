@@ -1,25 +1,26 @@
-@import '../../../../styles/variables.less';
+@import "../../../../styles/variables.less";
 
 :host {
-    display: block;
+  display: none;
 }
 
 .progress {
-    width: 160px;
-    height: 4px;
-    border-radius: 2px;
-    border: 1px solid @color-logo-dot;
-    position: relative;
-    overflow: hidden;
+  width: 160px;
+  height: 4px;
+  border-radius: 2px;
+  border: 1px solid @color-logo-dot;
+  position: relative;
+  overflow: hidden;
 
-    .progress-bar {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 8px;
+  .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
 
-        transition: width .5s ease;
+    transition: width 0.5s ease;
 
-        background: @color-logo-dot;
-    }
+    background: @color-logo-dot;
+  }
 }
+

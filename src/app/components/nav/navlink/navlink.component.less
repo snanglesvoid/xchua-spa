@@ -12,8 +12,10 @@ a {
   font-size: 2rem;
   color: black; // @color-fg-dark;
   display: block;
+  opacity: 0.5;
   // transition: all 0.3s ease;
   padding-right: 16px;
+  font-weight: 400;
 }
 
 :host ::ng-deep a span {
@@ -33,7 +35,11 @@ a {
 
 a:hover,
 a.active {
-  color: @color-highlight;
+  // color: @color-highlight;
+  opacity: 1;
+}
+a.active {
+  text-decoration: underline;
 }
 
 // .before.active {

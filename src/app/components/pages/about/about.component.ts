@@ -5,16 +5,16 @@ import {
   ElementRef,
   ViewChild
 } from "@angular/core";
-import { ApiService } from "src/app/services/api.service";
-import { GallerySpace } from "src/app/models/GallerySpace";
-import { Router } from "@angular/router";
-import { SnippetService } from "src/app/services/snippet.service";
-import { from, fromEvent, Observable, merge, of } from "rxjs";
-import { map, tap, switchMap } from "rxjs/operators";
-import { ClientService } from "src/app/services/client.service";
-import { LanguageService } from "src/app/services/language.service";
-import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
-import { LOGO_COMPONENT } from "../../logo/logo.component";
+import {ApiService} from "src/app/services/api.service";
+import {GallerySpace} from "src/app/models/GallerySpace";
+import {Router} from "@angular/router";
+import {SnippetService} from "src/app/services/snippet.service";
+import {from, fromEvent, Observable, merge, of} from "rxjs";
+import {map, tap, switchMap} from "rxjs/operators";
+import {ClientService} from "src/app/services/client.service";
+import {LanguageService} from "src/app/services/language.service";
+import {NAV_TOGGLE} from "../../nav/nav-toggle/nav-toggle.component";
+import {LOGO_COMPONENT} from "../../logo/logo.component";
 
 @Component({
   selector: "app-about",
@@ -54,8 +54,6 @@ export class AboutComponent implements OnInit, OnDestroy {
       tap(console.log),
       map(x => x.content)
     );
-
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "white";
   }
 
   ngOnDestroy() {
@@ -74,7 +72,7 @@ export class AboutComponent implements OnInit, OnDestroy {
       this.gallerySpaces = this.api.gallerySpaces.data;
       // console.log(this.gallerySpaces)
     } catch (error) {
-      this.router.navigate(["/server-error"], { state: { error: error } });
+      this.router.navigate(["/server-error"], {state: {error: error}});
     } finally {
       this.loading = false;
     }

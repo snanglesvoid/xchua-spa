@@ -28,7 +28,7 @@ app-page-header {
 
 :host ::ng-deep .heading {
   margin-top: -8rem;
-  padding-top: 6.5rem;
+  padding-top: 8rem;
   padding-bottom: 1rem;
   white-space: nowrap;
   position: sticky;
@@ -44,7 +44,7 @@ app-page-header {
     vertical-align: top;
     padding-top: 1rem;
     span {
-      font-weight: 600;
+      font-weight: 300;
       color: black;
     }
   }
@@ -58,19 +58,20 @@ app-page-header {
     padding-top: 14px;
     li {
       display: inline-block;
-      text-transform: uppercase;
+      text-transform: capitalize;
       position: relative;
       margin-right: 2rem;
       vertical-align: top;
       font-size: 2rem;
+      opacity: 0.5;
       a {
         display: inline-block;
         color: black;
-        font-weight: 600;
+        font-weight: 300;
       }
       cursor: pointer;
       ul.submenu {
-        padding-top: 0.5rem;
+        padding-top: 0.5rem !important;
         // position: absolute;
         list-style-type: none;
         display: none;
@@ -94,19 +95,18 @@ app-page-header {
         }
 
         @media (hover: hover) {
-          li:hover a {
-            border-bottom: 1px solid @color-highlight;
+          li:hover {
+            opacity: 1;
           }
         }
       }
     }
     @media (hover: hover) {
-      li:hover a {
-        border-bottom: 1px solid @color-highlight;
-      }
+      opacity: 1;
     }
-    li.active a {
-      border-bottom: 1px solid @color-highlight;
+    li.active {
+      opacity: 1;
+      // border-bottom: 1px solid @color-highlight;
     }
     @media (hover: hover) {
       li:hover {
@@ -135,11 +135,20 @@ app-html-block {
 
   a,
   a span {
-    color: black !important;
+    color: @color-highlight !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+  }
+  @media (hover: hover) {
+    a:hover,
+    a:hover span {
+      text-decoration: underline;
+    }
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: @size-md) {
   .text {
     a {
       padding-left: 12px;
