@@ -184,6 +184,7 @@ app-page-body {
   span {
     color: black;
     font-weight: 300;
+    font-size: 4rem;
   }
 }
 
@@ -197,14 +198,8 @@ app-page-body {
   // margin-top: -2.5rem;
 }
 
-@media screen and (min-width: 1400px) {
-  :host ::ng-deep app-page-body {
-    margin-left: 0;
-  }
-}
-
 :host ::ng-deep .scrollpane-content {
-  max-width: 1000px;
+  max-width: @container-width;
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;

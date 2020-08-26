@@ -24,11 +24,46 @@
     background: rgba(0, 0, 0, 0.94);
 
     .top {
-      padding-top: 8px;
+      padding-top: 4rem;
       width: 100%;
       height: calc(100% - 120px);
       text-align: center;
       position: relative;
+
+      .close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: white;
+        z-index: 9999;
+        cursor: pointer;
+        outline: 0;
+        transition: transform 0.7s ease;
+        background: transparent;
+        border: 0;
+        font-size: 3rem;
+
+        div {
+          width: 20px;
+          height: 2px;
+          background: white;
+          margin-top: 5px;
+          margin-bottom: 5px;
+          transform-origin: right;
+        }
+        div:first-child {
+          transform: rotate(-45deg);
+        }
+        div:nth-child(2) {
+          background: transparent;
+        }
+        div:last-child {
+          transform: rotate(45deg);
+        }
+      }
+      .close:hover {
+        transform: scale(1.2);
+      }
     }
 
     .bottom {

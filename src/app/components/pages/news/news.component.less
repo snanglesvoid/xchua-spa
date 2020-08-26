@@ -5,7 +5,8 @@
 }
 
 :host ::ng-deep .scrollpane-content {
-  max-width: 1000px;
+  max-width: @container-width;
+  // max-width: 1000px;
   width: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
@@ -17,7 +18,7 @@
   }
 }
 
-@media screen and (max-width: @size-md) {
+@media screen and (max-width: @size-container) {
   :host ::ng-deep app-scrollpane {
     padding-left: 1rem;
   }

@@ -11,19 +11,22 @@ app-page-header {
 
 h1 {
   color: black; //@color-highlight;
-  font-weight: 600;
+  font-weight: 300;
+  font-family: "Nib Pro", sans-serif, "FZJunHeiS-M-GB";
 }
 
 .date {
-  // text-transform: uppercase;
-  color: black;
+  color: #555;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 :host ::ng-deep app-page-header .titlebar {
   pointer-events: all;
 }
 :host app-page-body {
-  text-align: center;
+  text-align: left;
 }
 
 :host ::ng-deep .scrollpane-content {
@@ -34,7 +37,7 @@ h1 {
 }
 
 :host ::ng-deep app-smart-image {
-  width: 50%;
+  width: 100%;
   margin-left: 50%;
   transform: translateX(-50%);
 }

@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { LanguageService } from "../services/language.service";
+import {Pipe, PipeTransform} from "@angular/core";
+import {LanguageService} from "../services/language.service";
 
 const mns = [
   "January",
@@ -62,60 +62,60 @@ function formatDateChinese(date: Date, month = true, year: boolean = true) {
   name: "dateRange"
 })
 export class DateRangePipe implements PipeTransform {
-  transform(value: { start: Date; end: Date }, lang?: string): any {
-    let start = value.start;
-    let end = value.end;
+  transform(value: {start: Date; end: Date}, lang?: string): any {
+    const start = value.start;
+    const end = value.end;
 
     if (start.getFullYear() !== end.getFullYear()) {
       switch (lang) {
-        case "english":
-          return `${formatDateEnglish(start)} to ${formatDateEnglish(end)}`;
-        case "german":
-          return `${formatDateGerman(start)} - ${formatDateGerman(end)}`;
-        case "chinese":
-          return `${formatDateChinese(start)} - ${formatDateChinese(end)}`;
+        case 'english':
+          return `${formatDateEnglish(start)}–${formatDateEnglish(end)}`;
+        case 'german':
+          return `${formatDateGerman(start)}–${formatDateGerman(end)}`;
+        case 'chinese':
+          return `${formatDateChinese(start)}–${formatDateChinese(end)}`;
         default:
-          throw "unknown language";
+          throw new Error('unknown language');
       }
     } else if (start.getMonth() !== end.getMonth()) {
       switch (lang) {
-        case "english":
-          return `${formatDateEnglish(start, true, false)}-${formatDateEnglish(
+        case 'english':
+          return `${formatDateEnglish(start, true, false)}–${formatDateEnglish(
             end
           )}`;
-        case "german":
-          return `${formatDateGerman(start, true, false)}-${formatDateGerman(
+        case 'german':
+          return `${formatDateGerman(start, true, false)}–${formatDateGerman(
             end
           )}`;
-        case "chinese":
-          return `${formatDateChinese(start)}-${formatDateChinese(
+        case 'chinese':
+          return `${formatDateChinese(start)}–${formatDateChinese(
             end,
             true,
             false
           )}`;
         default:
-          throw "unknown language";
+          throw new Error('unknown language');
       }
     } else {
       switch (lang) {
-        case "english":
-          return `${formatDateEnglish(start, true, false)}-${formatDateEnglish(
+        case 'english':
+          return `${formatDateEnglish(start, true, false)}–${formatDateEnglish(
             end,
             false,
             true
           )}`;
-        case "german":
-          return `${formatDateGerman(start, false, false)}-${formatDateGerman(
+        case 'german':
+          return `${formatDateGerman(start, false, false)}–${formatDateGerman(
             end
           )}`;
-        case "chinese":
-          return `${formatDateChinese(start)}-${formatDateChinese(
+        case 'chinese':
+          return `${formatDateChinese(start)}–${formatDateChinese(
             end,
             false,
             false
           )}`;
         default:
-          throw "unknown language";
+          throw new Error('unknown language');
       }
     }
   }
