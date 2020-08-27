@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import {Component, OnInit, OnDestroy, ViewChild} from "@angular/core";
+import {Router, ActivatedRoute} from "@angular/router";
+import {Observable, Subject} from "rxjs";
 import {
   delay,
   map,
@@ -11,7 +11,7 @@ import {
   delayWhen
 } from "rxjs/operators";
 
-import { ApiService } from "src/app/services/api.service";
+import {ApiService} from "src/app/services/api.service";
 import {
   Artist,
   Exhibition,
@@ -19,11 +19,11 @@ import {
   Artwork,
   ArtworkSeries
 } from "src/app/models";
-import { ScrollpaneComponent } from "src/app/components/layout/scrollpane/scrollpane.component";
-import { ImageSize } from "src/app/components/common/smart-image/smart-image.component";
-import { LanguageService } from "src/app/services/language.service";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
-import { ScrollpaneSectionComponent } from "../../layout/scrollpane-section/scrollpane-section.component";
+import {ScrollpaneComponent} from "src/app/components/layout/scrollpane/scrollpane.component";
+import {ImageSize} from "src/app/components/common/smart-image/smart-image.component";
+import {LanguageService} from "src/app/services/language.service";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {ScrollpaneSectionComponent} from "../../layout/scrollpane-section/scrollpane-section.component";
 
 @Component({
   selector: "app-artist",
@@ -121,7 +121,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
       tap(_ => (this.hasCvUpload = true)),
       map(x =>
         this.sanitizer.bypassSecurityTrustUrl(
-          `https://galerie-xchua.com/api/upload/${x.filename}`
+          `https://hua-international/api/upload/${x.filename}`
         )
       )
     );

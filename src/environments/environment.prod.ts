@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiPrefix: 'https://galerie-xchua.com/api'
+  apiPrefix: 'https://hua-international.com/api'
 };
