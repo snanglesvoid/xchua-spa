@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {trigger} from '@angular/animations';
 import {Router, ActivationStart} from '@angular/router';
 import {filter} from 'rxjs/operators';
+import {NavColorService} from '../../services/nav-color.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,14 +12,16 @@ import {filter} from 'rxjs/operators';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public navC: NavColorService) {
     (window as any).nav = this;
   }
   isOpen = false;
   section: string;
-  background = 'white';
 
   contactHover = false;
+
+  private bcolor: string;
+  private tcolor: string;
 
   ngOnInit() {
     this.router.events
@@ -33,7 +36,6 @@ export class NavComponent implements OnInit {
         }
       });
   }
-
   navToggled(event: any) {
     // console.log('nav toggled', event)
     this.isOpen = event;
@@ -43,11 +45,17 @@ export class NavComponent implements OnInit {
       for (let i = 0; i < pageElements.length; ++i) {
         (pageElements[i] as HTMLDivElement).style.filter = 'grayscale(1)';
       }
+      this.bcolor = this.navC.backgroundColor;
+      this.tcolor = this.navC.textColor;
+      this.navC.textColor = 'black';
+      this.navC.backgroundColor = 'white';
     } else {
       const pageElements = document.querySelectorAll('.full-page, .page');
       for (let i = 0; i < pageElements.length; ++i) {
         (pageElements[i] as HTMLDivElement).style.filter = 'grayscale(0)';
       }
+      this.navC.backgroundColor = this.bcolor || this.navC.backgroundColor;
+      this.navC.textColor = this.tcolor || this.navC.textColor;
     }
   }
 }

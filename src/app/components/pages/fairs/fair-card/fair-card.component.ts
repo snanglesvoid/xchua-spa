@@ -4,15 +4,15 @@ import {
   Input,
   HostBinding,
   ElementRef
-} from "@angular/core";
-import { Fair, CloudinaryImage } from "src/app/models";
-import { LanguageService } from "src/app/services/language.service";
-import { ClientService } from "src/app/services/client.service";
+} from '@angular/core';
+import {Fair, CloudinaryImage} from 'src/app/models';
+import {LanguageService} from 'src/app/services/language.service';
+import {ClientService} from 'src/app/services/client.service';
 
 @Component({
-  selector: "app-fair-card",
-  templateUrl: "./fair-card.component.html",
-  styleUrls: ["./fair-card.component.less"]
+  selector: 'app-fair-card',
+  templateUrl: './fair-card.component.html',
+  styleUrls: ['./fair-card.component.less']
 })
 export class FairCardComponent implements OnInit {
   constructor(
@@ -21,17 +21,18 @@ export class FairCardComponent implements OnInit {
     private client: ClientService
   ) {}
 
-  ngOnInit() {
-    this.images = [...this.fair.pictures, this.fair.thumbnail];
-    this.image = this.images[0];
-    this.fair.thumbnail.imageFit = this.fair.thumbnailImageFit;
+  @HostBinding('class.small')
+  public get isSmall() {
+    return (
+      this.el.nativeElement.getBoundingClientRect().width <= this.client.sizeMd
+    );
   }
 
   @Input() fair: Fair;
-  @HostBinding("class.highlight")
+  @HostBinding('class.highlight')
   @Input()
   highlight = false;
-  @Input() showPictures: boolean = true;
+  @Input() showPictures = true;
 
   images: CloudinaryImage[] = [];
   image?: CloudinaryImage;
@@ -40,8 +41,14 @@ export class FairCardComponent implements OnInit {
     ratio: 0
   };
 
-  progressChanged(event) {
-    // console.log("progress changed ", event);
+  ngOnInit() {
+    this.images = [...this.fair.pictures, this.fair.thumbnail];
+    this.image = this.images[0];
+    this.fair.thumbnail.imageFit = this.fair.thumbnailImageFit;
+  }
+
+  progressChanged(event: any) {
+    // console.log('progress changed ', event);
     this.progress.ratio = event.ratio;
     if (event.ratio >= 1) {
       setTimeout(() => {
@@ -53,15 +60,8 @@ export class FairCardComponent implements OnInit {
     }
   }
 
-  @HostBinding("class.small")
-  public get isSmall() {
-    return (
-      this.el.nativeElement.getBoundingClientRect().width <= this.client.sizeMd
-    );
-  }
-
-  slideChanged($event) {
-    console.log("slide changed", $event);
+  slideChanged($event: any) {
+    console.log('slide changed', $event);
     console.log(this.images.map(x => x.animationState.fade.value));
   }
 }

@@ -6,6 +6,7 @@
   (click)="clicked.emit($event)"
   [style.padding-left]="paddingLeft"
   [style.padding-right]="paddingRight"
+  [style.color]="nav.textColor"
 >
   <!-- <app-snippet [snippet]="snippet"></app-snippet> -->
   {{ snippet | snippet: language.language | async }}

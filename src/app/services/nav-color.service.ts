@@ -5,7 +5,9 @@ import {Injectable} from '@angular/core';
 })
 export class NavColorService {
 
-  constructor() {}
+  constructor() {
+    (window as any).navColorService = this;
+  }
 
   private tColor = 'black';
   public get textColor() {
@@ -20,5 +22,8 @@ export class NavColorService {
   }
   public set backgroundColor(color: string) {
     this.bColor = color;
+    if (color === 'white') {
+      this.textColor = 'black';
+    }
   }
 }

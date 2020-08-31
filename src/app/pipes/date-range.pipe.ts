@@ -1,34 +1,47 @@
-import {Pipe, PipeTransform} from "@angular/core";
-import {LanguageService} from "../services/language.service";
+import {Pipe, PipeTransform} from '@angular/core';
+
+/* const mns = [ */
+/*   'January', */
+/*   'Febuary', */
+/*   'March', */
+/*   'April', */
+/*   'May', */
+/*   'June', */
+/*   'July', */
+/*   'August', */
+/*   'September', */
+/*   'October', */
+/*   'November', */
+/*   'December' */
+/* ]; */
 
 const mns = [
-  "January",
-  "Febuary",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
 ];
-
 const mnsG = [
-  "Januar",
-  "Februar",
-  "März",
-  "April",
-  "Mai",
-  "Juni",
-  "Juli",
-  "August",
-  "September",
-  "Oktober",
-  "November",
-  "Dezember"
+  'Januar',
+  'Februar',
+  'März',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Dezember'
 ];
 
 function formatDateEnglish(date: Date, month = true, year: boolean = true) {
@@ -53,13 +66,13 @@ function formatDateGerman(date: Date, month = true, year: boolean = true) {
   }
 }
 function formatDateChinese(date: Date, month = true, year: boolean = true) {
-  return `${year ? date.getFullYear() + "年" : ""}
-    ${month ? date.getMonth() + 1 + "月" : ""}
+  return `${year ? date.getFullYear() + '年' : ''}
+    ${month ? date.getMonth() + 1 + '月' : ''}
     ${date.getDate()}日`;
 }
 
 @Pipe({
-  name: "dateRange"
+  name: 'dateRange'
 })
 export class DateRangePipe implements PipeTransform {
   transform(value: {start: Date; end: Date}, lang?: string): any {

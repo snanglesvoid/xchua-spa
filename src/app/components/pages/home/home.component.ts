@@ -106,7 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(this.activeSlide, color);
     this.color = color;
     this.nav.textColor = this.color;
-    /* this.nav.backgroundColor = this.activeSlide.navColor || 'transparent'; */
+    this.nav.backgroundColor = this.activeSlide.navColor || 'transparent';
   }
 
   classesFor(slide: FrontPageImage) {

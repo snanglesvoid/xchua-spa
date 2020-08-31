@@ -8,6 +8,7 @@ import {
   keyframes
 } from '@angular/animations';
 import {Router} from '@angular/router';
+import {NavColorService} from 'src/app/services/nav-color.service';
 
 @Component({
   selector: 'app-logo',
@@ -82,14 +83,12 @@ import {Router} from '@angular/router';
   ]
 })
 export class LogoComponent implements OnInit {
-  @Input() textColor = '#000';
-  @Input() dotColor = '#ff7350';
 
   animationState: 'init' | 'big' | 'small' = 'init';
   private logoHover = false;
   private linksHover = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public nav: NavColorService) {
   }
 
   ngOnInit() {}

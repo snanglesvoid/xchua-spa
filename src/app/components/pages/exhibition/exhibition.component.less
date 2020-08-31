@@ -39,6 +39,11 @@ p.date {
   padding-bottom: 24px;
 }
 
+.spacer {
+  height: 8rem;
+  width: 100%;
+}
+
 .grid-item {
   transform: translateY(100%);
   transition: transform 1s ease, opacity 1s ease;
@@ -229,14 +234,27 @@ app-page-body {
     }
   }
 
+  :host ::ng-deep h1.title {
+    span {
+      font-size: 2.8rem;
+      line-height: 1.3;
+    }
+  }
+  .spacer {
+    height: 3rem;
+  }
+
   .heading {
     text-align: left;
+  }
+  .header:first-child {
+    margin-top: 2rem;
   }
   h1.title {
     text-align: left;
     // font-size: 2.5rem;
     line-height: 1;
-    position: sticky;
+    // position: sticky;
     top: 50px;
     background: white;
     padding-bottom: 0.5rem;

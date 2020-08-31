@@ -3,18 +3,21 @@
     (click)="switchLang('english')"
     class="lang"
     [class.active]="language == 'english'"
+    [style.color]="nav.textColor"
     >En</a
   >
   <a
     (click)="switchLang('german')"
     class="lang"
     [class.active]="language == 'german'"
+    [style.color]="nav.textColor"
     >De</a
   >
   <a
     (click)="switchLang('chinese')"
     class="lang"
     [class.active]="language == 'chinese'"
+    [style.color]="nav.textColor"
     >中<!-- 文 --></a
   >
 </div>

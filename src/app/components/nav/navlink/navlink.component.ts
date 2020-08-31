@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter, HostListener} from '@angular/core';
 import {LanguageService} from 'src/app/services/language.service';
+import {NavColorService} from 'src/app/services/nav-color.service';
 
 @Component({
   selector: 'app-navlink',
@@ -18,7 +19,7 @@ export class NavlinkComponent implements OnInit {
   paddingRight = '16px';
   paddingLeft = '24px';
 
-  constructor(public language: LanguageService) {}
+  constructor(public language: LanguageService, public nav: NavColorService) {}
 
   ngOnInit() {
     this.updatePadding();
