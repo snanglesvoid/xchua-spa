@@ -10,8 +10,6 @@ import {
   stagger
 } from '@angular/animations';
 import {LanguageService} from 'src/app/services/language.service';
-import {NAV_TOGGLE} from '../../nav/nav-toggle/nav-toggle.component';
-import {LOGO_COMPONENT} from '../../logo/logo.component';
 
 @Component({
   selector: 'app-fairs',
@@ -45,11 +43,8 @@ export class FairsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fairs = this.api.fairs.waitForData();
-
-    /* NAV_TOGGLE.color = LOGO_COMPONENT.textColor = 'white'; */
   }
 
   ngOnDestroy() {
-    /* NAV_TOGGLE.color = LOGO_COMPONENT.textColor = 'black'; */
   }
 }

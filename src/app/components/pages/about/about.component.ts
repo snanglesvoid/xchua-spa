@@ -4,29 +4,22 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild
-} from "@angular/core";
-import {ApiService} from "src/app/services/api.service";
-import {GallerySpace} from "src/app/models/GallerySpace";
-import {Router} from "@angular/router";
-import {SnippetService} from "src/app/services/snippet.service";
-import {from, fromEvent, Observable, merge, of} from "rxjs";
-import {map, tap, switchMap} from "rxjs/operators";
-import {ClientService} from "src/app/services/client.service";
-import {LanguageService} from "src/app/services/language.service";
-import {NAV_TOGGLE} from "../../nav/nav-toggle/nav-toggle.component";
-import {LOGO_COMPONENT} from "../../logo/logo.component";
+} from '@angular/core';
+import {ApiService} from 'src/app/services/api.service';
+import {GallerySpace} from 'src/app/models/GallerySpace';
+import {Router} from '@angular/router';
+import {SnippetService} from 'src/app/services/snippet.service';
+import {from, fromEvent, Observable, merge, of} from 'rxjs';
+import {map, tap, switchMap} from 'rxjs/operators';
+import {ClientService} from 'src/app/services/client.service';
+import {LanguageService} from 'src/app/services/language.service';
 
 @Component({
-  selector: "app-about",
-  templateUrl: "./about.component.html",
-  styleUrls: ["./about.component.less"]
+  selector: 'app-about',
+  templateUrl: './about.component.html',
+  styleUrls: ['./about.component.less']
 })
 export class AboutComponent implements OnInit, OnDestroy {
-  private dataChangeSubscription;
-  loading: boolean = true;
-
-  gallerySpaces: GallerySpace[] = [];
-  statements$: Observable<string>;
 
   // from(this.snippet.getTextblock('abouttext')).pipe(
   //   tap(console.log),
@@ -41,6 +34,19 @@ export class AboutComponent implements OnInit, OnDestroy {
     private lang: LanguageService
   ) {}
 
+  get isMobile() {
+    return this.client.isMobile || this.client.isTablet;
+  }
+  private dataChangeSubscription: any;
+  loading = true;
+
+  gallerySpaces: GallerySpace[] = [];
+  statements$: Observable<string>;
+
+  @ViewChild('pictures') pictures: ElementRef<HTMLDivElement>;
+
+  activeIndex = 0;
+
   ngOnInit() {
     this.dataChangeSubscription = this.api.gallerySpaces.dataChanged.subscribe(
       () => {
@@ -50,7 +56,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     this.updateData();
 
     this.statements$ = merge(this.lang.languageChanged, of(1)).pipe(
-      switchMap(_ => from(this.snippet.getTextblock("abouttext"))),
+      switchMap(_ => from(this.snippet.getTextblock('abouttext'))),
       tap(console.log),
       map(x => x.content)
     );
@@ -58,11 +64,6 @@ export class AboutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.dataChangeSubscription.unsubscribe();
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
-  }
-
-  get isMobile() {
-    return this.client.isMobile || this.client.isTablet;
   }
 
   async updateData() {
@@ -72,7 +73,7 @@ export class AboutComponent implements OnInit, OnDestroy {
       this.gallerySpaces = this.api.gallerySpaces.data;
       // console.log(this.gallerySpaces)
     } catch (error) {
-      this.router.navigate(["/server-error"], {state: {error: error}});
+      this.router.navigate(['/server-error'], {state: {error}});
     } finally {
       this.loading = false;
     }
@@ -85,16 +86,12 @@ export class AboutComponent implements OnInit, OnDestroy {
       // this.other(gallery).animationState = false
     }
   }
-
-  @ViewChild("pictures") pictures: ElementRef<HTMLDivElement>;
-
-  activeIndex = 0;
   scrollLeft() {
-    console.log("scrollLeft");
+    console.log('scrollLeft');
     this.activeIndex = 0;
   }
   scrollRight() {
-    console.log("scrollRight");
+    console.log('scrollRight');
     this.activeIndex = 1;
   }
 }

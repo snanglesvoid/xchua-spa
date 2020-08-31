@@ -1,17 +1,18 @@
-import { Model } from "./Model";
-import { ApiService } from "../services/api.service";
-import { Language } from "../services/language.service";
-import { CloudinaryImageModel, CloudinaryImage } from "./CloudinaryImage";
+import {Model} from './Model';
+import {ApiService} from '../services/api.service';
+import {Language} from '../services/language.service';
+import {CloudinaryImageModel, CloudinaryImage} from './CloudinaryImage';
 
-export type TextPlacement = "left" | "right" | "center" | "top";
+export type TextPlacement = 'left' | 'right' | 'center' | 'top';
 
 export interface FrontPageImageModel {
   _id: string;
-  title: { english: string; german?: string; chinese?: string };
-  subtitle: { english?: string; german?: string; chinese?: string };
-  caption: { english?: string; german?: string; chinese?: string };
+  title: {english: string; german?: string; chinese?: string};
+  subtitle: {english?: string; german?: string; chinese?: string};
+  caption: {english?: string; german?: string; chinese?: string};
   linkUrl?: string;
   textColor: string;
+  navColor: string;
   customColor?: string;
   textPlacement: TextPlacement;
   image: CloudinaryImageModel;
@@ -47,10 +48,13 @@ export class FrontPageImage extends Model {
     return this._image;
   }
   public get linkUrl() {
-    return this.model.linkUrl || "#";
+    return this.model.linkUrl || '#';
   }
   public get textColor() {
     return this.model.textColor;
+  }
+  public get navColor() {
+    return this.model.navColor;
   }
   public get customColor() {
     return this.model.customColor;
@@ -68,8 +72,8 @@ export class FrontPageImage extends Model {
   translate(language: Language) {
     this._title = this.model.title[language] || this.model.title.english;
     this._subtitle =
-      this.model.subtitle[language] || this.model.subtitle.english || "";
+      this.model.subtitle[language] || this.model.subtitle.english || '';
     this._caption =
-      this.model.caption[language] || this.model.caption.english || "";
+      this.model.caption[language] || this.model.caption.english || '';
   }
 }

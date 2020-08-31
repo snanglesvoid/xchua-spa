@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { SnippetService } from "src/app/services/snippet.service";
-import { Textblock } from "src/app/models";
-import { LanguageService } from "src/app/services/language.service";
-import { trigger, animate, transition, style } from "@angular/animations";
-import { NAV_TOGGLE } from "../../nav/nav-toggle/nav-toggle.component";
-import { LOGO_COMPONENT } from "../../logo/logo.component";
+import {Component, OnInit, OnDestroy} from "@angular/core";
+import {ActivatedRoute, Router} from "@angular/router";
+import {SnippetService} from "src/app/services/snippet.service";
+import {Textblock} from "src/app/models";
+import {LanguageService} from "src/app/services/language.service";
+import {trigger, animate, transition, style} from "@angular/animations";
 
 @Component({
   selector: "app-page",
@@ -14,8 +12,8 @@ import { LOGO_COMPONENT } from "../../logo/logo.component";
   animations: [
     trigger("fadeIn", [
       transition(":enter", [
-        style({ opacity: 0 }),
-        animate("1000ms ease-out", style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate("1000ms ease-out", style({opacity: 1}))
       ])
     ])
   ]
@@ -38,7 +36,6 @@ export class PageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "white";
     this.route.paramMap.subscribe(data => {
       let slug = data.get("slug");
       if (!slug) {
@@ -56,7 +53,6 @@ export class PageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.dataChangeSubscription.unsubscribe();
-    NAV_TOGGLE.color = LOGO_COMPONENT.textColor = "black";
   }
 
   async updateData() {
@@ -64,7 +60,7 @@ export class PageComponent implements OnInit, OnDestroy {
     try {
       this.data = await this.snippet.getTextblock(this.slug);
     } catch (error) {
-      this.router.navigate(["/server-error"], { state: { error: error } });
+      this.router.navigate(["/server-error"], {state: {error}});
     } finally {
       this.loading = false;
     }

@@ -1,16 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-
-export var NAV_TOGGLE: NavToggleComponent;
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {NavColorService} from 'src/app/services/nav-color.service';
 
 @Component({
-  selector: "app-nav-toggle",
-  templateUrl: "./nav-toggle.component.html",
-  styleUrls: ["./nav-toggle.component.less"]
+  selector: 'app-nav-toggle',
+  templateUrl: './nav-toggle.component.html',
+  styleUrls: ['./nav-toggle.component.less']
 })
 export class NavToggleComponent implements OnInit {
-  @Output() toggled = new EventEmitter<Boolean>();
-
-  private _open: boolean = false;
   @Input()
   get open() {
     return this._open;
@@ -19,9 +15,13 @@ export class NavToggleComponent implements OnInit {
     this._open = value;
   }
 
-  constructor() {
-    NAV_TOGGLE = this;
+  constructor(public navColor: NavColorService) {
   }
+  @Output() toggled = new EventEmitter<boolean>();
+
+  private _open = false;
+
+  /* color = 'black'; */
   // idx = 0
   ngOnInit() {
     // interval(1000).subscribe(_ => {
@@ -35,6 +35,4 @@ export class NavToggleComponent implements OnInit {
     this._open = !this._open;
     this.toggled.emit(this._open);
   }
-
-  color = "black";
 }

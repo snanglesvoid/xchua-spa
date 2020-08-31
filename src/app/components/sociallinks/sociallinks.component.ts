@@ -1,24 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {Component, OnInit, Input} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
-import { environment } from "../../../environments/environment";
-import { SocialLink, SocialLinkModel } from "src/app/models/SocialLink";
-import { ApiService } from "src/app/services/api.service";
-import { DomSanitizer } from "@angular/platform-browser";
-import { Router } from "@angular/router";
-import { NAV_TOGGLE } from "../nav/nav-toggle/nav-toggle.component";
+import {environment} from '../../../environments/environment';
+import {SocialLink, SocialLinkModel} from 'src/app/models/SocialLink';
+import {ApiService} from 'src/app/services/api.service';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 const apiPrefix = environment.apiPrefix;
 
 @Component({
-  selector: "app-sociallinks",
-  templateUrl: "./sociallinks.component.html",
-  styleUrls: ["./sociallinks.component.less"]
+  selector: 'app-sociallinks',
+  templateUrl: './sociallinks.component.html',
+  styleUrls: ['./sociallinks.component.less']
 })
 export class SociallinksComponent implements OnInit {
-  loading: boolean = true;
-
-  sociallinks: SocialLink[];
 
   constructor(
     private http: HttpClient,
@@ -26,9 +22,14 @@ export class SociallinksComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private router: Router
   ) {}
+  loading = true;
+
+  sociallinks: SocialLink[];
+
+  @Input() color: string;
 
   ngOnInit() {
-    this.http.get(apiPrefix + "/sociallinks").subscribe(
+    this.http.get(apiPrefix + '/sociallinks').subscribe(
       response => {
         this.sociallinks = (response as Array<SocialLinkModel>).map(
           s => new SocialLink(this.api, s)
@@ -39,9 +40,6 @@ export class SociallinksComponent implements OnInit {
         console.error(error);
       }
     );
-    if (!this.color) {
-      this.color = NAV_TOGGLE.color;
-    }
   }
 
   getUrl(link: SocialLink) {
@@ -49,12 +47,10 @@ export class SociallinksComponent implements OnInit {
   }
 
   goTo(link: SocialLink) {
-    if (link.url.startsWith("/")) {
+    if (link.url.startsWith('/')) {
       this.router.navigate([link.url]);
     } else {
-      window.open(link.url, "_blank");
+      window.open(link.url, '_blank');
     }
   }
-
-  @Input() color: string;
 }
