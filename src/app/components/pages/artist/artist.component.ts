@@ -121,7 +121,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
       tap(_ => (this.hasCvUpload = true)),
       map(x =>
         this.sanitizer.bypassSecurityTrustUrl(
-          `https://hua-international/api/upload/${x.filename}`
+          `https://hua-international.com/api/upload/${x.filename}`
         )
       )
     );
@@ -173,7 +173,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
       // console.log('top')
       this.tabbarHidden = active;
     }
-    if (!active) return;
+    if (!active) { return; }
     if (!series) {
       this._currentBackgroundIndex = -1;
     } else {
@@ -205,8 +205,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
   @ViewChild(ScrollpaneComponent) scrollpane: ScrollpaneComponent;
 
   downArrowClicked() {
-    let sections = this.scrollpane.sections.toArray();
-    let index = sections.findIndex(s => s.active);
+    const sections = this.scrollpane.sections.toArray();
+    const index = sections.findIndex(s => s.active);
     if (index + 1 < sections.length) {
       this.scrollpane.scrollToSection(
         this.scrollpane.sections.toArray()[index + 1],
@@ -234,12 +234,12 @@ export class ArtistComponent implements OnInit, OnDestroy {
   exhibitionsSection: ScrollpaneSectionComponent;
 
   scrollToSeries(s: ArtworkSeries) {
-    let section = this.scrollpane.sections.find(x => x.snippet == s.title);
+    const section = this.scrollpane.sections.find(x => x.snippet == s.title);
     this.scrollpane.scrollToSection(section);
   }
 
   isSeriesActive(s: ArtworkSeries) {
-    let section = this.scrollpane.sections.find(x => x.snippet == s.title);
+    const section = this.scrollpane.sections.find(x => x.snippet === s.title);
     return section && section.active;
   }
 }
