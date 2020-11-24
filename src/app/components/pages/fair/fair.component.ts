@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { ApiService } from 'src/app/services/api.service'
-import { Fair, CloudinaryImage } from 'src/app/models'
-import { LanguageService } from 'src/app/services/language.service'
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ApiService} from 'src/app/services/api.service';
+import {Fair, CloudinaryImage} from 'src/app/models';
+import {LanguageService} from 'src/app/services/language.service';
 
 @Component({
   selector: 'app-fair',
@@ -17,55 +17,55 @@ export class FairComponent implements OnInit, OnDestroy {
     public lang: LanguageService
   ) {}
 
-  private _fair: Fair
-  private _slug: string
-  private _dataChangeSubscription
-  private _loading: boolean = true
-
-  fairTitle: string = ''
-
   get loading() {
-    return this._loading
+    return this.mLoading;
   }
   get fair() {
-    return this._fair
+    return this.mFair;
   }
+
+  private mFair: Fair;
+  private mSlug: string;
+  private mDataChangeSubscription: any;
+  private mLoading = true;
+
+  fairTitle = '';
+
+  textViewportState = 1;
 
   ngOnInit() {
     this.route.paramMap.subscribe(data => {
-      this._slug = data.get('slug')
-      this._dataChangeSubscription = this.api.fairs.dataChanged.subscribe(_ => {
-        this.updateData()
-      })
-      this.updateData()
-    }, console.error)
+      this.mSlug = data.get('slug');
+      this.mDataChangeSubscription = this.api.fairs.dataChanged.subscribe((_: any) => {
+        this.updateData();
+      });
+      this.updateData();
+    }, console.error);
   }
 
   ngOnDestroy() {
-    this._dataChangeSubscription.unsubscribe()
+    this.mDataChangeSubscription.unsubscribe();
   }
 
   async updateData() {
-    this._loading = true
-    await this.api.fairs.waitForData()
-    setTimeout(_ => {
-      let fair = this.api.fairs.data.find(x => x.slug === this._slug)
+    this.mLoading = true;
+    await this.api.fairs.waitForData();
+    setTimeout((_: any) => {
+      const fair = this.api.fairs.data.find(x => x.slug === this.mSlug);
       if (!fair) {
-        return this.router.navigate(['/page-not-found'])
+        return this.router.navigate(['/page-not-found']);
       }
-      this._fair = fair
-      this.fairTitle = fair.title || ''
-      this._loading = false
-    })
+      this.mFair = fair;
+      this.fairTitle = fair.title || '';
+      this.mLoading = false;
+    });
   }
 
   inViewportChange(image: CloudinaryImage, event: number) {
-    image.animationState = event
+    image.animationState = event;
   }
-
-  textViewportState = 1
-  textViewportChange(event) {
-    this.textViewportState = event
+  textViewportChange(event: any) {
+    this.textViewportState = event;
     // if (event === 0) this.showPicturesMasonry = true
   }
 }

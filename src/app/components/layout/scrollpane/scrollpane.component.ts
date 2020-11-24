@@ -13,11 +13,14 @@ import {
   QueryList,
   HostListener
 } from '@angular/core';
+
 import {ScrollpaneSectionComponent} from '../scrollpane-section/scrollpane-section.component';
+
 import {
   SvgCanvasService,
   CanvasPolyline
 } from 'src/app/services/svg-canvas.service';
+
 import {ClientService} from 'src/app/services/client.service';
 
 @Component({
@@ -29,18 +32,18 @@ export class ScrollpaneComponent
   implements OnInit, OnDestroy, AfterContentInit {
 
   public get offsetTop(): number {
-    return this._top;
+    return this.mTop;
   }
   public set offsetTop(value: number) {
-    this._top = value;
-    window.scroll(0, this._top);
+    this.mTop = value;
+    window.scroll(0, this.mTop);
   }
   @Input()
   get showLines() {
-    return this._showLines;
+    return this.mShowLines;
   }
   set showLines(value) {
-    this._showLines = value;
+    this.mShowLines = value;
     if (this.sections) {
       this.createLines();
       this.updateLines();
@@ -58,15 +61,15 @@ export class ScrollpaneComponent
   showBoxShadowTop = false;
   showBoxShadowBottom = true;
 
-  private _last = 0;
-  private _top = 0;
+  private mLast = 0;
+  private mTop = 0;
   private bottom = false;
   private top = true;
 
   private lines: CanvasPolyline[] = [];
 
   @Input() boxShadows = true;
-  private _showLines = false;
+  private mShowLines = false;
 
   @Input() noPadding = false;
   @Input() scrollOffset = 80; // 158;
@@ -88,15 +91,15 @@ export class ScrollpaneComponent
   @HostListener('window:scroll', [])
   onWindowScrolled() {
     // console.log('scroll, pageYOffset', window.pageYOffset)
-    this._last = this._top;
-    this._top = window.pageYOffset;
-    if (this._last === this._top) {return; }
-    if (this._top > this._last) {
+    this.mLast = this.mTop;
+    this.mTop = window.pageYOffset;
+    if (this.mLast === this.mTop) {return;}
+    if (this.mTop > this.mLast) {
       this.scrolledDown();
     } else {
       this.scrolledUp();
     }
-    if (this._top === 0) {
+    if (this.mTop === 0) {
       this.reachedStart();
     }
     this.updateActiveSections();
@@ -148,7 +151,9 @@ export class ScrollpaneComponent
       this.sections.changes.subscribe(_ => {
         this.sections.forEach(s => {
           s.activeChange.subscribe(() => {
-            if (!s.active) {return; }
+            if (!s.active) {
+              return;
+            }
             if (!s.subsection) {
               this.sections.first.childActive = false;
             } else if (s.active) {
@@ -204,9 +209,9 @@ export class ScrollpaneComponent
     setTimeout(() => this.updateLines(), 50);
   }
 
-  scrollTo(y: number, callback = null, duration = 500) {
+  scrollTo(y: number, callback: any = null, duration: number = 500) {
     const diff = y - this.offsetTop;
-    if (diff === 0) {return; }
+    if (diff === 0) {return;}
     // const duration = Math.abs(diff * 2.5)
     // duration += Math.abs(0.5 * diff);
     const startingY = this.offsetTop;
@@ -229,8 +234,7 @@ export class ScrollpaneComponent
     // window.requestAnimationFrame(step);
   }
 
-  scrollToSection(section: ScrollpaneSectionComponent, duration = 250) {
-    // console.log('section: (top, height)', section.offsetTop, section.height)
+  scrollToSection(section: ScrollpaneSectionComponent, duration: number = 250) {
     let y =
       this.sections.first === section
         ? 0
@@ -242,9 +246,7 @@ export class ScrollpaneComponent
   }
 
   createLines() {
-    // console.log("create lines", this.showLines);
     if (this.showLines) {
-      // console.log("create lines");
       if (this.lines) {
         this.lines.forEach(l => this.svgCanvas.deleteElement(l));
       }
@@ -264,13 +266,13 @@ export class ScrollpaneComponent
     }
   }
   updateLines() {
-    if (!this.hrs || !this.showLines) {return; }
+    if (!this.hrs || !this.showLines) {return;}
     const hrs = this.hrs.toArray();
     this.sections
       .filter(s => s !== this.sections.last)
       .forEach((s, i) => {
         const line = this.lines[i];
-        if (!line) {return; }
+        if (!line) {return;}
         const hr: HTMLHRElement = hrs[i].nativeElement;
         const r = hr.getBoundingClientRect();
         const r1 = s.hrRect;

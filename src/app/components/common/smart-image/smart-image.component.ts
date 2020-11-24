@@ -22,13 +22,7 @@ export enum ImageSize {
   templateUrl: './smart-image.component.html',
   styleUrls: ['./smart-image.component.less'],
   animations: [
-    // trigger('fade', [
-    //   state('in', style({ opacity: 1 })),
-    //   state('out', style({ opacity: 0 })),
-    //   transition('in <=> out', animate('600ms ease')),
-    // ]),
   ],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SmartImageComponent implements OnInit {
 
@@ -36,10 +30,10 @@ export class SmartImageComponent implements OnInit {
 
   @Input()
   public get size() {
-    return this._size;
+    return this.mSize;
   }
   public set size(value: ImageSize) {
-    this._size = value;
+    this.mSize = value;
     this.resolution =
       value === ImageSize.SMALL
         ? this.client.smallImageRes
@@ -61,7 +55,7 @@ export class SmartImageComponent implements OnInit {
   @Output() loaded = new EventEmitter<any>();
   @Output() imageClicked = new EventEmitter<SmartImageComponent>();
 
-  private _size: ImageSize;
+  private mSize: ImageSize;
 
   loading = true;
   resolution: {width: number; height: number} = {

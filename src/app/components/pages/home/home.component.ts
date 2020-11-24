@@ -47,19 +47,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       ratio: 0
     };
 
-  private _dataChangeSubscription;
-  private _intervalSubscription;
+  private mDataChangeSubscription;
+  private mIntervalSubscription;
 
   color = 'black';
 
   ngOnInit() {
-    this._dataChangeSubscription = this.api.frontPageImages.dataChanged.subscribe(
+    this.mDataChangeSubscription = this.api.frontPageImages.dataChanged.subscribe(
       () => {
         // this.updateData()
       }
     );
     this.updateData();
-    // this._intervalSubscription = interval(8000).subscribe(x => {
+    // this.mintervalSubscription = interval(8000).subscribe(x => {
     //   this.slides.forEach(s => (s.animationState = "out"));
     //   this.activeIndex = x;
     // });
@@ -67,8 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._dataChangeSubscription.unsubscribe();
-    // this._intervalSubscription.unsubscribe();
+    this.mDataChangeSubscription.unsubscribe();
     this.nav.backgroundColor = 'white';
   }
 

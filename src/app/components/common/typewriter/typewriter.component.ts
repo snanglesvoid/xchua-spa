@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable, interval } from 'rxjs';
-import { map, takeWhile } from 'rxjs/operators';
+import {Component, OnInit, Input} from '@angular/core';
+import {Observable, interval} from 'rxjs';
+import {map, takeWhile} from 'rxjs/operators';
 
 @Component({
   selector: 'app-typewriter',
@@ -9,66 +9,74 @@ import { map, takeWhile } from 'rxjs/operators';
 })
 export class TypewriterComponent implements OnInit {
 
-  private _blink: boolean = true
-  public get blink() { return this._blink }
-
-  private _currentText: string = ''
-  public get currentText() { return this._currentText }
-
-  private _text: string = '...'
-  @Input()
-  public get text() { return this._text }
-  public set text(value: string) { 
-    this._text = value || '...'
-    this.transition()
+  private mBlink = true;
+  public get blink() {
+    return this.mBlink;
   }
 
-  private _interval: number = 100
+  private mCurrentText = '';
+  public get currentText() {
+    return this.mCurrentText;
+  }
+
+  private mText = '...';
   @Input()
-  public get interval() { return this._interval }
+  public get text() {
+    return this.mText;
+  }
+  public set text(value: string) {
+    this.mText = value || '...';
+    this.transition();
+  }
+
+  private mInterval = 100;
+  @Input()
+  public get interval() {
+    return this.mInterval;
+  }
   public set interval(value: number) {
-    this._interval = Math.floor(value)
-    this.transition()
+    this.mInterval = Math.floor(value);
+    this.transition();
   }
 
-  private timer: Observable<string>
+  private timer: Observable<string>;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
 
   }
 
   private transition() {
-    this._blink = true
+    this.mBlink = true;
     this.timer = interval(this.interval)
       .pipe(takeWhile(() => {
-        if (this._currentText === this._text) {
-          this._blink = false
-          return false
-        }
-        else {
-          return true
+        if (this.mCurrentText === this.mText) {
+          this.mBlink = false;
+          return false;
+        } else {
+          return true;
         }
       }))
       .pipe(map(_ => {
-        this.step()
-        return this._currentText
-      }))
-      
-    this.timer.forEach(_ => {})
+        this.step();
+        return this.mCurrentText;
+      }));
+
+    this.timer.forEach(() => {});
   }
 
   private step() {
-    if (this._text.startsWith(this._currentText)) {
-      let i
-      for (i = 0; i<Math.min(this.text.length, this._currentText.length); ++i) {
-        if (this._text[i] !== this._currentText[i]) break;
+    if (this.mText.startsWith(this.mCurrentText)) {
+      let i: number;
+      for (i = 0; i < Math.min(this.text.length, this.mCurrentText.length); ++i) {
+        if (this.mText[i] !== this.mCurrentText[i]) {
+          break;
+        }
       }
-      this._currentText += this._text[i]
-    }
-    else {
-      this._currentText = this._currentText.substr(0, this._currentText.length - 1)
+      this.mCurrentText += this.mText[i];
+    } else {
+      this.mCurrentText = this.mCurrentText.substr(0, this.mCurrentText.length - 1);
     }
   }
 

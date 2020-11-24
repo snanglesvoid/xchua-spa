@@ -8,7 +8,7 @@ import {
   ViewChild,
   AfterContentInit,
   AfterContentChecked,
-} from '@angular/core'
+} from '@angular/core';
 
 @Component({
   selector: 'app-scrollpane-section',
@@ -17,68 +17,68 @@ import {
 })
 export class ScrollpaneSectionComponent
   implements OnInit, AfterContentInit, AfterContentChecked {
-  @Input() snippet: string
-  @Input() subsection: boolean = false
-  @Input() navlink: boolean = true
-  @Input() scrollToOffset: number = 0
-
-  @Output() requestScroll = new EventEmitter<boolean>()
-  @Output() activeChange = new EventEmitter<boolean>()
-
-  childActive: boolean
-  private _active: boolean = false
   @Input()
   get active() {
-    return this._active
+    return this.mActive;
   }
   set active(value) {
-    this._active = value
-    if (this._active) {
-      this.requestScroll.emit(true)
+    this.mActive = value;
+    if (this.mActive) {
+      this.requestScroll.emit(true);
     }
-    this.activeChange.emit(this._active)
+    this.activeChange.emit(this.mActive);
   }
 
-  @ViewChild('hr') hr: ElementRef
-
   public get offsetTop(): number {
-    return this.el.nativeElement.offsetTop
+    return this.el.nativeElement.offsetTop;
     // return this.el.nativeElement.getBoundingClientRect().top
   }
   public get height(): number {
-    return this.el.nativeElement.getBoundingClientRect().height
+    return this.el.nativeElement.getBoundingClientRect().height;
   }
   public get lineConnectionPoint() {
-    let r = (this.hr.nativeElement as HTMLHRElement).getBoundingClientRect()
+    const r = (this.hr.nativeElement as HTMLHRElement).getBoundingClientRect();
     return {
       x: r.left,
       y: r.top + r.height / 2.0,
-    }
+    };
   }
   public get hrRect() {
-    return (this.hr.nativeElement as HTMLHRElement).getBoundingClientRect()
-  }
-
-  setActiveNoScroll(value: boolean) {
-    this._active = value
-    this.activeChange.emit(value)
+    return (this.hr.nativeElement as HTMLHRElement).getBoundingClientRect();
   }
 
   constructor(public el: ElementRef) {}
+  @Input() snippet: string;
+  @Input() subsection = false;
+  @Input() navlink = true;
+  @Input() scrollToOffset = 0;
 
-  ngOnInit() {
-    this.el.nativeElement.id = this.snippet
+  @Output() requestScroll = new EventEmitter<boolean>();
+  @Output() activeChange = new EventEmitter<boolean>();
+
+  childActive: boolean;
+  private mActive = false;
+
+  @ViewChild('hr') hr: ElementRef;
+
+  @ViewChild('projected') projected: ElementRef;
+
+  isEmpty = true;
+
+  setActiveNoScroll(value: boolean) {
+    this.mActive = value;
+    this.activeChange.emit(value);
   }
 
-  @ViewChild('projected') projected: ElementRef
+  ngOnInit() {
+    this.el.nativeElement.id = this.snippet;
+  }
   ngAfterContentInit() {
     this.isEmpty =
-      this.projected.nativeElement.getBoundingClientRect().height < 3
+      this.projected.nativeElement.getBoundingClientRect().height < 3;
   }
   ngAfterContentChecked() {
     this.isEmpty =
-      this.projected.nativeElement.getBoundingClientRect().height < 3
+      this.projected.nativeElement.getBoundingClientRect().height < 3;
   }
-
-  isEmpty: boolean = true
 }

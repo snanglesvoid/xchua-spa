@@ -1,19 +1,19 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Post } from "src/app/models/Post";
-import { ApiService } from "src/app/services/api.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { LanguageService } from "src/app/services/language.service";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Post} from 'src/app/models/Post';
+import {ApiService} from 'src/app/services/api.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LanguageService} from 'src/app/services/language.service';
 
 @Component({
-  selector: "app-post-page",
-  templateUrl: "./post-page.component.html",
-  styleUrls: ["./post-page.component.less"]
+  selector: 'app-post-page',
+  templateUrl: './post-page.component.html',
+  styleUrls: ['./post-page.component.less']
 })
 export class PostPageComponent implements OnInit, OnDestroy {
-  private _dataChangeSubscription;
-  private slug;
+  private mDataChangeSubscription: any;
+  private slug: string;
   post: Post;
-  loading: boolean = true;
+  loading = true;
 
   constructor(
     private api: ApiService,
@@ -24,8 +24,8 @@ export class PostPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.paramMap.subscribe(data => {
-      this.slug = data.get("slug");
-      this._dataChangeSubscription = this.api.news.dataChanged.subscribe(() => {
+      this.slug = data.get('slug');
+      this.mDataChangeSubscription = this.api.news.dataChanged.subscribe(() => {
         this.updateData();
       });
       this.updateData();
@@ -33,7 +33,7 @@ export class PostPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._dataChangeSubscription.unsubscribe();
+    this.mDataChangeSubscription.unsubscribe();
   }
 
   async updateData() {
@@ -41,12 +41,12 @@ export class PostPageComponent implements OnInit, OnDestroy {
     await this.api.news.waitForData();
     this.post = this.api.news.data.find(x => x.slug === this.slug);
     if (!this.post) {
-      return this.router.navigate(["/page-not-found"]);
+      return this.router.navigate(['/page-not-found']);
     }
     this.loading = false;
   }
 
   postTitle() {
-    return this.post ? this.post.title : "";
+    return this.post ? this.post.title : '';
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {
   trigger,
   query,
@@ -7,9 +7,9 @@ import {
   style,
   keyframes,
   animate,
-} from '@angular/animations'
-import { SlideshowComponent } from '../slideshow/slideshow.component'
-import { CloudinaryImage } from 'src/app/models'
+} from '@angular/animations';
+import {SlideshowComponent} from '../slideshow/slideshow.component';
+import {CloudinaryImage} from 'src/app/models';
 
 @Component({
   selector: 'app-slideshow-controller',
@@ -21,19 +21,19 @@ import { CloudinaryImage } from 'src/app/models'
         query(
           ':enter',
           [
-            style({ opacity: 0.0 }),
+            style({opacity: 0.0}),
             stagger(150, [
               animate(
                 '1s ease-out',
                 keyframes([
-                  style({ transform: 'scale(0.0)', opacity: 0.0, offset: 0.0 }),
-                  style({ transform: 'scale(1.5)', opacity: 1.0, offset: 0.8 }),
-                  style({ transform: 'scale(1.0)', opacity: 1.0, offset: 1.0 }),
+                  style({transform: 'scale(0.0)', opacity: 0.0, offset: 0.0}),
+                  style({transform: 'scale(1.5)', opacity: 1.0, offset: 0.8}),
+                  style({transform: 'scale(1.0)', opacity: 1.0, offset: 1.0}),
                 ])
               ),
             ]),
           ],
-          { optional: true }
+          {optional: true}
         ),
         query(
           ':leave',
@@ -42,56 +42,56 @@ import { CloudinaryImage } from 'src/app/models'
               animate(
                 '1s ease-out',
                 keyframes([
-                  style({ transform: 'scale(1.0)', opacity: 1.0, offset: 0.0 }),
-                  style({ transform: 'scale(1.2)', opacity: 1.0, offset: 0.8 }),
-                  style({ transform: 'scale(0.0)', opacity: 0.0, offset: 1.0 }),
+                  style({transform: 'scale(1.0)', opacity: 1.0, offset: 0.0}),
+                  style({transform: 'scale(1.2)', opacity: 1.0, offset: 0.8}),
+                  style({transform: 'scale(0.0)', opacity: 0.0, offset: 1.0}),
                 ])
               ),
             ]),
           ],
-          { optional: true }
+          {optional: true}
         ),
       ]),
     ]),
   ],
 })
 export class SlideshowControllerComponent implements OnInit {
-  private _slideshow: SlideshowComponent
   @Input()
   public get slideshow(): SlideshowComponent {
-    return this._slideshow
+    return this.mSlideshow;
   }
   public set slideshow(s: SlideshowComponent) {
-    this._slideshow = s
+    this.mSlideshow = s;
   }
 
   constructor() {}
+  private mSlideshow: SlideshowComponent;
+
+  @Output()
+  animationDone = new EventEmitter<any>();
 
   ngOnInit() {}
 
-  selectImage(event, image: CloudinaryImage) {
+  selectImage(event: any, image: CloudinaryImage) {
     if (event.stopPropagation) {
-      event.stopPropagation()
+      event.stopPropagation();
     }
     if (event.preventDefault) {
-      event.preventDefault()
+      event.preventDefault();
     }
-    this.slideshow.currentSlide = image
+    this.slideshow.currentSlide = image;
   }
 
   isImageActive(image: CloudinaryImage) {
     if (this.slideshow) {
-      return this.slideshow.currentSlide.id === image.id
+      return this.slideshow.currentSlide.id === image.id;
     } else {
-      return false
+      return false;
     }
   }
 
-  @Output()
-  animationDone = new EventEmitter<any>()
-
   animationDidFinish(event) {
     // console.log('animation finished')
-    this.animationDone.emit(event)
+    this.animationDone.emit(event);
   }
 }

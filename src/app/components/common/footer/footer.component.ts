@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -7,15 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
+
+  inViewport = false;
 
   ngOnInit() {
   }
 
-
-  
-  inViewport = false
-  viewportChange($event) {
-    this.inViewport = $event === 0
+  viewportChange($event: any) {
+    this.inViewport = $event === 0;
   }
 }

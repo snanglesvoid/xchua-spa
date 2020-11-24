@@ -1,29 +1,31 @@
-import { Directive, ElementRef, Output, EventEmitter, OnInit, OnDestroy, AfterContentInit } from '@angular/core';
-import 'imagesloaded'
+import {Directive, ElementRef, Output, EventEmitter, OnInit, OnDestroy, AfterContentInit} from '@angular/core';
+import 'imagesloaded';
 
 @Directive({
   selector: '[imagesLoaded]'
 })
-export class ImagesLoadedDirective implements OnInit, AfterContentInit,  OnDestroy {
+export class ImagesLoadedDirective implements OnInit, AfterContentInit, OnDestroy {
 
   constructor(
     private el: ElementRef
-  ) { 
+  ) {
 
   }
 
-  private imgLoad
-  private progress
+  private imgLoad;
+  private progress;
+
+  @Output() imagesLoaded = new EventEmitter<any>();
 
 
   ngOnInit() {
-    
+
   }
   ngAfterContentInit() {
-    this.imgLoad = imagesLoaded(this.el.nativeElement)
-    this.imgLoad.on('done', instance => this.onDone(instance))
-    this.imgLoad.on('progress', this.onProgress)
-    this.imgLoad.on('fail', this.onFail)
+    this.imgLoad = imagesLoaded(this.el.nativeElement);
+    this.imgLoad.on('done', instance => this.onDone(instance));
+    this.imgLoad.on('progress', this.onProgress);
+    this.imgLoad.on('fail', this.onFail);
   }
 
   ngOnDestroy() {
@@ -35,13 +37,9 @@ export class ImagesLoadedDirective implements OnInit, AfterContentInit,  OnDestr
   }
   onDone(instance) {
     // console.log('images loaded', instance)
-    this.imagesLoaded.emit(instance)
+    this.imagesLoaded.emit(instance);
   }
   onFail(instance) {
     // console.log('fail', instance)
   }
-
-  @Output() imagesLoaded = new EventEmitter<any>()
-
-
 }

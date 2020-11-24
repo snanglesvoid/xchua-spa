@@ -1,22 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-// import { trigger, animate, style, transition, query, stagger } from '@angular/animations'
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.less'],
   animations: [
-   
+
   ]
 })
 export class SpinnerComponent implements OnInit {
 
-  constructor() { 
+  constructor() {
 
   }
-  
+
   ngOnInit() {
-  
+
   }
 
 }

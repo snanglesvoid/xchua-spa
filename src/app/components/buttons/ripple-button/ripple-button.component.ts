@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { trigger, style, animate, state, query, transition } from '@angular/animations';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {trigger, style, animate, state, query, transition} from '@angular/animations';
 
 @Component({
   selector: 'app-ripple-button',
@@ -18,10 +18,10 @@ import { trigger, style, animate, state, query, transition } from '@angular/anim
             opacity: 0,
           }))
         ])
-      ], { optional: true }),
+      ], {optional: true}),
       query(':leave', [
         transition('* <=> *', [
-         
+
         ])
       ])
     ])
@@ -29,27 +29,25 @@ import { trigger, style, animate, state, query, transition } from '@angular/anim
 })
 export class RippleButtonComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
-    ;(window as any).btn = this
-  }
+  constructor() {}
 
   @Output()
-  click = new EventEmitter<any>()
+  click = new EventEmitter<any>();
 
-  onclick($event) {
-    this.click.emit($event)
+  ripples = [];
+
+  ngOnInit() {
   }
 
-  ripples = []
+  onclick($event: any) {
+    this.click.emit($event);
+  }
 
-  ripple(x, y) {
-    let r = {x: x, y: y}
-    this.ripples.push(r)
+  ripple(x: number, y: number) {
+    const r = {x, y};
+    this.ripples.push(r);
     setTimeout(() => {
-      this.ripples.splice(this.ripples.indexOf(r), 1)
-    }, 1500)
+      this.ripples.splice(this.ripples.indexOf(r), 1);
+    }, 1500);
   }
-
 }

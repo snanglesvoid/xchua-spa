@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { trigger, animate, transition, style, state } from '@angular/animations'
+import {Component, OnInit} from '@angular/core';
+import {trigger, animate, transition, style, state} from '@angular/animations';
 
 @Component({
   selector: 'app-wechat',
@@ -7,27 +7,27 @@ import { trigger, animate, transition, style, state } from '@angular/animations'
   styleUrls: ['./wechat.component.less'],
   animations: [
     trigger('fadeIn', [
-      state('out', style({ opacity: 0 })),
-      state('in', style({ opacity: 1 })),
+      state('out', style({opacity: 0})),
+      state('in', style({opacity: 1})),
       transition('out => in', [
-        style({ opacity: 0 }),
-        animate('1000ms ease-out', style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate('1000ms ease-out', style({opacity: 1}))
       ])
     ])
   ]
 })
 export class WechatComponent implements OnInit {
 
-  loading = true
+  loading = true;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    setTimeout(() => this.loading = false, 1000)
+    setTimeout(() => this.loading = false, 1000);
   }
 
   fadeState() {
-    return this.loading ? 'out' : 'in'
+    return this.loading ? 'out' : 'in';
   }
 }
- 
+
