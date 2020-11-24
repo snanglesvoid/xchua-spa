@@ -1,0 +1,63 @@
+:host {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+:host.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.form-container {
+  background: white;
+  margin-top: 50vh;
+  margin-left: 50vw;
+  padding: 2rem;
+  transform: translate(-50%, -50%);
+  max-width: calc(600px + 4rem);
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+  z-index: 9999;
+  cursor: pointer;
+  outline: 0;
+  transition: transform 0.7s ease;
+  background: transparent;
+  border: 0;
+  font-size: 3rem;
+
+  div {
+    width: 20px;
+    height: 2px;
+    background: white;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transform-origin: right;
+  }
+
+  div:first-child {
+    transform: rotate(-45deg);
+  }
+  div:nth-child(2) {
+    background: transparent;
+  }
+  div:last-child {
+    transform: rotate(45deg);
+  }
+}
+
+.close:hover {
+  transform: scale(1.2) rotate(90deg);
+}

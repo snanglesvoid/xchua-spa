@@ -1,4 +1,8 @@
-<button (click)="toggleNav()" [class.open]="open">
+<button
+  (click)="toggleNav()"
+  [class.open]="open"
+  [style.visibility]="navColor.hidden ? 'hidden' : 'visible'"
+>
   <div [style.background]="navColor.textColor"></div>
   <div [style.background]="navColor.textColor"></div>
   <div [style.background]="navColor.textColor"></div>

@@ -1,0 +1,67 @@
+<div>
+  <h3>
+    <app-snippet snippet="viewing-room-email-message"></app-snippet>
+  </h3>
+  <form>
+    <input type="hidden" name="action" value="email" />
+    <div class="form-group" [class.has-error]="validationErrors.name">
+      <label for="name.full">
+        <app-snippet snippet="contact-name"></app-snippet>
+      </label>
+      <input
+        class="form-control"
+        type="text"
+        name="name.full"
+        [(ngModel)]="data.name"
+        [placeholder]="placeholder('name') | snippet: lang.language | async"
+      />
+    </div>
+
+    <div class="form-group" [class.has-error]="validationErrors.email">
+      <label for="email">
+        <app-snippet snippet="contact-email"></app-snippet>
+      </label>
+      <input
+        class="form-control"
+        type="email"
+        name="email"
+        [(ngModel)]="data.email"
+        [placeholder]="placeholder('email') | snippet: lang.language | async"
+      />
+    </div>
+
+    <div class="form-group" id="email2">
+      <label for="email2">Email2</label>
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="data.email2"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group check" [class.has-error]="validationErrors.agree">
+      <div class="checkmark-container">
+        <input
+          type="checkbox"
+          name="data-agree"
+          [(ngModel)]="data['data-agree']"
+        />
+        <span class="checkmark"></span>
+      </div>
+      <span>
+        <app-snippet snippet="data-policy-agree"></app-snippet>&nbsp;
+        <a href="/pages/data-protection-agreement" target="_blank">
+          <em><app-snippet snippet="data-policy-name"></app-snippet></em>.
+        </a>
+      </span>
+    </div>
+    <br />
+
+    <div class="form-actions">
+      <button class="btn btn-primary" (click)="send()">
+        <app-snippet snippet="contact-send"></app-snippet>
+      </button>
+    </div>
+  </form>
+</div>

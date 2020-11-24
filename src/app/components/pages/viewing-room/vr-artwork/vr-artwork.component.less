@@ -1,0 +1,56 @@
+:host {
+  display: grid;
+  grid-template-columns: 61% 39%;
+  column-gap: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 8rem;
+  padding-bottom: 4rem;
+  height: 100vh;
+}
+
+.img-container {
+  position: relative;
+  max-height: calc(100vh - 12rem);
+}
+
+:host ::ng-deep .img {
+  object-fit: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.caption {
+  width: 100%;
+  text-align: center;
+  grid-column: 2;
+  position: relative;
+
+  .inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.inquire-button {
+  border: 1px solid transparent;
+  font-size: 1.5rem;
+  border-radius: 3px;
+  background: black;
+  color: white;
+  line-height: 3rem;
+  height: 3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+.inquire-button:hover {
+  color: black;
+  border: 1px solid black;
+}

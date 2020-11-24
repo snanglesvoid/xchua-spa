@@ -2,14 +2,31 @@
   <h3><app-snippet snippet="artists-title"></app-snippet></h3>
 </app-page-header>
 
+<app-tabbar>
+  <li [class.active]="residentSection.active">
+    <div>
+      <a (click)="scrollpane.scrollToSection(residentSection)">
+        <app-snippet snippet="artists-resident"></app-snippet>
+      </a>
+    </div>
+  </li>
+  <li [class.active]="guestSection.active">
+    <div>
+      <a (click)="scrollpane.scrollToSection(guestSection)">
+        <app-snippet snippet="artists-guest"></app-snippet>
+      </a>
+    </div>
+  </li>
+</app-tabbar>
+
 <app-page-body>
   <div class="list-container">
-    <app-scrollpane [showLines]="false">
+    <app-scrollpane [showLines]="false" [showTabbar]="false" #scrollpane>
       <app-scrollpane-section
         #residentSection
         snippet="artists-resident"
         active="true"
-        [navlink]="false"
+        style="min-height: 90vh;"
       >
         <ul class="artists-list">
           <li
@@ -29,7 +46,7 @@
           </li>
         </ul>
       </app-scrollpane-section>
-      <!-- <app-scrollpane-section #guestSection snippet="artists-guest">
+      <app-scrollpane-section #guestSection snippet="artists-guest">
         <ul class="artists-list">
           <li
             class="artist-link"
@@ -44,7 +61,7 @@
             </a>
           </li>
         </ul>
-      </app-scrollpane-section> -->
+      </app-scrollpane-section>
 
       <div style="height: 300px;"></div>
     </app-scrollpane>

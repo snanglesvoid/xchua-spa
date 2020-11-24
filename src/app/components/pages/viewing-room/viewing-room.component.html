@@ -1,0 +1,21 @@
+<app-page-header> </app-page-header>
+
+<app-page-body>
+  <app-scrollpane>
+    <div *ngIf="detailsKnown">
+      <div
+        *ngFor="let block of blocks$ | async"
+        appScrollTo
+        [ratio]="0.9"
+        (inViewport)="blockInViewport($event, block)"
+      >
+        <app-content-block [block]="block"></app-content-block>
+      </div>
+    </div>
+    <div *ngIf="!detailsKnown" class="email-form-container">
+      <app-email-form
+        (emailRegistered)="emailRegistered($event)"
+      ></app-email-form>
+    </div>
+  </app-scrollpane>
+</app-page-body>

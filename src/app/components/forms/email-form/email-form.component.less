@@ -1,0 +1,31 @@
+@import "../../../../styles/variables.less";
+
+:host {
+  display: block;
+  padding: 8px;
+  padding-right: 16px;
+  max-width: 600px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+#email2 {
+  display: none;
+}
+
+.form-group,
+.form-control {
+  max-width: unset;
+}
+
+.form-group.check {
+  height: 2rem;
+}
+
+:host ::ng-deep a:hover span,
+:host ::ng-deep a:hover {
+  border-bottom: 1px solid black;
+  display: inline-block;
+  text-decoration: none;
+}

@@ -26,4 +26,12 @@ export class NavColorService {
       this.textColor = 'black';
     }
   }
+
+  private mHidden = false;
+  public set hidden(hidden: boolean) {
+    this.mHidden = hidden;
+  }
+  public get hidden() {
+    return this.mHidden;
+  }
 }

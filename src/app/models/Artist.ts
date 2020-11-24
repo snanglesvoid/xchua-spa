@@ -1,14 +1,12 @@
-import { Name, Model } from "./Model";
-import { CloudinaryImageModel, CloudinaryImage } from "./CloudinaryImage";
-import { Language } from "../services/language.service";
-import { ApiService } from "../services/api.service";
-import { ArtworkSeries } from "./ArtworkSeries";
-import { Exhibition } from "./Exhibition";
-import { Fair } from "./Fair";
+import {Name, Model} from './Model';
+import {CloudinaryImageModel, CloudinaryImage} from './CloudinaryImage';
+import {Language} from '../services/language.service';
+import {ApiService} from '../services/api.service';
+import {ArtworkSeries} from './ArtworkSeries';
+import {Exhibition} from './Exhibition';
+import {Fair} from './Fair';
 
-import { Observable, from, of } from "rxjs";
-
-export type ArtistType = "resident" | "guest";
+export type ArtistType = 'resident' | 'guest';
 
 export interface ArtworkModel {
   _id: string;
@@ -43,17 +41,17 @@ export class Artwork extends Model {
     this._image = new CloudinaryImage(this.api, model.image);
     this._title = this.model.title.english;
     this._description = this.model.description
-      ? this.model.description.english || ""
-      : "NULL";
+      ? this.model.description.english || ''
+      : 'NULL';
     this._artist =
-      typeof model.artist === "string"
+      typeof model.artist === 'string'
         ? model.artist
         : model.artist
-        ? new Artist(api, model.artist)
-        : null;
+          ? new Artist(api, model.artist)
+          : null;
     this._artistName = this.model.artistName
-      ? this.model.artistName.english || ""
-      : "";
+      ? this.model.artistName.english || ''
+      : '';
 
     //   console.log('new artwork', model.artistName, model.title.english)
   }
@@ -81,13 +79,13 @@ export class Artwork extends Model {
     return this._pictures;
   }
   public get year() {
-    return this.model.year || "";
+    return this.model.year || '';
   }
   public get dimensions() {
-    return this.model.dimensions || "";
+    return this.model.dimensions || '';
   }
   public get price() {
-    return this.model.price || "";
+    return this.model.price || '';
   }
   public get availability() {
     return this.model.availability;
@@ -108,19 +106,21 @@ export class Artwork extends Model {
     super.translate(language);
     this._title = this.model.title[language] || this.model.title.english;
     this._description = this.model.description
-      ? this.model.description[language] || this.model.description.english || ""
-      : "NULL";
+      ? this.model.description[language] || this.model.description.english || ''
+      : 'NULL';
     this._artistName = this.model.artistName
-      ? this.model.artistName[language] || this.model.artistName.english || ""
-      : "NULL";
-    if (this.artist instanceof Artist) this.artist.translate(language);
+      ? this.model.artistName[language] || this.model.artistName.english || ''
+      : 'NULL';
+    if (this.artist instanceof Artist) {
+      this.artist.translate(language);
+    }
   }
 
   public async populate(field: string) {
-    if (field === "artist") {
-      return Promise.reject("not implemented");
+    if (field === 'artist') {
+      return Promise.reject('not implemented');
     } else {
-      return Promise.reject("Unknown Field Name: " + field);
+      return Promise.reject('Unknown Field Name: ' + field);
     }
   }
 }
@@ -139,7 +139,7 @@ export interface ArtistModel {
     german?: string;
     chinese?: string;
   };
-  cvUpload?: { filename: string; size: number; mimetype: string };
+  cvUpload?: {filename: string; size: number; mimetype: string};
   picture?: CloudinaryImageModel;
   thumbnail?: CloudinaryImageModel;
   selectedWork?: ArtworkModel | string;
@@ -151,7 +151,7 @@ export class Artist extends Model {
     super(api);
     this._picture = new CloudinaryImage(this.api, this.model.picture);
     this._thumbnail = new CloudinaryImage(this.api, this.model.thumbnail);
-    if (model.selectedWork && typeof model.selectedWork !== "string") {
+    if (model.selectedWork && typeof model.selectedWork !== 'string') {
       this._selectedWork = new Artwork(api, model.selectedWork as ArtworkModel);
     } else {
       this._selectedWork = model.selectedWork as string;
@@ -209,9 +209,9 @@ export class Artist extends Model {
     }
     if (this.model.biography) {
       this._biography =
-        this.model.biography[language] || this.model.biography.english || "";
+        this.model.biography[language] || this.model.biography.english || '';
     } else {
-      this._biography = "";
+      this._biography = '';
     }
     if (this._selectedWork instanceof Artwork) {
       this._selectedWork.translate(language);
@@ -231,19 +231,19 @@ export class Artist extends Model {
   }
 
   async populate(field: string) {
-    if (field === "selectedWork") {
+    if (field === 'selectedWork') {
       if (this._selectedWork instanceof Artwork) {
-        return Promise.resolve("Already populated");
+        return Promise.resolve('Already populated');
       } else {
-        //TODO
-        return Promise.reject("Not implemented");
+        // TODO
+        return Promise.reject('Not implemented');
       }
-    } else if (field === "artworks") {
+    } else if (field === 'artworks') {
       if (this.artworks) {
         return Promise.resolve(this.artworks);
       }
       try {
-        let aws = await this.api.artworks.waitForData();
+        const aws = await this.api.artworks.waitForData();
         this._artworks = aws.filter(aw => {
           (aw.artist as string) === this.id;
         });
@@ -254,14 +254,14 @@ export class Artist extends Model {
       } catch (error) {
         return Promise.reject(error);
       }
-    } else if (field === "series") {
-      return Promise.reject("Not implemented");
-    } else if (field === "exhibitions") {
-      return Promise.reject("Not implemented");
-    } else if (field === "fairs") {
-      return Promise.reject("Not implemented");
+    } else if (field === 'series') {
+      return Promise.reject('Not implemented');
+    } else if (field === 'exhibitions') {
+      return Promise.reject('Not implemented');
+    } else if (field === 'fairs') {
+      return Promise.reject('Not implemented');
     } else {
-      return Promise.reject("Unknown field name: " + field);
+      return Promise.reject('Unknown field name: ' + field);
     }
   }
 }

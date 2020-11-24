@@ -1,0 +1,30 @@
+<app-smart-image
+  *ngIf="block.image"
+  [size]="0"
+  imageClass="title-image"
+  [image]="block.image"
+></app-smart-image>
+
+<div class="heading" *ngIf="block.headline">
+  <h1>{{ block.headline }}</h1>
+</div>
+
+<div class="text" [innerHTML]="safeText">
+  <!--lorem-->
+  <!-- <p>In et augue.</p> -->
+
+  <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> -->
+
+  <!-- <p> -->
+  <!--   Phasellus mollis dictum nulla. Integer vitae neque vitae eros fringilla -->
+  <!--   rutrum. Vestibulum in pede adipiscing mi dapibus condimentum. Etiam felis -->
+  <!--   risus, condimentum in, malesuada eget, pretium ut, sapien. Suspendisse -->
+  <!--   placerat lectus venenatis lorem. Sed accumsan aliquam enim. Etiam hendrerit, -->
+  <!--   metus eu semper rutrum, nisl elit pharetra purus, non interdum nibh enim -->
+  <!--   eget augue. Sed mauris. Nam varius odio a sapien. Aenean rutrum dictum -->
+  <!--   sapien. Fusce pharetra elementum ligula. Nunc eu mi non augue iaculis -->
+  <!--   facilisis. Morbi interdum. Donec nisi arcu, rhoncus ac, vestibulum ut, -->
+  <!--   pellentesque nec, risus. Maecenas tempus facilisis neque. Nulla. -->
+  <!-- </p> -->
+  <!--/lorem-->
+</div>

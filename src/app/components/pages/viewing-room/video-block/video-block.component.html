@@ -1,0 +1,9 @@
+<ng-container *ngIf="block.vimeoLink">
+  <iframe
+    [src]="safeUrl"
+    frameborder="0"
+    allowfullscreen="allowfullscreen"
+    onload="this.width=screen.width; this.height=screen.width*9/16"
+  >
+  </iframe>
+</ng-container>

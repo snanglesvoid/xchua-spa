@@ -24,6 +24,9 @@ export class TabbarComponent implements OnInit, AfterContentInit, OnDestroy {
     setTimeout(() => {
       this.resize();
     }, 100);
+    setTimeout(() => {
+      this.resize();
+    }, 400);
   }
   ngOnDestroy(): void {
     this.sub.unsubscribe();

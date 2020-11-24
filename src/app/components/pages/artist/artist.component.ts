@@ -1,6 +1,6 @@
-import {Component, OnInit, OnDestroy, ViewChild} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
-import {Observable, Subject} from "rxjs";
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
 import {
   delay,
   map,
@@ -9,29 +9,47 @@ import {
   share,
   filter,
   delayWhen
-} from "rxjs/operators";
+} from 'rxjs/operators';
 
-import {ApiService} from "src/app/services/api.service";
+import {ApiService} from 'src/app/services/api.service';
 import {
   Artist,
   Exhibition,
   CloudinaryImage,
   Artwork,
   ArtworkSeries
-} from "src/app/models";
-import {ScrollpaneComponent} from "src/app/components/layout/scrollpane/scrollpane.component";
-import {ImageSize} from "src/app/components/common/smart-image/smart-image.component";
-import {LanguageService} from "src/app/services/language.service";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {ScrollpaneSectionComponent} from "../../layout/scrollpane-section/scrollpane-section.component";
+} from 'src/app/models';
+import {ScrollpaneComponent} from 'src/app/components/layout/scrollpane/scrollpane.component';
+import {ImageSize} from 'src/app/components/common/smart-image/smart-image.component';
+import {LanguageService} from 'src/app/services/language.service';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+import {ScrollpaneSectionComponent} from '../../layout/scrollpane-section/scrollpane-section.component';
 
 @Component({
-  selector: "app-artist",
-  templateUrl: "./artist-plain.component.html",
-  styleUrls: ["./artist.component.less"]
+  selector: 'app-artist',
+  templateUrl: './artist-plain.component.html',
+  styleUrls: ['./artist.component.less']
 })
 export class ArtistComponent implements OnInit, OnDestroy {
-  private _currentBackgroundIndex: number = -1;
+
+  get loading() {
+    const s = this.loadingState;
+    return !(s.series && s.exhibitions && s.backgroundImages);
+  }
+
+  get currentBackgroundIndex() {
+    return this._currentBackgroundIndex;
+  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private api: ApiService,
+    public lang: LanguageService,
+    private sanitizer: DomSanitizer
+  ) {
+  }
+
+  private _currentBackgroundIndex = -1;
 
   loadingState = {
     series: false,
@@ -44,15 +62,6 @@ export class ArtistComponent implements OnInit, OnDestroy {
     backgroundImages: boolean;
   }> = new Subject();
   loaded$: Observable<any>;
-
-  get loading() {
-    let s = this.loadingState;
-    return !(s.series && s.exhibitions && s.backgroundImages);
-  }
-
-  get currentBackgroundIndex() {
-    return this._currentBackgroundIndex;
-  }
   artist$: Observable<Artist>;
   artist: Artist;
   biography$: Observable<string>;
@@ -65,25 +74,34 @@ export class ArtistComponent implements OnInit, OnDestroy {
   cvUploadHref$: Observable<SafeUrl>;
   hasSeries = true;
   hasCvUpload = false;
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private api: ApiService,
-    public lang: LanguageService,
-    private sanitizer: DomSanitizer
-  ) {
-    (window as any).artistComponent = this;
-  }
+
+  progress: any = {
+    ratio: 0,
+    done: false
+  };
+
+  @ViewChild(ScrollpaneComponent) scrollpane: ScrollpaneComponent;
+
+  textViewportState = 1;
+
+  tabbarHidden = true;
+  arrowHidden = true;
+
+  backgroundImageSize: ImageSize = ImageSize.FULLSCREEN;
+
+  @ViewChild('worksSection') worksSection: ScrollpaneSectionComponent;
+  @ViewChild('cvSection') cvSection: ScrollpaneSectionComponent;
+  @ViewChild('exhibitionsSection')
+  exhibitionsSection: ScrollpaneSectionComponent;
 
   ngOnInit() {
-    (window as any).ac = this;
     this.artist$ = this.route.paramMap.pipe(
       delay(5),
-      map(data => data.get("slug")),
+      map(data => data.get('slug')),
       switchMap(slug => this.api.artist.withArgs(slug)),
       tap(x => {
         if (!x) {
-          return this.router.navigate(["/page-not-found"]);
+          return this.router.navigate(['/page-not-found']);
         }
       }),
       map(artists => artists[0]),
@@ -97,7 +115,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
     this.artistName$ = this.artist$.pipe(
       map(artist =>
-        artist && artist.name ? artist.name.first + " " + artist.name.last : ""
+        artist && artist.name ? artist.name.first + ' ' + artist.name.last : ''
       )
     );
 
@@ -106,7 +124,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
     this.series$ = this.artist$.pipe(
       switchMap(artist => this.api.artworkSeries.withArgs(artist.id)),
       tap(xs => {
-        console.log("series evaluated", xs);
+        console.log('series evaluated', xs);
         this.loadingState.series = true;
         this.hasSeries = xs && xs.length > 1;
         this.loadingProgess$.next(this.loadingState);
@@ -115,7 +133,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
     );
 
     this.cvUploadHref$ = this.artist$.pipe(
-      tap(x => console.log("upload", x.cvUpload)),
+      tap(x => console.log('upload', x.cvUpload)),
       filter(x => x.cvUpload !== undefined),
       map(x => x.cvUpload),
       tap(_ => (this.hasCvUpload = true)),
@@ -135,7 +153,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
     this.exhibitions$ = this.artist$.pipe(
       switchMap(artist => this.api.exhibitions.withArgs(artist.id)),
       tap(_ => {
-        console.log("exhibitions evaluated");
+        console.log('exhibitions evaluated');
         this.loadingState.exhibitions = true;
         this.loadingProgess$.next(this.loadingState);
       }),
@@ -148,7 +166,7 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
     this.loaded$ = this.loadingProgess$.pipe(
       filter(x => x.series && x.backgroundImages && x.exhibitions),
-      tap(_ => console.log("loaded!"))
+      tap(_ => console.log('loaded!'))
     );
     this.loadingProgess$.subscribe(console.log, console.error);
   }
@@ -157,10 +175,6 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
   inViewportChange(image: CloudinaryImage | Artwork, event: number) {
     image.animationState = event;
-  }
-
-  backgroundSlideChanged(event) {
-    // console.log('background slide changed: ', event)
   }
 
   sectionActiveChange(
@@ -173,7 +187,9 @@ export class ArtistComponent implements OnInit, OnDestroy {
       // console.log('top')
       this.tabbarHidden = active;
     }
-    if (!active) { return; }
+    if (!active) {
+      return;
+    }
     if (!series) {
       this._currentBackgroundIndex = -1;
     } else {
@@ -184,13 +200,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
       }, 300);
     }
   }
-
-  progress: any = {
-    ratio: 0,
-    done: false
-  };
-  backgroundLoadingProgress($event) {
-    console.log("background loading progress", $event.ratio);
+  backgroundLoadingProgress($event: any) {
+    console.log('background loading progress', $event.ratio);
     this.progress = $event;
 
     if (this.progress.ratio >= 1) {
@@ -201,8 +212,6 @@ export class ArtistComponent implements OnInit, OnDestroy {
       }, 600);
     }
   }
-
-  @ViewChild(ScrollpaneComponent) scrollpane: ScrollpaneComponent;
 
   downArrowClicked() {
     const sections = this.scrollpane.sections.toArray();
@@ -216,25 +225,13 @@ export class ArtistComponent implements OnInit, OnDestroy {
     this.showArrow(false);
   }
 
-  textViewportState = 1;
-
-  tabbarHidden = true;
-  arrowHidden = true;
-
-  showArrow(event) {
+  showArrow(event: any) {
     // console.log('show arrow ', event)
     this.arrowHidden = !event;
   }
 
-  backgroundImageSize: ImageSize = ImageSize.FULLSCREEN;
-
-  @ViewChild("worksSection") worksSection: ScrollpaneSectionComponent;
-  @ViewChild("cvSection") cvSection: ScrollpaneSectionComponent;
-  @ViewChild("exhibitionsSection")
-  exhibitionsSection: ScrollpaneSectionComponent;
-
   scrollToSeries(s: ArtworkSeries) {
-    const section = this.scrollpane.sections.find(x => x.snippet == s.title);
+    const section = this.scrollpane.sections.find(x => x.snippet === s.title);
     this.scrollpane.scrollToSection(section);
   }
 

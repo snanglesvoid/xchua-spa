@@ -1,0 +1,19 @@
+<ng-container *ngIf="block.type === 'Title Image'">
+  <app-title-image-block [block]="block"></app-title-image-block>
+</ng-container>
+
+<ng-container *ngIf="block.type === 'Artwork Display'">
+  <app-artwork-display-block [block]="block"></app-artwork-display-block>
+</ng-container>
+
+<ng-container *ngIf="block.type === 'Quote'">
+  <app-quote-block [block]="block"></app-quote-block>
+</ng-container>
+
+<ng-container *ngIf="block.type === 'Text'">
+  <app-text-content-block [block]="block"></app-text-content-block>
+</ng-container>
+
+<ng-container *ngIf="block.type === 'Video'">
+  <app-video-block [block]="block"></app-video-block>
+</ng-container>

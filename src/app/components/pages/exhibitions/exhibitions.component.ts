@@ -1,27 +1,17 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { ApiService } from "src/app/services/api.service";
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {ApiService} from 'src/app/services/api.service';
 
-import {
-  trigger,
-  state,
-  transition,
-  style,
-  query,
-  animate
-} from "@angular/animations";
-import { Exhibition } from "src/app/models/Exhibition";
-import { GallerySpace } from "src/app/models/GallerySpace";
-import { Observable, interval, of, from } from "rxjs";
-import { scan, map, takeWhile } from "rxjs/operators";
+import {Exhibition} from 'src/app/models/Exhibition';
+import {Observable, of} from 'rxjs';
 
 @Component({
-  selector: "app-exhibitions",
-  templateUrl: "./exhibitions.component.html",
-  styleUrls: ["./exhibitions.component.less"],
+  selector: 'app-exhibitions',
+  templateUrl: './exhibitions.component.html',
+  styleUrls: ['./exhibitions.component.less'],
   animations: []
 })
 export class ExhibitionsComponent implements OnInit, OnDestroy {
-  private dataChangeSubscription;
+  private dataChangeSubscription: any;
   loading = true;
 
   exhibitions: Exhibition[] = [];
@@ -45,7 +35,7 @@ export class ExhibitionsComponent implements OnInit, OnDestroy {
   }
 
   async updateData() {
-    this.loading = false;
+    this.loading = true;
     if (this.stream) {
       this.stream = of(null);
     }
@@ -62,7 +52,7 @@ export class ExhibitionsComponent implements OnInit, OnDestroy {
     // this.stream = of(this.exhibitions)
 
     this.stream.subscribe(x => {
-      if (x.length == this.exhibitions.length) {
+      if (x.length === this.exhibitions.length) {
         this.loading = false;
 
         setTimeout(() => window.scrollTo(0, 1), 150);

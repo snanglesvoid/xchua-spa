@@ -1,0 +1,24 @@
+<div class="img-container">
+  <app-smart-image [image]="artwork.image" [size]="1" imageClass="img">
+  </app-smart-image>
+</div>
+
+<div class="caption">
+  <div class="inner">
+    <p>
+      <a class="artist-link">{{ artwork.artistName }}</a>
+      {{ artwork.title }}
+      <span *ngIf="artwork.year">,&nbsp;{{ artwork.year }} </span>
+      <br />
+      <span *ngIf="artwork.description">
+        {{ artwork.description }} <br />
+      </span>
+      <span *ngIf="artwork.dimensions">
+        {{ artwork.dimensions }}
+      </span>
+    </p>
+    <button class="btn btn-primary inquire-button" (click)="inquire()">
+      <app-snippet snippet="viewing-room-inquire-button"></app-snippet>
+    </button>
+  </div>
+</div>
