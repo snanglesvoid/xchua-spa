@@ -87,16 +87,16 @@ import {SlideshowCursorControllerComponent} from './components/common/slideshow-
 import {SlideshowSimpleComponent} from './components/common/slideshow-simple/slideshow-simple.component';
 import {ViewingRoomsComponent} from './components/pages/viewing-rooms/viewing-rooms.component';
 import {ViewingRoomComponent} from './components/pages/viewing-room/viewing-room.component';
-import { ContentBlockComponent } from './components/pages/viewing-room/content-block/content-block.component';
-import { TitleImageBlockComponent } from './components/pages/viewing-room/title-image-block/title-image-block.component';
-import { ArtworkDisplayBlockComponent } from './components/pages/viewing-room/artwork-display-block/artwork-display-block.component';
-import { TextContentBlockComponent } from './components/pages/viewing-room/text-content-block/text-content-block.component';
-import { QuoteBlockComponent } from './components/pages/viewing-room/quote-block/quote-block.component';
-import { VideoBlockComponent } from './components/pages/viewing-room/video-block/video-block.component';
-import { EmailFormComponent } from './components/forms/email-form/email-form.component';
-import { ContactModalComponent } from './components/common/contact-modal/contact-modal.component';
-import { VrArtworkComponent } from './components/pages/viewing-room/vr-artwork/vr-artwork.component';
-import { ArtworkDisplayCarouselComponent } from './components/pages/viewing-room/artwork-display-carousel/artwork-display-carousel.component';
+import {ContentBlockComponent} from './components/pages/viewing-room/content-block/content-block.component';
+import {TitleImageBlockComponent} from './components/pages/viewing-room/title-image-block/title-image-block.component';
+import {ArtworkDisplayBlockComponent} from './components/pages/viewing-room/artwork-display-block/artwork-display-block.component';
+import {TextContentBlockComponent} from './components/pages/viewing-room/text-content-block/text-content-block.component';
+import {QuoteBlockComponent} from './components/pages/viewing-room/quote-block/quote-block.component';
+import {VideoBlockComponent} from './components/pages/viewing-room/video-block/video-block.component';
+import {EmailFormComponent} from './components/forms/email-form/email-form.component';
+import {ContactModalComponent} from './components/common/contact-modal/contact-modal.component';
+import {VrArtworkComponent} from './components/pages/viewing-room/vr-artwork/vr-artwork.component';
+import {ArtworkDisplayCarouselComponent} from './components/pages/viewing-room/artwork-display-carousel/artwork-display-carousel.component';
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -212,12 +212,14 @@ const cookieConfig: NgcCookieConsentConfig = {
       border: '1px solid #424242'
     }
   },
-  type: 'info',
+  /* type: 'info', */
+  type: 'opt-in',
   content: {
     message:
       'This website uses cookies to ensure you get the best experience on our website.',
-    dismiss: 'Got it!',
-    deny: 'Refuse cookies',
+    allow: 'Allow',
+    /* dismiss: 'Got it!', */
+    deny: 'Refuse',
     link: 'Learn more',
     href: 'https://cookiesandyou.com',
     policy: 'Cookie Policy'
