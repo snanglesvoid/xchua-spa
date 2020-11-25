@@ -23,14 +23,14 @@ export class LanguageService {
         this._lang = 'english';
       }
       if (this.cookie.get('consent')) {
-        this.cookie.set('_language', this._lang, 365);
+        this.cookie.set('_language', this._lang, 365, '/', 'hua-international.com', true);
       } else {
         console.log('no cookie consent');
       }
     } else {
       this._lang = 'english';
       if (this.cookie.get('consent')) {
-        this.cookie.set('_language', 'english', 365);
+        this.cookie.set('_language', 'english', 365, '/', 'hua-international.com', true);
       } else {
         console.warn('no cookie consent');
       }
@@ -48,7 +48,7 @@ export class LanguageService {
   public set language(value: Language) {
     this._lang = value;
     if (this.cookie.get('consent')) {
-      this.cookie.set('_language', value, 365);
+      this.cookie.set('_language', value, 365, '/', 'hua-international.com', true);
     } else {
       console.warn('no cookie consent');
     }

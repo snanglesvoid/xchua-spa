@@ -56,8 +56,8 @@ export class AppComponent implements OnInit, OnDestroy {
     this.popupCloseSubscription = this.ccs.popupClose$.subscribe(() => {
       // you can use this.ccs.getConfig() to do stuff...
       /* console.log('ccs popup close') */
-      this.cookie.set('consent', 'true', 365);
-      this.cookie.set('_language', this.lang.language);
+      this.cookie.set('consent', 'true', 365, '/', 'hua-international.com', true);
+      this.cookie.set('_language', this.lang.language, 365, '/', 'hua-international.com', true);
     });
 
     this.initializeSubscription = this.ccs.initialize$.subscribe(

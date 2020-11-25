@@ -95,7 +95,7 @@ export class ViewingRoomComponent implements OnInit, OnDestroy {
   emailRegistered($event: any) {
     this.email = $event.email;
     this.name = $event.name;
-    this.cookie.set('email', this.email);
-    this.cookie.set('name', this.name);
+    this.cookie.set('email', this.email, 365, '/', 'hua-international.com', true);
+    this.cookie.set('name', this.name, 365, '/', 'hua-international.com', true);
   }
 }
