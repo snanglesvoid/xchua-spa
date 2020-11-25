@@ -34,6 +34,7 @@ export class ViewingRoomComponent implements OnInit, OnDestroy {
   activeBlock: ContentBlock;
 
   ngOnInit() {
+    (window as any).cookie = this.cookie;
     this.navC.hidden = true;
     this.viewingRoom$ = this.route.paramMap.pipe(
       delay(5),
