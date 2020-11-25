@@ -2,22 +2,22 @@
   <h3><app-snippet snippet="artists-title"></app-snippet></h3>
 </app-page-header>
 
-<app-tabbar>
-  <li [class.active]="residentSection.active">
-    <div>
-      <a (click)="scrollpane.scrollToSection(residentSection)">
-        <app-snippet snippet="artists-resident"></app-snippet>
-      </a>
-    </div>
-  </li>
-  <li [class.active]="guestSection.active">
-    <div>
-      <a (click)="scrollpane.scrollToSection(guestSection)">
-        <app-snippet snippet="artists-guest"></app-snippet>
-      </a>
-    </div>
-  </li>
-</app-tabbar>
+<!-- <app-tabbar> -->
+<!--   <li [class.active]="residentSection.active"> -->
+<!--     <div> -->
+<!--       <a (click)="scrollpane.scrollToSection(residentSection)"> -->
+<!--         <app-snippet snippet="artists-resident"></app-snippet> -->
+<!--       </a> -->
+<!--     </div> -->
+<!--   </li> -->
+<!--   <li [class.active]="guestSection.active"> -->
+<!--     <div> -->
+<!--       <a (click)="scrollpane.scrollToSection(guestSection)"> -->
+<!--         <app-snippet snippet="artists-guest"></app-snippet> -->
+<!--       </a> -->
+<!--     </div> -->
+<!--   </li> -->
+<!-- </app-tabbar> -->
 
 <app-page-body>
   <div class="list-container">
@@ -32,9 +32,7 @@
           <li
             class="artist-link"
             *ngFor="let artist of residentArtists; let i = index"
-            [class.section-active]="residentSection.active"
             [@linkEnter]="linkEnter(i)"
-            (@linkEnter.done)="allAnimationsDone(i)"
             (mouseenter)="artistMouseover(artist)"
             (press)="artistMouseover(artist)"
           >
@@ -45,13 +43,13 @@
             </a>
           </li>
         </ul>
-      </app-scrollpane-section>
-      <app-scrollpane-section #guestSection snippet="artists-guest">
+        <h3>
+          <app-snippet snippet="artists-guest"></app-snippet>
+        </h3>
         <ul class="artists-list">
           <li
             class="artist-link"
             *ngFor="let artist of guestArtists; let i = index"
-            [class.section-active]="guestSection.active"
             [@linkEnter]="linkEnter(i + residentArtists.length)"
             (mouseenter)="artistMouseover(artist)"
             (press)="artistMouseover(artist)"
@@ -62,6 +60,23 @@
           </li>
         </ul>
       </app-scrollpane-section>
+
+      <!-- <app-scrollpane-section #guestSection snippet="artists-guest"> -->
+      <!--   <ul class="artists-list"> -->
+      <!--     <li -->
+      <!--       class="artist-link" -->
+      <!--       *ngFor="let artist of guestArtists; let i = index" -->
+      <!--       [class.section-active]="guestSection.active" -->
+      <!--       [@linkEnter]="linkEnter(i + residentArtists.length)" -->
+      <!--       (mouseenter)="artistMouseover(artist)" -->
+      <!--       (press)="artistMouseover(artist)" -->
+      <!--     > -->
+      <!--       <a routerLink="/artists/{{ artist.slug }}"> -->
+      <!--         {{ artist.name.first + " " + artist.name.last }} -->
+      <!--       </a> -->
+      <!--     </li> -->
+      <!--   </ul> -->
+      <!-- </app-scrollpane-section> -->
 
       <div style="height: 300px;"></div>
     </app-scrollpane>
