@@ -212,13 +212,13 @@ const cookieConfig: NgcCookieConsentConfig = {
       border: '1px solid #424242'
     }
   },
-  /* type: 'info', */
-  type: 'opt-in',
+  type: 'info',
+  /* type: 'opt-in', */
   content: {
     message:
       'This website uses cookies to ensure you get the best experience on our website.',
     allow: 'Allow',
-    /* dismiss: 'Got it!', */
+    dismiss: 'Got it!',
     deny: 'Refuse',
     link: 'Learn more',
     href: 'https://cookiesandyou.com',

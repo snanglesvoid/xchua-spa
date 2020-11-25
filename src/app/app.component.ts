@@ -22,7 +22,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private ccs: NgcCookieConsentService,
     private cookie: CookieService,
     private lang: LanguageService
-  ) {}
+  ) {
+    (window as any).ccs = this.ccs;
+    (window as any).cookie = this.cookie;
+  }
 
   title = 'xc-hua';
 

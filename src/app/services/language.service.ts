@@ -1,62 +1,62 @@
-import { Injectable, EventEmitter } from '@angular/core'
-import { CookieService } from 'ngx-cookie-service'
+import {Injectable, EventEmitter} from '@angular/core';
+import {CookieService} from 'ngx-cookie-service';
 
-export type Language = 'english' | 'german' | 'chinese'
+export type Language = 'english' | 'german' | 'chinese';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LanguageService {
   constructor(private cookie: CookieService) {
-    ;(window as any).languageService = this
+    (window as any).languageService = this;
 
-    let languageCookie = this.cookie.get('_language')
-    let browserLanguage = this.cookie.get('language')
+    const languageCookie = this.cookie.get('_language');
+    const browserLanguage = this.cookie.get('language');
     if (languageCookie) {
-      this._lang = languageCookie as Language
+      this._lang = languageCookie as Language;
     } else if (browserLanguage) {
       if (browserLanguage.startsWith('zh')) {
-        this._lang = 'chinese'
+        this._lang = 'chinese';
       } else if (browserLanguage.startsWith('de')) {
-        this._lang = 'german'
+        this._lang = 'german';
       } else {
-        this._lang = 'english'
+        this._lang = 'english';
       }
       if (this.cookie.get('consent')) {
-        this.cookie.set('_language', this._lang, 365)
+        this.cookie.set('_language', this._lang, 365);
       } else {
-        console.log('no cookie consent')
+        console.log('no cookie consent');
       }
     } else {
-      this._lang = 'english'
+      this._lang = 'english';
       if (this.cookie.get('consent')) {
-        this.cookie.set('_language', 'english', 365)
+        this.cookie.set('_language', 'english', 365);
       } else {
-        console.warn('no cookie consent')
+        console.warn('no cookie consent');
       }
     }
-    if (this._lang == 'chinese') {
-      document.title = '户尔空间'
+    if (this._lang === 'chinese') {
+      document.title = '户尔空间';
     }
   }
 
-  private _lang: Language
-  public languageChanged = new EventEmitter<Language>()
+  private _lang: Language;
+  public languageChanged = new EventEmitter<Language>();
   public get language() {
-    return this._lang
+    return this._lang;
   }
   public set language(value: Language) {
-    this._lang = value
+    this._lang = value;
     if (this.cookie.get('consent')) {
-      this.cookie.set('_language', value, 365)
+      this.cookie.set('_language', value, 365);
     } else {
-      console.warn('no cookie consent')
+      console.warn('no cookie consent');
     }
-    if (value == 'chinese') {
-      document.title = '户尔空间'
+    if (value === 'chinese') {
+      document.title = '户尔空间';
     } else {
-      document.title = 'XC.HuA'
+      document.title = 'Hua International';
     }
-    this.languageChanged.emit(value)
+    this.languageChanged.emit(value);
   }
 }
