@@ -1,16 +1,21 @@
 :host {
   display: block;
-  min-height: 100vh;
-  height: 100vh;
   position: relative;
-  max-width: 1300px;
+  max-width: 1000px;
   margin-left: 50%;
   transform: translateX(-50%);
   width: 100%;
+  padding-top: 12rem;
+  padding-bottom: 4rem;
 }
 
-app-html-block {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+:host.full-height {
+  min-height: 100vh;
+  height: 100vh;
+
+  app-html-block {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }

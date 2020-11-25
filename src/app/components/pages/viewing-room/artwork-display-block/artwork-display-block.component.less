@@ -1,8 +1,34 @@
+@import "../../../../../styles/variables.less";
+
 :host {
   display: block;
   position: relative;
   min-height: 100vh;
 }
 
-:host ::ng-deep artwork {
+:host.columns {
+  app-vr-artwork {
+    width: 50vw;
+    display: inline-block !important;
+  }
+}
+
+@media screen and (max-width: @size-md) {
+  :host.columns {
+    app-vr-artwork {
+      width: unset;
+      display: block !important;
+    }
+  }
+}
+
+:host.carousel {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  app-vr-artwork {
+    width: 50vw;
+    display: inline-block !important;
+  }
 }

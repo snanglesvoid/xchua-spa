@@ -1,9 +1,10 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, HostBinding} from '@angular/core';
 import {Artwork} from 'src/app/models';
 import {SmartImageComponent} from 'src/app/components/common/smart-image/smart-image.component';
 import {InquireService} from 'src/app/services/inquire.service';
 import {ContactFormData} from 'src/app/components/forms/contact-form/contact-form.component';
 import {CookieService} from 'ngx-cookie-service';
+import {ContentBlock} from 'src/app/models/ViewingRoom';
 
 @Component({
   selector: 'app-vr-artwork',
@@ -17,11 +18,23 @@ export class VrArtworkComponent implements OnInit {
     private cookie: CookieService,
   ) {}
 
+  @Input() block: ContentBlock;
+
   @Input() artwork: Artwork;
 
   @Input() imageClass: string;
 
   @ViewChild(SmartImageComponent) image: SmartImageComponent;
+
+  @HostBinding('class.right')
+  get isLeft() {
+    return this.block && this.block.layout === 'Image Right';
+  }
+
+  @HostBinding('class.columns')
+  get isColumns() {
+    return this.block && (this.block.layout === 'Columns' || this.block.layout === 'Carousel');
+  }
 
   ngOnInit() {
   }

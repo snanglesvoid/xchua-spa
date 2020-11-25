@@ -1,3 +1,5 @@
+@import "../../../../../styles/variables.less";
+
 :host {
   display: grid;
   grid-template-columns: 61% 39%;
@@ -7,6 +9,19 @@
   padding-top: 8rem;
   padding-bottom: 4rem;
   height: 100vh;
+}
+
+:host.right {
+  grid-template-columns: 39% 61%;
+  .img-container {
+    grid-column: 2;
+    grid-row: 1;
+    padding-right: 2rem;
+  }
+  .caption {
+    grid-column: 1;
+    grid-row: 1;
+  }
 }
 
 .img-container {
@@ -53,4 +68,64 @@
 .inquire-button:hover {
   color: black;
   border: 1px solid black;
+}
+
+:host.columns {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: block;
+  height: unset;
+
+  .img-container {
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 12rem);
+  }
+  .caption {
+    .inner {
+      transform: none !important;
+      position: relative !important;
+      top: 0;
+    }
+  }
+}
+:host.columns ::ng-deep {
+  .img {
+    position: relative;
+    max-height: calc(100vh - 12rem);
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: block;
+    height: unset;
+
+    .img-container {
+      width: calc(100vw - 2rem);
+      height: auto;
+      max-height: calc(100vh - 12rem);
+    }
+    .caption {
+      .inner {
+        transform: none !important;
+        position: relative !important;
+        top: 0;
+      }
+    }
+  }
+  :host ::ng-deep {
+    .img {
+      position: relative;
+      max-height: calc(100vh - 12rem);
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }

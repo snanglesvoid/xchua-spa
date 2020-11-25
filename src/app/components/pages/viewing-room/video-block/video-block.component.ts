@@ -1,11 +1,12 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectionStrategy} from '@angular/core';
 import {ContentBlock} from 'src/app/models/ViewingRoom';
 import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-block',
   templateUrl: './video-block.component.html',
-  styleUrls: ['./video-block.component.less']
+  styleUrls: ['./video-block.component.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VideoBlockComponent implements OnInit {
 

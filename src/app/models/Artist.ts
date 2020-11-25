@@ -245,7 +245,7 @@ export class Artist extends Model {
       try {
         const aws = await this.api.artworks.waitForData();
         this._artworks = aws.filter(aw => {
-          (aw.artist as string) === this.id;
+          return (aw.artist as string) === this.id;
         });
         this._artworks.forEach(aw => {
           aw.artist = this;
