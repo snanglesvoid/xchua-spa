@@ -89,6 +89,7 @@ export class ViewingRoomComponent implements OnInit, OnDestroy {
   }
 
   public get detailsKnown() {
+    return true;
     return this.email !== '' && this.name;
   }
 

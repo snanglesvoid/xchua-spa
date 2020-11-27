@@ -5,7 +5,7 @@ import {Language} from '../services/language.service';
 import {Model} from './Model';
 
 export type ContentBlockType = 'Title Image' | 'Artwork Display' | 'Quote' | 'Text' | 'Video';
-export type ArtworkDisplayLayout = 'Image Left' | 'Image Right' | 'Columns' | 'Carousel';
+export type ArtworkDisplayLayout = 'Image Top' | 'Image Left' | 'Image Right' | 'Columns' | 'Carousel';
 export type TextColorType = 'bright' | 'dark' | 'custom';
 
 export interface ContentBlockModel {

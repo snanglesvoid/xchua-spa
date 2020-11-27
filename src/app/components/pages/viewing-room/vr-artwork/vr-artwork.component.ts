@@ -36,6 +36,11 @@ export class VrArtworkComponent implements OnInit {
     return this.block && (this.block.layout === 'Columns' || this.block.layout === 'Carousel');
   }
 
+  @HostBinding('class.top')
+  get isTop() {
+    return this.block && this.block.layout === 'Image Top';
+  }
+
   ngOnInit() {
   }
 
