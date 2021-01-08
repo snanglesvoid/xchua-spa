@@ -13,8 +13,9 @@ import {NavColorService} from '../../services/nav-color.service';
 export class NavComponent implements OnInit {
 
   constructor(private router: Router, public navC: NavColorService) {
-    (window as any).nav = this;
+
   }
+
   isOpen = false;
   section: string;
 
@@ -41,19 +42,22 @@ export class NavComponent implements OnInit {
     this.isOpen = event;
     if (this.isOpen) {
       const pageElements = document.querySelectorAll('.full-page, .page');
-      console.log(pageElements);
-      for (let i = 0; i < pageElements.length; ++i) {
-        (pageElements[i] as HTMLDivElement).style.filter = 'grayscale(1)';
-      }
+
+      pageElements.forEach((e: HTMLDivElement) => {
+        e.style.filter = 'grayscale(1)';
+      });
+
       this.bcolor = this.navC.backgroundColor;
       this.tcolor = this.navC.textColor;
       this.navC.textColor = 'black';
       this.navC.backgroundColor = 'white';
     } else {
+
       const pageElements = document.querySelectorAll('.full-page, .page');
-      for (let i = 0; i < pageElements.length; ++i) {
-        (pageElements[i] as HTMLDivElement).style.filter = 'grayscale(0)';
-      }
+      pageElements.forEach((e: HTMLDivElement) => {
+        e.style.filter = 'grayscale(0)';
+      });
+
       this.navC.backgroundColor = this.bcolor || this.navC.backgroundColor;
       this.navC.textColor = this.tcolor || this.navC.textColor;
     }

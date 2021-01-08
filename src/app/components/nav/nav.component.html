@@ -8,78 +8,79 @@
   [style.background]="navC.backgroundColor"
   [style.display]="navC.hidden ? 'none' : 'block'"
 >
-  <app-logo></app-logo>
-  <!-- <br /> -->
-  <br />
-  <br />
-  <!-- <app-scrollpane [boxShadows]="false" [noPadding]="true"> -->
-  <!-- <app-navlink -->
-  <!--   (clicked)="navToggled(false)" -->
-  <!--   href="/" -->
-  <!--   section="home" -->
-  <!--   snippet="menu-home" -->
-  <!--   [active]="section == 'home'" -->
-  <!-- ></app-navlink> -->
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/artists"
-    section="artists"
-    snippet="menu-artists"
-    [active]="section == 'artists'"
-  ></app-navlink>
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/exhibitions"
-    section="exhibitions"
-    snippet="menu-exhibitions"
-    [active]="section == 'exhibitions'"
-  ></app-navlink>
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/fairs"
-    section="fairs"
-    snippet="menu-fairs"
-    [active]="section == 'fairs'"
-  ></app-navlink>
-  <!-- <app-navlink
+  <div class="clip">
+    <app-logo></app-logo>
+    <!-- <br /> -->
+    <br />
+    <br />
+    <!-- <app-scrollpane [boxShadows]="false" [noPadding]="true"> -->
+    <!-- <app-navlink -->
+    <!--   (clicked)="navToggled(false)" -->
+    <!--   href="/" -->
+    <!--   section="home" -->
+    <!--   snippet="menu-home" -->
+    <!--   [active]="section == 'home'" -->
+    <!-- ></app-navlink> -->
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/artists"
+      section="artists"
+      snippet="menu-artists"
+      [active]="section == 'artists'"
+    ></app-navlink>
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/exhibitions"
+      section="exhibitions"
+      snippet="menu-exhibitions"
+      [active]="section == 'exhibitions'"
+    ></app-navlink>
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/fairs"
+      section="fairs"
+      snippet="menu-fairs"
+      [active]="section == 'fairs'"
+    ></app-navlink>
+    <!-- <app-navlink
     (clicked)="navToggled(false)"
     href="/libary"
     section="libary"
     snippet="menu-libary"
   ></app-navlink> -->
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/news"
-    section="news"
-    snippet="menu-news"
-    [active]="section == 'news'"
-  ></app-navlink>
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/about"
-    section="aboout"
-    snippet="menu-about"
-    [active]="section == 'about'"
-  ></app-navlink>
-  <app-navlink
-    (clicked)="navToggled(false)"
-    href="/contact"
-    section="contact"
-    snippet="menu-contact"
-    [active]="section == 'contact'"
-    class="contact-link"
-    (mouseover)="contactHover = true"
-    (mouseout)="contactHover = false"
-  ></app-navlink>
-  <!-- <app-navlink -->
-  <!--   (clicked)="navToggled(false)" -->
-  <!--   href="/viewing-rooms" -->
-  <!--   section="viewing-rooms" -->
-  <!--   snippet="menu-viewing-rooms" -->
-  <!--   [active]="section == 'viewing-rooms'" -->
-  <!-- ></app-navlink> -->
-
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/news"
+      section="news"
+      snippet="menu-news"
+      [active]="section == 'news'"
+    ></app-navlink>
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/about"
+      section="aboout"
+      snippet="menu-about"
+      [active]="section == 'about'"
+    ></app-navlink>
+    <app-navlink
+      (clicked)="navToggled(false)"
+      href="/contact"
+      section="contact"
+      snippet="menu-contact"
+      [active]="section == 'contact'"
+      class="contact-link"
+      (mouseover)="contactHover = true"
+      (mouseout)="contactHover = false"
+    ></app-navlink>
+    <!-- <app-navlink -->
+    <!--   (clicked)="navToggled(false)" -->
+    <!--   href="/viewing-rooms" -->
+    <!--   section="viewing-rooms" -->
+    <!--   snippet="menu-viewing-rooms" -->
+    <!--   [active]="section == 'viewing-rooms'" -->
+    <!-- ></app-navlink> -->
+    <app-language-select></app-language-select>
+  </div>
   <!-- <app-sociallinks color="white" [class.hover]="contactHover"></app-sociallinks> -->
   <!-- </app-scrollpane> -->
-  <app-language-select></app-language-select>
 </div>

@@ -95,15 +95,26 @@ app-sociallinks.hover {
 
 @media screen and (max-width: 1032px) {
   .nav {
-    padding-top: 8rem;
+    // padding-top: 8rem;
+    padding-top: 0;
     overflow: hidden;
     height: 100vh;
     max-height: 7rem;
     transition: all 0.5s ease;
+    .clip {
+      padding-top: 8rem;
+      max-height: 7rem;
+      transition: all 0.5s ease;
+      overflow: hidden;
+    }
   }
+
   .nav.open {
     max-height: 100vh;
     background: black;
+    .clip {
+      max-height: 100vh;
+    }
   }
   :host ::ng-deep .nav:not(.open) .language-select {
     display: none;
