@@ -97,6 +97,8 @@ import {EmailFormComponent} from './components/forms/email-form/email-form.compo
 import {ContactModalComponent} from './components/common/contact-modal/contact-modal.component';
 import {VrArtworkComponent} from './components/pages/viewing-room/vr-artwork/vr-artwork.component';
 import {ArtworkDisplayCarouselComponent} from './components/pages/viewing-room/artwork-display-carousel/artwork-display-carousel.component';
+import { ViewingRoomListComponent } from './components/pages/viewing-rooms/viewing-room-list/viewing-room-list.component';
+import { ViewingRoomListItemComponent } from './components/pages/viewing-rooms/viewing-room-list-item/viewing-room-list-item.component';
 
 @Injectable()
 export class AppHammerConfig extends HammerGestureConfig {
@@ -304,7 +306,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     EmailFormComponent,
     ContactModalComponent,
     VrArtworkComponent,
-    ArtworkDisplayCarouselComponent
+    ArtworkDisplayCarouselComponent,
+    ViewingRoomListComponent,
+    ViewingRoomListItemComponent
   ],
   imports: [
     BrowserModule,

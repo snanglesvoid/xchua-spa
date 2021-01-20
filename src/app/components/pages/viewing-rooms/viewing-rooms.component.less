@@ -1,0 +1,24 @@
+@import "../../../../styles/variables.less";
+
+:host {
+  display: block;
+}
+
+@media screen and (min-width: 1600px) {
+  :host ::ng-deep app-page-body {
+    margin-left: 0;
+  }
+}
+
+:host ::ng-deep .scrollpane-content {
+  max-width: @container-width;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+@media screen and (max-width: @size-md) {
+  :host ::ng-deep app-page-header {
+    background: white !important;
+  }
+}

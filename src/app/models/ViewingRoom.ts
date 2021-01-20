@@ -152,6 +152,10 @@ export class ViewingRoom extends Model {
     return this._thumbnail;
   }
 
+  public set thumbnail(image: CloudinaryImage) {
+    this._thumbnail = image;
+  }
+
   private _blocks?: ContentBlock[];
   public get blocks() {
     return this._blocks;

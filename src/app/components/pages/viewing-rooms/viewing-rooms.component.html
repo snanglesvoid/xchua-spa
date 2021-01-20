@@ -6,10 +6,13 @@
 
 <app-page-body>
   <app-scrollpane [showLines]="false" [showTabbar]="false" #scrollpane>
-    <ul class="viewing-rooms-list">
-      <li *ngFor="let vr of viewingRooms$ | async">
-        <a [routerLink]="'/viewing-rooms/' + vr.slug">{{ vr.title }}</a>
-      </li>
-    </ul>
+    <!-- <ul class="viewing-rooms-list"> -->
+    <!--   <li *ngFor="let vr of viewingRooms$ | async"> -->
+    <!--     <a [routerLink]="'/viewing-rooms/' + vr.slug">{{ vr.title }}</a> -->
+    <!--   </li> -->
+    <!-- </ul> -->
+    <app-viewing-room-list
+      [rooms]="viewingRooms$ | async"
+    ></app-viewing-room-list>
   </app-scrollpane>
 </app-page-body>

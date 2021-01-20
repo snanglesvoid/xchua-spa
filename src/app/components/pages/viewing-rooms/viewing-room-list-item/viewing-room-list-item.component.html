@@ -1,0 +1,24 @@
+<div
+  class="exhibition-card"
+  *ngIf="room"
+  appScrollTo
+  [ratio]="0.3"
+  (inViewport)="inViewportChange($event)"
+  [class.in-view]="viewportPosition < 1"
+>
+  <app-smart-image
+    *ngIf="room.thumbnail"
+    [image]="room.thumbnail"
+    imageClass="hover-fx"
+    size="2"
+    routerLink="/viewing-rooms/{{ room.slug }}"
+  ></app-smart-image>
+
+  <div class="description">
+    <h3>
+      <a routerLink="/viewing-rooms/{{ room.slug }}">
+        {{ room.title }}
+      </a>
+    </h3>
+  </div>
+</div>

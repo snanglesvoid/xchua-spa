@@ -1,0 +1,77 @@
+@import "../../../../../styles//variables.less";
+
+.exhibition-card {
+  transform: translateY(400px);
+  transition: all 1s ease;
+  opacity: 0;
+}
+
+.in-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+:host ::ng-deep img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+:host {
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  padding-top: 0;
+  margin-bottom: 32px;
+  display: block;
+
+  .description {
+    overflow: hidden;
+    transition: transform 600ms 400ms ease-out;
+  }
+
+  h3 {
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: 300;
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media screen and (max-width: @size-sm) {
+  :host {
+    padding: 0;
+    .description {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    h3 {
+      white-space: unset;
+    }
+  }
+}
+
+// @media screen and (max-width: @size-lg) {
+//   :host {
+//     height: 600px;
+//   }
+
+//   :host ::ng-deep img {
+//     height: 440px;
+//   }
+// }

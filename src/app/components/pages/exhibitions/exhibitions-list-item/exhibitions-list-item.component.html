@@ -6,9 +6,6 @@
   (inViewport)="inViewportChange($event)"
   [class.in-view]="viewportPosition < 1"
 >
-  <!-- <cl-image *ngIf="exhibition.coverPicture.exists"
-    [public-id]="exhibition.coverPicture.id"
-  ></cl-image> -->
   <app-smart-image
     [image]="exhibition.coverPicture"
     imageClass="hover-fx"
@@ -21,19 +18,6 @@
         {{ exhibition.title }}
       </a>
     </h3>
-    <!-- <ul class="artist-links"> -->
-    <!--   <div *ngIf="exhibition.artists.length === 1"> -->
-    <!--     <li *ngFor="let artist of exhibition.artists"> -->
-    <!--       <a routerLink="/artists/{{ artist.slug }}"> -->
-    <!--         {{ artist.name.first + " " + artist.name.last }} -->
-    <!--       </a> -->
-    <!--     </li> -->
-    <!--   </div> -->
-    <!--   <li *ngIf="exhibition.artists && exhibition.artists.length > 1"> -->
-    <!--     <app-snippet snippet="exhibitions-group-exhibition"></app-snippet> -->
-    <!--   </li> -->
-    <!-- </ul> -->
-    <!-- {{ exhibition.start | date }}&nbsp;to {{ exhibition.end | date }},&nbsp; -->
     <p *ngIf="exhibition.start && exhibition.end" class="date">
       <span>
         {{ exhibition | dateRange: lang.language }}
