@@ -43,7 +43,7 @@
     "parallax-js": "^3.1.0",
     "postprocessing": "^6.5.0",
     "rxjs": "~6.3.3",
-    "three": "^0.105.2",
+    "three": "^0.137.0",
     "three.js-svg-renderer": "^3.1.6",
     "threex.domevents": "^1.0.1",
     "tslib": "^1.9.0",
